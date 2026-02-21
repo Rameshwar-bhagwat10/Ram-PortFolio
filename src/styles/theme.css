@@ -1,11 +1,20 @@
-:root {
-  --primary: #3b82f6;
-  --secondary: #8b5cf6;
-  --background: #ffffff;
-  --foreground: #000000;
+/* Additional theme utilities */
+
+.text-gradient {
+  background: linear-gradient(135deg, #FF8C00 0%, #FF5F00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.dark {
-  --background: #000000;
-  --foreground: #ffffff;
+.glow-text {
+  text-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+}
+
+.card-gradient {
+  background: linear-gradient(135deg, rgba(255, 140, 0, 0.05) 0%, rgba(255, 95, 0, 0.02) 100%);
+}
+
+.border-gradient {
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }

@@ -1,19 +1,55 @@
-import SkillCard from './SkillCard';
-import SkillTabs from './SkillTabs';
+'use client';
+
+import { motion } from 'framer-motion';
+import SectionHeading from '@/components/ui/SectionHeading';
+import Container from '@/components/layout/Container';
+import MarqueeRow from './MarqueeRow';
 import { skills } from './skills.data';
 
 export default function Skills() {
+  // Split skills into two groups for different rows
+  const midPoint = Math.ceil(skills.length / 2);
+  const topRowSkills = skills.slice(0, midPoint);
+  const bottomRowSkills = skills.slice(midPoint);
+
   return (
-    <section id="skills" className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-8">Skills</h2>
-        <SkillTabs />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          {skills.map((skill) => (
-            <SkillCard key={skill.name} skill={skill} />
-          ))}
-        </div>
-      </div>
+    <section
+      id="skills"
+      className="relative py-28 px-6 bg-[#0F0E0E] overflow-hidden"
+    >
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+      <Container>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <SectionHeading
+            subtitle="Technical Stack"
+            title="Technologies I Work With"
+          />
+        </motion.div>
+
+        {/* Marquee Rows */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-16"
+        >
+          {/* Top Row - Left to Right */}
+          <MarqueeRow skills={topRowSkills} speed={15} />
+
+          {/* Bottom Row - Right to Left (Reverse) */}
+          <MarqueeRow skills={bottomRowSkills} speed={15} reverse />
+        </motion.div>
+      </Container>
     </section>
   );
 }

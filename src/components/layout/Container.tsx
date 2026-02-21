@@ -1,3 +1,24 @@
-export default function Container({ children }: { children: React.ReactNode }) {
-  return <div className="container mx-auto px-4">{children}</div>;
+import React from 'react';
+import { cn } from '@/lib/utils';
+
+interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
 }
+
+const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn('container mx-auto px-4 sm:px-6 lg:px-8', className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+Container.displayName = 'Container';
+
+export default Container;

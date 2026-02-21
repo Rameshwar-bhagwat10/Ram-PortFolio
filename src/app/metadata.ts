@@ -1,6 +1,3 @@
-import { Metadata } from 'next';
+import { generateSEO } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'Personal portfolio website',
-};
+export const metadata = generateSEO();
