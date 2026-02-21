@@ -29,7 +29,7 @@ export default function Work() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3"
           >
             Featured <span className="text-gradient">Projects</span>
           </motion.h2>

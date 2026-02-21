@@ -6,6 +6,7 @@ export interface Project {
   features: string[];
   techStack: string[];
   image: string;
+  hoverImage: string;
   liveUrl?: string;
   githubUrl?: string;
   color: string;
@@ -24,6 +25,7 @@ export const projects: Project[] = [
     ],
     techStack: ["Next.js", "TypeScript", "Python", "TensorFlow", "PostgreSQL", "Redis"],
     image: "/images/projects/project1.svg",
+    hoverImage: "/images/projects/project1-hover.svg",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com",
     color: "255, 140, 0"
@@ -40,6 +42,7 @@ export const projects: Project[] = [
     ],
     techStack: ["React", "Node.js", "MongoDB", "Stripe", "AWS", "Docker"],
     image: "/images/projects/project2.svg",
+    hoverImage: "/images/projects/project2-hover.svg",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com",
     color: "59, 130, 246"
@@ -56,6 +59,7 @@ export const projects: Project[] = [
     ],
     techStack: ["Next.js", "GraphQL", "PostgreSQL", "WebRTC", "Blockchain"],
     image: "/images/projects/project3.svg",
+    hoverImage: "/images/projects/project3-hover.svg",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com",
     color: "34, 197, 94"
@@ -72,6 +76,7 @@ export const projects: Project[] = [
     ],
     techStack: ["React", "TypeScript", "Python", "FastAPI", "TimescaleDB", "Kafka"],
     image: "/images/projects/project4.svg",
+    hoverImage: "/images/projects/project4-hover.svg",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com",
     color: "168, 85, 247"

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function HorizonGlow() {
   return (
-    <div className="absolute bottom-0 left-0 w-full h-[500px] z-[5] pointer-events-none overflow-hidden">
+    <div className="absolute bottom-0 left-0 w-full h-[600px] z-[5] pointer-events-none overflow-visible">
       {/* Sharp curved horizon arc with proper glow */}
       <motion.div
         className="relative w-full h-full"
@@ -60,12 +60,12 @@ export default function HorizonGlow() {
         </svg>
 
         {/* Glow bars - DJ style pulsing from arc upward */}
-        <div className="absolute bottom-[48px] left-0 w-full h-[450px]">
+        <div className="absolute bottom-[48px] left-0 w-full h-[550px]">
           {/* Glow bar 1 - Fast pulse */}
           <motion.div
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%]"
             animate={{
-              height: ['200px', '350px', '200px'],
+              height: ['200px', '400px', '200px'],
               opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
@@ -74,7 +74,7 @@ export default function HorizonGlow() {
               ease: 'easeInOut',
             }}
             style={{
-              background: 'radial-gradient(ellipse at center bottom, rgba(220, 60, 20, 0.3) 0%, rgba(200, 50, 20, 0.2) 20%, rgba(180, 40, 15, 0.15) 40%, rgba(140, 30, 10, 0.08) 60%, rgba(100, 20, 5, 0.04) 80%, transparent 100%)',
+              background: 'radial-gradient(ellipse at center bottom, rgba(220, 60, 20, 0.3) 0%, rgba(200, 50, 20, 0.2) 20%, rgba(180, 40, 15, 0.15) 40%, rgba(140, 30, 10, 0.08) 60%, rgba(100, 20, 5, 0.04) 80%, rgba(80, 15, 3, 0.02) 90%, transparent 100%)',
               filter: 'blur(50px)',
             }}
           />
@@ -83,7 +83,7 @@ export default function HorizonGlow() {
           <motion.div
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%]"
             animate={{
-              height: ['180px', '320px', '180px'],
+              height: ['180px', '370px', '180px'],
               opacity: [0.25, 0.45, 0.25],
             }}
             transition={{
@@ -93,7 +93,7 @@ export default function HorizonGlow() {
               delay: 0.2,
             }}
             style={{
-              background: 'radial-gradient(ellipse at center bottom, rgba(255, 80, 30, 0.25) 0%, rgba(220, 60, 20, 0.18) 25%, rgba(180, 40, 15, 0.12) 50%, rgba(120, 25, 10, 0.06) 75%, transparent 100%)',
+              background: 'radial-gradient(ellipse at center bottom, rgba(255, 80, 30, 0.25) 0%, rgba(220, 60, 20, 0.18) 25%, rgba(180, 40, 15, 0.12) 50%, rgba(120, 25, 10, 0.06) 75%, rgba(80, 15, 5, 0.03) 90%, transparent 100%)',
               filter: 'blur(60px)',
             }}
           />
@@ -102,7 +102,7 @@ export default function HorizonGlow() {
           <motion.div
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100%]"
             animate={{
-              height: ['160px', '280px', '160px'],
+              height: ['160px', '340px', '160px'],
               opacity: [0.2, 0.4, 0.2],
             }}
             transition={{
@@ -112,7 +112,7 @@ export default function HorizonGlow() {
               delay: 0.4,
             }}
             style={{
-              background: 'radial-gradient(ellipse at center bottom, rgba(255, 100, 40, 0.2) 0%, rgba(200, 60, 25, 0.14) 30%, rgba(150, 40, 15, 0.08) 60%, rgba(100, 25, 10, 0.03) 85%, transparent 100%)',
+              background: 'radial-gradient(ellipse at center bottom, rgba(255, 100, 40, 0.2) 0%, rgba(200, 60, 25, 0.14) 30%, rgba(150, 40, 15, 0.08) 60%, rgba(100, 25, 10, 0.03) 85%, rgba(60, 15, 5, 0.01) 95%, transparent 100%)',
               filter: 'blur(70px)',
             }}
           />

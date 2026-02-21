@@ -72,7 +72,7 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
             key={`${skill.name}-${index}`}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
-            className="flex-shrink-0 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:scale-125 hover:-translate-y-2 cursor-default relative hover:z-30"
+            className="flex-shrink-0 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:scale-110 hover:-translate-y-2 cursor-default relative hover:z-30"
             style={{ width: '96px' }}
           >
             <skill.icon 
@@ -80,12 +80,10 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
               style={{ color: skill.color }}
             />
             
-            {/* Skill name tooltip - appears on hover */}
-            {hoveredIndex === index && (
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-white whitespace-nowrap pointer-events-none animate-fadeIn">
-                {skill.name}
-              </span>
-            )}
+            {/* Skill name - always visible below icon */}
+            <span className="text-xs font-medium text-white/70 whitespace-nowrap text-center">
+              {skill.name}
+            </span>
           </div>
         ))}
       </div>

@@ -2,13 +2,13 @@
 
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import Card from '@/components/ui/Card';
+import { Briefcase, CheckCircle2, Users, TrendingUp } from 'lucide-react';
 
 const stats = [
-  { value: 5, label: 'Years Experience', suffix: '+' },
-  { value: 50, label: 'Projects Completed', suffix: '+' },
-  { value: 15, label: 'Happy Clients', suffix: '+' },
-  { value: 98, label: 'Success Rate', suffix: '%' },
+  { value: 5, label: 'Years Experience', suffix: '+', max: 10, icon: Briefcase, color: '#FF8C00' },
+  { value: 50, label: 'Projects Completed', suffix: '+', max: 100, icon: CheckCircle2, color: '#3B82F6' },
+  { value: 15, label: 'Happy Clients', suffix: '+', max: 20, icon: Users, color: '#10B981' },
+  { value: 98, label: 'Success Rate', suffix: '%', max: 100, icon: TrendingUp, color: '#8B5CF6' },
 ];
 
 function AnimatedNumber({ value, suffix = '' }: { value: number; suffix?: string }) {
@@ -34,6 +34,82 @@ function AnimatedNumber({ value, suffix = '' }: { value: number; suffix?: string
   return <span ref={ref}>0{suffix}</span>;
 }
 
+function CircularProgress({ 
+  value, 
+  max, 
+  color, 
+  icon: Icon, 
+  label, 
+  suffix 
+}: { 
+  value: number; 
+  max: number; 
+  color: string; 
+  icon: any; 
+  label: string; 
+  suffix: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const percentage = (value / max) * 100;
+  const circumference = 2 * Math.PI * 45; // radius = 45
+  const offset = circumference - (percentage / 100) * circumference;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="flex flex-col items-center"
+    >
+      {/* Circular Progress */}
+      <div className="relative w-32 h-32 mb-4">
+        {/* Background Circle */}
+        <svg className="w-full h-full transform -rotate-90">
+          <circle
+            cx="64"
+            cy="64"
+            r="45"
+            stroke="rgba(255, 255, 255, 0.1)"
+            strokeWidth="8"
+            fill="none"
+          />
+          {/* Progress Circle */}
+          <motion.circle
+            cx="64"
+            cy="64"
+            r="45"
+            stroke={color}
+            strokeWidth="8"
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            initial={{ strokeDashoffset: circumference }}
+            animate={isInView ? { strokeDashoffset: offset } : { strokeDashoffset: circumference }}
+            transition={{ duration: 1.5, ease: 'easeOut', delay: 0.2 }}
+            style={{
+              filter: `drop-shadow(0 0 8px ${color}40)`,
+            }}
+          />
+        </svg>
+
+        {/* Center Content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <Icon size={24} style={{ color }} className="mb-1" />
+          <div className="text-2xl font-bold text-white">
+            <AnimatedNumber value={value} suffix={suffix} />
+          </div>
+        </div>
+      </div>
+
+      {/* Label */}
+      <p className="text-sm text-white/70 text-center font-medium">{label}</p>
+    </motion.div>
+  );
+}
+
 export default function StatsGrid() {
   return (
     <motion.div
@@ -41,22 +117,24 @@ export default function StatsGrid() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.3 }}
-      className="grid grid-cols-2 gap-6 w-full"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-8 w-full"
     >
       {stats.map((stat, index) => (
         <motion.div
           key={stat.label}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
         >
-          <Card padding="md" hover className="text-center h-full">
-            <div className="text-4xl font-bold text-gradient mb-2">
-              <AnimatedNumber value={stat.value} suffix={stat.suffix} />
-            </div>
-            <div className="text-sm text-muted">{stat.label}</div>
-          </Card>
+          <CircularProgress
+            value={stat.value}
+            max={stat.max}
+            color={stat.color}
+            icon={stat.icon}
+            label={stat.label}
+            suffix={stat.suffix}
+          />
         </motion.div>
       ))}
     </motion.div>

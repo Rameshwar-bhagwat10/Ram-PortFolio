@@ -12,10 +12,10 @@ export default function AboutHeader() {
       transition={{ duration: 0.6 }}
     >
       <SectionHeading
-        subtitle=""
-        title="Building Modern Web Experiences"
-        highlightWord="Modern"
-        description="Passionate about creating scalable, performant applications"
+        subtitle="Get to Know Me"
+        title="Turning Ideas Into Reality"
+        highlightWord="Reality"
+        description="Developer by day, problem solver by nature. Let's build something amazing together."
       />
     </motion.div>
   );

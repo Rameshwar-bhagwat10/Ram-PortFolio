@@ -1,40 +1,37 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Badge from '@/components/ui/Badge';
-
-const highlights = [
-  {
-    title: 'Product-Focused',
-    description: 'Building scalable solutions that solve real problems',
-  },
-  {
-    title: 'AI-Driven',
-    description: 'Leveraging modern AI to enhance user experiences',
-  },
-  {
-    title: 'Performance-First',
-    description: 'Optimizing for speed, efficiency, and reliability',
-  },
-  {
-    title: 'Team Collaboration',
-    description: 'Working seamlessly with cross-functional teams',
-  },
-  {
-    title: 'Continuous Learning',
-    description: 'Staying updated with latest technologies and best practices',
-  },
-];
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiNodedotjs, 
+  SiPython, 
+  SiAmazon,
+  SiTensorflow,
+  SiDocker
+} from 'react-icons/si';
+import { Layers } from 'lucide-react';
 
 const expertise = [
-  'React & Next.js',
-  'TypeScript',
-  'Node.js',
-  'Python',
-  'AWS & Cloud',
-  'AI/ML Integration',
-  'System Design',
-  'DevOps',
+  // Row 1 - 4 items
+  [
+    { name: 'React', icon: SiReact, color: '#61DAFB' },
+    { name: 'Next.js', icon: SiNextdotjs, color: '#FFFFFF' },
+    { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+    { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
+  ],
+  // Row 2 - 3 items
+  [
+    { name: 'Python', icon: SiPython, color: '#3776AB' },
+    { name: 'AWS', icon: SiAmazon, color: '#FF9900' },
+    { name: 'AI/ML', icon: SiTensorflow, color: '#FF6F00' },
+  ],
+  // Row 3 - 2 items
+  [
+    { name: 'System Design', icon: Layers, color: '#8B5CF6' },
+    { name: 'DevOps', icon: SiDocker, color: '#2496ED' },
+  ],
 ];
 
 export default function AboutStory() {
@@ -44,69 +41,33 @@ export default function AboutStory() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="space-y-8 h-full flex flex-col"
+      className="space-y-6"
     >
-      {/* Positioning Statement */}
-      <div>
-        <p className="text-lg leading-relaxed text-white/90 mb-4">
-          I craft high-performance web applications with a focus on clean architecture, 
-          modern technologies, and exceptional user experiences.
-        </p>
-        <p className="text-base leading-relaxed text-white/80">
-          With over 5 years of experience in full-stack development, I specialize in 
-          building scalable applications that combine cutting-edge technology with 
-          intuitive design. Currently focused on AI-powered developer tools.
-        </p>
-      </div>
-
-      {/* Highlights with vertical line */}
-      <div className="relative space-y-6 pl-6 flex-1">
-        {/* Vertical gradient line */}
-        <div 
-          className="absolute left-0 top-2 bottom-2 w-[2px] bg-gradient-to-b from-primary via-primary/50 to-transparent"
-        />
-
-        {highlights.map((highlight, index) => (
-          <motion.div
-            key={highlight.title}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-            className="relative"
+      {/* Core Expertise Heading */}
+      <h4 className="text-lg font-bold text-center bg-gradient-to-r from-primary via-orange-500 to-primary bg-clip-text text-transparent">Core Expertise</h4>
+      
+      {/* Inverted Triangle Layout */}
+      <div className="flex flex-col items-center gap-3">
+        {expertise.map((row, rowIndex) => (
+          <div 
+            key={rowIndex} 
+            className="flex gap-3 justify-center"
           >
-            {/* Glowing dot */}
-            <div className="absolute -left-6 top-1">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-              </span>
-            </div>
-
-            <h4 className="text-lg font-bold mb-1">{highlight.title}</h4>
-            <p className="text-muted text-sm">{highlight.description}</p>
-          </motion.div>
+            {row.map((skill, index) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.3 + (rowIndex * row.length + index) * 0.05 }}
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 w-[110px]"
+              >
+                <skill.icon size={16} style={{ color: skill.color }} className="flex-shrink-0" />
+                <span className="text-xs font-medium text-white/90 truncate">{skill.name}</span>
+              </motion.div>
+            ))}
+          </div>
         ))}
-      </div>
-
-      {/* Expertise Tags */}
-      <div>
-        <h4 className="text-lg font-bold mb-4">Core Expertise</h4>
-        <div className="flex flex-wrap gap-2">
-          {expertise.map((skill, index) => (
-            <motion.div
-              key={skill}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.5 + index * 0.05 }}
-            >
-              <Badge variant="outline" className="text-sm">
-                {skill}
-              </Badge>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </motion.div>
   );

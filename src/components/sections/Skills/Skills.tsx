@@ -27,12 +27,13 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
-          <SectionHeading
-            subtitle="Technical Stack"
-            title="Technologies I Work With"
-          />
+          <p className="text-primary text-sm font-semibold tracking-wider uppercase mb-3">My Arsenal</p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 text-white">
+            Technologies <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">I Master</span>
+          </h2>
+          <p className="text-muted text-lg max-w-2xl mx-auto">Building modern web experiences with cutting-edge tools and frameworks</p>
         </motion.div>
 
         {/* Marquee Rows */}

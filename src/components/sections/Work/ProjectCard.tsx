@@ -5,7 +5,48 @@ import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { ExternalLink, Github } from 'lucide-react';
 import { Project } from './work.data';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { 
+  SiNextdotjs, 
+  SiReact, 
+  SiTypescript, 
+  SiPython, 
+  SiNodedotjs, 
+  SiMongodb, 
+  SiPostgresql, 
+  SiRedis,
+  SiAmazon,
+  SiDocker,
+  SiStripe,
+  SiGraphql,
+  SiTensorflow,
+  SiApachekafka,
+  SiFastapi,
+  SiWebrtc,
+  SiBitcoin
+} from 'react-icons/si';
+
+// Tech stack icon mapping with original brand colors
+const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; style?: React.CSSProperties; className?: string }>; color: string }> = {
+  'Next.js': { icon: SiNextdotjs, color: '#FFFFFF' }, // Changed from black to white
+  'React': { icon: SiReact, color: '#61DAFB' },
+  'TypeScript': { icon: SiTypescript, color: '#3178C6' },
+  'Python': { icon: SiPython, color: '#3776AB' },
+  'Node.js': { icon: SiNodedotjs, color: '#339933' },
+  'FastAPI': { icon: SiFastapi, color: '#009688' },
+  'GraphQL': { icon: SiGraphql, color: '#E10098' },
+  'TensorFlow': { icon: SiTensorflow, color: '#FF6F00' },
+  'PostgreSQL': { icon: SiPostgresql, color: '#4169E1' },
+  'MongoDB': { icon: SiMongodb, color: '#47A248' },
+  'TimescaleDB': { icon: SiPostgresql, color: '#FDB515' },
+  'Redis': { icon: SiRedis, color: '#DC382D' },
+  'Stripe': { icon: SiStripe, color: '#008CDD' },
+  'AWS': { icon: SiAmazon, color: '#FF9900' },
+  'Docker': { icon: SiDocker, color: '#2496ED' },
+  'Kafka': { icon: SiApachekafka, color: '#FFFFFF' }, // Changed from black to white
+  'WebRTC': { icon: SiWebrtc, color: '#FFFFFF' }, // Changed from dark gray to white
+  'Blockchain': { icon: SiBitcoin, color: '#F7931A' },
+};
 
 interface ProjectCardProps {
   project: Project;
@@ -13,6 +54,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Track this card's scroll progress for smooth animations
   const { scrollYProgress } = useScroll({
@@ -48,6 +90,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               damping: 20
             }}
             className="relative"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             {/* Ambient glow */}
             <motion.div
@@ -65,29 +109,76 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               }}
             />
             
-            {/* Image wrapper */}
-            <motion.div 
-              className="relative h-[55vh] md:h-[60vh] lg:h-[65vh] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#171616]"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            {/* Fixed Image Box - Container stays in place */}
+            <div 
+              className="relative h-[55vh] md:h-[60vh] lg:h-[65vh] rounded-2xl border border-white/10 shadow-2xl bg-[#171616] overflow-hidden"
             >
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-                priority
-              />
-              
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              
-              {/* Project number */}
-              <div className="absolute top-6 left-6 text-white/40 text-sm font-medium tabular-nums">
-                {String(project.id).padStart(2, '0')} / 04
-              </div>
-            </motion.div>
+              {/* First Image - Back layer, rotates on hover */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl overflow-hidden bg-[#171616]"
+                animate={{
+                  rotate: isHovered ? -8 : 0,
+                  scale: isHovered ? 0.7 : 1,
+                  x: isHovered ? -40 : 0,
+                  y: isHovered ? 20 : 0,
+                  opacity: isHovered ? 1 : 1,
+                }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                style={{
+                  transformOrigin: 'center center',
+                }}
+              >
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                  priority
+                />
+                
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                
+                {/* Project number */}
+                <div className="absolute top-6 left-6 text-white/40 text-sm font-medium tabular-nums z-10">
+                  {String(project.id).padStart(2, '0')} / 04
+                </div>
+              </motion.div>
+
+              {/* Second Image - Front layer, rotates on hover */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl overflow-hidden bg-[#171616]"
+                animate={{
+                  rotate: isHovered ? 8 : 0,
+                  scale: isHovered ? 0.7 : 1,
+                  x: isHovered ? 40 : 0,
+                  y: isHovered ? -20 : 0,
+                  opacity: isHovered ? 1 : 0,
+                }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                style={{
+                  transformOrigin: 'center center',
+                }}
+              >
+                <Image
+                  src={project.hoverImage}
+                  alt={`${project.title} - Hover`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* Content Container - Right 50% */}
@@ -164,7 +255,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.8 + idx * 0.1 }}
                 >
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                  <div className="w-2 h-2 rotate-45 bg-gradient-to-br from-primary to-orange-600 mt-2 flex-shrink-0" />
                   <p className="text-xs md:text-sm text-white/70 leading-relaxed">
                     {feature}
                   </p>
@@ -180,19 +271,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.0 }}
             >
-              {project.techStack.map((tech, idx) => (
-                <motion.span
-                  key={idx}
-                  className="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 1.1 + idx * 0.05 }}
-                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 140, 0, 0.1)' }}
-                >
-                  {tech}
-                </motion.span>
-              ))}
+              {project.techStack.map((tech, idx) => {
+                const config = techConfig[tech];
+                const Icon = config?.icon || SiReact; // Default icon
+                const iconColor = config?.color || '#FFFFFF';
+                
+                return (
+                  <motion.span
+                    key={idx}
+                    className="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80 inline-flex items-center gap-1.5"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: 1.1 + idx * 0.05 }}
+                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 140, 0, 0.1)' }}
+                  >
+                    <Icon size={12} className="flex-shrink-0" style={{ color: iconColor }} />
+                    {tech}
+                  </motion.span>
+                );
+              })}
             </motion.div>
 
             {/* CTA Buttons */}

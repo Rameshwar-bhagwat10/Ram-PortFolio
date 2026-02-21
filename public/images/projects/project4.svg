@@ -1,18 +1,82 @@
 <svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="800" height="600" fill="#1a1a1a"/>
-  <circle cx="400" cy="300" r="150" fill="url(#gradient4)" opacity="0.3"/>
-  <rect x="150" y="100" width="500" height="400" rx="20" fill="#2a2a2a" stroke="#a855f7" stroke-width="2"/>
-  <polyline points="200,350 250,300 300,320 350,250 400,280 450,220 500,240 550,200 600,230" stroke="#a855f7" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="250" cy="300" r="6" fill="#a855f7"/>
-  <circle cx="350" cy="250" r="6" fill="#a855f7"/>
-  <circle cx="450" cy="220" r="6" fill="#a855f7"/>
-  <circle cx="550" cy="200" r="6" fill="#a855f7"/>
-  <rect x="200" y="380" width="400" height="8" rx="4" fill="#a855f7" opacity="0.3"/>
-  <rect x="200" y="410" width="350" height="8" rx="4" fill="#a855f7" opacity="0.2"/>
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGradient4)"/>
+  
+  <!-- Ambient glows -->
+  <circle cx="400" cy="300" r="200" fill="url(#glow1_4)" opacity="0.35"/>
+  <circle cx="200" cy="180" r="100" fill="url(#glow2_4)" opacity="0.2"/>
+  <circle cx="600" cy="420" r="120" fill="url(#glow3_4)" opacity="0.25"/>
+  
+  <!-- Main container -->
+  <rect x="150" y="100" width="500" height="400" rx="20" fill="url(#cardGradient4)" opacity="0.1"/>
+  <rect x="150" y="100" width="500" height="400" rx="20" fill="#2a2a2a" stroke="url(#borderGradient4)" stroke-width="3"/>
+  
+  <!-- Financial chart line with gradient -->
+  <path d="M200 350 L250 300 L300 320 L350 250 L400 280 L450 220 L500 240 L550 200 L600 230" 
+        stroke="url(#chartGradient4)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Chart area fill -->
+  <path d="M200 350 L250 300 L300 320 L350 250 L400 280 L450 220 L500 240 L550 200 L600 230 L600 450 L200 450 Z" 
+        fill="url(#areaGradient4)" opacity="0.2"/>
+  
+  <!-- Data points with glow -->
+  <circle cx="250" cy="300" r="8" fill="url(#pointGradient4)"/>
+  <circle cx="250" cy="300" r="12" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.3"/>
+  <circle cx="350" cy="250" r="8" fill="url(#pointGradient4)"/>
+  <circle cx="350" cy="250" r="12" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.3"/>
+  <circle cx="450" cy="220" r="8" fill="url(#pointGradient4)"/>
+  <circle cx="450" cy="220" r="12" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.3"/>
+  <circle cx="550" cy="200" r="8" fill="url(#pointGradient4)"/>
+  <circle cx="550" cy="200" r="12" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Info bars -->
+  <rect x="200" y="380" width="400" height="10" rx="5" fill="url(#barGradient4)"/>
+  <rect x="200" y="380" width="400" height="10" rx="5" fill="#a855f7" opacity="0.2"/>
+  <rect x="200" y="410" width="360" height="10" rx="5" fill="url(#barGradient4)" opacity="0.7"/>
+  <rect x="200" y="440" width="320" height="10" rx="5" fill="url(#barGradient4)" opacity="0.4"/>
+  
   <defs>
-    <radialGradient id="gradient4">
-      <stop offset="0%" stop-color="#a855f7"/>
+    <linearGradient id="bgGradient4" x1="0" y1="0" x2="800" y2="600">
+      <stop offset="0%" stop-color="#0a0a0a"/>
       <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <radialGradient id="glow1_4">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="glow2_4">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow3_4">
+      <stop offset="0%" stop-color="#9333ea" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#9333ea" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardGradient4" x1="150" y1="100" x2="650" y2="500">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="borderGradient4" x1="150" y1="100" x2="650" y2="500">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="50%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+    <linearGradient id="chartGradient4" x1="200" y1="200" x2="600" y2="350">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="50%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="areaGradient4" x1="400" y1="200" x2="400" y2="450">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="pointGradient4">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </radialGradient>
+    <linearGradient id="barGradient4" x1="0" y1="0" x2="100%" y2="0">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
   </defs>
 </svg>

@@ -41,7 +41,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="absolute left-1/2 -translate-x-1/2 backdrop-blur-2xl border border-white/[0.15] rounded-full px-5 py-2 shadow-lg flex items-center gap-2"
+            className="absolute left-1/2 -translate-x-1/2 backdrop-blur-md border border-white/[0.15] rounded-full px-5 py-2 shadow-lg flex items-center gap-2"
             style={{
               boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
             }}
@@ -56,7 +56,7 @@ export default function Navbar() {
 
       {/* Mobile Navbar */}
       <nav className="fixed top-6 left-0 right-0 z-50 px-6 md:hidden">
-        <div className="backdrop-blur-2xl border border-white/[0.05] rounded-full px-6 py-3 shadow-lg flex justify-between items-center">
+        <div className="backdrop-blur-md border border-white/[0.05] rounded-full px-6 py-3 shadow-lg flex justify-between items-center">
           {/* Logo */}
           <div
             className="cursor-pointer flex-shrink-0"

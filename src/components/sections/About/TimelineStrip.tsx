@@ -53,10 +53,11 @@ export default function TimelineStrip() {
         transition={{ duration: 0.6 }}
         className="text-center mb-20"
       >
-        <h3 className="text-4xl font-bold mb-3 bg-gradient-to-r from-white via-white to-primary bg-clip-text text-transparent">
-          My Journey
+        <p className="text-purple-400 text-sm font-semibold tracking-wider uppercase mb-3">The Story So Far</p>
+        <h3 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent">
+          From Code to Impact
         </h3>
-        <p className="text-muted text-lg">From first line of code to building the future</p>
+        <p className="text-muted text-lg max-w-2xl mx-auto">Every line of code tells a story. Here&apos;s mine—from curious beginner to building products that matter.</p>
       </motion.div>
 
       {/* Timeline Container */}
@@ -69,7 +70,7 @@ export default function TimelineStrip() {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, delay: 0.2, ease: 'easeOut' }}
-            className="absolute top-12 left-0 right-0 h-[3px] bg-gradient-to-r from-primary/20 via-primary to-primary/20 origin-left"
+            className="absolute top-12 left-0 right-0 h-[3px] bg-gradient-to-r from-purple-500/20 via-purple-500 to-purple-500/20 origin-left"
           />
 
           {/* Timeline Items */}
@@ -89,33 +90,33 @@ export default function TimelineStrip() {
                   className="relative mb-8 cursor-pointer z-10"
                 >
                   {/* Outer glow ring */}
-                  <div className="absolute inset-0 rounded-full bg-primary/30 blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                  <div className="absolute inset-0 rounded-full bg-purple-500/30 blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
                   
                   {/* Icon container */}
-                  <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-card to-background border-2 border-primary/30 flex items-center justify-center group-hover:border-primary transition-all duration-300 shadow-lg">
+                  <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-card to-background border-2 border-purple-500/30 flex items-center justify-center group-hover:border-purple-500 transition-all duration-300 shadow-lg">
                     <milestone.icon 
-                      className="text-primary group-hover:scale-110 transition-transform duration-300" 
+                      className="text-purple-500 group-hover:scale-110 transition-transform duration-300" 
                       size={32} 
                       strokeWidth={1.5} 
                     />
                     
                     {/* Animated ring on hover */}
-                    <span className="absolute inset-0 rounded-full border-2 border-primary/50 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500"></span>
+                    <span className="absolute inset-0 rounded-full border-2 border-purple-500/50 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500"></span>
                   </div>
                 </motion.div>
 
                 {/* Year Badge */}
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 mb-4 group-hover:bg-primary/20 group-hover:border-primary transition-all duration-300"
+                  className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 mb-4 group-hover:bg-purple-500/20 group-hover:border-purple-500 transition-all duration-300"
                 >
-                  <span className="text-primary font-bold text-sm tracking-wider">
+                  <span className="text-purple-400 font-bold text-sm tracking-wider">
                     {milestone.year}
                   </span>
                 </motion.div>
 
                 {/* Title */}
-                <h4 className="text-base font-bold mb-2 group-hover:text-primary transition-colors duration-300 leading-tight">
+                <h4 className="text-base font-bold mb-2 text-white group-hover:text-purple-400 transition-colors duration-300 leading-tight">
                   {milestone.title}
                 </h4>
 
@@ -143,35 +144,35 @@ export default function TimelineStrip() {
               <div className="relative flex-shrink-0">
                 <motion.div
                   whileHover={{ scale: 1.15 }}
-                  className="relative w-16 h-16 rounded-full bg-gradient-to-br from-card to-background border-2 border-primary/30 flex items-center justify-center group-hover:border-primary transition-all duration-300 shadow-lg z-10"
+                  className="relative w-16 h-16 rounded-full bg-gradient-to-br from-card to-background border-2 border-white/30 flex items-center justify-center group-hover:border-white transition-all duration-300 shadow-lg z-10"
                 >
                   <milestone.icon 
-                    className="text-primary" 
+                    className="text-white" 
                     size={24} 
                     strokeWidth={1.5} 
                   />
                   
                   {/* Glow effect */}
-                  <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </motion.div>
 
                 {/* Vertical connector */}
                 {index < milestones.length - 1 && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-16 w-[2px] h-8 bg-gradient-to-b from-primary/50 to-primary/20" />
+                  <div className="absolute left-1/2 -translate-x-1/2 top-16 w-[2px] h-8 bg-gradient-to-b from-white/50 to-white/20" />
                 )}
               </div>
 
               {/* Content */}
               <div className="flex-1 pb-8">
                 {/* Year */}
-                <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-primary/10 border border-primary/30 mb-3">
-                  <span className="text-primary font-bold text-sm">
+                <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-white/10 border border-white/30 mb-3">
+                  <span className="text-white font-bold text-sm">
                     {milestone.year}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h4 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                <h4 className="text-lg font-bold mb-2 group-hover:text-white transition-colors">
                   {milestone.title}
                 </h4>
 

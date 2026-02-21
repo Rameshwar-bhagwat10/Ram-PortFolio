@@ -1,0 +1,69 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGradient4h)"/>
+  
+  <!-- Ambient glows -->
+  <circle cx="300" cy="300" r="150" fill="url(#glow1_4h)" opacity="0.3"/>
+  <circle cx="550" cy="200" r="100" fill="url(#glow2_4h)" opacity="0.2"/>
+  
+  <!-- Main container -->
+  <rect x="50" y="50" width="700" height="500" rx="20" fill="#1A1A1A" stroke="url(#borderGradient4h)" stroke-width="2"/>
+  
+  <!-- Trading dashboard panel -->
+  <rect x="150" y="150" width="220" height="320" rx="15" fill="url(#panelGradient4h)"/>
+  <rect x="150" y="150" width="220" height="320" rx="15" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Chart bars -->
+  <rect x="170" y="350" width="30" height="80" rx="5" fill="#a78bfa" opacity="0.8"/>
+  <rect x="210" y="320" width="30" height="110" rx="5" fill="#a78bfa" opacity="0.9"/>
+  <rect x="250" y="300" width="30" height="130" rx="5" fill="#c4b5fd"/>
+  <rect x="290" y="340" width="30" height="90" rx="5" fill="#a78bfa" opacity="0.8"/>
+  
+  <!-- Analytics panel -->
+  <rect x="400" y="200" width="300" height="220" rx="15" fill="url(#analyticsPanelGradient4h)" opacity="0.3"/>
+  <rect x="400" y="200" width="300" height="220" rx="15" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Circular indicator -->
+  <circle cx="550" cy="310" r="50" fill="url(#circleGradient4h)"/>
+  <circle cx="550" cy="310" r="40" fill="none" stroke="#c4b5fd" stroke-width="3" opacity="0.5"/>
+  <circle cx="550" cy="310" r="30" fill="none" stroke="#a78bfa" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Trend line -->
+  <path d="M150 480 Q300 460 450 470 T650 480" stroke="url(#trendGradient4h)" stroke-width="4" fill="none" stroke-linecap="round"/>
+  
+  <defs>
+    <linearGradient id="bgGradient4h" x1="0" y1="0" x2="800" y2="600">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#0F0E0E"/>
+    </linearGradient>
+    <radialGradient id="glow1_4h">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2_4h">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="borderGradient4h" x1="50" y1="50" x2="750" y2="550">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="panelGradient4h" x1="150" y1="150" x2="370" y2="470">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="analyticsPanelGradient4h" x1="400" y1="200" x2="700" y2="420">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <radialGradient id="circleGradient4h">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </radialGradient>
+    <linearGradient id="trendGradient4h" x1="150" y1="480" x2="650" y2="480">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+</svg>

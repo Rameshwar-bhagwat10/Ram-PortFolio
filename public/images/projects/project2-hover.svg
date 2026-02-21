@@ -1,0 +1,61 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGradient2h)"/>
+  
+  <!-- Ambient glows -->
+  <circle cx="400" cy="250" r="200" fill="url(#glow1_2h)" opacity="0.3"/>
+  <circle cx="650" cy="450" r="120" fill="url(#glow2_2h)" opacity="0.2"/>
+  
+  <!-- Main container -->
+  <rect x="50" y="50" width="700" height="500" rx="20" fill="#1A1A1A" stroke="url(#borderGradient2h)" stroke-width="2"/>
+  
+  <!-- Product showcase cards -->
+  <rect x="200" y="150" width="150" height="200" rx="15" fill="url(#cardGradient2h)"/>
+  <rect x="200" y="150" width="150" height="200" rx="15" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.5"/>
+  <circle cx="275" cy="220" r="30" fill="#93c5fd" opacity="0.8"/>
+  <rect x="220" y="280" width="110" height="10" rx="5" fill="#60a5fa" opacity="0.7"/>
+  <rect x="220" y="305" width="80" height="10" rx="5" fill="#60a5fa" opacity="0.5"/>
+  
+  <rect x="380" y="150" width="150" height="200" rx="15" fill="url(#cardGradient2h)" opacity="0.8"/>
+  <rect x="380" y="150" width="150" height="200" rx="15" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.4"/>
+  <circle cx="455" cy="220" r="30" fill="#93c5fd" opacity="0.6"/>
+  <rect x="400" y="280" width="110" height="10" rx="5" fill="#60a5fa" opacity="0.5"/>
+  <rect x="400" y="305" width="80" height="10" rx="5" fill="#60a5fa" opacity="0.3"/>
+  
+  <rect x="560" y="150" width="150" height="200" rx="15" fill="url(#cardGradient2h)" opacity="0.5"/>
+  <rect x="560" y="150" width="150" height="200" rx="15" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.3"/>
+  <circle cx="635" cy="220" r="30" fill="#93c5fd" opacity="0.4"/>
+  <rect x="580" y="280" width="110" height="10" rx="5" fill="#60a5fa" opacity="0.3"/>
+  
+  <!-- Shopping cart icon -->
+  <circle cx="400" cy="450" r="35" fill="url(#iconGradient2h)"/>
+  <circle cx="400" cy="450" r="28" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.5"/>
+  <path d="M390 445 L395 450 L410 435" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <defs>
+    <linearGradient id="bgGradient2h" x1="0" y1="0" x2="800" y2="600">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#0F0E0E"/>
+    </linearGradient>
+    <radialGradient id="glow1_2h">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2_2h">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="borderGradient2h" x1="50" y1="50" x2="750" y2="550">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="cardGradient2h" x1="0" y1="0" x2="150" y2="200">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </linearGradient>
+    <radialGradient id="iconGradient2h">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </radialGradient>
+  </defs>
+</svg>
