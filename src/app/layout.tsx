@@ -32,9 +32,10 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ overflow: 'visible' }}
       >
         <Navbar />
-        <main className="relative z-10">
+        <main className="relative z-10" style={{ overflow: 'visible' }}>
           {children}
         </main>
         <Footer />
