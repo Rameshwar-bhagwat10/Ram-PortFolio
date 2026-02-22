@@ -3,52 +3,53 @@
 import { useState, useEffect } from 'react';
 
 export default function useScrollSpy(ids: string[]): string {
-  const [activeId, setActiveId] = useState('');
+  const [activeId, setActiveId] = useState('hero');
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: '-10% 0px -40% 0px',
-        threshold: [0, 0.1, 0.2],
-      }
-    );
-
-    // Observe all sections
-    ids.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    // Fallback: Check if we're at the bottom of the page
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
+      const scrollPosition = window.scrollY + 100; // Offset for navbar height
       
-      // If we're within 100px of the bottom, activate contact
-      if (documentHeight - scrollPosition < 100) {
-        setActiveId('contact');
+      // Check each section from bottom to top
+      // This ensures we get the correct section even when multiple are visible
+      let currentSection = 'hero';
+      
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const id = ids[i];
+        const element = document.getElementById(id);
+        
+        if (element) {
+          const offsetTop = element.offsetTop;
+          
+          // If we've scrolled past this section's start, it's the active one
+          if (scrollPosition >= offsetTop) {
+            currentSection = id;
+            break;
+          }
+        }
+      }
+      
+      setActiveId(currentSection);
+    };
+
+    // Run on mount
+    handleScroll();
+    
+    // Run on scroll with throttling for performance
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      ids.forEach((id) => {
-        const element = document.getElementById(id);
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [ids]);
 

@@ -109,9 +109,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               }}
             />
             
-            {/* Fixed Image Box - Container stays in place */}
+            {/* Fixed Image Box - Container stays in place with project-specific gradient */}
             <div 
-              className="relative h-[55vh] md:h-[60vh] lg:h-[65vh] rounded-2xl border border-white/10 shadow-2xl bg-[#171616] overflow-hidden"
+              className="relative h-[55vh] md:h-[60vh] lg:h-[65vh] rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
+              style={{
+                background: `radial-gradient(circle at 30% 50%, rgba(${project.color}, 0.15) 0%, rgba(${project.color}, 0.08) 40%, #0F0E0E 100%)`
+              }}
             >
               {/* First Image - Back layer, rotates on hover */}
               <motion.div
@@ -124,8 +127,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   opacity: isHovered ? 1 : 1,
                 }}
                 transition={{
-                  duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: 0.8,
+                  ease: [0.16, 1, 0.3, 1],
+                  type: 'spring',
+                  stiffness: 100,
+                  damping: 20,
                 }}
                 style={{
                   transformOrigin: 'center center',
@@ -160,8 +166,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   opacity: isHovered ? 1 : 0,
                 }}
                 transition={{
-                  duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: 0.8,
+                  ease: [0.16, 1, 0.3, 1],
+                  type: 'spring',
+                  stiffness: 100,
+                  damping: 20,
                 }}
                 style={{
                   transformOrigin: 'center center',

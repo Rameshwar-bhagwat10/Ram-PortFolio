@@ -63,7 +63,7 @@ export default function About() {
   return (
     <section 
       id="about" 
-      className="relative pt-16 pb-32 px-6 bg-[#0F0E0E] overflow-hidden"
+      className="relative pt-16 pb-12 px-6 bg-[#0F0E0E] overflow-hidden"
     >
       {/* Extended horizon glow from Hero - fading upward */}
       <div className="absolute top-0 left-0 w-full h-64 pointer-events-none">
@@ -111,15 +111,12 @@ export default function About() {
               {/* About Information */}
               <div className="space-y-6">
                 {/* Positioning Statement */}
-                <div>
-                  <p className="text-lg leading-relaxed text-white/90 mb-4">
-                    I craft high-performance web applications with a focus on clean architecture, 
-                    modern technologies, and exceptional user experiences.
+                <div className="space-y-4">
+                  <p className="text-xl md:text-2xl leading-[1.8] font-light text-white/95 tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    I craft high-performance web applications with clean architecture and exceptional user experiences.
                   </p>
-                  <p className="text-base leading-relaxed text-white/80">
-                    With over 5 years of experience in full-stack development, I specialize in 
-                    building scalable applications that combine cutting-edge technology with 
-                    intuitive design. Currently focused on AI-powered developer tools.
+                  <p className="text-lg md:text-xl leading-[1.7] font-light text-white/75 tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    Specializing in scalable applications that blend cutting-edge technology with intuitive design.
                   </p>
                 </div>
 

@@ -6,7 +6,7 @@ import { Briefcase, CheckCircle2, Users, TrendingUp } from 'lucide-react';
 
 const stats = [
   { value: 5, label: 'Years Experience', suffix: '+', max: 10, icon: Briefcase, color: '#FF8C00' },
-  { value: 50, label: 'Projects Completed', suffix: '+', max: 100, icon: CheckCircle2, color: '#3B82F6' },
+  { value: 50, label: 'Projects', suffix: '+', max: 100, icon: CheckCircle2, color: '#3B82F6' },
   { value: 15, label: 'Happy Clients', suffix: '+', max: 20, icon: Users, color: '#10B981' },
   { value: 98, label: 'Success Rate', suffix: '%', max: 100, icon: TrendingUp, color: '#8B5CF6' },
 ];
@@ -105,7 +105,7 @@ function CircularProgress({
       </div>
 
       {/* Label */}
-      <p className="text-sm text-white/70 text-center font-medium">{label}</p>
+      <p className="text-sm font-semibold text-center bg-gradient-to-r from-primary via-orange-400 to-orange-500 bg-clip-text text-transparent">{label}</p>
     </motion.div>
   );
 }
