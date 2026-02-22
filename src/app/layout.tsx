@@ -6,7 +6,6 @@ import "../styles/animations.css";
 import { generateSEO } from "@/lib/seo";
 import Navbar from "@/components/layout/Navbar/Navbar";
 import Footer from "@/components/layout/Footer/Footer";
-import NeonCursorTrail from "@/components/ui/NeonCursorTrail";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +34,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ overflow: 'visible' }}
       >
-        <NeonCursorTrail />
         <Navbar />
         <main className="relative z-10" style={{ overflow: 'visible' }}>
           {children}
