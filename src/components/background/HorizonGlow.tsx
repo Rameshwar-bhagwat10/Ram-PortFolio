@@ -1,26 +1,42 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useMemo } from 'react';
 
 export default function HorizonGlow() {
+  // Memoize animation variants
+  const glowVariants = useMemo(() => ({
+    glow1: {
+      height: ['200px', '400px', '200px'],
+      opacity: [0.2, 0.35, 0.2],
+    },
+    glow2: {
+      height: ['180px', '370px', '180px'],
+      opacity: [0.18, 0.32, 0.18],
+    },
+    glow3: {
+      height: ['160px', '340px', '160px'],
+      opacity: [0.15, 0.28, 0.15],
+    },
+  }), []);
+
   return (
     <div className="absolute bottom-0 left-0 w-full h-[600px] z-[5] pointer-events-none overflow-visible">
-      {/* Sharp curved horizon arc with proper glow */}
       <motion.div
         className="relative w-full h-full"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, delay: 0.5, ease: 'easeOut' }}
       >
-        {/* SVG Sharp Curved Arc - Upward curve (planetary horizon) */}
+        {/* SVG Sharp Curved Arc */}
         <svg
           className="absolute bottom-0 inset-x-0 w-full h-48 z-10"
           viewBox="0 0 1200 200"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
           <defs>
-            {/* White gradient for the line */}
             <linearGradient id="whiteHorizonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
               <stop offset="15%" stopColor="#FFFFFF" stopOpacity="0.7" />
@@ -29,7 +45,6 @@ export default function HorizonGlow() {
               <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
             </linearGradient>
             
-            {/* Glow filter */}
             <filter id="horizonGlow">
               <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
               <feMerge>
@@ -39,7 +54,6 @@ export default function HorizonGlow() {
             </filter>
           </defs>
           
-          {/* Glow layer - wider and blurred */}
           <path
             d="M 0 200 Q 600 50, 1200 200"
             stroke="url(#whiteHorizonGradient)"
@@ -49,7 +63,6 @@ export default function HorizonGlow() {
             style={{ filter: 'blur(8px)' }}
           />
           
-          {/* Main bold curved line with glow filter */}
           <path
             d="M 0 200 Q 600 50, 1200 200"
             stroke="url(#whiteHorizonGradient)"
@@ -59,15 +72,11 @@ export default function HorizonGlow() {
           />
         </svg>
 
-        {/* Glow bars - DJ style pulsing from arc upward */}
+        {/* Optimized glow bars with will-change */}
         <div className="absolute bottom-[48px] left-0 w-full h-[550px]">
-          {/* Glow bar 1 - Fast pulse */}
           <motion.div
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%]"
-            animate={{
-              height: ['200px', '400px', '200px'],
-              opacity: [0.2, 0.35, 0.2],
-            }}
+            animate={glowVariants.glow1}
             transition={{
               duration: 1.5,
               repeat: Infinity,
@@ -76,16 +85,13 @@ export default function HorizonGlow() {
             style={{
               background: 'radial-gradient(ellipse at center bottom, rgba(255, 20, 147, 0.2) 0%, rgba(255, 60, 100, 0.14) 20%, rgba(255, 100, 60, 0.1) 40%, rgba(255, 140, 40, 0.06) 60%, rgba(255, 140, 20, 0.03) 80%, rgba(255, 140, 10, 0.015) 90%, transparent 100%)',
               filter: 'blur(50px)',
+              willChange: 'height, opacity',
             }}
           />
 
-          {/* Glow bar 2 - Medium pulse */}
           <motion.div
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%]"
-            animate={{
-              height: ['180px', '370px', '180px'],
-              opacity: [0.18, 0.32, 0.18],
-            }}
+            animate={glowVariants.glow2}
             transition={{
               duration: 1.3,
               repeat: Infinity,
@@ -95,16 +101,13 @@ export default function HorizonGlow() {
             style={{
               background: 'radial-gradient(ellipse at center bottom, rgba(255, 0, 0, 0.18) 0%, rgba(255, 20, 147, 0.13) 25%, rgba(255, 100, 80, 0.09) 50%, rgba(255, 140, 60, 0.045) 75%, rgba(255, 140, 30, 0.02) 90%, transparent 100%)',
               filter: 'blur(60px)',
+              willChange: 'height, opacity',
             }}
           />
 
-          {/* Glow bar 3 - Slow pulse */}
           <motion.div
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100%]"
-            animate={{
-              height: ['160px', '340px', '160px'],
-              opacity: [0.15, 0.28, 0.15],
-            }}
+            animate={glowVariants.glow3}
             transition={{
               duration: 1.7,
               repeat: Infinity,
@@ -114,6 +117,7 @@ export default function HorizonGlow() {
             style={{
               background: 'radial-gradient(ellipse at center bottom, rgba(255, 140, 0, 0.15) 0%, rgba(255, 20, 147, 0.1) 30%, rgba(255, 0, 0, 0.06) 60%, rgba(255, 100, 50, 0.02) 85%, rgba(255, 140, 20, 0.008) 95%, transparent 100%)',
               filter: 'blur(70px)',
+              willChange: 'height, opacity',
             }}
           />
         </div>
