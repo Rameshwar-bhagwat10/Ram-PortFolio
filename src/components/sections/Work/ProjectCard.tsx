@@ -229,7 +229,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
             {/* Divider */}
             <motion.div 
-              className="w-12 h-[2px] bg-primary"
+              className="w-12 h-[2px] bg-primary-gradient"
               initial={{ width: 0 }}
               whileInView={{ width: 48 }}
               viewport={{ once: true }}
@@ -264,7 +264,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.8 + idx * 0.1 }}
                 >
-                  <div className="w-2 h-2 rotate-45 bg-gradient-to-br from-primary to-orange-600 mt-2 flex-shrink-0" />
+                  <div className="w-2 h-2 rotate-45 bg-primary-gradient mt-2 flex-shrink-0" />
                   <p className="text-xs md:text-sm text-white/70 leading-relaxed">
                     {feature}
                   </p>
@@ -288,7 +288,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 return (
                   <motion.span
                     key={idx}
-                    className="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80 inline-flex items-center gap-1.5"
+                    className="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1.5"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -296,7 +296,27 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 140, 0, 0.1)' }}
                   >
                     <Icon size={12} className="flex-shrink-0" style={{ color: iconColor }} />
-                    {tech}
+                    <motion.span
+                      className="inline-block"
+                      style={{
+                        background: 'linear-gradient(90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.5) 100%)',
+                        backgroundSize: '200% 100%',
+                        WebkitBackgroundClip: 'text',
+                        backgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.4))',
+                      }}
+                      animate={{
+                        backgroundPosition: ['0% 0%', '200% 0%'],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: 'linear',
+                      }}
+                    >
+                      {tech}
+                    </motion.span>
                   </motion.span>
                 );
               })}

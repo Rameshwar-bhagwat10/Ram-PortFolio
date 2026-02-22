@@ -34,6 +34,8 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-orange': 'linear-gradient(135deg, #FF8C00 0%, #FF5F00 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%)',
+        'gradient-primary-hover': 'linear-gradient(135deg, #FF2020 0%, #FF3AA3 50%, #FFA020 100%)',
       },
       animation: {
         'float': 'float 20s ease-in-out infinite',

@@ -2,6 +2,7 @@
 
 import { Skill } from './skills.data';
 import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 interface MarqueeRowProps {
   skills: Skill[];
@@ -80,10 +81,28 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
               style={{ color: skill.color }}
             />
             
-            {/* Skill name - always visible below icon */}
-            <span className="text-xs font-medium text-white/70 whitespace-nowrap text-center">
+            {/* Skill name with shimmer effect */}
+            <motion.span
+              className="text-xs font-medium whitespace-nowrap text-center inline-block"
+              style={{
+                background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.4) 100%)',
+                backgroundSize: '200% 100%',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.4))',
+              }}
+              animate={{
+                backgroundPosition: ['0% 0%', '200% 0%'],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
               {skill.name}
-            </span>
+            </motion.span>
           </div>
         ))}
       </div>

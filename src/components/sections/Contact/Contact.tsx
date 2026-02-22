@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ContactCard from './ContactCard';
+import CustomParticleBackground from '@/components/background/CustomParticleBackground';
 
 export default function Contact() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -12,6 +13,9 @@ export default function Contact() {
       id="contact"
       className="relative min-h-screen flex items-center justify-center py-32 px-6 bg-[#0F0E0E] overflow-hidden"
     >
+      {/* Particle Background - Green */}
+      <CustomParticleBackground color="100, 255, 150" particleCount={35} />
+
       {/* Subtle background atmosphere */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Radial orange glow */}
@@ -58,10 +62,50 @@ export default function Contact() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsFormOpen(true)}
-          className="group relative px-10 py-3.5 rounded-full font-semibold text-base text-white backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-white/15 transition-all duration-300 inline-flex items-center gap-3"
+          className="group relative px-10 py-3.5 rounded-full font-semibold text-base text-white backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 inline-flex items-center gap-3 overflow-hidden opacity-80"
         >
           {/* White glow effect */}
           <div className="absolute inset-0 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Shimmer effect */}
+          <>
+            {/* Main shimmer stripe */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none rounded-full"
+              style={{
+                width: '80%',
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 30%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 70%, transparent 100%)',
+                filter: 'blur(12px)',
+              }}
+              animate={{
+                left: ['-80%', '180%'],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                repeatDelay: 1.5,
+              }}
+            />
+            {/* Secondary glow layer */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none rounded-full"
+              style={{
+                width: '100%',
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.05) 60%, transparent 100%)',
+                filter: 'blur(20px)',
+              }}
+              animate={{
+                left: ['-100%', '200%'],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                repeatDelay: 1.5,
+              }}
+            />
+          </>
           
           <span className="relative z-10">Get in Touch</span>
           

@@ -8,37 +8,37 @@ const strengths = [
     icon: Zap,
     title: 'Fast Development',
     description: 'Rapid prototyping and iteration',
-    color: 'from-orange-500 to-red-500',
+    color: 'from-red-500 via-pink-500 to-orange-500',
   },
   {
     icon: Target,
     title: 'User-Centric',
     description: 'Designing with users in mind',
-    color: 'from-primary to-orange-600',
+    color: 'from-pink-500 via-orange-500 to-red-500',
   },
   {
     icon: Rocket,
     title: 'Scalable Solutions',
     description: 'Building for growth',
-    color: 'from-red-500 to-primary',
+    color: 'from-red-500 via-pink-500 to-orange-500',
   },
   {
     icon: Code2,
     title: 'Clean Code',
     description: 'Maintainable architecture',
-    color: 'from-orange-600 to-red-600',
+    color: 'from-orange-500 via-pink-500 to-red-500',
   },
   {
     icon: Lightbulb,
     title: 'Innovation',
     description: 'Creative problem solving',
-    color: 'from-primary to-secondary',
+    color: 'from-red-500 via-pink-500 to-orange-500',
   },
   {
     icon: Users,
     title: 'Team Player',
     description: 'Collaborative mindset',
-    color: 'from-secondary to-primary',
+    color: 'from-orange-500 via-pink-500 to-red-500',
   },
 ];
 

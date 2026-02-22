@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useScroll, useTransform, motion } from 'framer-motion';
 import { projects } from './work.data';
 import ProjectCard from './ProjectCard';
+import CustomParticleBackground from '@/components/background/CustomParticleBackground';
 
 export default function Work() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,9 +21,9 @@ export default function Work() {
   );
 
   return (
-    <div id="work" ref={containerRef} className="relative" style={{ height: '430vh' }}>
+    <div id="work" ref={containerRef} className="relative bg-[#0F0E0E]" style={{ height: '430vh' }}>
       {/* Intro Section */}
-      <div className="h-[30vh] flex items-center justify-center bg-[#0F0E0E]">
+      <div className="h-[30vh] flex items-center justify-center bg-[#0F0E0E] relative">
         <div className="text-center px-6">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -57,9 +58,12 @@ export default function Work() {
 
       {/* Sticky Projects Section */}
       <div className="sticky top-0 h-screen overflow-hidden bg-[#0F0E0E]">
+        {/* Particle Background - Purple */}
+        <CustomParticleBackground color="200, 100, 255" particleCount={35} />
+        
         <motion.div
           style={{ x }}
-          className="flex h-full will-change-transform"
+          className="flex h-full will-change-transform relative z-10"
           transition={{
             type: 'spring',
             stiffness: 100,

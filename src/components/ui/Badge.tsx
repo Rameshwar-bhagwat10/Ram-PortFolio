@@ -10,9 +10,9 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     const baseStyles = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-colors duration-200';
 
     const variants = {
-      primary: 'bg-primary text-black',
-      outline: 'border border-primary text-primary',
-      subtle: 'bg-primary/10 text-primary',
+      primary: 'bg-primary-gradient text-white',
+      outline: 'border border-transparent bg-primary-gradient bg-clip-padding text-primary-gradient',
+      subtle: 'bg-primary-gradient/10 text-primary-gradient',
     };
 
     return (

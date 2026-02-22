@@ -20,7 +20,7 @@ interface Bubble {
 
 export default function NeonCursorTrail() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
   const mouseRef = useRef<Point>({ x: 0, y: 0 });
   const currentRef = useRef<Point>({ x: 0, y: 0 });
   const trailRef = useRef<Point[]>([]);

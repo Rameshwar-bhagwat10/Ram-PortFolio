@@ -20,13 +20,15 @@ export default function HorizonLine() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            {/* Gradient for the line */}
+            {/* Gradient for the line - Red to Pink to Orange */}
             <linearGradient id="horizonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FF8C00" stopOpacity="0" />
-              <stop offset="20%" stopColor="#FF8C00" stopOpacity="0.6" />
+              <stop offset="0%" stopColor="#FF0000" stopOpacity="0" />
+              <stop offset="15%" stopColor="#FF0000" stopOpacity="0.4" />
+              <stop offset="35%" stopColor="#FF1493" stopOpacity="0.8" />
               <stop offset="50%" stopColor="#FF8C00" stopOpacity="1" />
-              <stop offset="80%" stopColor="#FF8C00" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#FF8C00" stopOpacity="0" />
+              <stop offset="65%" stopColor="#FF1493" stopOpacity="0.8" />
+              <stop offset="85%" stopColor="#FF0000" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#FF0000" stopOpacity="0" />
             </linearGradient>
             
             {/* Glow filter */}

@@ -8,63 +8,78 @@ import ProfileCard from './ProfileCard';
 import AboutStory from './AboutStory';
 import StatsGrid from './StatsGrid';
 import TimelineStrip from './TimelineStrip';
+import AchievementsSection from './AchievementsSection';
+import CustomParticleBackground from '@/components/background/CustomParticleBackground';
 
 const highlights = [
   {
-    id: 'product',
-    title: 'Product-Focused',
-    description: 'Building scalable solutions that solve real problems with clean architecture and modern best practices. I prioritize user needs and business goals, ensuring every feature delivers measurable value.',
+    id: 'personal',
+    title: 'Personal Info',
+    description: 'Based in Yeola, Maharashtra, India, I am a passionate Full Stack Developer dedicated to creating innovative web solutions. With a strong foundation in modern technologies and a commitment to continuous learning.',
     points: [
-      'User-centric design thinking',
-      'Agile development methodology',
-      'Data-driven decision making',
-      'Continuous iteration & improvement'
+      'Location: Yeola, Maharashtra',
+      'Email: rameshwarbhagwat019@gmail.com',
+      'Phone: +91 9699245170',
+      'Open to remote opportunities'
     ]
   },
   {
-    id: 'ai',
-    title: 'AI-Driven',
-    description: 'Leveraging modern AI and machine learning to enhance user experiences and automate complex workflows. From natural language processing to predictive analytics, I integrate cutting-edge AI technologies.',
+    id: 'strengths',
+    title: 'Strengths',
+    description: 'My core strengths lie in building scalable full-stack applications with modern frameworks and best practices. I excel at problem-solving, clean code architecture, and delivering user-centric solutions.',
     points: [
-      'TensorFlow & PyTorch integration',
-      'OpenAI API implementation',
-      'Custom ML model development',
-      'Natural language processing'
+      'Full Stack Development (MERN)',
+      'React & Next.js expertise',
+      'RESTful API design',
+      'Database optimization & design'
     ]
   },
   {
-    id: 'performance',
-    title: 'Performance-First',
-    description: 'Optimizing for speed, efficiency, and reliability with cutting-edge performance optimization techniques. Every millisecond matters - from Core Web Vitals to server response times.',
+    id: 'achievements',
+    title: 'Achievements',
+    description: 'Throughout my journey, I have successfully delivered multiple production-ready applications, contributed to open-source projects, and continuously expanded my technical expertise.',
     points: [
-      'Code splitting & lazy loading',
-      'Advanced caching strategies',
-      'Database query optimization',
-      'Core Web Vitals optimization'
+      'Built scalable web applications',
+      'Open source contributions',
+      'Technical blog writing',
+      'Mentored junior developers'
     ]
   },
   {
-    id: 'collaboration',
-    title: 'Team Collaboration',
-    description: 'Working seamlessly with cross-functional teams using agile methodologies and clear communication. I believe great products are built by great teams where ideas flourish.',
+    id: 'education',
+    title: 'Education',
+    description: 'Continuously learning and staying updated with the latest technologies and industry trends. My educational journey combines formal education with self-directed learning and practical experience.',
     points: [
-      'Pair programming sessions',
-      'Comprehensive code reviews',
-      'Sprint planning & retrospectives',
-      'Technical documentation'
+      'Computer Science background',
+      'Online certifications & courses',
+      'Active tech community member',
+      'Continuous skill development'
     ]
   },
 ];
 
 export default function About() {
-  const [activeTab, setActiveTab] = useState('product');
+  const [activeTab, setActiveTab] = useState('personal');
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const activeHighlight = highlights.find(h => h.id === activeTab) || highlights[0];
 
+  const handleCopyEmail = (text: string) => {
+    // Check if the text contains an email
+    const emailMatch = text.match(/[\w.-]+@[\w.-]+\.\w+/);
+    if (emailMatch) {
+      navigator.clipboard.writeText(emailMatch[0]);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    }
+  };
   return (
     <section 
       id="about" 
       className="relative pt-16 pb-12 px-6 bg-[#0F0E0E] overflow-hidden"
     >
+      {/* Particle Background - White */}
+      <CustomParticleBackground color="255, 255, 255" particleCount={35} />
+
       {/* Extended horizon glow from Hero - fading upward */}
       <div className="absolute top-0 left-0 w-full h-64 pointer-events-none">
         <div 
@@ -131,7 +146,7 @@ export default function About() {
                         className={`
                           px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300
                           ${activeTab === highlight.id 
-                            ? 'bg-primary text-black' 
+                            ? 'bg-primary-gradient text-white shadow-lg shadow-pink-500/30' 
                             : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
                           }
                         `}
@@ -152,25 +167,39 @@ export default function About() {
                       className="min-h-[180px]"
                     >
                       <h4 className="text-xl font-bold mb-3 text-white flex items-center gap-2">
-                        <span className="w-1 h-6 bg-gradient-to-b from-primary to-orange-600 rounded-full"></span>
+                        <span className="w-1 h-6 bg-primary-gradient rounded-full"></span>
                         {activeHighlight.title}
                       </h4>
                       <p className="text-base text-white/80 leading-relaxed mb-4">{activeHighlight.description}</p>
                       
                       {/* Key Points Grid */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
-                        {activeHighlight.points.map((point, index) => (
-                          <motion.div
-                            key={point}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-                            className="flex items-start gap-2"
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                            <span className="text-sm text-white/70">{point}</span>
-                          </motion.div>
-                        ))}
+                        {activeHighlight.points.map((point, index) => {
+                          const isEmail = point.toLowerCase().includes('email:');
+                          return (
+                            <motion.div
+                              key={point}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
+                              onClick={() => isEmail && handleCopyEmail(point)}
+                              className={`flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 ${isEmail ? 'cursor-pointer' : ''}`}
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full bg-primary-gradient flex-shrink-0"></div>
+                              <span className="text-xs font-medium text-white/70">{point}</span>
+                              {isEmail && copiedEmail && (
+                                <motion.span
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  className="ml-auto text-[10px] text-green-400"
+                                >
+                                  Copied!
+                                </motion.span>
+                              )}
+                            </motion.div>
+                          );
+                        })}
                       </div>
                     </motion.div>
                   </AnimatePresence>
@@ -178,6 +207,9 @@ export default function About() {
               </div>
             </div>
           </div>
+
+          {/* Achievements Section */}
+          <AchievementsSection />
 
           {/* Timeline Strip */}
           <div className="mb-16">

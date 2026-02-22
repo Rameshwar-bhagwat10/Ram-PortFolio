@@ -66,7 +66,7 @@ export default function HorizonGlow() {
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%]"
             animate={{
               height: ['200px', '400px', '200px'],
-              opacity: [0.3, 0.5, 0.3],
+              opacity: [0.2, 0.35, 0.2],
             }}
             transition={{
               duration: 1.5,
@@ -74,7 +74,7 @@ export default function HorizonGlow() {
               ease: 'easeInOut',
             }}
             style={{
-              background: 'radial-gradient(ellipse at center bottom, rgba(220, 60, 20, 0.3) 0%, rgba(200, 50, 20, 0.2) 20%, rgba(180, 40, 15, 0.15) 40%, rgba(140, 30, 10, 0.08) 60%, rgba(100, 20, 5, 0.04) 80%, rgba(80, 15, 3, 0.02) 90%, transparent 100%)',
+              background: 'radial-gradient(ellipse at center bottom, rgba(255, 20, 147, 0.2) 0%, rgba(255, 60, 100, 0.14) 20%, rgba(255, 100, 60, 0.1) 40%, rgba(255, 140, 40, 0.06) 60%, rgba(255, 140, 20, 0.03) 80%, rgba(255, 140, 10, 0.015) 90%, transparent 100%)',
               filter: 'blur(50px)',
             }}
           />
@@ -84,7 +84,7 @@ export default function HorizonGlow() {
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%]"
             animate={{
               height: ['180px', '370px', '180px'],
-              opacity: [0.25, 0.45, 0.25],
+              opacity: [0.18, 0.32, 0.18],
             }}
             transition={{
               duration: 1.3,
@@ -93,7 +93,7 @@ export default function HorizonGlow() {
               delay: 0.2,
             }}
             style={{
-              background: 'radial-gradient(ellipse at center bottom, rgba(255, 80, 30, 0.25) 0%, rgba(220, 60, 20, 0.18) 25%, rgba(180, 40, 15, 0.12) 50%, rgba(120, 25, 10, 0.06) 75%, rgba(80, 15, 5, 0.03) 90%, transparent 100%)',
+              background: 'radial-gradient(ellipse at center bottom, rgba(255, 0, 0, 0.18) 0%, rgba(255, 20, 147, 0.13) 25%, rgba(255, 100, 80, 0.09) 50%, rgba(255, 140, 60, 0.045) 75%, rgba(255, 140, 30, 0.02) 90%, transparent 100%)',
               filter: 'blur(60px)',
             }}
           />
@@ -103,7 +103,7 @@ export default function HorizonGlow() {
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100%]"
             animate={{
               height: ['160px', '340px', '160px'],
-              opacity: [0.2, 0.4, 0.2],
+              opacity: [0.15, 0.28, 0.15],
             }}
             transition={{
               duration: 1.7,
@@ -112,7 +112,7 @@ export default function HorizonGlow() {
               delay: 0.4,
             }}
             style={{
-              background: 'radial-gradient(ellipse at center bottom, rgba(255, 100, 40, 0.2) 0%, rgba(200, 60, 25, 0.14) 30%, rgba(150, 40, 15, 0.08) 60%, rgba(100, 25, 10, 0.03) 85%, rgba(60, 15, 5, 0.01) 95%, transparent 100%)',
+              background: 'radial-gradient(ellipse at center bottom, rgba(255, 140, 0, 0.15) 0%, rgba(255, 20, 147, 0.1) 30%, rgba(255, 0, 0, 0.06) 60%, rgba(255, 100, 50, 0.02) 85%, rgba(255, 140, 20, 0.008) 95%, transparent 100%)',
               filter: 'blur(70px)',
             }}
           />

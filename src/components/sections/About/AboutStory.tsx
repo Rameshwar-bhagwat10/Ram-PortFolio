@@ -44,7 +44,7 @@ export default function AboutStory() {
       className="space-y-6"
     >
       {/* Core Expertise Heading */}
-      <h4 className="text-lg font-bold text-center bg-gradient-to-r from-primary via-orange-500 to-primary bg-clip-text text-transparent">Core Expertise</h4>
+      <h4 className="text-lg font-bold text-center text-primary-gradient">Core Expertise</h4>
       
       {/* Inverted Triangle Layout */}
       <div className="flex flex-col items-center gap-3">
@@ -63,7 +63,27 @@ export default function AboutStory() {
                 className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 w-[110px]"
               >
                 <skill.icon size={16} style={{ color: skill.color }} className="flex-shrink-0" />
-                <span className="text-xs font-medium text-white/90 truncate">{skill.name}</span>
+                <motion.span
+                  className="text-xs font-medium truncate inline-block"
+                  style={{
+                    background: 'linear-gradient(90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.5) 100%)',
+                    backgroundSize: '200% 100%',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.4))',
+                  }}
+                  animate={{
+                    backgroundPosition: ['0% 0%', '200% 0%'],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  }}
+                >
+                  {skill.name}
+                </motion.span>
               </motion.div>
             ))}
           </div>

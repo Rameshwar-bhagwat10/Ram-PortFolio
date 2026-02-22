@@ -23,7 +23,7 @@ export default function ProfileCard() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-secondary to-primary p-[4px]"
+          className="absolute inset-0 rounded-full bg-primary-gradient p-[4px]"
         >
           <div className="w-full h-full rounded-full bg-background" />
         </motion.div>
@@ -42,16 +42,35 @@ export default function ProfileCard() {
       </motion.div>
 
       {/* Name */}
-      <motion.h3
+      <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-4xl font-black tracking-tight mb-6 text-center bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent"
-        style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}
+        className="relative mb-6 text-center"
       >
-        John Doe
-      </motion.h3>
+        <motion.h3
+          className="text-xl md:text-2xl font-light tracking-wide leading-[1.4] font-[family-name:var(--font-abril-fatface)] inline-block"
+          style={{
+            background: 'linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.3) 60%, rgba(255,255,255,0.3) 100%)',
+            backgroundSize: '200% 100%',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.5))',
+          }}
+          animate={{
+            backgroundPosition: ['0% 0%', '200% 0%'],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        >
+          Rameshwar Bhagwat
+        </motion.h3>
+      </motion.div>
 
       {/* Social Links */}
       <motion.div
@@ -62,45 +81,45 @@ export default function ProfileCard() {
         className="flex items-center gap-2"
       >
         <motion.a
-          href="mailto:john@example.com"
+          href="mailto:rameshwarbhagwat019@gmail.com"
           whileHover={{ scale: 1.15, y: -3 }}
           whileTap={{ scale: 0.95 }}
-          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary/20 border border-white/10 hover:border-primary transition-all duration-300 flex items-center justify-center group"
+          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
         >
-          <Mail size={16} className="text-muted group-hover:text-primary transition-colors" />
+          <Mail size={16} className="text-muted group-hover:text-pink-400 transition-colors" />
         </motion.a>
         
         <motion.a
-          href="https://linkedin.com"
+          href="https://linkedin.com/in/Rameshwarbhagwat"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.15, y: -3 }}
           whileTap={{ scale: 0.95 }}
-          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary/20 border border-white/10 hover:border-primary transition-all duration-300 flex items-center justify-center group"
+          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
         >
-          <Linkedin size={16} className="text-muted group-hover:text-primary transition-colors" />
+          <Linkedin size={16} className="text-muted group-hover:text-pink-400 transition-colors" />
         </motion.a>
         
         <motion.a
-          href="https://github.com"
+          href="https://github.com/Rameshwar-bhagwat10"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.15, y: -3 }}
           whileTap={{ scale: 0.95 }}
-          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary/20 border border-white/10 hover:border-primary transition-all duration-300 flex items-center justify-center group"
+          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
         >
-          <Github size={16} className="text-muted group-hover:text-primary transition-colors" />
+          <Github size={16} className="text-muted group-hover:text-pink-400 transition-colors" />
         </motion.a>
 
         <motion.a
-          href="https://twitter.com"
+          href="https://twitter.com/Rameshwarbhagwat"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.15, y: -3 }}
           whileTap={{ scale: 0.95 }}
-          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary/20 border border-white/10 hover:border-primary transition-all duration-300 flex items-center justify-center group"
+          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
         >
-          <Twitter size={16} className="text-muted group-hover:text-primary transition-colors" />
+          <Twitter size={16} className="text-muted group-hover:text-pink-400 transition-colors" />
         </motion.a>
       </motion.div>
     </motion.div>

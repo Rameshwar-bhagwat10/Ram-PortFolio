@@ -54,7 +54,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
           {...register('message', { required: 'Please enter your message' })}
           placeholder="Your message..."
           rows={5}
-          className="w-full rounded-xl bg-[#141414] border border-white/10 p-4 text-white placeholder-white/40 focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
+          className="w-full rounded-xl bg-[#141414] border border-white/10 p-4 text-white placeholder-white/40 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all resize-none"
         />
         {errors.message && (
           <p className="text-red-400 text-sm mt-1">{errors.message.message}</p>
@@ -68,7 +68,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
             {...register('name', { required: 'Name is required' })}
             type="text"
             placeholder="Your name"
-            className="w-full rounded-xl bg-[#141414] border border-white/10 p-3 text-white placeholder-white/40 focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+            className="w-full rounded-xl bg-[#141414] border border-white/10 p-3 text-white placeholder-white/40 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all"
           />
           {errors.name && (
             <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
@@ -86,7 +86,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
             })}
             type="email"
             placeholder="Your email"
-            className="w-full rounded-xl bg-[#141414] border border-white/10 p-3 text-white placeholder-white/40 focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+            className="w-full rounded-xl bg-[#141414] border border-white/10 p-3 text-white placeholder-white/40 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all"
           />
           {errors.email && (
             <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
@@ -106,7 +106,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
           ${
             isSuccess
               ? 'bg-green-500'
-              : 'bg-gradient-to-r from-[#FF8C00] to-[#FF5F00] hover:brightness-110'
+              : 'bg-primary-gradient hover:brightness-110'
           }
         `}
         style={{

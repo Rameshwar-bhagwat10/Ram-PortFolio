@@ -1,6 +1,6 @@
-export const SITE_NAME = 'Portfolio';
-export const SITE_URL = 'https://example.com';
-export const SITE_DESCRIPTION = 'High-performance personal portfolio showcasing modern web development';
+export const SITE_NAME = 'Rameshwar Bhagwat - Full Stack Developer';
+export const SITE_URL = 'https://rameshwarbhagwat.com';
+export const SITE_DESCRIPTION = 'Full Stack Developer specializing in React, TypeScript, and Next.js. Building modern web applications with cutting-edge technologies.';
 
 export const NAV_LINKS = [
   { id: 'hero', label: 'Home' },
@@ -11,7 +11,7 @@ export const NAV_LINKS = [
 ];
 
 export const SOCIAL_LINKS = [
-  { name: 'GitHub', url: 'https://github.com' },
-  { name: 'LinkedIn', url: 'https://linkedin.com' },
-  { name: 'Twitter', url: 'https://twitter.com' },
+  { name: 'GitHub', url: 'https://github.com/Rameshwar-bhagwat10' },
+  { name: 'LinkedIn', url: 'https://linkedin.com/in/Rameshwarbhagwat' },
+  { name: 'Twitter', url: 'https://twitter.com/Rameshwarbhagwat' },
 ];

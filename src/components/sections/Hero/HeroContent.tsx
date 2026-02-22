@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Container from '@/components/layout/Container';
+import TypingAnimation from './TypingAnimation';
 
 const staggerContainer = {
   animate: {
@@ -49,10 +50,30 @@ export default function HeroContent() {
             style={{ borderColor: 'rgba(255, 255, 255, 0.06)' }}
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-gradient opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-gradient"></span>
             </span>
-            <span className="text-muted">Available for Opportunities</span>
+            <motion.span
+              className="text-muted inline-block"
+              style={{
+                background: 'linear-gradient(90deg, rgba(179,179,179,0.5) 0%, rgba(179,179,179,0.5) 40%, rgba(255,255,255,1) 50%, rgba(179,179,179,0.5) 60%, rgba(179,179,179,0.5) 100%)',
+                backgroundSize: '200% 100%',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.3))',
+              }}
+              animate={{
+                backgroundPosition: ['0% 0%', '200% 0%'],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              Available for Opportunities
+            </motion.span>
           </div>
         </motion.div>
 
@@ -61,14 +82,31 @@ export default function HeroContent() {
           className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight"
           variants={fadeUpVariant}
         >
-          <span className="block text-white">Full Stack Developer</span>
-          <span className="block mt-2">
-            Building{' '}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              AI-Driven Products
-            </span>
+          <span className="block text-white">Hi, I'm <span className="text-primary-gradient">Rameshwar Bhagwat</span></span>
+          <span className="block mt-2 text-white">
+            Building AI-Driven Products
           </span>
         </motion.h1>
+
+        {/* Typing Animation - Below heading */}
+        <motion.div
+          className="text-xl md:text-2xl lg:text-3xl font-semibold text-white"
+          variants={fadeUpVariant}
+        >
+          <span className="text-white/80">I'm a </span>
+          <TypingAnimation 
+            phrases={[
+              'Full Stack Developer',
+              'React Specialist',
+              'Open Source Contributor',
+              'Tech Blogger',
+              'Startup Advisor'
+            ]}
+            typingSpeed={80}
+            deletingSpeed={50}
+            pauseDuration={2000}
+          />
+        </motion.div>
 
         {/* Description */}
         <motion.p
@@ -94,6 +132,7 @@ export default function HeroContent() {
           <Button
             variant="secondary"
             size="lg"
+            shimmer={true}
             onClick={() => scrollToSection('contact')}
           >
             Get In Touch
