@@ -1,127 +1,79 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Mail, Linkedin, Github, Twitter } from 'lucide-react';
+import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
 
 export default function ProfileCard() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="flex flex-col items-center"
-    >
+    <div className="flex flex-col items-center">
       {/* Profile Image */}
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative w-64 h-64 mb-8"
-      >
-        {/* Animated ring */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-0 rounded-full bg-primary-gradient p-[4px]"
-        >
+      <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mb-6 sm:mb-8">
+        {/* Static ring */}
+        <div className="absolute inset-0 rounded-full bg-primary-gradient p-[3px] sm:p-[4px]">
           <div className="w-full h-full rounded-full bg-background" />
-        </motion.div>
+        </div>
 
         {/* Profile picture */}
-        <div className="absolute inset-[4px] rounded-full overflow-hidden shadow-2xl">
+        <div className="absolute inset-[3px] sm:inset-[4px] rounded-full overflow-hidden shadow-2xl">
           <Image
             src="/images/profile/profile.jpeg"
-            alt="Profile"
+            alt={`${PERSONAL_INFO.name} - ${PERSONAL_INFO.jobTitle}`}
             width={256}
             height={256}
             className="w-full h-full object-cover"
             priority
           />
         </div>
-      </motion.div>
+      </div>
 
       {/* Name */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="relative mb-6 text-center"
-      >
-        <motion.h3
-          className="text-xl md:text-2xl font-light tracking-wide leading-[1.4] font-[family-name:var(--font-abril-fatface)] inline-block"
-          style={{
-            background: 'linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.3) 60%, rgba(255,255,255,0.3) 100%)',
-            backgroundSize: '200% 100%',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.5))',
-          }}
-          animate={{
-            backgroundPosition: ['0% 0%', '200% 0%'],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        >
-          Rameshwar Bhagwat
-        </motion.h3>
-      </motion.div>
+      <div className="relative mb-4 sm:mb-6 text-center">
+        <h3 className="text-lg sm:text-xl md:text-2xl font-light tracking-wide leading-[1.4] font-[family-name:var(--font-abril-fatface)] text-white">
+          {PERSONAL_INFO.name}
+        </h3>
+      </div>
 
       {/* Social Links */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="flex items-center gap-2"
-      >
-        <motion.a
-          href="mailto:rameshwarbhagwat019@gmail.com"
-          whileHover={{ scale: 1.15, y: -3 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
+      <div className="flex items-center gap-2">
+        <a
+          href={`mailto:${PERSONAL_INFO.email}`}
+          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
+          aria-label="Email Rameshwar Bhagwat"
         >
-          <Mail size={16} className="text-muted group-hover:text-pink-400 transition-colors" />
-        </motion.a>
+          <Mail size={14} className="sm:w-4 sm:h-4 text-muted group-hover:text-pink-400 transition-colors" />
+        </a>
         
-        <motion.a
-          href="https://linkedin.com/in/Rameshwarbhagwat"
+        <a
+          href={SOCIAL_LINKS.find(link => link.name === 'LinkedIn')?.url}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.15, y: -3 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
+          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
+          aria-label="LinkedIn Profile"
         >
-          <Linkedin size={16} className="text-muted group-hover:text-pink-400 transition-colors" />
-        </motion.a>
+          <Linkedin size={14} className="sm:w-4 sm:h-4 text-muted group-hover:text-pink-400 transition-colors" />
+        </a>
         
-        <motion.a
-          href="https://github.com/Rameshwar-bhagwat10"
+        <a
+          href={SOCIAL_LINKS.find(link => link.name === 'GitHub')?.url}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.15, y: -3 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
+          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
+          aria-label="GitHub Profile"
         >
-          <Github size={16} className="text-muted group-hover:text-pink-400 transition-colors" />
-        </motion.a>
+          <Github size={14} className="sm:w-4 sm:h-4 text-muted group-hover:text-pink-400 transition-colors" />
+        </a>
 
-        <motion.a
-          href="https://twitter.com/Rameshwarbhagwat"
+        <a
+          href={SOCIAL_LINKS.find(link => link.name === 'Twitter')?.url}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.15, y: -3 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
+          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-primary-gradient-hover border border-white/10 hover:border-pink-500 transition-all duration-300 flex items-center justify-center group"
+          aria-label="Twitter Profile"
         >
-          <Twitter size={16} className="text-muted group-hover:text-pink-400 transition-colors" />
-        </motion.a>
-      </motion.div>
-    </motion.div>
+          <Twitter size={14} className="sm:w-4 sm:h-4 text-muted group-hover:text-pink-400 transition-colors" />
+        </a>
+      </div>
+    </div>
   );
 }

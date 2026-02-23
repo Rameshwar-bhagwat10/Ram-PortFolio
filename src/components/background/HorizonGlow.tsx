@@ -4,19 +4,15 @@ import { motion } from 'framer-motion';
 import { useMemo } from 'react';
 
 export default function HorizonGlow() {
-  // Memoize animation variants
+  // Memoize animation variants - Reduced to 2 layers for better performance
   const glowVariants = useMemo(() => ({
     glow1: {
-      height: ['200px', '400px', '200px'],
-      opacity: [0.2, 0.35, 0.2],
+      height: ['200px', '380px', '200px'],
+      opacity: [0.2, 0.32, 0.2],
     },
     glow2: {
-      height: ['180px', '370px', '180px'],
-      opacity: [0.18, 0.32, 0.18],
-    },
-    glow3: {
-      height: ['160px', '340px', '160px'],
-      opacity: [0.15, 0.28, 0.15],
+      height: ['180px', '350px', '180px'],
+      opacity: [0.18, 0.28, 0.18],
     },
   }), []);
 
@@ -72,7 +68,7 @@ export default function HorizonGlow() {
           />
         </svg>
 
-        {/* Optimized glow bars with will-change */}
+        {/* Optimized glow bars - Reduced from 3 to 2 layers */}
         <div className="absolute bottom-[48px] left-0 w-full h-[550px]">
           <motion.div
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%]"
@@ -90,33 +86,17 @@ export default function HorizonGlow() {
           />
 
           <motion.div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%]"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[95%]"
             animate={glowVariants.glow2}
             transition={{
-              duration: 1.3,
+              duration: 1.6,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: 0.2,
+              delay: 0.3,
             }}
             style={{
               background: 'radial-gradient(ellipse at center bottom, rgba(255, 0, 0, 0.18) 0%, rgba(255, 20, 147, 0.13) 25%, rgba(255, 100, 80, 0.09) 50%, rgba(255, 140, 60, 0.045) 75%, rgba(255, 140, 30, 0.02) 90%, transparent 100%)',
-              filter: 'blur(60px)',
-              willChange: 'height, opacity',
-            }}
-          />
-
-          <motion.div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100%]"
-            animate={glowVariants.glow3}
-            transition={{
-              duration: 1.7,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: 0.4,
-            }}
-            style={{
-              background: 'radial-gradient(ellipse at center bottom, rgba(255, 140, 0, 0.15) 0%, rgba(255, 20, 147, 0.1) 30%, rgba(255, 0, 0, 0.06) 60%, rgba(255, 100, 50, 0.02) 85%, rgba(255, 140, 20, 0.008) 95%, transparent 100%)',
-              filter: 'blur(70px)',
+              filter: 'blur(65px)',
               willChange: 'height, opacity',
             }}
           />

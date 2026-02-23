@@ -1,27 +1,65 @@
 'use client';
 
+import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/Hero/Hero';
-import About from '@/components/sections/About/About';
-import Skills from '@/components/sections/Skills/Skills';
-import Work from '@/components/sections/Work/Work';
-import Contact from '@/components/sections/Contact/Contact';
+
+// Lazy load sections that are below the fold
+const About = dynamic(() => import('@/components/sections/About/About'), {
+  loading: () => <div className="min-h-screen bg-[#0F0E0E]" />,
+  ssr: true, // Still render on server for SEO
+});
+
+const Skills = dynamic(() => import('@/components/sections/Skills/Skills'), {
+  loading: () => <div className="min-h-screen bg-[#0F0E0E]" />,
+  ssr: true,
+});
+
+const Work = dynamic(() => import('@/components/sections/Work/Work'), {
+  loading: () => <div className="min-h-screen bg-[#0F0E0E]" />,
+  ssr: true,
+});
+
+const Contact = dynamic(() => import('@/components/sections/Contact/Contact'), {
+  loading: () => <div className="min-h-screen bg-[#0F0E0E]" />,
+  ssr: true,
+});
 
 export default function Home() {
+  useEffect(() => {
+    // Optimize scroll performance with passive listeners
+    const optimizeScroll = () => {
+      document.documentElement.style.scrollBehavior = 'smooth';
+    };
+    
+    optimizeScroll();
+    
+    // Debounced scroll handler for performance
+    let scrollTimeout: NodeJS.Timeout;
+    const handleScroll = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        // Scroll ended - can perform any cleanup if needed
+      }, 150);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#0F0E0E]">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-[#0F0E0E]" style={{ willChange: 'auto' }}>
+      {/* Hero Section - Loads immediately */}
       <Hero />
 
-      {/* About Section */}
+      {/* Below sections - Lazy loaded */}
       <About />
-
-      {/* Skills Section */}
       <Skills />
-
-      {/* Work Section */}
       <Work />
-
-      {/* Contact Section */}
       <Contact />
     </div>
   );

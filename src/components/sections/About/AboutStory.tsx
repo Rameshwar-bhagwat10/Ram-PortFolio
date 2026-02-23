@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { 
   SiReact, 
   SiNextdotjs, 
@@ -36,59 +35,31 @@ const expertise = [
 
 export default function AboutStory() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className="space-y-6"
-    >
+    <div className="space-y-4 sm:space-y-6">
       {/* Core Expertise Heading */}
-      <h4 className="text-lg font-bold text-center text-primary-gradient">Core Expertise</h4>
+      <h4 className="text-base sm:text-lg font-bold text-center text-primary-gradient">Core Expertise</h4>
       
       {/* Inverted Triangle Layout */}
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-2 sm:gap-3">
         {expertise.map((row, rowIndex) => (
           <div 
             key={rowIndex} 
-            className="flex gap-3 justify-center"
+            className="flex gap-2 sm:gap-3 justify-center flex-wrap"
           >
-            {row.map((skill, index) => (
-              <motion.div
+            {row.map((skill) => (
+              <div
                 key={skill.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.3 + (rowIndex * row.length + index) * 0.05 }}
-                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 w-[110px]"
+                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 w-[100px] sm:w-[110px]"
               >
-                <skill.icon size={16} style={{ color: skill.color }} className="flex-shrink-0" />
-                <motion.span
-                  className="text-xs font-medium truncate inline-block"
-                  style={{
-                    background: 'linear-gradient(90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.5) 100%)',
-                    backgroundSize: '200% 100%',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.4))',
-                  }}
-                  animate={{
-                    backgroundPosition: ['0% 0%', '200% 0%'],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                >
+                <skill.icon size={14} style={{ color: skill.color }} className="flex-shrink-0 sm:w-4 sm:h-4" />
+                <span className="text-[11px] sm:text-xs font-medium text-white/70 truncate">
                   {skill.name}
-                </motion.span>
-              </motion.div>
+                </span>
+              </div>
             ))}
           </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }

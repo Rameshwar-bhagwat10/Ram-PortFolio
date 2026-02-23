@@ -18,6 +18,9 @@
 
   html {
     @apply scroll-smooth overflow-x-hidden;
+    scroll-behavior: smooth;
+    /* Enhanced smooth scrolling */
+    scroll-padding-top: 0;
   }
 
   body {
@@ -25,6 +28,15 @@
     font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Optimize scrolling performance */
+    overscroll-behavior-y: none;
+  }
+
+  /* Optimize all sections for smooth scrolling */
+  section {
+    will-change: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   /* Selection */

@@ -1,11 +1,11 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { ExternalLink, Github } from 'lucide-react';
 import { Project } from './work.data';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { 
   SiNextdotjs, 
   SiReact, 
@@ -50,73 +50,52 @@ const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; st
 
 interface ProjectCardProps {
   project: Project;
+  index: number;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
+export default function ProjectCard({ project, index }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Track this card's scroll progress for smooth animations
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start end', 'end start'],
-  });
-
-  // Smooth opacity transition - fade in when entering, fade out when leaving
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.4, 1, 1, 0.4]);
-  
-  // Smooth scale transition - subtle zoom effect
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.96, 1, 1, 0.96]);
-
   return (
-    <motion.div
-      ref={cardRef}
-      style={{ opacity, scale }}
+    <article 
       className="w-full h-full flex items-center justify-center px-6 md:px-12 lg:px-16"
+      itemScope
+      itemType="https://schema.org/CreativeWork"
     >
+      {/* SEO Microdata for each project */}
+      <meta itemProp="name" content={project.title} />
+      <meta itemProp="description" content={`${project.tagline}. ${project.description}`} />
+      <meta itemProp="author" content="Rameshwar Bhagwat" />
+      <meta itemProp="image" content={project.image} />
+      <meta itemProp="keywords" content={project.techStack.join(', ')} />
+      {project.liveUrl && <meta itemProp="url" content={project.liveUrl} />}
+      
       <div className="w-full max-w-7xl mx-auto h-full flex items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 w-full">
           
           {/* Image Container - Left 50% */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ 
-              duration: 0.8, 
-              ease: [0.22, 1, 0.36, 1],
-              type: 'spring',
-              stiffness: 80,
-              damping: 20
-            }}
+          <figure
             className="relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            itemProp="image"
           >
-            {/* Ambient glow */}
-            <motion.div
-              className="absolute inset-0 -m-8 rounded-full blur-3xl pointer-events-none"
-              animate={{
-                opacity: [0.15, 0.25, 0.15],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
+            {/* Ambient glow - Static, no animation */}
+            <div
+              className="absolute inset-0 -m-8 rounded-full blur-3xl pointer-events-none opacity-20"
               style={{
                 background: `radial-gradient(circle, rgba(${project.color}, 0.4) 0%, transparent 70%)`,
               }}
             />
             
-            {/* Fixed Image Box - Container stays in place with project-specific gradient */}
+            {/* Fixed Image Box */}
             <div 
               className="relative h-[55vh] md:h-[60vh] lg:h-[65vh] rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
               style={{
                 background: `radial-gradient(circle at 30% 50%, rgba(${project.color}, 0.15) 0%, rgba(${project.color}, 0.08) 40%, #0F0E0E 100%)`
               }}
             >
-              {/* First Image - Back layer, rotates on hover */}
+              {/* First Image - Back layer */}
               <motion.div
                 className="absolute inset-0 rounded-2xl overflow-hidden bg-[#171616]"
                 animate={{
@@ -124,17 +103,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   scale: isHovered ? 0.7 : 1,
                   x: isHovered ? -40 : 0,
                   y: isHovered ? 20 : 0,
-                  opacity: isHovered ? 1 : 1,
                 }}
                 transition={{
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1],
-                  type: 'spring',
-                  stiffness: 100,
+                  type: "spring",
+                  stiffness: 120,
                   damping: 20,
+                  mass: 0.8,
                 }}
                 style={{
                   transformOrigin: 'center center',
+                  willChange: 'transform',
                 }}
               >
                 <Image
@@ -143,7 +121,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
-                  priority
+                  priority={index === 0}
+                  loading={index === 0 ? 'eager' : 'lazy'}
                 />
                 
                 {/* Gradient overlay */}
@@ -155,7 +134,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 </div>
               </motion.div>
 
-              {/* Second Image - Front layer, rotates on hover */}
+              {/* Second Image - Front layer */}
               <motion.div
                 className="absolute inset-0 rounded-2xl overflow-hidden bg-[#171616]"
                 animate={{
@@ -166,14 +145,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   opacity: isHovered ? 1 : 0,
                 }}
                 transition={{
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1],
-                  type: 'spring',
-                  stiffness: 100,
+                  type: "spring",
+                  stiffness: 120,
                   damping: 20,
+                  mass: 0.8,
                 }}
                 style={{
                   transformOrigin: 'center center',
+                  willChange: 'transform',
                 }}
               >
                 <Image
@@ -182,160 +161,77 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
+                  loading="lazy"
                 />
                 
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               </motion.div>
             </div>
-          </motion.div>
+          </figure>
 
-          {/* Content Container - Right 50% */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ 
-              duration: 0.8, 
-              ease: [0.22, 1, 0.36, 1], 
-              delay: 0.2,
-              type: 'spring',
-              stiffness: 80,
-              damping: 20
-            }}
-            className="flex flex-col justify-center space-y-4 md:space-y-5"
-          >
+          {/* Content Container - Right 50% - No animations for better performance */}
+          <div className="flex flex-col justify-center space-y-4 md:space-y-5">
             {/* Title */}
-            <motion.h3 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" itemProp="name">
               {project.title}
-            </motion.h3>
+            </h3>
 
             {/* Tagline */}
-            <motion.p 
-              className="text-base md:text-lg text-muted"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
+            <p className="text-base md:text-lg text-muted" itemProp="headline">
               {project.tagline}
-            </motion.p>
+            </p>
 
             {/* Divider */}
-            <motion.div 
-              className="w-12 h-[2px] bg-primary-gradient"
-              initial={{ width: 0 }}
-              whileInView={{ width: 48 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            />
+            <div className="w-12 h-[2px] bg-primary-gradient" aria-hidden="true" />
 
             {/* Description */}
-            <motion.p 
-              className="text-sm md:text-base text-white/80 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
+            <p className="text-sm md:text-base text-white/80 leading-relaxed" itemProp="description">
               {project.description}
-            </motion.p>
+            </p>
 
             {/* Features */}
-            <motion.div 
-              className="space-y-2 md:space-y-2.5"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-            >
+            <ul className="space-y-2 md:space-y-2.5" itemProp="about">
               {project.features.map((feature, idx) => (
-                <motion.div 
-                  key={idx} 
-                  className="flex items-start gap-3"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.8 + idx * 0.1 }}
-                >
-                  <div className="w-2 h-2 rotate-45 bg-primary-gradient mt-2 flex-shrink-0" />
+                <li key={idx} className="flex items-start gap-3">
+                  <div className="w-2 h-2 rotate-45 bg-primary-gradient mt-2 flex-shrink-0" aria-hidden="true" />
                   <p className="text-xs md:text-sm text-white/70 leading-relaxed">
                     {feature}
                   </p>
-                </motion.div>
+                </li>
               ))}
-            </motion.div>
+            </ul>
 
             {/* Tech Stack */}
-            <motion.div 
-              className="flex flex-wrap gap-2"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 1.0 }}
-            >
+            <div className="flex flex-wrap gap-2" role="list" aria-label="Technologies used">
               {project.techStack.map((tech, idx) => {
                 const config = techConfig[tech];
-                const Icon = config?.icon || SiReact; // Default icon
+                const Icon = config?.icon || SiReact;
                 const iconColor = config?.color || '#FFFFFF';
                 
                 return (
-                  <motion.span
+                  <span
                     key={idx}
-                    className="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1.5"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 1.1 + idx * 0.05 }}
-                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 140, 0, 0.1)' }}
+                    className="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1.5 hover:bg-white/10 transition-colors duration-300"
+                    role="listitem"
+                    itemProp="keywords"
                   >
-                    <Icon size={12} className="flex-shrink-0" style={{ color: iconColor }} />
-                    <motion.span
-                      className="inline-block"
-                      style={{
-                        background: 'linear-gradient(90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.5) 100%)',
-                        backgroundSize: '200% 100%',
-                        WebkitBackgroundClip: 'text',
-                        backgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.4))',
-                      }}
-                      animate={{
-                        backgroundPosition: ['0% 0%', '200% 0%'],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: 'linear',
-                      }}
-                    >
-                      {tech}
-                    </motion.span>
-                  </motion.span>
+                    <Icon size={12} className="flex-shrink-0" style={{ color: iconColor }} aria-hidden="true" />
+                    <span className="text-white/70">{tech}</span>
+                  </span>
                 );
               })}
-            </motion.div>
+            </div>
 
             {/* CTA Buttons */}
-            <motion.div 
-              className="flex flex-wrap gap-3 md:gap-4 pt-2 md:pt-3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-            >
+            <nav className="flex flex-wrap gap-3 md:gap-4 pt-2 md:pt-3" aria-label="Project links">
               {project.liveUrl && (
                 <Button
                   variant="primary"
                   size="md"
                   onClick={() => window.open(project.liveUrl, '_blank')}
                   rightIcon={<ExternalLink size={16} />}
+                  aria-label={`View ${project.title} live demo`}
                 >
                   View Live
                 </Button>
@@ -346,14 +242,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   size="md"
                   onClick={() => window.open(project.githubUrl, '_blank')}
                   rightIcon={<Github size={16} />}
+                  aria-label={`View ${project.title} source code on GitHub`}
                 >
                   Source Code
                 </Button>
               )}
-            </motion.div>
-          </motion.div>
+            </nav>
+          </div>
         </div>
       </div>
-    </motion.div>
+    </article>
   );
 }

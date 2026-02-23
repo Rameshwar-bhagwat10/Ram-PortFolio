@@ -6,10 +6,13 @@ import SectionHeading from '@/components/ui/SectionHeading';
 export default function AboutHeader() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      viewport={{ once: true, margin: '-100px' }}
+      transition={{ 
+        duration: 1.2, 
+        ease: [0.16, 1, 0.3, 1],
+      }}
     >
       <SectionHeading
         subtitle="Get to Know Me"
