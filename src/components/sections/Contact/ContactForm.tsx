@@ -5,9 +5,10 @@ import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 
 interface ContactFormData {
-  message: string;
   name: string;
   email: string;
+  subject: string;
+  message: string;
 }
 
 interface ContactFormProps {
@@ -17,6 +18,7 @@ interface ContactFormProps {
 export default function ContactForm({ onClose }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -27,39 +29,48 @@ export default function ContactForm({ onClose }: ContactFormProps) {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
+    setError(null);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    console.log('Form submitted:', data);
+      const result = await response.json();
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
-
-    // Close modal and reset after 2 seconds
-    setTimeout(() => {
-      setIsSuccess(false);
-      reset();
-      if (onClose) {
-        onClose();
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message');
       }
-    }, 2000);
+
+      setIsSuccess(true);
+
+      // Close modal and reset after 3 seconds
+      setTimeout(() => {
+        setIsSuccess(false);
+        reset();
+        if (onClose) {
+          onClose();
+        }
+      }, 3000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send message');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      {/* Textarea */}
-      <div>
-        <textarea
-          {...register('message', { required: 'Please enter your message' })}
-          placeholder="Your message..."
-          rows={5}
-          className="w-full rounded-xl bg-[#141414] border border-white/10 p-4 text-white placeholder-white/40 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all resize-none"
-        />
-        {errors.message && (
-          <p className="text-red-400 text-sm mt-1">{errors.message.message}</p>
-        )}
-      </div>
+      {/* Error Message */}
+      {error && (
+        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20">
+          <p className="text-red-400 text-sm">{error}</p>
+        </div>
+      )}
 
       {/* Name and Email */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -69,6 +80,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
             type="text"
             placeholder="Your name"
             className="w-full rounded-xl bg-[#141414] border border-white/10 p-3 text-white placeholder-white/40 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all"
+            disabled={isSubmitting || isSuccess}
           />
           {errors.name && (
             <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
@@ -87,11 +99,40 @@ export default function ContactForm({ onClose }: ContactFormProps) {
             type="email"
             placeholder="Your email"
             className="w-full rounded-xl bg-[#141414] border border-white/10 p-3 text-white placeholder-white/40 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all"
+            disabled={isSubmitting || isSuccess}
           />
           {errors.email && (
             <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
           )}
         </div>
+      </div>
+
+      {/* Subject */}
+      <div>
+        <input
+          {...register('subject', { required: 'Subject is required' })}
+          type="text"
+          placeholder="Subject"
+          className="w-full rounded-xl bg-[#141414] border border-white/10 p-3 text-white placeholder-white/40 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all"
+          disabled={isSubmitting || isSuccess}
+        />
+        {errors.subject && (
+          <p className="text-red-400 text-sm mt-1">{errors.subject.message}</p>
+        )}
+      </div>
+
+      {/* Message Textarea */}
+      <div>
+        <textarea
+          {...register('message', { required: 'Please enter your message' })}
+          placeholder="Your message..."
+          rows={5}
+          className="w-full rounded-xl bg-[#141414] border border-white/10 p-4 text-white placeholder-white/40 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all resize-none"
+          disabled={isSubmitting || isSuccess}
+        />
+        {errors.message && (
+          <p className="text-red-400 text-sm mt-1">{errors.message.message}</p>
+        )}
       </div>
 
       {/* CTA Button */}

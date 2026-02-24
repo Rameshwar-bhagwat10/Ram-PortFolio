@@ -1,33 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Copy, Check } from 'lucide-react';
 import AchievementsMarquee from './AchievementsMarquee';
-
-const codeSnippets = [
-  { code: 'while(alive) { eat(); sleep(); code(); }', language: 'Life.js' },
-  { code: '// 99 bugs in the code... 🐛', language: 'Debug.log' },
-  { code: 'sudo rm -rf problems/', language: 'Terminal' },
-  { code: 'git commit -m "It works! 🎉"', language: 'Git' },
-  { code: 'if (coffee) { code(); }', language: 'Morning.js' },
-  { code: 'const magic = () => "✨";', language: 'React' },
-];
+import { useVisitorTracking } from '@/hooks/useVisitorTracking';
+import { formatNumber } from '@/lib/visitor-utils';
 
 export default function AchievementsSection() {
   const [copied, setCopied] = useState(false);
-  const [currentSnippet, setCurrentSnippet] = useState(0);
+  const { stats, isLoading } = useVisitorTracking();
   const email = 'rameshwarbhagwat019@gmail.com';
   const emailName = 'rameshwarbhagwat019';
-
-  // Rotate code snippets
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSnippet((prev) => (prev + 1) % codeSnippets.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
@@ -45,39 +30,51 @@ export default function AchievementsSection() {
     >
       {/* Two Box Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start max-w-2xl mx-auto">
-        {/* Left Box - Code Snippets */}
+        {/* Left Box - Visitor Analytics */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-3 relative h-[180px] flex flex-col"
+          className="bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl p-3 relative h-[180px] flex flex-col justify-center overflow-hidden"
         >
-          {/* macOS-style dots */}
-          <div className="flex gap-1.5 mb-2">
-            <div className="w-2 h-2 rounded-full bg-[#FF5F57]"></div>
-            <div className="w-2 h-2 rounded-full bg-[#FFBD2E]"></div>
-            <div className="w-2 h-2 rounded-full bg-[#28CA42]"></div>
-          </div>
-
-          {/* Code Snippets */}
-          <div className="flex-1 flex flex-col gap-1.5 overflow-hidden">
-            {codeSnippets.map((snippet, index) => (
+          {/* Grid Background */}
+          <div 
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
+              `,
+              backgroundSize: '20px 20px',
+            }}
+          />
+          
+          {/* Content */}
+          <div className="relative z-10 text-center space-y-3">
+            {/* Visitor Count - Top */}
+            {isLoading ? (
+              <div className="text-4xl font-bold text-white animate-pulse">...</div>
+            ) : (
               <motion.div
-                key={`${snippet.code}-${index}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: currentSnippet === index ? 1 : 0.5, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-md p-1.5 font-mono"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent"
               >
-                <div className="flex items-center justify-between mb-0.5">
-                  <span className="text-[8px] text-white/40">{snippet.language}</span>
-                </div>
-                <code className="text-[9px] text-green-400 block leading-tight">
-                  {snippet.code}
-                </code>
+                {stats.uniqueVisitors.toLocaleString()}+
               </motion.div>
-            ))}
+            )}
+
+            {/* Text - Below Count */}
+            <div className="space-y-1">
+              <h3 className="text-base font-bold text-white">
+                Portfolio Visitors
+              </h3>
+              <p className="text-white/60 text-xs">
+                Thank you for being part of my journey
+              </p>
+            </div>
           </div>
         </motion.div>
 

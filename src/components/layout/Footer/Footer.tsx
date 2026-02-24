@@ -2,6 +2,7 @@
 
 import { Github, Linkedin, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
+import VisitorCounter from '@/components/analytics/VisitorCounter';
 
 const socialIcons = {
   GitHub: Github,
@@ -19,6 +20,11 @@ export default function Footer() {
   return (
     <footer className="relative z-10 bg-background/50 backdrop-blur-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Visitor Stats */}
+        <div className="mb-6 flex justify-center">
+          <VisitorCounter variant="footer" showDetails={true} />
+        </div>
+
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted text-sm">
             &copy; {new Date().getFullYear()} Rameshwar Bhagwat. All rights reserved.
