@@ -44,7 +44,7 @@ export default function AboutStory() {
         {expertise.map((row, rowIndex) => (
           <div 
             key={rowIndex} 
-            className="flex gap-2 sm:gap-3 justify-center flex-wrap"
+            className="flex gap-2 sm:gap-3 justify-center"
           >
             {row.map((skill) => (
               <div

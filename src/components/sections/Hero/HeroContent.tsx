@@ -66,26 +66,26 @@ export default function HeroContent() {
 
         {/* Main heading - SEO optimized with proper h1 */}
         <div className="px-2 sm:px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight sm:leading-tight md:leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tight leading-[1.2] sm:leading-[1.2] md:leading-[1.2]" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 700 }}>
             <span className="block text-white">
               Hi, I'm <span className="text-primary-gradient">Rameshwar Bhagwat</span>
             </span>
-            <span className="block mt-1.5 sm:mt-2 text-white">
+            <span className="block mt-2 sm:mt-3 text-white">
               Building AI-Driven Products
             </span>
           </h1>
         </div>
 
         {/* Typing Animation - Below heading */}
-        <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-white px-2 sm:px-4">
-          <span className="text-white/80">I'm a </span>
+        <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-white px-2 sm:px-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
+          <span className="text-white/70">I'm a </span>
           <TypingAnimation 
             phrases={[
               'Full Stack Developer',
               'React Specialist',
-              'Open Source Contributor',
-              'Tech Blogger',
-              'Startup Advisor'
+              'UI/UX Enthusiast',
+              'Problem Solver',
+              'Tech Innovator'
             ]}
             typingSpeed={80}
             deletingSpeed={50}
@@ -94,7 +94,7 @@ export default function HeroContent() {
         </div>
 
         {/* Description - SEO optimized */}
-        <p className="text-base sm:text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed px-4 sm:px-6">
+        <p className="text-sm sm:text-base md:text-lg text-muted max-w-2xl mx-auto leading-relaxed px-4 sm:px-6" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 400 }}>
           Crafting scalable web applications with modern technologies.
           Specialized in React, TypeScript, and Next.js.
         </p>

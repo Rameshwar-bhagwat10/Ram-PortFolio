@@ -13,19 +13,19 @@ export default function Work() {
     offset: ['start start', 'end end'],
   });
 
-  // Use useSpring for smoother interpolation
+  // Use useSpring for smoother interpolation with slower response
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 80,
+    damping: 35,
     restDelta: 0.001
   });
 
-  // Optimized transform with memoization
-  // Adjusted to start horizontal scroll later - user sees first project longer
+  // Slower horizontal scroll with proper entry/exit transitions
+  // Extended keyframes for smoother angles at start and end (6 projects)
   const x = useTransform(
     smoothProgress,
-    [0, 0.15, 0.40, 0.65, 0.90, 1],
-    ['0%', '0%', '-100vw', '-200vw', '-300vw', '-300vw']
+    [0, 0.08, 0.20, 0.35, 0.48, 0.61, 0.74, 0.87, 0.95, 1],
+    ['0%', '0%', '-25vw', '-100vw', '-200vw', '-300vw', '-400vw', '-475vw', '-500vw', '-500vw']
   );
 
   return (
@@ -34,7 +34,7 @@ export default function Work() {
       ref={containerRef} 
       className="relative bg-[#0F0E0E]" 
       style={{ 
-        height: '400vh', // Reduced from 430vh for smoother scrolling
+        height: '750vh', // Increased for 6 projects with slower scrolling
         willChange: 'auto',
         transform: 'translateZ(0)',
         backfaceVisibility: 'hidden',

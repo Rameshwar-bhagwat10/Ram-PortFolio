@@ -74,7 +74,7 @@ export default function HorizonGlow() {
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%]"
             animate={glowVariants.glow1}
             transition={{
-              duration: 1.5,
+              duration: 4,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
@@ -89,10 +89,10 @@ export default function HorizonGlow() {
             className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[95%]"
             animate={glowVariants.glow2}
             transition={{
-              duration: 1.6,
+              duration: 4.5,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: 0.3,
+              delay: 0.5,
             }}
             style={{
               background: 'radial-gradient(ellipse at center bottom, rgba(255, 0, 0, 0.18) 0%, rgba(255, 20, 147, 0.13) 25%, rgba(255, 100, 80, 0.09) 50%, rgba(255, 140, 60, 0.045) 75%, rgba(255, 140, 30, 0.02) 90%, transparent 100%)',

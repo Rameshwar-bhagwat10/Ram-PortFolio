@@ -77,7 +77,7 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
             style={{ width: '96px' }}
           >
             <skill.icon 
-              className="text-6xl transition-all duration-300 drop-shadow-lg hover:drop-shadow-2xl" 
+              className="text-5xl transition-all duration-300 drop-shadow-lg hover:drop-shadow-2xl" 
               style={{ color: skill.color }}
             />
             

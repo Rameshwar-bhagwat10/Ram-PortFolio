@@ -23,15 +23,26 @@ import {
   SiApachekafka,
   SiFastapi,
   SiWebrtc,
-  SiBitcoin
+  SiBitcoin,
+  SiTailwindcss,
+  SiKotlin,
+  SiFirebase,
+  SiPrisma,
+  SiPandas,
+  SiNumpy,
+  SiScikitlearn,
+  SiJavascript
 } from 'react-icons/si';
+import { TbApi } from 'react-icons/tb';
 
 // Tech stack icon mapping with original brand colors
 const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; style?: React.CSSProperties; className?: string }>; color: string }> = {
-  'Next.js': { icon: SiNextdotjs, color: '#FFFFFF' }, // Changed from black to white
+  'Next.js': { icon: SiNextdotjs, color: '#FFFFFF' },
   'React': { icon: SiReact, color: '#61DAFB' },
   'TypeScript': { icon: SiTypescript, color: '#3178C6' },
+  'JavaScript': { icon: SiJavascript, color: '#F7DF1E' },
   'Python': { icon: SiPython, color: '#3776AB' },
+  'Kotlin': { icon: SiKotlin, color: '#7F52FF' },
   'Node.js': { icon: SiNodedotjs, color: '#339933' },
   'FastAPI': { icon: SiFastapi, color: '#009688' },
   'GraphQL': { icon: SiGraphql, color: '#E10098' },
@@ -40,12 +51,24 @@ const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; st
   'MongoDB': { icon: SiMongodb, color: '#47A248' },
   'TimescaleDB': { icon: SiPostgresql, color: '#FDB515' },
   'Redis': { icon: SiRedis, color: '#DC382D' },
-  'Stripe': { icon: SiStripe, color: '#008CDD' },
+  'Prisma': { icon: SiPrisma, color: '#2D3748' },
+  'Firebase': { icon: SiFirebase, color: '#FFCA28' },
+  'Firestore': { icon: SiFirebase, color: '#FFCA28' },
+  'Firebase Auth': { icon: SiFirebase, color: '#FFCA28' },
+  'Stripe': { icon: SiStripe, color: '#635BFF' },
+  'Tailwind CSS': { icon: SiTailwindcss, color: '#06B6D4' },
   'AWS': { icon: SiAmazon, color: '#FF9900' },
   'Docker': { icon: SiDocker, color: '#2496ED' },
-  'Kafka': { icon: SiApachekafka, color: '#FFFFFF' }, // Changed from black to white
-  'WebRTC': { icon: SiWebrtc, color: '#FFFFFF' }, // Changed from dark gray to white
+  'Kafka': { icon: SiApachekafka, color: '#FFFFFF' },
+  'WebRTC': { icon: SiWebrtc, color: '#FFFFFF' },
   'Blockchain': { icon: SiBitcoin, color: '#F7931A' },
+  'Scikit-learn': { icon: SiScikitlearn, color: '#F7931E' },
+  'Pandas': { icon: SiPandas, color: '#150458' },
+  'NumPy': { icon: SiNumpy, color: '#013243' },
+  'NLTK': { icon: SiPython, color: '#3776AB' },
+  'Matplotlib': { icon: SiPython, color: '#11557C' },
+  'OpenWeather API': { icon: TbApi, color: '#EB6E4B' },
+  'Android SDK': { icon: SiKotlin, color: '#3DDC84' },
 };
 
 interface ProjectCardProps {
@@ -88,11 +111,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               }}
             />
             
-            {/* Fixed Image Box */}
+            {/* Fixed Image Box with Solid Fill Background */}
             <div 
               className="relative h-[55vh] md:h-[60vh] lg:h-[65vh] rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
               style={{
-                background: `radial-gradient(circle at 30% 50%, rgba(${project.color}, 0.15) 0%, rgba(${project.color}, 0.08) 40%, #0F0E0E 100%)`
+                background: `linear-gradient(135deg, rgba(${project.color}, 0.25) 0%, rgba(${project.color}, 0.15) 50%, rgba(${project.color}, 0.08) 100%)`
               }}
             >
               {/* First Image - Back layer */}

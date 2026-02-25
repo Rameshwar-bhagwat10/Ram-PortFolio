@@ -15,8 +15,8 @@ export default function Navbar() {
     <>
       {/* Desktop Navbar */}
       <nav className="fixed top-6 left-0 right-0 z-50 px-6 md:px-10 hidden md:block">
-        <div className="relative flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo - Left Side */}
+        <div className="relative max-w-7xl mx-auto flex items-center">
+          {/* Logo - Left Side - Aligned with navbar */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -36,21 +36,20 @@ export default function Navbar() {
             />
           </motion.div>
 
-          {/* Center Glass Pill Navigation - Absolutely Centered */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="absolute left-1/2 -translate-x-1/2 backdrop-blur-sm border border-white/[0.15] rounded-full px-5 py-2 shadow-lg flex items-center gap-2"
-            style={{
-              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
-            }}
-          >
-            <NavLinks activeSection={activeSection} />
-          </motion.div>
-
-          {/* Right Side Spacer - For Balance */}
-          <div className="w-20 flex-shrink-0" />
+          {/* Center Glass Pill Navigation - Perfectly Centered */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="backdrop-blur-sm border border-white/[0.15] rounded-full px-3 py-1.5 shadow-lg flex items-center gap-1"
+              style={{
+                boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
+              }}
+            >
+              <NavLinks activeSection={activeSection} />
+            </motion.div>
+          </div>
         </div>
       </nav>
 
