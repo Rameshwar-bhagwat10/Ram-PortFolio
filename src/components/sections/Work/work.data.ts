@@ -24,8 +24,8 @@ export const projects: Project[] = [
       "Modern SaaS authentication and user dashboard"
     ],
     techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS"],
-    image: "/images/projects/project2.png",
-    hoverImage: "/images/projects/project2-hover.png",
+    image: "/images/projects/project1.png",
+    hoverImage: "/images/projects/project1-hover.png",
     liveUrl: "https://devory-app.com",
     githubUrl: "https://github.com/yourusername/devory",
     color: "138, 43, 226" // Blue-Violet - Innovation, creativity, intelligence (AI/Education)
@@ -41,8 +41,8 @@ export const projects: Project[] = [
       "Predictive analysis for coastal risk assessment"
     ],
     techStack: ["Next.js", "TypeScript", "Node.js", "Tailwind CSS", "OpenWeather API"],
-    image: "/images/projects/project1.png",
-    hoverImage: "/images/projects/project1-hover.png",
+    image: "/images/projects/project2.png",
+    hoverImage: "/images/projects/project2-hover.png",
     liveUrl: "https://safecoast-demo.com",
     githubUrl: "https://github.com/yourusername/safecoast",
     color: "0, 119, 182" // Ocean Blue - Trust, safety, water/coastal theme
@@ -58,8 +58,8 @@ export const projects: Project[] = [
       "Real-time message prediction with probability scoring"
     ],
     techStack: ["Python", "Scikit-learn", "Pandas", "NumPy", "NLTK", "Matplotlib"],
-    image: "/images/projects/project3.svg",
-    hoverImage: "/images/projects/project3-hover.svg",
+    image: "/images/projects/project3.png",
+    hoverImage: "/images/projects/project3-hover.png",
     liveUrl: "https://your-demo-link.com",
     githubUrl: "https://github.com/yourusername/spam-message-detection",
     color: "220, 53, 69" // Red - Alert, warning, security (spam detection)
@@ -75,8 +75,8 @@ export const projects: Project[] = [
       "SEO-ready architecture and fast loading speed"
     ],
     techStack: ["React", "Next.js", "Tailwind CSS", "Firebase"],
-    image: "/images/projects/project4.svg",
-    hoverImage: "/images/projects/project4-hover.svg",
+    image: "/images/projects/project4.png",
+    hoverImage: "/images/projects/project4-hover.png",
     liveUrl: "https://webcraft-demo.com",
     githubUrl: "https://github.com/yourusername/webcraft",
     color: "99, 102, 241" // Indigo - Professional, corporate, business
@@ -92,15 +92,15 @@ export const projects: Project[] = [
       "Admin dashboard for inventory management"
     ],
     techStack: ["Next.js", "MongoDB", "Node.js", "Stripe", "Tailwind CSS"],
-    image: "/images/projects/project1.svg",
-    hoverImage: "/images/projects/project1-hover.svg",
+    image: "/images/projects/project5.png",
+    hoverImage: "/images/projects/project5-hover.png",
     liveUrl: "https://localmart-demo.com",
     githubUrl: "https://github.com/yourusername/localmart",
     color: "16, 185, 129" // Green - Growth, money, commerce, success
   },
   {
     id: 6,
-    title: "AgroManage",
+    title: "Agro Management System",
     tagline: "Smart Agriculture Management System",
     description: "Developed a mobile-based agriculture management system for a client to digitize farm operations and crop tracking. The platform enables farmers to manage inventory, monitor crop cycles, and maintain real-time data records through a scalable cloud backend.",
     features: [
