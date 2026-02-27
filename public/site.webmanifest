@@ -1,0 +1,21 @@
+{
+  "name": "Rameshwar Bhagwat - Full Stack & AI Developer",
+  "short_name": "RB Portfolio",
+  "description": "Portfolio of Rameshwar Bhagwat - Full Stack Developer specializing in AI-powered SaaS platforms",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0E0E",
+  "theme_color": "#0F0E0E",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
