@@ -5,10 +5,9 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import { Briefcase, CheckCircle2, Users, TrendingUp } from 'lucide-react';
 
 const stats = [
-  { value: 5, label: 'Years Experience', suffix: '+', max: 10, icon: Briefcase, color: '#FF1493' },
-  { value: 50, label: 'Projects', suffix: '+', max: 100, icon: CheckCircle2, color: '#3B82F6' },
-  { value: 15, label: 'Happy Clients', suffix: '+', max: 20, icon: Users, color: '#10B981' },
-  { value: 98, label: 'Success Rate', suffix: '%', max: 100, icon: TrendingUp, color: '#8B5CF6' },
+  { value: 6, label: 'Projects Built', suffix: '+', max: 10, icon: CheckCircle2, color: '#FF6B35' },
+  { value: 3, label: 'Years Experience', suffix: '+', max: 5, icon: Briefcase, color: '#3B82F6' },
+  { value: 20, label: 'Technologies', suffix: '+', max: 30, icon: TrendingUp, color: '#10B981' },
 ];
 
 function AnimatedNumber({ value, suffix = '', isInView }: { value: number; suffix?: string; isInView: boolean }) {
@@ -140,7 +139,7 @@ function CircularProgress({
 
 export default function StatsGrid() {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 w-full">
+    <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full">
       {stats.map((stat, index) => (
         <div key={stat.label}>
           <CircularProgress
