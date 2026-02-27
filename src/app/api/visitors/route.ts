@@ -1,11 +1,29 @@
 import { NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
 import {
   generateVisitorFingerprint,
   isBot,
   getClientIP,
   getTodayKey,
 } from '@/lib/visitor-utils';
+
+// Initialize Upstash Redis client
+let redis: Redis | null = null;
+
+function getRedisClient(): Redis | null {
+  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+    return null;
+  }
+  
+  if (!redis) {
+    redis = new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    });
+  }
+  
+  return redis;
+}
 
 // Redis keys
 const KEYS = {
@@ -15,25 +33,19 @@ const KEYS = {
   FINGERPRINT_PREFIX: 'visitors:fingerprint:',
 };
 
-// Fallback values when KV is not configured
+// Fallback values when Redis is not configured
 const FALLBACK_STATS = {
   uniqueVisitors: 19,
   totalVisits: 47,
   todayVisitors: 3,
 };
 
-// Check if KV is configured
-function isKVConfigured(): boolean {
-  return !!(
-    process.env.KV_REST_API_URL &&
-    process.env.KV_REST_API_TOKEN
-  );
-}
-
 export async function GET() {
   try {
-    // If KV is not configured, return fallback stats
-    if (!isKVConfigured()) {
+    const redis = getRedisClient();
+    
+    // If Redis is not configured, return fallback stats
+    if (!redis) {
       return NextResponse.json({
         ...FALLBACK_STATS,
         lastUpdated: new Date().toISOString(),
@@ -43,9 +55,9 @@ export async function GET() {
 
     // Get stats from Redis
     const [uniqueVisitors, totalVisits, todayVisitors] = await Promise.all([
-      kv.scard(KEYS.UNIQUE_VISITORS), // Count of unique visitor IDs
-      kv.get<number>(KEYS.TOTAL_VISITS) || Promise.resolve(0), // Total visit count
-      kv.scard(`${KEYS.TODAY_PREFIX}${getTodayKey()}`), // Today's unique visitors
+      redis.scard(KEYS.UNIQUE_VISITORS), // Count of unique visitor IDs
+      redis.get<number>(KEYS.TOTAL_VISITS).then((val: number | null) => val || 0), // Total visit count
+      redis.scard(`${KEYS.TODAY_PREFIX}${getTodayKey()}`), // Today's unique visitors
     ]);
 
     return NextResponse.json({
@@ -69,8 +81,10 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    // If KV is not configured, return fallback stats (don't track)
-    if (!isKVConfigured()) {
+    const redis = getRedisClient();
+    
+    // If Redis is not configured, return fallback stats (don't track)
+    if (!redis) {
       return NextResponse.json({
         success: true,
         isNewVisitor: false,
@@ -97,11 +111,11 @@ export async function POST(request: Request) {
     const todayKey = `${KEYS.TODAY_PREFIX}${getTodayKey()}`;
 
     // Check if visitor exists
-    const lastVisit = await kv.get<string>(fingerprintKey);
+    const lastVisit = await redis.get<string>(fingerprintKey);
     const isNewVisitor = !lastVisit;
 
     // Update visitor data using pipeline
-    const pipeline = kv.pipeline();
+    const pipeline = redis.pipeline();
 
     // Always increment total visits
     pipeline.incr(KEYS.TOTAL_VISITS);
@@ -131,9 +145,9 @@ export async function POST(request: Request) {
 
     // Get updated stats
     const [uniqueVisitors, totalVisits, todayVisitors] = await Promise.all([
-      kv.scard(KEYS.UNIQUE_VISITORS),
-      kv.get<number>(KEYS.TOTAL_VISITS),
-      kv.scard(todayKey),
+      redis.scard(KEYS.UNIQUE_VISITORS),
+      redis.get<number>(KEYS.TOTAL_VISITS).then((val: number | null) => val || 0),
+      redis.scard(todayKey),
     ]);
 
     return NextResponse.json({
