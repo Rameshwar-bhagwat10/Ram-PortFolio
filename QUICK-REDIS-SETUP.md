@@ -4,6 +4,7 @@
 
 ✅ **Fixed**: Deprecated `@vercel/kv` warning resolved
 ✅ **Upgraded**: Now using `@upstash/redis` (official Vercel recommendation)
+✅ **Backward Compatible**: Works with existing `KV_*` environment variables
 ✅ **Same functionality**: Visitor counter works exactly the same
 
 ---
@@ -25,8 +26,11 @@
 9. Click **"Create"**
 
 **Done!** Environment variables are automatically added:
-- `UPSTASH_REDIS_REST_URL`
-- `UPSTASH_REDIS_REST_TOKEN`
+- `KV_REST_API_URL` (works with our code!)
+- `KV_REST_API_TOKEN` (works with our code!)
+- Plus: `KV_URL` and `KV_REST_API_READ_ONLY_TOKEN`
+
+**Note**: Our code supports both `KV_*` (legacy) and `UPSTASH_REDIS_*` (new) variable names.
 
 ### 2. Redeploy
 
@@ -56,8 +60,10 @@ Your portfolio now needs these **11 variables** in Vercel:
 9. `NEXT_PUBLIC_APP_URL`
 
 ### New (Auto-added by Upstash integration):
-10. `UPSTASH_REDIS_REST_URL`
-11. `UPSTASH_REDIS_REST_TOKEN`
+10. `KV_REST_API_URL` (or `UPSTASH_REDIS_REST_URL`)
+11. `KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_TOKEN`)
+
+**Note**: Upstash adds `KV_*` names by default. Our code supports both naming conventions!
 
 ---
 
