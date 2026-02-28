@@ -9,6 +9,7 @@ Complete documentation for deploying, configuring, and maintaining your portfoli
 ### Essential Setup
 - **[Vercel Deployment Guide](./VERCEL-DEPLOYMENT-GUIDE.md)** - Complete step-by-step deployment to Vercel
 - **[Production Checklist](./PRODUCTION-CHECKLIST.md)** - Pre-deployment verification checklist
+- **[Post-Deployment Guide](./POST-DEPLOYMENT-GUIDE.md)** - ⭐ What to do after going live
 
 ### Domain Configuration
 - **[Custom Domain Setup](./CUSTOM-DOMAIN-SETUP.md)** - Add your custom domain to Vercel
@@ -44,41 +45,55 @@ Complete documentation for deploying, configuring, and maintaining your portfoli
    - Performance optimization
    - Pre-deployment tasks
 
+3. [Post-Deployment Guide](./POST-DEPLOYMENT-GUIDE.md) ⭐ NEW
+   - Immediate tasks (first 24 hours)
+   - Social media updates
+   - Analytics setup
+   - SEO configuration
+   - Ongoing maintenance
+   - Growth strategies
+
 ### Domain & DNS
-3. [Custom Domain Setup](./CUSTOM-DOMAIN-SETUP.md)
+4. [Custom Domain Setup](./CUSTOM-DOMAIN-SETUP.md)
    - Buying a domain
    - DNS configuration
    - SSL certificates
    - Domain verification
 
-4. [Domain Update Checklist](./DOMAIN-UPDATE-CHECKLIST.md)
+5. [Domain Update Checklist](./DOMAIN-UPDATE-CHECKLIST.md)
    - Files updated for rameshwarbhagwat.me
    - Environment variables
    - Testing checklist
 
 ### Visitor Tracking
-5. [Quick Redis Setup](./QUICK-REDIS-SETUP.md)
+6. [Quick Redis Setup](./QUICK-REDIS-SETUP.md)
    - Fast 2-minute setup
    - Environment variables
    - Verification steps
 
-6. [Upstash Redis Setup](./UPSTASH-REDIS-SETUP.md)
+7. [Upstash Redis Setup](./UPSTASH-REDIS-SETUP.md)
    - Detailed Redis configuration
    - Troubleshooting
    - Pricing information
    - Security & privacy
 
-7. [Visitor Counter Fix](./VISITOR-COUNTER-FIX.md)
+8. [Visitor Counter Fix](./VISITOR-COUNTER-FIX.md)
    - Common issues
    - Environment variable compatibility
    - Testing procedures
 
 ### SEO & Optimization
-8. [SEO Implementation](./SEO-IMPLEMENTATION.md)
+9. [SEO Implementation](./SEO-IMPLEMENTATION.md)
    - Metadata configuration
    - Sitemap setup
    - Robots.txt
    - Structured data
+
+10. [Post-Deployment Guide](./POST-DEPLOYMENT-GUIDE.md)
+    - Complete post-launch checklist
+    - Analytics and monitoring
+    - Social media strategy
+    - Growth and optimization
 
 ---
 
@@ -88,6 +103,14 @@ Complete documentation for deploying, configuring, and maintaining your portfoli
 1. Read [Vercel Deployment Guide](./VERCEL-DEPLOYMENT-GUIDE.md)
 2. Complete [Production Checklist](./PRODUCTION-CHECKLIST.md)
 3. Follow [Quick Redis Setup](./QUICK-REDIS-SETUP.md)
+4. **Then follow [Post-Deployment Guide](./POST-DEPLOYMENT-GUIDE.md)** ⭐
+
+### After Going Live
+1. Follow [Post-Deployment Guide](./POST-DEPLOYMENT-GUIDE.md)
+2. Set up Google Search Console
+3. Update social media profiles
+4. Configure analytics and monitoring
+5. Start sharing your portfolio!
 
 ### Adding Custom Domain
 1. Read [Custom Domain Setup](./CUSTOM-DOMAIN-SETUP.md)
