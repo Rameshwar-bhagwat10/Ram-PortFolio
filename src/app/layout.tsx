@@ -94,10 +94,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "32x32" },
-      { url: "/favicon.svg", type: "image/svg+xml" }
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" }
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "/favicon.svg",
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
@@ -171,10 +171,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
         />
         
-        {/* Favicon - Multiple formats for browser compatibility */}
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        {/* Favicon - SVG primary, ICO fallback */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         
         {/* Preconnect to external domains for performance */}
