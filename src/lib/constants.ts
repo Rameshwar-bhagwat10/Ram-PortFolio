@@ -1,5 +1,5 @@
 export const SITE_NAME = 'Rameshwar Bhagwat - Full Stack Developer';
-export const SITE_URL = 'https://rameshwarbhagwat.com';
+export const SITE_URL = 'https://rameshwarbhagwat.me';
 export const SITE_DESCRIPTION = 'Full Stack Developer specializing in React, TypeScript, and Next.js. Building modern web applications with cutting-edge technologies.';
 
 // SEO Keywords

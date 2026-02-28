@@ -179,7 +179,7 @@ export async function POST(request: Request) {
                       <table role="presentation" style="margin: 30px 0;">
                         <tr>
                           <td style="padding-right: 10px;">
-                            <a href="https://rameshwarbhagwat.com" style="display: inline-block; padding: 14px 24px; background: linear-gradient(135deg, #FF8C00 0%, #FF5F00 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px;">View Portfolio</a>
+                            <a href="https://rameshwarbhagwat.me" style="display: inline-block; padding: 14px 24px; background: linear-gradient(135deg, #FF8C00 0%, #FF5F00 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px;">View Portfolio</a>
                           </td>
                           <td>
                             <a href="https://github.com/YOUR_GITHUB_USERNAME" style="display: inline-block; padding: 14px 24px; background-color: #333; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px;">GitHub Profile</a>

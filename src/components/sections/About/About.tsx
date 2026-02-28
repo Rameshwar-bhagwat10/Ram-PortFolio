@@ -92,10 +92,10 @@ export default function About() {
       <meta itemProp="name" content={PERSONAL_INFO.name} />
       <meta itemProp="jobTitle" content={PERSONAL_INFO.jobTitle} />
       <meta itemProp="description" content={PERSONAL_INFO.bio} />
-      <meta itemProp="url" content="https://rameshwarbhagwat.com" />
+      <meta itemProp="url" content="https://rameshwarbhagwat.me" />
       <meta itemProp="email" content={PERSONAL_INFO.email} />
       <meta itemProp="telephone" content={PERSONAL_INFO.phone} />
-      <meta itemProp="image" content={`https://rameshwarbhagwat.com${PERSONAL_INFO.image}`} />
+      <meta itemProp="image" content={`https://rameshwarbhagwat.me${PERSONAL_INFO.image}`} />
       
       {/* Address Schema */}
       <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress" className="hidden">

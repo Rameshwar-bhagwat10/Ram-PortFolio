@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
   preload: true,
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rameshwarbhagwat.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rameshwarbhagwat.me';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -7,7 +7,7 @@ Allow: /
 # Disallow: /api/
 
 # Sitemap location
-Sitemap: https://rameshwarbhagwat.com/sitemap.xml
+Sitemap: https://rameshwarbhagwat.me/sitemap.xml
 
 # Crawl-delay (optional, helps prevent server overload)
 Crawl-delay: 1

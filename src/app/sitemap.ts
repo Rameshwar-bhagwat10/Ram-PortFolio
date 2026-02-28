@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { projects } from '@/components/sections/Work/work.data';
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rameshwarbhagwat.com';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rameshwarbhagwat.me';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages
