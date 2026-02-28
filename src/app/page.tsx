@@ -30,11 +30,6 @@ const Contact = dynamic(() => import('@/components/sections/Contact/Contact'), {
   ssr: true,
 });
 
-const FAQ = dynamic(() => import('@/components/sections/FAQ/FAQ'), {
-  loading: () => <div className="min-h-96 bg-[#0F0E0E]" />,
-  ssr: true,
-});
-
 export default function Home() {
   useEffect(() => {
     // Optimize scroll performance with passive listeners
@@ -71,7 +66,6 @@ export default function Home() {
       <Skills />
       <Work />
       <GitHubContributions />
-      <FAQ />
       <Contact />
     </div>
   );
