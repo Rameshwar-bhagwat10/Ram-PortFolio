@@ -111,12 +111,9 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               }}
             />
             
-            {/* Fixed Image Box with Solid Fill Background */}
+            {/* Fixed Image Box - Transparent */}
             <div 
-              className="relative h-[40vh] sm:h-[45vh] md:h-[55vh] lg:h-[60vh] xl:h-[65vh] rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
-              style={{
-                background: `linear-gradient(135deg, rgba(${project.color}, 0.25) 0%, rgba(${project.color}, 0.15) 50%, rgba(${project.color}, 0.08) 100%)`
-              }}
+              className="relative h-[40vh] sm:h-[45vh] md:h-[55vh] lg:h-[60vh] xl:h-[65vh] rounded-xl sm:rounded-2xl overflow-hidden"
             >
               {/* First Image - Back layer */}
               <motion.div
