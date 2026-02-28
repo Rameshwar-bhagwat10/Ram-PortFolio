@@ -81,7 +81,7 @@ export function generateSEO(
       },
     },
     verification: {
-      google: 'your-google-verification-code',
+      google: 'ibL2p6r9xrTKR3U9o5zRTmVlFC4lAP_GheMlBWgOuGo',
       // yandex: 'your-yandex-verification-code',
       // bing: 'your-bing-verification-code',
     },

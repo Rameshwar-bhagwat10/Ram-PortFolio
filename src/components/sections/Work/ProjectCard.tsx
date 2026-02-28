@@ -79,12 +79,44 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Generate Article JSON-LD Schema for each project
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": project.title,
+    "description": `${project.tagline}. ${project.description}`,
+    "author": {
+      "@type": "Person",
+      "name": "Rameshwar Bhagwat",
+      "url": "https://rameshwarbhagwat.me"
+    },
+    "image": `https://rameshwarbhagwat.me${project.image}`,
+    "applicationCategory": "WebApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "keywords": project.techStack.join(', '),
+    ...(project.liveUrl && { "url": project.liveUrl }),
+    ...(project.githubUrl && { "codeRepository": project.githubUrl }),
+    "programmingLanguage": project.techStack,
+    "featureList": project.features
+  };
+
   return (
     <article 
       className="w-full h-full flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-16 py-8 md:py-0"
       itemScope
-      itemType="https://schema.org/CreativeWork"
+      itemType="https://schema.org/SoftwareApplication"
     >
+      {/* JSON-LD Schema for Project */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
+      
       {/* SEO Microdata for each project */}
       <meta itemProp="name" content={project.title} />
       <meta itemProp="description" content={`${project.tagline}. ${project.description}`} />
@@ -137,7 +169,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               >
                 <Image
                   src={project.image}
-                  alt={project.title}
+                  alt={`${project.title} - Rameshwar Bhagwat Project Screenshot`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
@@ -177,7 +209,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               >
                 <Image
                   src={project.hoverImage}
-                  alt={`${project.title} - Hover`}
+                  alt={`${project.title} - Rameshwar Bhagwat Project Interface`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"

@@ -98,7 +98,7 @@ export default function AchievementsSection() {
             <div className="relative">
               <Image 
                 src="/icons/logo.svg" 
-                alt="Logo" 
+                alt="Rameshwar Bhagwat Portfolio Logo" 
                 width={50}
                 height={50}
                 className="hover:scale-110 transition-transform duration-300 w-[50px] sm:w-[60px] h-[50px] sm:h-[60px]"

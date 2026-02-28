@@ -66,14 +66,12 @@ export default function HeroContent() {
 
         {/* Main heading - SEO optimized with proper h1 */}
         <div className="px-2 sm:px-4">
-          <h1 className="text-[2rem] sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tight leading-[1.15] sm:leading-[1.2] md:leading-[1.2]" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 700 }}>
-            <span className="block text-white">
-              Hi, I'm <span className="text-primary-gradient">Rameshwar Bhagwat</span>
-            </span>
-            <span className="block mt-1.5 sm:mt-3 text-white">
-              Building AI-Driven Products
-            </span>
+          <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[4rem] font-bold tracking-tight leading-[1.15] sm:leading-[1.2] md:leading-[1.2] text-white" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 700 }}>
+            <span className="text-primary-gradient">Rameshwar Bhagwat</span>
           </h1>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-[1.3] mt-2 sm:mt-4 text-white" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 600 }}>
+            Full Stack & AI Developer
+          </h2>
         </div>
 
         {/* Typing Animation - Below heading */}
@@ -83,7 +81,7 @@ export default function HeroContent() {
             phrases={[
               'Full Stack Developer',
               'React Specialist',
-              'UI/UX Enthusiast',
+              'AI Enthusiast',
               'Problem Solver',
               'Tech Innovator'
             ]}
@@ -95,8 +93,8 @@ export default function HeroContent() {
 
         {/* Description - SEO optimized */}
         <p className="text-xs sm:text-base md:text-lg text-muted max-w-2xl mx-auto leading-relaxed px-4 sm:px-6" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 400 }}>
-          Crafting scalable web applications with modern technologies.
-          Specialized in React, TypeScript, and Next.js.
+          Building scalable AI-powered SaaS platforms and web applications.
+          Specialized in React, Next.js, TypeScript, and Machine Learning integration.
         </p>
 
         {/* CTA Buttons */}
@@ -124,15 +122,17 @@ export default function HeroContent() {
 
         {/* Hidden SEO content */}
         <div className="sr-only">
-          <h2>Full Stack Developer & React Specialist</h2>
+          <h3>Rameshwar Bhagwat Portfolio</h3>
           <p>
-            Rameshwar Bhagwat is a Full Stack Developer based in Yeola, Maharashtra, India. 
-            Specializing in React, Next.js, TypeScript, and modern web technologies. 
+            Rameshwar Bhagwat is a Full Stack & AI Developer based in Yeola, Maharashtra, India. 
+            Specializing in React, Next.js, TypeScript, and AI-powered web applications. 
+            Rameshwar Bhagwat builds scalable SaaS platforms and machine learning systems.
             Available for full-time roles and freelance projects.
           </p>
           <ul>
             <li>Full Stack Development (MERN Stack)</li>
             <li>React & Next.js Expert</li>
+            <li>AI & Machine Learning Integration</li>
             <li>TypeScript Development</li>
             <li>Open Source Contributor</li>
             <li>Technical Blog Writer</li>

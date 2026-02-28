@@ -15,7 +15,7 @@ const highlights = [
   {
     id: 'personal',
     title: 'Personal Info',
-    description: 'Based in Yeola, Maharashtra, India, I am a passionate Full Stack Developer dedicated to creating innovative web solutions. With a strong foundation in modern technologies and a commitment to continuous learning.',
+    description: 'Rameshwar Bhagwat is based in Yeola, Maharashtra, India, and is a passionate Full Stack Developer dedicated to creating innovative web solutions. With a strong foundation in modern technologies and a commitment to continuous learning, Rameshwar Bhagwat delivers exceptional results.',
     points: [
       'Location: Yeola, Maharashtra',
       'Email: rameshwarbhagwat019@gmail.com',
@@ -26,7 +26,7 @@ const highlights = [
   {
     id: 'strengths',
     title: 'Strengths',
-    description: 'My core strengths lie in building scalable full-stack applications with modern frameworks and best practices. I excel at problem-solving, clean code architecture, and delivering user-centric solutions.',
+    description: 'Rameshwar Bhagwat excels in building scalable full-stack applications with modern frameworks and best practices. Core strengths include problem-solving, clean code architecture, and delivering user-centric solutions that drive business value.',
     points: [
       'Full Stack Development (MERN)',
       'React & Next.js expertise',
@@ -37,7 +37,7 @@ const highlights = [
   {
     id: 'achievements',
     title: 'Achievements',
-    description: 'Throughout my journey, I have successfully delivered multiple production-ready applications, contributed to open-source projects, and continuously expanded my technical expertise.',
+    description: 'Throughout his journey, Rameshwar Bhagwat has successfully delivered multiple production-ready applications including Devory and ThinkVerse, contributed to open-source projects, and continuously expanded technical expertise in AI and web development.',
     points: [
       'Built scalable web applications',
       'Open source contributions',
@@ -48,9 +48,9 @@ const highlights = [
   {
     id: 'education',
     title: 'Education',
-    description: 'Continuously learning and staying updated with the latest technologies and industry trends. My educational journey combines formal education with self-directed learning and practical experience.',
+    description: 'Rameshwar Bhagwat continuously learns and stays updated with the latest technologies and industry trends. The educational journey combines formal IT engineering education with self-directed learning and practical experience in cutting-edge technologies.',
     points: [
-      'Computer Science background',
+      'IT Engineering background',
       'Online certifications & courses',
       'Active tech community member',
       'Continuous skill development'
@@ -159,13 +159,15 @@ export default function About() {
 
         {/* Hidden SEO Content */}
           <div className="sr-only">
-            <h2>About Rameshwar Bhagwat - Full Stack Developer</h2>
+            <h2>About Rameshwar Bhagwat - Full Stack & AI Developer</h2>
             <p>
-              Rameshwar Bhagwat is a Full Stack Developer based in Yeola, Maharashtra, India, 
+              Rameshwar Bhagwat is a Full Stack & AI Developer based in Yeola, Maharashtra, India, 
               specializing in React, Next.js, TypeScript, and modern web technologies. 
-              With 5+ years of experience, he builds scalable web applications and AI-driven products.
+              With 5+ years of experience, Rameshwar Bhagwat builds scalable web applications and AI-driven products 
+              like Devory and ThinkVerse. The Rameshwar Bhagwat portfolio showcases expertise in full-stack development, 
+              machine learning integration, and SaaS platform development.
             </p>
-            <h3>Core Skills and Expertise</h3>
+            <h3>Rameshwar Bhagwat - Core Skills and Expertise</h3>
             <ul>
               <li>Full Stack Development with MERN Stack (MongoDB, Express.js, React, Node.js)</li>
               <li>Frontend Development: React, Next.js, TypeScript, JavaScript, HTML5, CSS3</li>
@@ -176,10 +178,11 @@ export default function About() {
               <li>AI/ML Integration: TensorFlow, Python, Machine Learning APIs</li>
               <li>System Design and Architecture</li>
             </ul>
-            <h3>Professional Experience</h3>
+            <h3>Rameshwar Bhagwat - Professional Experience</h3>
             <p>
-              5+ years of professional experience in web development, having worked on 50+ projects 
-              with 15+ happy clients. Achieved a 98% success rate in project delivery.
+              Rameshwar Bhagwat has 5+ years of professional experience in web development, having worked on 50+ projects 
+              with 15+ happy clients. Achieved a 98% success rate in project delivery. Notable projects by Rameshwar Bhagwat 
+              include Devory (AI-powered SaaS platform) and ThinkVerse (collaborative platform).
             </p>
             <h3>Achievements</h3>
             <ul>
@@ -190,15 +193,15 @@ export default function About() {
             </ul>
             <h3>Education and Continuous Learning</h3>
             <p>
-              Computer Science background with continuous skill development through online certifications, 
+              Rameshwar Bhagwat has an IT Engineering background with continuous skill development through online certifications, 
               courses, and active participation in the tech community.
             </p>
-            <h3>Contact Information</h3>
+            <h3>Contact Rameshwar Bhagwat</h3>
             <address>
               <p>Location: Yeola, Maharashtra, India</p>
               <p>Email: rameshwarbhagwat019@gmail.com</p>
               <p>Phone: +91 9699245170</p>
-              <p>Open to remote opportunities worldwide</p>
+              <p>Rameshwar Bhagwat is open to remote opportunities worldwide</p>
             </address>
           </div>
 
@@ -227,10 +230,10 @@ export default function About() {
                   {/* Positioning Statement */}
                   <div className="space-y-2 sm:space-y-4">
                     <p className="text-base sm:text-xl md:text-2xl leading-[1.6] sm:leading-[1.8] font-light text-white/95 tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                      I craft high-performance web applications with clean architecture and exceptional user experiences.
+                      Rameshwar Bhagwat crafts high-performance web applications with clean architecture and exceptional user experiences.
                     </p>
                     <p className="text-sm sm:text-lg md:text-xl leading-[1.5] sm:leading-[1.7] font-light text-white/75 tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                      Specializing in scalable applications that blend cutting-edge technology with intuitive design.
+                      Specializing in scalable AI-powered applications that blend cutting-edge technology with intuitive design.
                     </p>
                   </div>
 

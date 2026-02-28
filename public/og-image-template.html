@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=630">
+    <title>OG Image - Rameshwar Bhagwat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1200px;
+            height: 630px;
+            background: #0F0E0E;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background Effects */
+        .glow-top {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(255, 80, 40, 0.3) 0%, transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        
+        .glow-bottom {
+            position: absolute;
+            bottom: -50px;
+            left: 20%;
+            width: 800px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(255, 80, 40, 0.2) 0%, transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        
+        .grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+        
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            padding: 0 100px;
+            max-width: 1000px;
+        }
+        
+        .title {
+            font-size: 80px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #FF5028 0%, #FF1493 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            line-height: 1.1;
+        }
+        
+        .subtitle {
+            font-size: 48px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 40px;
+        }
+        
+        .description {
+            font-size: 28px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 50px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tech-badge {
+            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .url {
+            position: absolute;
+            bottom: 50px;
+            left: 100px;
+            font-size: 24px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Decorative circles */
+        .circle-1 {
+            position: absolute;
+            top: 100px;
+            right: 150px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF5028 0%, #FF1493 100%);
+            opacity: 0.1;
+            filter: blur(20px);
+        }
+        
+        .circle-2 {
+            position: absolute;
+            bottom: 130px;
+            right: 100px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF5028 0%, #FF1493 100%);
+            opacity: 0.08;
+            filter: blur(15px);
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-top"></div>
+    <div class="glow-bottom"></div>
+    <div class="grid"></div>
+    <div class="circle-1"></div>
+    <div class="circle-2"></div>
+    
+    <div class="content">
+        <h1 class="title">Rameshwar Bhagwat</h1>
+        <h2 class="subtitle">Full Stack & AI Developer</h2>
+        <p class="description">Building scalable AI-powered SaaS platforms</p>
+        
+        <div class="tech-stack">
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Next.js</span>
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">AI/ML</span>
+        </div>
+    </div>
+    
+    <div class="url">rameshwarbhagwat.me</div>
+</body>
+</html>

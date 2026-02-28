@@ -28,7 +28,7 @@ export default function Navbar() {
           >
             <Image 
               src="/icons/logo.svg" 
-              alt="Logo" 
+              alt="Rameshwar Bhagwat - Full Stack & AI Developer Logo" 
               width={80}
               height={80}
               className="hover:scale-110 transition-transform duration-300"
@@ -65,7 +65,7 @@ export default function Navbar() {
           >
             <Image 
               src="/icons/logo.svg" 
-              alt="Logo" 
+              alt="Rameshwar Bhagwat Logo" 
               width={40}
               height={40}
               priority

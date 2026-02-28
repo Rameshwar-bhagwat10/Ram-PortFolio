@@ -5,6 +5,7 @@ import "../styles/theme.css";
 import "../styles/animations.css";
 import Navbar from "@/components/layout/Navbar/Navbar";
 import Footer from "@/components/layout/Footer/Footer";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +29,14 @@ export const metadata: Metadata = {
     default: "Rameshwar Bhagwat | Full Stack & AI Developer",
     template: "%s | Rameshwar Bhagwat"
   },
-  description: "Full Stack Developer and AI enthusiast building scalable SaaS platforms like Devory and ThinkVerse. Specializing in Next.js, React, TypeScript, and AI/ML systems. Explore innovative projects and modern web applications.",
+  description: "Rameshwar Bhagwat is a Full Stack and AI Developer building scalable SaaS platforms like Devory and ThinkVerse. Specializing in React, Next.js, TypeScript, and machine learning systems. Explore Rameshwar Bhagwat's portfolio of innovative AI-powered applications and modern web development projects.",
   keywords: [
     "Rameshwar Bhagwat",
+    "Rameshwar Bhagwat portfolio",
+    "Rameshwar Bhagwat developer",
+    "Full Stack Developer Rameshwar Bhagwat",
+    "AI Developer Rameshwar Bhagwat",
+    "Rameshwar Bhagwat projects",
     "Full Stack Developer",
     "AI Developer",
     "Next.js Developer",
@@ -41,11 +47,7 @@ export const metadata: Metadata = {
     "ThinkVerse",
     "Machine Learning Projects",
     "Web Development Portfolio",
-    "AI-Powered Applications",
-    "Safecoast",
-    "WebCraft",
-    "AgroManage",
-    "Spam Detection ML"
+    "AI-Powered Applications"
   ],
   authors: [{ name: "Rameshwar Bhagwat", url: siteUrl }],
   creator: "Rameshwar Bhagwat",
@@ -56,7 +58,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: "/",
+    canonical: siteUrl,
   },
   icons: {
     icon: [
@@ -72,10 +74,10 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Rameshwar Bhagwat Portfolio",
     title: "Rameshwar Bhagwat | Full Stack & AI Developer",
-    description: "Portfolio of a Full Stack & AI Developer building modern SaaS platforms, AI-powered applications, and scalable web solutions.",
+    description: "Rameshwar Bhagwat is a Full Stack and AI Developer building scalable SaaS platforms like Devory and ThinkVerse. Explore innovative AI-powered applications and modern web development projects.",
     images: [
       {
-        url: "/og-image.png",
+        url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
         alt: "Rameshwar Bhagwat - Full Stack & AI Developer Portfolio"
@@ -85,9 +87,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Rameshwar Bhagwat | Full Stack & AI Developer",
-    description: "Full Stack Developer building AI-powered SaaS platforms and modern web applications.",
-    images: ["/og-image.png"],
-    creator: "@yourtwitterhandle", // Update with your Twitter handle
+    description: "Rameshwar Bhagwat is a Full Stack and AI Developer building AI-powered SaaS platforms like Devory and modern web applications.",
+    images: [`${siteUrl}/og-image.png`],
+    creator: "@yourtwitterhandle",
   },
   robots: {
     index: true,
@@ -99,6 +101,9 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  verification: {
+    google: 'ibL2p6r9xrTKR3U9o5zRTmVlFC4lAP_GheMlBWgOuGo',
   },
   manifest: "/site.webmanifest",
 };
@@ -115,7 +120,7 @@ export default function RootLayout({
     "url": siteUrl,
     "image": `${siteUrl}/images/profile/profile.jpeg`,
     "jobTitle": "Full Stack & AI Developer",
-    "description": "Full Stack Developer specializing in AI-powered SaaS platforms, modern web applications, and scalable solutions.",
+    "description": "Rameshwar Bhagwat is a Full Stack and AI Developer building AI-powered SaaS platforms like Devory and ThinkVerse, specializing in modern web applications and machine learning systems.",
     "email": "rameshwarbhagwat019@gmail.com",
     "telephone": "+91-9699245170",
     "address": {
@@ -126,7 +131,7 @@ export default function RootLayout({
     },
     "sameAs": [
       "https://github.com/Rameshwar-bhagwat10",
-      "https://linkedin.com/in/rameshwar-bhagwat",
+      "https://linkedin.com/in/rameshwar-bhagwat"
     ],
     "knowsAbout": [
       "Full Stack Development",
@@ -154,8 +159,20 @@ export default function RootLayout({
     "author": {
       "@type": "Person",
       "name": "Rameshwar Bhagwat"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${siteUrl}/?q={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
     }
   };
+
+  const breadcrumbItems = [
+    { name: "Home", url: siteUrl },
+  ];
 
   return (
     <html lang="en" className="dark">
@@ -170,6 +187,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
         />
+        
+        {/* Breadcrumb Schema */}
+        <BreadcrumbSchema items={breadcrumbItems} />
         
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
