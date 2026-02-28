@@ -62,11 +62,22 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    shortcut: [
+      { url: '/favicon.ico', type: 'image/x-icon' }
+    ],
+    apple: [
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/favicon.svg',
+      },
+    ],
   },
   openGraph: {
     type: "website",
@@ -104,6 +115,9 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'ibL2p6r9xrTKR3U9o5zRTmVlFC4lAP_GheMlBWgOuGo',
+    other: {
+      'msvalidate.01': 'YOUR_BING_VERIFICATION_CODE', // Replace with actual Bing verification code
+    },
   },
   manifest: "/site.webmanifest",
 };
@@ -190,6 +204,17 @@ export default function RootLayout({
         
         {/* Breadcrumb Schema */}
         <BreadcrumbSchema items={breadcrumbItems} />
+        
+        {/* Favicon - Multiple formats for better compatibility */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="mask-icon" href="/favicon.svg" color="#FF5028" />
+        
+        {/* Bing/Microsoft specific meta tags */}
+        <meta name="msapplication-TileColor" content="#0F0E0E" />
+        <meta name="msapplication-TileImage" content="/favicon.svg" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
         
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
