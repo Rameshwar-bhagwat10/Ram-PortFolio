@@ -22,7 +22,7 @@ export default function HeroContent() {
   return (
     <Container className="relative z-20 px-4 sm:px-6">
       <motion.div 
-        className="pt-24 sm:pt-32 md:pt-40 pb-20 sm:pb-28 md:pb-32 space-y-4 sm:space-y-5 md:space-y-6 text-center"
+        className="pt-20 sm:pt-32 md:pt-40 pb-16 sm:pb-28 md:pb-32 space-y-3 sm:space-y-5 md:space-y-6 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -66,18 +66,18 @@ export default function HeroContent() {
 
         {/* Main heading - SEO optimized with proper h1 */}
         <div className="px-2 sm:px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tight leading-[1.2] sm:leading-[1.2] md:leading-[1.2]" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 700 }}>
+          <h1 className="text-[2rem] sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tight leading-[1.15] sm:leading-[1.2] md:leading-[1.2]" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 700 }}>
             <span className="block text-white">
               Hi, I'm <span className="text-primary-gradient">Rameshwar Bhagwat</span>
             </span>
-            <span className="block mt-2 sm:mt-3 text-white">
+            <span className="block mt-1.5 sm:mt-3 text-white">
               Building AI-Driven Products
             </span>
           </h1>
         </div>
 
         {/* Typing Animation - Below heading */}
-        <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-white px-2 sm:px-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
+        <div className="text-sm sm:text-lg md:text-xl lg:text-2xl font-medium text-white px-2 sm:px-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
           <span className="text-white/70">I'm a </span>
           <TypingAnimation 
             phrases={[
@@ -94,19 +94,19 @@ export default function HeroContent() {
         </div>
 
         {/* Description - SEO optimized */}
-        <p className="text-sm sm:text-base md:text-lg text-muted max-w-2xl mx-auto leading-relaxed px-4 sm:px-6" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 400 }}>
+        <p className="text-xs sm:text-base md:text-lg text-muted max-w-2xl mx-auto leading-relaxed px-4 sm:px-6" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: 400 }}>
           Crafting scalable web applications with modern technologies.
           Specialized in React, TypeScript, and Next.js.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 px-4 sm:px-0">
+        <div className="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-4 mt-5 sm:mt-8 px-4 sm:px-0 max-w-md sm:max-w-none mx-auto">
           <Button
             variant="primary"
             size="lg"
             onClick={() => scrollToSection('work')}
             aria-label="View my portfolio work"
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto text-sm sm:text-base py-2.5 sm:py-3"
           >
             View My Work
           </Button>
@@ -116,7 +116,7 @@ export default function HeroContent() {
             shimmer={true}
             onClick={() => scrollToSection('contact')}
             aria-label="Get in touch with me"
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto text-sm sm:text-base py-2.5 sm:py-3"
           >
             Get In Touch
           </Button>

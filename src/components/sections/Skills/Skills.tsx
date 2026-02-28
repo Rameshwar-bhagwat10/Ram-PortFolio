@@ -17,7 +17,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative py-28 px-6 bg-[#0F0E0E] overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 bg-[#0F0E0E] overflow-hidden"
       aria-label="Technical Skills and Expertise"
       itemScope
       itemType="https://schema.org/ItemList"
@@ -119,8 +119,8 @@ export default function Skills() {
       {/* Particle Background - Removed for performance */}
       {/* <CustomParticleBackground color="100, 150, 255" particleCount={35} /> */}
 
-      {/* Subtle background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+      {/* Subtle background glow - hidden on mobile */}
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
       <Container>
         {/* Section Header */}
@@ -129,13 +129,13 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-10 sm:mb-12 md:mb-16 text-center"
         >
-          <p className="text-primary-gradient text-sm font-semibold tracking-wider uppercase mb-3">My Arsenal</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 text-white">
+          <p className="text-primary-gradient text-xs sm:text-sm font-semibold tracking-wider uppercase mb-2 sm:mb-3">My Arsenal</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 sm:mb-3 md:mb-4 text-white px-2">
             Technologies <span className="text-primary-gradient">I Master</span>
           </h2>
-          <p className="text-muted text-lg max-w-2xl mx-auto">Building modern web experiences with cutting-edge tools and frameworks</p>
+          <p className="text-muted text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">Building modern web experiences with cutting-edge tools and frameworks</p>
         </motion.div>
 
         {/* Marquee Rows */}
@@ -144,7 +144,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-16"
+          className="space-y-8 sm:space-y-12 md:space-y-16"
           role="list"
           aria-label="Technology skills showcase"
         >

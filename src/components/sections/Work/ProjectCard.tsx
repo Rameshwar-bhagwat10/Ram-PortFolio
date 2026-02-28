@@ -81,7 +81,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <article 
-      className="w-full h-full flex items-center justify-center px-6 md:px-12 lg:px-16"
+      className="w-full h-full flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-16 py-8 md:py-0"
       itemScope
       itemType="https://schema.org/CreativeWork"
     >
@@ -94,18 +94,18 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       {project.liveUrl && <meta itemProp="url" content={project.liveUrl} />}
       
       <div className="w-full max-w-7xl mx-auto h-full flex items-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 w-full">
           
           {/* Image Container - Left 50% */}
           <figure
-            className="relative"
+            className="relative order-1 md:order-none"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             itemProp="image"
           >
             {/* Ambient glow - Static, no animation */}
             <div
-              className="absolute inset-0 -m-8 rounded-full blur-3xl pointer-events-none opacity-20"
+              className="absolute inset-0 -m-4 sm:-m-6 md:-m-8 rounded-full blur-3xl pointer-events-none opacity-20"
               style={{
                 background: `radial-gradient(circle, rgba(${project.color}, 0.4) 0%, transparent 70%)`,
               }}
@@ -113,14 +113,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             
             {/* Fixed Image Box with Solid Fill Background */}
             <div 
-              className="relative h-[55vh] md:h-[60vh] lg:h-[65vh] rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
+              className="relative h-[40vh] sm:h-[45vh] md:h-[55vh] lg:h-[60vh] xl:h-[65vh] rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
               style={{
                 background: `linear-gradient(135deg, rgba(${project.color}, 0.25) 0%, rgba(${project.color}, 0.15) 50%, rgba(${project.color}, 0.08) 100%)`
               }}
             >
               {/* First Image - Back layer */}
               <motion.div
-                className="absolute inset-0 rounded-2xl overflow-hidden bg-[#171616]"
+                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden bg-[#171616]"
                 animate={{
                   rotate: isHovered ? -8 : 0,
                   scale: isHovered ? 0.7 : 1,
@@ -152,14 +152,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
                 {/* Project number */}
-                <div className="absolute top-6 left-6 text-white/40 text-sm font-medium tabular-nums z-10">
+                <div className="absolute top-4 sm:top-6 left-4 sm:left-6 text-white/40 text-xs sm:text-sm font-medium tabular-nums z-10">
                   {String(project.id).padStart(2, '0')} / 04
                 </div>
               </motion.div>
 
               {/* Second Image - Front layer */}
               <motion.div
-                className="absolute inset-0 rounded-2xl overflow-hidden bg-[#171616]"
+                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden bg-[#171616]"
                 animate={{
                   rotate: isHovered ? 8 : 0,
                   scale: isHovered ? 0.7 : 1,
@@ -194,31 +194,31 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           </figure>
 
           {/* Content Container - Right 50% - No animations for better performance */}
-          <div className="flex flex-col justify-center space-y-4 md:space-y-5">
+          <div className="flex flex-col justify-center space-y-3 sm:space-y-4 md:space-y-5 order-2">
             {/* Title */}
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" itemProp="name">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" itemProp="name">
               {project.title}
             </h3>
 
             {/* Tagline */}
-            <p className="text-base md:text-lg text-muted" itemProp="headline">
+            <p className="text-sm sm:text-base md:text-lg text-muted" itemProp="headline">
               {project.tagline}
             </p>
 
             {/* Divider */}
-            <div className="w-12 h-[2px] bg-primary-gradient" aria-hidden="true" />
+            <div className="w-10 sm:w-12 h-[2px] bg-primary-gradient" aria-hidden="true" />
 
             {/* Description */}
-            <p className="text-sm md:text-base text-white/80 leading-relaxed" itemProp="description">
+            <p className="text-xs sm:text-sm md:text-base text-white/80 leading-relaxed" itemProp="description">
               {project.description}
             </p>
 
             {/* Features */}
-            <ul className="space-y-2 md:space-y-2.5" itemProp="about">
+            <ul className="space-y-1.5 sm:space-y-2 md:space-y-2.5" itemProp="about">
               {project.features.map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <div className="w-2 h-2 rotate-45 bg-primary-gradient mt-2 flex-shrink-0" aria-hidden="true" />
-                  <p className="text-xs md:text-sm text-white/70 leading-relaxed">
+                <li key={idx} className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 bg-primary-gradient mt-1.5 sm:mt-2 flex-shrink-0" aria-hidden="true" />
+                  <p className="text-[11px] sm:text-xs md:text-sm text-white/70 leading-relaxed">
                     {feature}
                   </p>
                 </li>
@@ -226,7 +226,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </ul>
 
             {/* Tech Stack */}
-            <div className="flex flex-wrap gap-2" role="list" aria-label="Technologies used">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2" role="list" aria-label="Technologies used">
               {project.techStack.map((tech, idx) => {
                 const config = techConfig[tech];
                 const Icon = config?.icon || SiReact;
@@ -235,11 +235,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 return (
                   <span
                     key={idx}
-                    className="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1.5 hover:bg-white/10 transition-colors duration-300"
+                    className="px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1 sm:gap-1.5 hover:bg-white/10 transition-colors duration-300"
                     role="listitem"
                     itemProp="keywords"
                   >
-                    <Icon size={12} className="flex-shrink-0" style={{ color: iconColor }} aria-hidden="true" />
+                    <Icon size={10} className="flex-shrink-0 sm:w-3 sm:h-3" style={{ color: iconColor }} aria-hidden="true" />
                     <span className="text-white/70">{tech}</span>
                   </span>
                 );
@@ -247,14 +247,15 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </div>
 
             {/* CTA Buttons */}
-            <nav className="flex flex-wrap gap-3 md:gap-4 pt-2 md:pt-3" aria-label="Project links">
+            <nav className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 pt-1 sm:pt-2 md:pt-3" aria-label="Project links">
               {project.liveUrl && (
                 <Button
                   variant="primary"
                   size="md"
                   onClick={() => window.open(project.liveUrl, '_blank')}
-                  rightIcon={<ExternalLink size={16} />}
+                  rightIcon={<ExternalLink size={14} className="sm:w-4 sm:h-4" />}
                   aria-label={`View ${project.title} live demo`}
+                  className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2"
                 >
                   View Live
                 </Button>
@@ -264,8 +265,9 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   variant="secondary"
                   size="md"
                   onClick={() => window.open(project.githubUrl, '_blank')}
-                  rightIcon={<Github size={16} />}
+                  rightIcon={<Github size={14} className="sm:w-4 sm:h-4" />}
                   aria-label={`View ${project.title} source code on GitHub`}
+                  className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2"
                 >
                   Source Code
                 </Button>

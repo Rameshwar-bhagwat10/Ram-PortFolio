@@ -54,8 +54,8 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Navbar */}
-      <nav className="fixed top-6 left-0 right-0 z-50 px-6 md:hidden">
-        <div className="backdrop-blur-sm border border-white/[0.05] rounded-full px-6 py-3 shadow-lg flex justify-between items-center">
+      <nav className="fixed top-4 left-0 right-0 z-50 px-4 md:hidden">
+        <div className="backdrop-blur-sm border border-white/[0.05] rounded-full px-4 py-2 shadow-lg flex justify-between items-center">
           {/* Logo */}
           <div
             className="cursor-pointer flex-shrink-0"
@@ -66,8 +66,8 @@ export default function Navbar() {
             <Image 
               src="/icons/logo.svg" 
               alt="Logo" 
-              width={52}
-              height={52}
+              width={40}
+              height={40}
               priority
             />
           </div>
@@ -75,11 +75,11 @@ export default function Navbar() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-white p-2 hover:bg-white/[0.05] rounded-full transition-all"
+            className="text-white p-1.5 hover:bg-white/[0.05] rounded-full transition-all"
             aria-label="Toggle menu"
           >
             <svg
-              className="w-6 h-6"
+              className="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

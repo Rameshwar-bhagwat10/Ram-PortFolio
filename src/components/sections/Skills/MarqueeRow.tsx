@@ -19,7 +19,7 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
   // Initialize offset based on direction
   const [offset, setOffset] = useState(() => {
     if (reverse) {
-      const itemWidth = 96 + 48;
+      const itemWidth = 64 + 24; // 64px width + 24px gap on mobile
       return -itemWidth * skills.length;
     }
     return 0;
@@ -30,7 +30,7 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
 
     const animate = () => {
       setOffset((prev) => {
-        const itemWidth = 96 + 48; // icon width (96px) + gap (48px)
+        const itemWidth = 64 + 24; // icon width (64px) + gap (24px on mobile, 32px on sm, 48px on md)
         const totalWidth = itemWidth * skills.length;
         const newOffset = prev + (reverse ? 0.5 : -0.5);
         
@@ -60,10 +60,10 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
   const displaySkills = [...skills, ...skills];
 
   return (
-    <div className="relative overflow-hidden py-8 pb-16" ref={containerRef}>
+    <div className="relative overflow-hidden py-4 sm:py-6 md:py-8 pb-8 sm:pb-12 md:pb-16" ref={containerRef}>
       {/* Marquee container */}
       <div
-        className="flex gap-12 will-change-transform"
+        className="flex gap-6 sm:gap-8 md:gap-12 will-change-transform"
         style={{ 
           transform: `translateX(${offset}px)`,
         }}
@@ -73,17 +73,17 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
             key={`${skill.name}-${index}`}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
-            className="flex-shrink-0 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:scale-110 hover:-translate-y-2 cursor-default relative hover:z-30"
-            style={{ width: '96px' }}
+            className="flex-shrink-0 flex flex-col items-center justify-center gap-2 sm:gap-2.5 md:gap-3 transition-all duration-300 hover:scale-110 hover:-translate-y-2 cursor-default relative hover:z-30"
+            style={{ width: '64px', minWidth: '64px' }}
           >
             <skill.icon 
-              className="text-5xl transition-all duration-300 drop-shadow-lg hover:drop-shadow-2xl" 
+              className="text-3xl sm:text-4xl md:text-5xl transition-all duration-300 drop-shadow-lg hover:drop-shadow-2xl" 
               style={{ color: skill.color }}
             />
             
             {/* Skill name with shimmer effect */}
             <motion.span
-              className="text-xs font-medium whitespace-nowrap text-center inline-block"
+              className="text-[9px] sm:text-[10px] md:text-xs font-medium whitespace-nowrap text-center inline-block"
               style={{
                 background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.4) 100%)',
                 backgroundSize: '200% 100%',
@@ -108,8 +108,8 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
       </div>
 
       {/* Edge fade masks */}
-      <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#0F0E0E] to-transparent pointer-events-none z-20" />
-      <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#0F0E0E] to-transparent pointer-events-none z-20" />
+      <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-24 md:w-32 bg-gradient-to-r from-[#0F0E0E] to-transparent pointer-events-none z-20" />
+      <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-24 md:w-32 bg-gradient-to-l from-[#0F0E0E] to-transparent pointer-events-none z-20" />
     </div>
   );
 }

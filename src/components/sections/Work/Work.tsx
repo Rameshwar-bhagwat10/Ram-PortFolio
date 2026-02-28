@@ -107,7 +107,7 @@ export default function Work() {
       {/* Intro Section */}
       <div className="h-[30vh] flex items-center justify-center bg-[#0F0E0E] relative">
         <motion.div 
-          className="text-center px-6"
+          className="text-center px-4 sm:px-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -116,15 +116,15 @@ export default function Work() {
             ease: [0.16, 1, 0.3, 1],
           }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-2 sm:mb-3">
             Featured <span className="text-gradient">Projects</span>
           </h2>
-          <p className="text-sm md:text-base text-muted mb-6">
+          <p className="text-xs sm:text-sm md:text-base text-muted mb-4 sm:mb-6">
             Crafting digital experiences that make an impact
           </p>
-          <div className="flex items-center justify-center gap-2 text-white/40 text-sm" aria-label="Scroll to explore projects">
+          <div className="flex items-center justify-center gap-2 text-white/40 text-xs sm:text-sm" aria-label="Scroll to explore projects">
             <span>Scroll to explore</span>
-            <span className="text-xl" aria-hidden="true">↓</span>
+            <span className="text-lg sm:text-xl" aria-hidden="true">↓</span>
           </div>
         </motion.div>
       </div>

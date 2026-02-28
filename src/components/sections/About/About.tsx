@@ -225,25 +225,25 @@ export default function About() {
                 {/* About Information */}
                 <div className="space-y-4 sm:space-y-6">
                   {/* Positioning Statement */}
-                  <div className="space-y-3 sm:space-y-4">
-                    <p className="text-lg sm:text-xl md:text-2xl leading-[1.7] sm:leading-[1.8] font-light text-white/95 tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  <div className="space-y-2 sm:space-y-4">
+                    <p className="text-base sm:text-xl md:text-2xl leading-[1.6] sm:leading-[1.8] font-light text-white/95 tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                       I craft high-performance web applications with clean architecture and exceptional user experiences.
                     </p>
-                    <p className="text-base sm:text-lg md:text-xl leading-[1.6] sm:leading-[1.7] font-light text-white/75 tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                    <p className="text-sm sm:text-lg md:text-xl leading-[1.5] sm:leading-[1.7] font-light text-white/75 tracking-wide" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
                       Specializing in scalable applications that blend cutting-edge technology with intuitive design.
                     </p>
                   </div>
 
                   {/* Tabbed Highlights */}
-                  <div>
+                  <div className="w-full">
                     {/* Mini Navbar */}
-                    <div className="flex gap-2 mb-4 sm:mb-6 overflow-x-auto pb-2 scrollbar-hide">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-6">
                       {highlights.map((highlight) => (
                         <button
                           key={highlight.id}
                           onClick={() => handleTabChange(highlight.id)}
                           className={`
-                            px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-300
+                            px-2.5 sm:px-4 py-1 sm:py-2 rounded-full text-[11px] sm:text-sm font-medium whitespace-nowrap transition-all duration-300
                             ${activeTab === highlight.id 
                               ? 'bg-primary-gradient text-white shadow-lg shadow-pink-500/30' 
                               : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
@@ -265,16 +265,16 @@ export default function About() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                        className="min-h-[160px] sm:min-h-[180px]"
+                        className="min-h-[140px] sm:min-h-[180px]"
                       >
-                        <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white flex items-center gap-2">
-                          <span className="w-1 h-5 sm:h-6 bg-primary-gradient rounded-full" aria-hidden="true"></span>
+                        <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3 text-white flex items-center gap-2">
+                          <span className="w-1 h-4 sm:h-6 bg-primary-gradient rounded-full" aria-hidden="true"></span>
                           {activeHighlight.title}
                         </h3>
-                        <p className="text-sm sm:text-base text-white/80 leading-relaxed mb-3 sm:mb-4">{activeHighlight.description}</p>
+                        <p className="text-xs sm:text-base text-white/80 leading-relaxed mb-2 sm:mb-4">{activeHighlight.description}</p>
                         
                         {/* Key Points Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 mt-3 sm:mt-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5 sm:gap-3 mt-2 sm:mt-4 w-full">
                           {activeHighlight.points.map((point, index) => {
                             const isEmail = point.toLowerCase().includes('email:');
                             return (
@@ -288,18 +288,18 @@ export default function About() {
                                   ease: [0.22, 1, 0.36, 1]
                                 }}
                                 onClick={() => isEmail && handleCopyEmail(point)}
-                                className={`flex items-center gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 ${isEmail ? 'cursor-pointer' : ''}`}
+                                className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 ${isEmail ? 'cursor-pointer' : ''} max-w-full`}
                                 role={isEmail ? 'button' : undefined}
                                 aria-label={isEmail ? 'Click to copy email' : undefined}
                               >
-                                <div className="w-1.5 h-1.5 rounded-full bg-primary-gradient flex-shrink-0" aria-hidden="true"></div>
-                                <span className="text-[11px] sm:text-xs font-medium text-white/70">{point}</span>
+                                <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-primary-gradient flex-shrink-0" aria-hidden="true"></div>
+                                <span className="text-[10px] sm:text-xs font-medium text-white/70 truncate">{point}</span>
                                 {isEmail && copiedEmail && (
                                   <motion.span
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="ml-auto text-[10px] text-green-400"
+                                    className="ml-auto text-[9px] sm:text-[10px] text-green-400 flex-shrink-0"
                                   >
                                     Copied!
                                   </motion.span>

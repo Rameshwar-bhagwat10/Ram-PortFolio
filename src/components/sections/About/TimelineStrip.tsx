@@ -43,20 +43,20 @@ const milestones = [
 
 export default function TimelineStrip() {
   return (
-    <div id="my-journey" className="relative py-20">
+    <div id="my-journey" className="relative py-12 sm:py-16 md:py-20">
       {/* Section Title */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-20"
+        className="text-center mb-12 sm:mb-16 md:mb-20"
       >
-        <p className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 text-sm font-semibold tracking-wider uppercase mb-3">The Story So Far</p>
-        <h3 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">
+        <p className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-2 sm:mb-3">The Story So Far</p>
+        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-2 sm:mb-3 md:mb-4 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent px-4">
           From Code to Impact
         </h3>
-        <p className="text-muted text-lg max-w-2xl mx-auto">Every line of code tells a story. Here&apos;s mine—from curious beginner to building products that matter.</p>
+        <p className="text-muted text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">Every line of code tells a story. Here&apos;s mine—from curious beginner to building products that matter.</p>
       </motion.div>
 
       {/* Timeline Container */}
@@ -151,14 +151,14 @@ export default function TimelineStrip() {
         </div>
 
         {/* Mobile & Tablet: Vertical Timeline */}
-        <div className="lg:hidden space-y-8">
+        <div className="lg:hidden space-y-6 sm:space-y-8 px-4">
           {/* Vertical connecting line */}
           <motion.div
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, delay: 0.2 }}
-            className="absolute left-8 top-0 bottom-0 w-[3px] bg-gradient-to-b from-orange-900/30 via-orange-500 to-orange-400/30 origin-top shadow-[0_0_15px_rgba(249,115,22,0.4)]"
+            className="absolute left-6 sm:left-8 top-0 bottom-0 w-[2px] sm:w-[3px] bg-gradient-to-b from-orange-900/30 via-orange-500 to-orange-400/30 origin-top shadow-[0_0_15px_rgba(249,115,22,0.4)]"
           />
 
           {milestones.map((milestone, index) => (
@@ -168,17 +168,16 @@ export default function TimelineStrip() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="relative flex gap-6 group"
+              className="relative flex gap-3 sm:gap-6 group"
             >
               {/* Icon Node */}
               <div className="relative flex-shrink-0">
                 <motion.div
                   whileHover={{ scale: 1.15 }}
-                  className={`relative w-16 h-16 rounded-full bg-gradient-to-br from-card to-background border-2 border-orange-500/30 flex items-center justify-center group-hover:border-orange-400 transition-all duration-300 shadow-lg shadow-orange-500/20 z-10`}
+                  className={`relative w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-card to-background border-2 border-orange-500/30 flex items-center justify-center group-hover:border-orange-400 transition-all duration-300 shadow-lg shadow-orange-500/20 z-10`}
                 >
                   <milestone.icon 
-                    className="text-orange-400" 
-                    size={24} 
+                    className="text-orange-400 w-5 h-5 sm:w-6 sm:h-6" 
                     strokeWidth={1.5} 
                   />
                   
@@ -188,26 +187,26 @@ export default function TimelineStrip() {
 
                 {/* Vertical connector */}
                 {index < milestones.length - 1 && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-16 w-[2px] h-8 bg-gradient-to-b from-orange-500/50 to-orange-500/20" />
+                  <div className="absolute left-1/2 -translate-x-1/2 top-12 sm:top-16 w-[2px] h-6 sm:h-8 bg-gradient-to-b from-orange-500/50 to-orange-500/20" />
                 )}
               </div>
 
               {/* Content */}
-              <div className="flex-1 pb-8">
+              <div className="flex-1 pb-6 sm:pb-8">
                 {/* Year with gradient background */}
-                <div className={`inline-flex items-center justify-center px-3 py-1 rounded-full bg-gradient-to-r ${milestone.color} bg-opacity-20 border border-orange-500/30 mb-3`}>
-                  <span className="font-bold text-sm text-white">
+                <div className={`inline-flex items-center justify-center px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r ${milestone.color} bg-opacity-20 border border-orange-500/30 mb-2 sm:mb-3`}>
+                  <span className="font-bold text-xs sm:text-sm text-white">
                     {milestone.year}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h4 className="text-lg font-bold mb-2 text-white group-hover:text-orange-300 transition-colors">
+                <h4 className="text-base sm:text-lg font-bold mb-1.5 sm:mb-2 text-white group-hover:text-orange-300 transition-colors">
                   {milestone.title}
                 </h4>
 
                 {/* Description */}
-                <p className="text-sm text-muted leading-relaxed">
+                <p className="text-xs sm:text-sm text-muted leading-relaxed">
                   {milestone.description}
                 </p>
               </div>
@@ -222,7 +221,7 @@ export default function TimelineStrip() {
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.2, delay: 0.8 }}
-        className="mt-20 h-[1px] bg-gradient-to-r from-transparent via-orange-500/30 to-transparent origin-center"
+        className="mt-12 sm:mt-16 md:mt-20 h-[1px] bg-gradient-to-r from-transparent via-orange-500/30 to-transparent origin-center"
       />
     </div>
   );
