@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Black circle background -->
+  <circle cx="256" cy="256" r="256" fill="#000000"/>
+  
+  <!-- White "RB" text -->
+  <text 
+    x="256" 
+    y="320" 
+    font-family="Inter, Arial, sans-serif" 
+    font-size="240" 
+    font-weight="700" 
+    fill="#FFFFFF" 
+    text-anchor="middle"
+    dominant-baseline="middle"
+  >RB</text>
+  
+  <!-- Orange accent line -->
+  <rect x="176" y="340" width="160" height="8" rx="4" fill="#FF5028"/>
+</svg>
