@@ -62,20 +62,27 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
-    shortcut: [
-      { url: '/favicon.ico', type: 'image/x-icon' }
-    ],
+    shortcut: '/favicon.ico',
     apple: [
-      { url: '/favicon.svg', type: 'image/svg+xml' }
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
     other: [
       {
-        rel: 'mask-icon',
-        url: '/favicon.svg',
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        url: '/android-chrome-192x192.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '512x512',
+        url: '/android-chrome-512x512.png',
       },
     ],
   },
@@ -205,10 +212,12 @@ export default function RootLayout({
         {/* Breadcrumb Schema */}
         <BreadcrumbSchema items={breadcrumbItems} />
         
-        {/* Favicon - Multiple formats for better compatibility */}
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        {/* Favicon - Multiple formats for maximum compatibility */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <link rel="mask-icon" href="/favicon.svg" color="#FF5028" />
         
         {/* Bing/Microsoft specific meta tags */}
