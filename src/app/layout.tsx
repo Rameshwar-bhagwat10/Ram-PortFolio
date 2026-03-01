@@ -62,10 +62,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' },
     ],
     shortcut: '/favicon.ico',
     apple: [
@@ -212,17 +209,13 @@ export default function RootLayout({
         {/* Breadcrumb Schema */}
         <BreadcrumbSchema items={breadcrumbItems} />
         
-        {/* Favicon - Multiple formats for maximum compatibility */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
-        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+        {/* Favicon - ICO format for maximum compatibility */}
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-        <link rel="mask-icon" href="/favicon.svg" color="#FF5028" />
         
         {/* Bing/Microsoft specific meta tags */}
         <meta name="msapplication-TileColor" content="#0F0E0E" />
-        <meta name="msapplication-TileImage" content="/favicon.svg" />
+        <meta name="msapplication-TileImage" content="/android-chrome-512x512.png" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         
         {/* Preconnect to external domains for performance */}
