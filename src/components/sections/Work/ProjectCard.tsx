@@ -107,7 +107,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <article 
-      className="w-full h-full flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-16 py-8 md:py-0"
+      className="w-full h-full flex items-center justify-center px-3 xs:px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 xs:py-6 sm:py-8 md:py-0"
       itemScope
       itemType="https://schema.org/SoftwareApplication"
     >
@@ -126,7 +126,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       {project.liveUrl && <meta itemProp="url" content={project.liveUrl} />}
       
       <div className="w-full max-w-7xl mx-auto h-full flex items-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xs:gap-5 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 w-full">
           
           {/* Image Container - Left 50% */}
           <figure
@@ -137,7 +137,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           >
             {/* Ambient glow - Static, no animation */}
             <div
-              className="absolute inset-0 -m-4 sm:-m-6 md:-m-8 rounded-full blur-3xl pointer-events-none opacity-20"
+              className="absolute inset-0 -m-3 xs:-m-4 sm:-m-5 md:-m-6 lg:-m-8 rounded-full blur-2xl sm:blur-3xl pointer-events-none opacity-15 sm:opacity-20"
               style={{
                 background: `radial-gradient(circle, rgba(${project.color}, 0.4) 0%, transparent 70%)`,
               }}
@@ -145,11 +145,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             
             {/* Fixed Image Box - Transparent */}
             <div 
-              className="relative h-[40vh] sm:h-[45vh] md:h-[55vh] lg:h-[60vh] xl:h-[65vh] rounded-xl sm:rounded-2xl overflow-hidden"
+              className="relative h-[28vh] xs:h-[32vh] sm:h-[36vh] md:h-[45vh] lg:h-[55vh] xl:h-[65vh] rounded-lg xs:rounded-xl sm:rounded-xl md:rounded-2xl overflow-hidden"
             >
               {/* First Image - Back layer */}
               <motion.div
-                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden bg-[#171616]"
+                className="absolute inset-0 rounded-lg xs:rounded-xl sm:rounded-xl md:rounded-2xl overflow-hidden bg-[#171616]"
                 animate={{
                   rotate: isHovered ? -8 : 0,
                   scale: isHovered ? 0.7 : 1,
@@ -172,7 +172,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   alt={`${project.title} - Rameshwar Bhagwat Project Screenshot`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-contain md:object-cover"
                   priority={index === 0}
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
@@ -181,14 +181,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
                 {/* Project number */}
-                <div className="absolute top-4 sm:top-6 left-4 sm:left-6 text-white/40 text-xs sm:text-sm font-medium tabular-nums z-10">
+                <div className="absolute top-2 xs:top-3 sm:top-4 md:top-6 left-2 xs:left-3 sm:left-4 md:left-6 text-white/40 text-[10px] xs:text-xs sm:text-sm font-medium tabular-nums z-10">
                   {String(project.id).padStart(2, '0')} / 04
                 </div>
               </motion.div>
 
               {/* Second Image - Front layer */}
               <motion.div
-                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden bg-[#171616]"
+                className="absolute inset-0 rounded-lg xs:rounded-xl sm:rounded-xl md:rounded-2xl overflow-hidden bg-[#171616]"
                 animate={{
                   rotate: isHovered ? 8 : 0,
                   scale: isHovered ? 0.7 : 1,
@@ -212,7 +212,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   alt={`${project.title} - Rameshwar Bhagwat Project Interface`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-contain md:object-cover"
                   loading="lazy"
                 />
                 
@@ -223,31 +223,31 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           </figure>
 
           {/* Content Container - Right 50% - No animations for better performance */}
-          <div className="flex flex-col justify-center space-y-3 sm:space-y-4 md:space-y-5 order-2">
+          <div className="flex flex-col justify-center space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4 lg:space-y-5 order-2">
             {/* Title */}
-            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" itemProp="name">
+            <h3 className="text-xl xs:text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight" itemProp="name">
               {project.title}
             </h3>
 
             {/* Tagline */}
-            <p className="text-sm sm:text-base md:text-lg text-muted" itemProp="headline">
+            <p className="text-xs xs:text-sm sm:text-sm md:text-base lg:text-lg text-muted" itemProp="headline">
               {project.tagline}
             </p>
 
             {/* Divider */}
-            <div className="w-10 sm:w-12 h-[2px] bg-primary-gradient" aria-hidden="true" />
+            <div className="w-8 xs:w-9 sm:w-10 md:w-12 h-[2px] bg-primary-gradient" aria-hidden="true" />
 
             {/* Description */}
-            <p className="text-xs sm:text-sm md:text-base text-white/80 leading-relaxed" itemProp="description">
+            <p className="text-[11px] xs:text-xs sm:text-xs md:text-sm lg:text-base text-white/80 leading-relaxed" itemProp="description">
               {project.description}
             </p>
 
             {/* Features */}
-            <ul className="space-y-1.5 sm:space-y-2 md:space-y-2.5" itemProp="about">
+            <ul className="space-y-1 xs:space-y-1.5 sm:space-y-1.5 md:space-y-2 lg:space-y-2.5" itemProp="about">
               {project.features.map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 bg-primary-gradient mt-1.5 sm:mt-2 flex-shrink-0" aria-hidden="true" />
-                  <p className="text-[11px] sm:text-xs md:text-sm text-white/70 leading-relaxed">
+                <li key={idx} className="flex items-start gap-1.5 xs:gap-2 sm:gap-2 md:gap-3">
+                  <div className="w-1 h-1 xs:w-1.5 xs:h-1.5 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 rotate-45 bg-primary-gradient mt-1 xs:mt-1.5 sm:mt-1.5 md:mt-2 flex-shrink-0" aria-hidden="true" />
+                  <p className="text-[10px] xs:text-[11px] sm:text-xs md:text-sm text-white/70 leading-relaxed">
                     {feature}
                   </p>
                 </li>
@@ -255,7 +255,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </ul>
 
             {/* Tech Stack */}
-            <div className="flex flex-wrap gap-1.5 sm:gap-2" role="list" aria-label="Technologies used">
+            <div className="flex flex-wrap gap-1 xs:gap-1.5 sm:gap-1.5 md:gap-2" role="list" aria-label="Technologies used">
               {project.techStack.map((tech, idx) => {
                 const config = techConfig[tech];
                 const Icon = config?.icon || SiReact;
@@ -264,11 +264,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 return (
                   <span
                     key={idx}
-                    className="px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1 sm:gap-1.5 hover:bg-white/10 transition-colors duration-300"
+                    className="px-1.5 xs:px-2 sm:px-2 md:px-2.5 py-0.5 xs:py-0.5 sm:py-0.5 md:py-1 text-[9px] xs:text-[10px] sm:text-[10px] md:text-xs font-medium rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1 xs:gap-1 sm:gap-1 md:gap-1.5 hover:bg-white/10 transition-colors duration-300"
                     role="listitem"
                     itemProp="keywords"
                   >
-                    <Icon size={10} className="flex-shrink-0 sm:w-3 sm:h-3" style={{ color: iconColor }} aria-hidden="true" />
+                    <Icon size={9} className="flex-shrink-0 xs:w-2.5 xs:h-2.5 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3" style={{ color: iconColor }} aria-hidden="true" />
                     <span className="text-white/70">{tech}</span>
                   </span>
                 );
@@ -276,15 +276,15 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </div>
 
             {/* CTA Buttons */}
-            <nav className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 pt-1 sm:pt-2 md:pt-3" aria-label="Project links">
+            <nav className="flex items-center gap-2 xs:gap-2 sm:gap-2.5 md:gap-3 pt-1 xs:pt-1 sm:pt-1.5 md:pt-2 lg:pt-3" aria-label="Project links">
               {project.liveUrl && (
                 <Button
                   variant="primary"
-                  size="md"
+                  size="sm"
                   onClick={() => window.open(project.liveUrl, '_blank')}
-                  rightIcon={<ExternalLink size={14} className="sm:w-4 sm:h-4" />}
+                  rightIcon={<ExternalLink size={12} className="xs:w-3 xs:h-3 sm:w-3.5 sm:h-3.5" />}
                   aria-label={`View ${project.title} live demo`}
-                  className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2"
+                  className="text-[10px] xs:text-[11px] sm:text-xs px-2.5 xs:px-3 sm:px-3.5 py-1 xs:py-1.5 sm:py-1.5 whitespace-nowrap"
                 >
                   View Live
                 </Button>
@@ -292,11 +292,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               {project.githubUrl && (
                 <Button
                   variant="secondary"
-                  size="md"
+                  size="sm"
                   onClick={() => window.open(project.githubUrl, '_blank')}
-                  rightIcon={<Github size={14} className="sm:w-4 sm:h-4" />}
+                  rightIcon={<Github size={12} className="xs:w-3 xs:h-3 sm:w-3.5 sm:h-3.5" />}
                   aria-label={`View ${project.title} source code on GitHub`}
-                  className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2"
+                  className="text-[10px] xs:text-[11px] sm:text-xs px-2.5 xs:px-3 sm:px-3.5 py-1 xs:py-1.5 sm:py-1.5 whitespace-nowrap"
                 >
                   Source Code
                 </Button>

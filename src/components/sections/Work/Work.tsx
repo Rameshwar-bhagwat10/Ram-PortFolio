@@ -1,44 +1,57 @@
 'use client';
 
-import { useRef } from 'react';
-import { useScroll, useTransform, motion, useSpring } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from './work.data';
 import ProjectCard from './ProjectCard';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Work() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
+  const handleNext = () => {
+    if (currentIndex < projects.length - 1) {
+      setDirection(1);
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
 
-  // Use useSpring for smoother interpolation with slower response
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 35,
-    restDelta: 0.001
-  });
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setDirection(-1);
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
-  // Slower horizontal scroll with proper entry/exit transitions
-  // Extended keyframes for smoother angles at start and end (6 projects)
-  const x = useTransform(
-    smoothProgress,
-    [0, 0.08, 0.20, 0.35, 0.48, 0.61, 0.74, 0.87, 0.95, 1],
-    ['0%', '0%', '-25vw', '-100vw', '-200vw', '-300vw', '-400vw', '-475vw', '-500vw', '-500vw']
-  );
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 0.9,
+      rotateY: direction > 0 ? 15 : -15,
+      filter: 'blur(10px)',
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+      filter: 'blur(0px)',
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? '-100%' : '100%',
+      opacity: 0,
+      scale: 0.9,
+      rotateY: direction > 0 ? -15 : 15,
+      filter: 'blur(10px)',
+    }),
+  };
 
   return (
     <section 
       id="work" 
-      ref={containerRef} 
-      className="relative bg-[#0F0E0E]" 
-      style={{ 
-        height: '750vh', // Increased for 6 projects with slower scrolling
-        willChange: 'auto',
-        transform: 'translateZ(0)',
-        backfaceVisibility: 'hidden',
-      }}
+      className="relative bg-[#0F0E0E] py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32"
       aria-label="Featured Projects Portfolio"
       itemScope
       itemType="https://schema.org/CreativeWork"
@@ -104,10 +117,11 @@ export default function Work() {
           <li>Delivered real-time features with sub-100ms latency</li>
         </ul>
       </div>
-      {/* Intro Section */}
-      <div className="h-[30vh] flex items-center justify-center bg-[#0F0E0E] relative">
+
+      {/* Header Section */}
+      <div className="container mx-auto px-4 sm:px-6 mb-8 sm:mb-10 md:mb-12 lg:mb-16">
         <motion.div 
-          className="text-center px-4 sm:px-6"
+          className="text-center max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -116,37 +130,193 @@ export default function Work() {
             ease: [0.16, 1, 0.3, 1],
           }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-2 sm:mb-3">
+          {/* Small label */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-5 md:mb-6"
+          >
+            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-[#FF8C00] to-[#FF5F00] animate-pulse" />
+            <span className="text-xs sm:text-sm text-white/70 font-medium">Portfolio Showcase</span>
+          </motion.div>
+
+          {/* Main heading */}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-3 sm:mb-4 md:mb-5 px-2 leading-tight">
             Featured <span className="text-gradient">Projects</span>
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-muted mb-4 sm:mb-6">
-            Crafting digital experiences that make an impact
+
+          {/* Decorative line */}
+          <div className="flex items-center justify-center gap-3 mb-4 sm:mb-5 md:mb-6">
+            <div className="h-[1px] w-12 sm:w-16 md:w-20 bg-gradient-to-r from-transparent to-white/20" />
+            <div className="w-1.5 h-1.5 rotate-45 bg-primary-gradient" />
+            <div className="h-[1px] w-12 sm:w-16 md:w-20 bg-gradient-to-l from-transparent to-white/20" />
+          </div>
+
+          {/* Description */}
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/60 leading-relaxed px-4 max-w-2xl mx-auto">
+            Explore a curated collection of full-stack applications showcasing expertise in modern web technologies, 
+            scalable architecture, and innovative solutions across <span className="text-white/80 font-medium">AI, e-commerce, healthcare, and fintech</span> domains.
           </p>
-          <div className="flex items-center justify-center gap-2 text-white/40 text-xs sm:text-sm" aria-label="Scroll to explore projects">
-            <span>Scroll to explore</span>
-            <span className="text-lg sm:text-xl" aria-hidden="true">↓</span>
+
+          {/* Stats or badges */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 mt-6 sm:mt-7 md:mt-8">
+            <div className="flex items-center gap-2 text-xs sm:text-sm">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                <span className="text-base sm:text-lg font-bold text-gradient">{projects.length}</span>
+              </div>
+              <span className="text-white/50">Projects</span>
+            </div>
+            <div className="w-px h-6 bg-white/10" />
+            <div className="flex items-center gap-2 text-xs sm:text-sm">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                <span className="text-base sm:text-lg font-bold text-gradient">15+</span>
+              </div>
+              <span className="text-white/50">Technologies</span>
+            </div>
+            <div className="w-px h-6 bg-white/10" />
+            <div className="flex items-center gap-2 text-xs sm:text-sm">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                <span className="text-base sm:text-lg font-bold text-gradient">4</span>
+              </div>
+              <span className="text-white/50">Industries</span>
+            </div>
           </div>
         </motion.div>
       </div>
 
-      {/* Sticky Projects Section */}
-      <div className="sticky top-0 h-screen overflow-hidden bg-[#0F0E0E]">
-        <motion.div
-          style={{ x, willChange: 'transform', transform: 'translate3d(0,0,0)' }}
-          className="flex h-full relative z-10"
-          role="list"
-          aria-label="Project showcase"
+      {/* Carousel Container */}
+      <div className="relative w-full h-[500px] xs:h-[550px] sm:h-[600px] md:h-[650px] lg:h-[700px] xl:h-[800px] overflow-visible md:overflow-hidden perspective-1000">
+        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { 
+                type: "spring", 
+                stiffness: 200, 
+                damping: 25,
+                mass: 1
+              },
+              opacity: { 
+                duration: 0.5,
+                ease: [0.16, 1, 0.3, 1]
+              },
+              scale: {
+                duration: 0.5,
+                ease: [0.16, 1, 0.3, 1]
+              },
+              rotateY: {
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1]
+              },
+              filter: {
+                duration: 0.4,
+                ease: "easeInOut"
+              }
+            }}
+            className="absolute inset-0"
+            style={{
+              transformStyle: 'preserve-3d',
+              backfaceVisibility: 'hidden',
+            }}
+          >
+            <ProjectCard project={projects[currentIndex]} index={currentIndex} />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Arrows - Desktop (side placement) */}
+        <button
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+          className={`hidden md:flex absolute left-6 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full items-center justify-center transition-all duration-300 group ${
+            currentIndex === 0
+              ? 'opacity-30 cursor-not-allowed'
+              : 'cursor-pointer hover:scale-110 active:scale-95'
+          }`}
+          style={{
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
+          }}
+          aria-label="Previous project"
         >
-          {projects.map((project, index) => (
-            <div 
-              key={project.id} 
-              className="w-screen h-full flex-shrink-0"
-              role="listitem"
-            >
-              <ProjectCard project={project} index={index} />
-            </div>
-          ))}
-        </motion.div>
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <ChevronLeft className="w-6 h-6 lg:w-7 lg:h-7 text-white relative z-10 drop-shadow-lg" />
+        </button>
+
+        <button
+          onClick={handleNext}
+          disabled={currentIndex === projects.length - 1}
+          className={`hidden md:flex absolute right-6 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 rounded-full items-center justify-center transition-all duration-300 group ${
+            currentIndex === projects.length - 1
+              ? 'opacity-30 cursor-not-allowed'
+              : 'cursor-pointer hover:scale-110 active:scale-95'
+          }`}
+          style={{
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
+          }}
+          aria-label="Next project"
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <ChevronRight className="w-6 h-6 lg:w-7 lg:h-7 text-white relative z-10 drop-shadow-lg" />
+        </button>
+      </div>
+
+      {/* Navigation Arrows - Mobile (bottom placement) */}
+      <div className="flex md:hidden justify-center gap-4 mt-6">
+        <button
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+          className={`w-12 h-12 xs:w-13 xs:h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 group ${
+            currentIndex === 0
+              ? 'opacity-30 cursor-not-allowed'
+              : 'cursor-pointer active:scale-95'
+          }`}
+          style={{
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
+          }}
+          aria-label="Previous project"
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-active:opacity-100 transition-opacity duration-300" />
+          <ChevronLeft className="w-6 h-6 xs:w-7 xs:h-7 text-white relative z-10 drop-shadow-lg" />
+        </button>
+
+        <button
+          onClick={handleNext}
+          disabled={currentIndex === projects.length - 1}
+          className={`w-12 h-12 xs:w-13 xs:h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 group ${
+            currentIndex === projects.length - 1
+              ? 'opacity-30 cursor-not-allowed'
+              : 'cursor-pointer active:scale-95'
+          }`}
+          style={{
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
+          }}
+          aria-label="Next project"
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-active:opacity-100 transition-opacity duration-300" />
+          <ChevronRight className="w-6 h-6 xs:w-7 xs:h-7 text-white relative z-10 drop-shadow-lg" />
+        </button>
       </div>
     </section>
   );

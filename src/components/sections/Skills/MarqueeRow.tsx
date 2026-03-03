@@ -15,6 +15,19 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   // Initialize offset based on direction
   const [offset, setOffset] = useState(() => {
@@ -32,7 +45,10 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
       setOffset((prev) => {
         const itemWidth = 64 + 24; // icon width (64px) + gap (24px on mobile, 32px on sm, 48px on md)
         const totalWidth = itemWidth * skills.length;
-        const newOffset = prev + (reverse ? 0.5 : -0.5);
+        
+        // Balanced speed: mobile (1.1), desktop (0.8)
+        const speed = isMobile ? 1.1 : 0.8;
+        const newOffset = prev + (reverse ? speed : -speed);
         
         // Reset when one full set has scrolled
         if (!reverse && newOffset <= -totalWidth) {
@@ -54,7 +70,7 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [hoveredIndex, reverse, skills.length]);
+  }, [hoveredIndex, reverse, skills.length, isMobile]);
 
   // Double the array for seamless display
   const displaySkills = [...skills, ...skills];
