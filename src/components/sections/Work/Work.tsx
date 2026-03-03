@@ -56,7 +56,7 @@ export default function Work() {
       itemScope
       itemType="https://schema.org/CreativeWork"
     >
-      {/* SEO Microdata */}
+      {/* SEO Microdataa */}
       <meta itemProp="name" content="Featured Projects - Rameshwar Bhagwat Portfolio" />
       <meta itemProp="description" content="Showcase of full-stack web development projects including AI SaaS platforms, e-commerce marketplaces, healthcare portals, and fintech dashboards built with React, Next.js, TypeScript, and modern technologies." />
       <meta itemProp="author" content="Rameshwar Bhagwat" />
