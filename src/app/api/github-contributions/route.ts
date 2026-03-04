@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
-const GITHUB_USERNAME = 'Rameshwar-bhagwat10'; // Replace with your GitHub username
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Add this to your .env.local
+const GITHUB_USERNAME = 'Rameshwar-bhagwat10';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 export async function GET() {
   try {
@@ -78,7 +78,7 @@ function calculateStreaks(days: any[]) {
   let tempStreak = 0;
 
   // Sort days by date (newest first)
-  const sortedDays = [...days].sort((a, b) => 
+  const sortedDays = [...days].sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 

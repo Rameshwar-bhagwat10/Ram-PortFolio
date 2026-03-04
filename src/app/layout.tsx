@@ -142,9 +142,6 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'ibL2p6r9xrTKR3U9o5zRTmVlFC4lAP_GheMlBWgOuGo',
-    other: {
-      'msvalidate.01': 'YOUR_BING_VERIFICATION_CODE', // Replace with actual Bing verification code
-    },
   },
   manifest: "/site.webmanifest",
 };
@@ -250,8 +247,6 @@ export default function RootLayout({
         
         {/* Theme Color for mobile browsers */}
         <meta name="theme-color" content="#0F0E0E" />
-        <meta name="msapplication-TileColor" content="#0F0E0E" />
-        
         {/* Viewport optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>

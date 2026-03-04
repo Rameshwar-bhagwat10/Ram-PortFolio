@@ -1,11 +1,4 @@
-/* Additional theme utilities */
-
-.text-gradient {
-  background: linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* Additional theme utilities — unique gradient classes */
 
 .text-primary-gradient {
   background: linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%);
@@ -28,16 +21,4 @@
 
 .border-primary-gradient {
   border-image: linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%) 1;
-}
-
-.glow-text {
-  text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
-}
-
-.card-gradient {
-  background: linear-gradient(135deg, rgba(255, 0, 0, 0.05) 0%, rgba(255, 20, 147, 0.03) 50%, rgba(255, 140, 0, 0.02) 100%);
-}
-
-.border-gradient {
-  border: 1px solid rgba(255, 255, 255, 0.06);
 }

@@ -182,7 +182,7 @@ export async function POST(request: Request) {
                             <a href="https://rameshwarbhagwat.me" style="display: inline-block; padding: 14px 24px; background: linear-gradient(135deg, #FF8C00 0%, #FF5F00 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px;">View Portfolio</a>
                           </td>
                           <td>
-                            <a href="https://github.com/YOUR_GITHUB_USERNAME" style="display: inline-block; padding: 14px 24px; background-color: #333; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px;">GitHub Profile</a>
+                            <a href="https://github.com/Rameshwar-bhagwat10" style="display: inline-block; padding: 14px 24px; background-color: #333; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px;">GitHub Profile</a>
                           </td>
                         </tr>
                       </table>
@@ -201,8 +201,8 @@ export async function POST(request: Request) {
                       <p style="margin: 0 0 10px; color: #666; font-size: 14px; font-weight: 600;">Connect with me</p>
                       <p style="margin: 0; color: #999; font-size: 12px;">
                         <a href="mailto:rameshwarbhagwat019@gmail.com" style="color: #FF8C00; text-decoration: none; margin: 0 10px;">Email</a> |
-                        <a href="https://linkedin.com/in/YOUR_LINKEDIN" style="color: #FF8C00; text-decoration: none; margin: 0 10px;">LinkedIn</a> |
-                        <a href="https://github.com/YOUR_GITHUB" style="color: #FF8C00; text-decoration: none; margin: 0 10px;">GitHub</a>
+                        <a href="https://www.linkedin.com/in/rameshwar-bhagwat" style="color: #FF8C00; text-decoration: none; margin: 0 10px;">LinkedIn</a> |
+                        <a href="https://github.com/Rameshwar-bhagwat10" style="color: #FF8C00; text-decoration: none; margin: 0 10px;">GitHub</a>
                       </p>
                       <p style="margin: 15px 0 0; color: #999; font-size: 11px;">
                         This is an automated response. Please do not reply to this email.

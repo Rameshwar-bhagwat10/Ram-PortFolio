@@ -80,9 +80,9 @@ export default function StackedCards() {
 
   // Smooth the scroll progress with a spring for buttery card movement
   const scrollYProgress = useSpring(rawProgress, {
-    stiffness: 80,
-    damping: 30,
-    restDelta: 0.0005,
+    stiffness: 120,
+    damping: 28,
+    restDelta: 0.001,
   });
 
   return (
@@ -90,7 +90,7 @@ export default function StackedCards() {
       <div
         ref={containerRef}
         className="relative"
-        style={{ height: `${services.length * 85 + 40}vh` }}
+        style={{ height: `${services.length * 60 + 30}vh` }}
       >
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           {services.map((card, i) => (
@@ -134,23 +134,23 @@ function CardLayer({
 
   const yOffset = useTransform(
     scrollYProgress,
-    isFirst ? [0, segmentSize * 0.5] : [enterStart, enterEnd],
-    isFirst ? [25, 0] : [100, 0],
+    isFirst ? [0, 0.001] : [enterStart, enterEnd],
+    isFirst ? [0, 0] : [100, 0],
     { clamp: true }
   );
 
   const rotate = useTransform(
     scrollYProgress,
-    isFirst ? [0, segmentSize * 0.5] : [enterStart, enterEnd],
+    isFirst ? [0, 0.001] : [enterStart, enterEnd],
     isFirst
-      ? [layout.rotation + 3, layout.rotation]
+      ? [layout.rotation, layout.rotation]
       : [layout.rotation + 8, layout.rotation],
     { clamp: true }
   );
 
   const opacity = useTransform(
     scrollYProgress,
-    isFirst ? [0, segmentSize * 0.4] : [enterStart, enterStart + segmentSize * 0.15],
+    isFirst ? [0, segmentSize * 0.12] : [enterStart, enterStart + segmentSize * 0.15],
     isFirst ? [0, 1] : [0, 1],
     { clamp: true }
   );

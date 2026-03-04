@@ -6,6 +6,7 @@ import AboutHeader from './AboutHeader';
 import ProfileCard from './ProfileCard';
 import StatsGrid from './StatsGrid';
 import TimelineStrip from './TimelineStrip';
+import MarqueeBanner from './MarqueeBanner';
 import StackedCards from './StackedCards';
 import InfoCards from './InfoCards';
 import { PERSONAL_INFO } from '@/lib/constants';
@@ -187,8 +188,11 @@ export default function About() {
       {/* Stacked Cards — outside Container so sticky works full-width */}
       <StackedCards />
 
+      {/* Marquee Banner — above timeline */}
+      <MarqueeBanner />
+
       <Container>
-          <div className="max-w-7xl mx-auto pt-24 sm:pt-32">
+          <div className="max-w-7xl mx-auto pt-8 sm:pt-12">
             {/* Timeline Strip */}
             <div className="mb-12 sm:mb-16">
               <TimelineStrip />
