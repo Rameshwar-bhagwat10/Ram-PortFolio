@@ -160,7 +160,7 @@ export default function HeroStrips() {
             />
 
             {/* Subtle dark overlay for content readability */}
-            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-black/50" />
 
             {/* Heading text — positioned full-viewport-width, clipped by strip overflow */}
             <div
@@ -175,19 +175,29 @@ export default function HeroStrips() {
                   className="text-center w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-40 md:pt-48"
                 >
                   <div
-                    className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.02em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] text-white uppercase whitespace-nowrap"
+                    className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] text-white whitespace-nowrap"
                     style={{
-                      fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
+                      fontFamily: 'var(--font-space-grotesk), "Space Grotesk", sans-serif',
                       fontWeight: 800,
                     }}
                   >
-                    Rameshwar Bhagwat
+                    Hi, I&apos;m{' '}
+                    <span
+                      style={{
+                        background: 'linear-gradient(135deg, #ff8a3d 0%, #ff3c6f 50%, #c06dff 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      Rameshwar Bhagwat
+                    </span>
                   </div>
                   <div
-                    className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[0.02em] leading-[1.05] mt-2 sm:mt-3 text-white uppercase"
+                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.02em] leading-[1.1] mt-2 sm:mt-3 text-white/80"
                     style={{
                       fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
-                      fontWeight: 800,
+                      fontWeight: 600,
                     }}
                   >
                     Full Stack &amp; AI Developer
@@ -220,19 +230,29 @@ export default function HeroStrips() {
           className="text-center w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-40 md:pt-48"
         >
           <div
-            className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.02em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] text-white uppercase whitespace-nowrap"
+            className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] text-white whitespace-nowrap"
             style={{
-              fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
+              fontFamily: 'var(--font-space-grotesk), "Space Grotesk", sans-serif',
               fontWeight: 800,
             }}
           >
-            Rameshwar Bhagwat
+            Hi, I&apos;m{' '}
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #ff8a3d 0%, #ff3c6f 50%, #c06dff 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Rameshwar Bhagwat
+            </span>
           </div>
           <div
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[0.02em] leading-[1.05] mt-2 sm:mt-3 text-white uppercase"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.02em] leading-[1.1] mt-2 sm:mt-3 text-white/80"
             style={{
               fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
-              fontWeight: 800,
+              fontWeight: 600,
             }}
           >
             Full Stack &amp; AI Developer

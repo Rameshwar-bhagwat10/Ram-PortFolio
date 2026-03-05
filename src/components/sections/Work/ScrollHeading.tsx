@@ -1,32 +1,34 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function ScrollHeading() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Track scroll progress of the container through the viewport
+  // Track the full journey of the container through the viewport
+  // progress 0 = container top reaches viewport bottom (just entering)
+  // progress 1 = container bottom reaches viewport top (just left)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start end', 'end start'],
   });
 
-  // Map scroll progress (0→1) to horizontal translation
-  // Full traverse: starts off-screen right, ends off-screen left
-  const xRaw = useTransform(scrollYProgress, [0, 1], ['50%', '-100%']);
-
-  // Smooth spring — responsive enough to keep pace with faster scroll range
-  const x = useSpring(xRaw, { stiffness: 60, damping: 40, mass: 0.8, restDelta: 0.001 });
+  // Only animate during the middle portion when the heading is FULLY visible
+  // [0.25, 0.75] = the container is fully inside the viewport
+  // Outside this range, values are clamped (no movement)
+  // The heading starts at 10% (visible from left) and scrolls to -60% (to show the right end)
+  const x = useTransform(scrollYProgress, [0.25, 0.75], ['10%', '-60%']);
 
   return (
     <div
       ref={containerRef}
       className="relative w-full overflow-hidden py-4 sm:py-6 md:py-8 mb-8 sm:mb-10 md:mb-12 lg:mb-16"
     >
+      {/* CSS transition provides smooth interpolation without spring lag */}
       <motion.h2
-        style={{ x, willChange: 'transform' }}
-        className="whitespace-nowrap text-[3.5rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] font-extrabold uppercase tracking-[-0.03em] leading-none select-none"
+        style={{ x, willChange: 'transform', transition: 'transform 0.15s linear' }}
+        className="whitespace-nowrap text-[2.8rem] sm:text-[4rem] md:text-[5.5rem] lg:text-[7rem] xl:text-[9rem] font-extrabold uppercase tracking-[-0.03em] leading-none select-none"
       >
         <span
           className="text-white/20"

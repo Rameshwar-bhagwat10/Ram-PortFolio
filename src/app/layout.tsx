@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Bebas_Neue, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Bebas_Neue, Playfair_Display, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "../styles/theme.css";
 import "../styles/animations.css";
@@ -39,6 +39,13 @@ const playfairDisplay = Playfair_Display({
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
+  subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: 'swap',
   preload: true,
@@ -251,7 +258,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${playfairDisplay.variable} ${plusJakartaSans.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${playfairDisplay.variable} ${plusJakartaSans.variable} ${spaceGrotesk.variable} antialiased`}
         style={{ overflow: 'visible' }}
       >
         <IntroAnimationProvider>

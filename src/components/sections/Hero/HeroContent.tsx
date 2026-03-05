@@ -43,10 +43,10 @@ export default function HeroContent() {
         {/* Invisible heading placeholder — reserves exact same space as the visual heading
            rendered inside HeroStrips for the strip-reveal effect. */}
         <div className="invisible px-2 sm:px-4" aria-hidden="true">
-          <div className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.02em] leading-[0.95] sm:leading-[0.95] md:leading-[0.95] uppercase whitespace-nowrap" style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}>
-            Rameshwar Bhagwat
+          <div className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-[1.1] sm:leading-[1.1] md:leading-[1.1] whitespace-nowrap" style={{ fontFamily: 'var(--font-space-grotesk), "Space Grotesk", sans-serif', fontWeight: 800 }}>
+            Hi, I&apos;m Rameshwar Bhagwat
           </div>
-          <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[0.02em] leading-[1.05] mt-2 sm:mt-3 uppercase" style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}>
+          <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[0.02em] leading-[1.1] mt-2 sm:mt-3" style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 600 }}>
             Full Stack &amp; AI Developer
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function HeroContent() {
         {/* Description - SEO optimized */}
         <motion.div
           variants={childVariants}
-          className="text-lg sm:text-2xl md:text-3xl lg:text-4xl max-w-4xl mx-auto leading-snug px-4 sm:px-6"
+          className="text-base sm:text-xl md:text-2xl lg:text-3xl max-w-4xl mx-auto leading-snug px-4 sm:px-6"
           style={{
             fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
             fontWeight: 400,
