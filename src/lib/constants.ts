@@ -1,33 +1,89 @@
-export const SITE_NAME = 'Rameshwar Bhagwat - Full Stack Developer';
+export const SITE_NAME = 'Rameshwar Bhagwat - Full Stack Developer & AI Engineer';
 export const SITE_URL = 'https://rameshwarbhagwat.me';
-export const SITE_DESCRIPTION = 'Full Stack Developer specializing in React, TypeScript, and Next.js. Building modern web applications with cutting-edge technologies.';
+export const SITE_DESCRIPTION = 'Rameshwar Bhagwat is a Full Stack Developer and AI Engineer specializing in React, Next.js, TypeScript, Node.js, and AI-powered web applications. Building modern, scalable SaaS platforms and innovative web solutions.';
 
-// SEO Keywords
+// SEO Keywords - Optimized for search ranking
 export const SEO_KEYWORDS = [
+  // Primary Keywords - Name variations
   'Rameshwar Bhagwat',
+  'Rameshwar Bhagwat Developer',
+  'Rameshwar Bhagwat Portfolio',
+  'Rameshwar Bhagwat Full Stack Developer',
+  'Rameshwar Bhagwat AI Engineer',
+  'Rameshwar Bhagwat Web Developer',
+  'Rameshwar Bhagwat React Developer',
+  'Rameshwar Bhagwat Software Engineer',
+
+  // Job Title Keywords
   'Full Stack Developer',
+  'AI Engineer',
+  'Frontend Developer',
+  'Backend Developer',
+  'Web Developer',
+  'Software Engineer',
   'React Developer',
   'Next.js Developer',
   'TypeScript Developer',
-  'Web Developer',
-  'Frontend Developer',
-  'Backend Developer',
-  'JavaScript Developer',
   'Node.js Developer',
+  'JavaScript Developer',
+  'Python Developer',
+  'MERN Stack Developer',
   'UI/UX Developer',
-  'Portfolio',
-  'Yeola Developer',
-  'Maharashtra Developer',
-  'India Developer',
-  'Modern Web Applications',
+
+  // Technology Keywords
+  'React.js Expert',
+  'Next.js Expert',
+  'TypeScript Expert',
+  'Node.js Expert',
+  'MongoDB Developer',
+  'PostgreSQL Developer',
+  'Tailwind CSS Developer',
+  'REST API Developer',
+  'GraphQL Developer',
+
+  // Service Keywords
+  'SaaS Developer',
+  'AI-powered Applications',
+  'Web Application Development',
+  'Custom Software Development',
   'Scalable Web Apps',
-  'AI-driven Products',
+  'Modern Web Applications',
+  'Enterprise Web Solutions',
+  'Startup MVP Development',
+
+  // Location Keywords
+  'Developer in India',
+  'Full Stack Developer India',
+  'Web Developer Maharashtra',
+  'Developer Yeola',
+  'Freelance Developer India',
+  'Remote Developer',
+  'Hire Full Stack Developer',
+  'Hire React Developer',
+  'Hire AI Engineer',
+
+  // Long-tail Keywords
+  'Best Full Stack Developer Portfolio',
+  'Top React Developer India',
+  'Expert Next.js Developer',
+  'Professional Web Developer',
+  'Experienced AI Engineer',
 ];
 
-// Personal Information
+// Personal Information - SEO Optimized
 export const PERSONAL_INFO = {
   name: 'Rameshwar Bhagwat',
-  jobTitle: 'Full Stack Developer',
+  firstName: 'Rameshwar',
+  lastName: 'Bhagwat',
+  jobTitle: 'Full Stack Developer & AI Engineer',
+  alternateJobTitles: [
+    'Full Stack Developer',
+    'AI Engineer',
+    'React Developer',
+    'Next.js Developer',
+    'Software Engineer',
+    'Web Developer',
+  ],
   email: 'rameshwarbhagwat019@gmail.com',
   phone: '+91-9699245170',
   location: {
@@ -37,7 +93,20 @@ export const PERSONAL_INFO = {
     countryCode: 'IN',
   },
   image: '/images/profile/profile.jpeg',
-  bio: 'Full Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies. Building scalable web applications and AI-driven products.',
+  bio: 'Rameshwar Bhagwat is a Full Stack Developer and AI Engineer with expertise in React, Next.js, TypeScript, Node.js, and Python. Specializing in building scalable web applications, SaaS platforms, and AI-powered solutions. Passionate about creating innovative digital experiences that drive business growth.',
+  shortBio: 'Full Stack Developer & AI Engineer specializing in React, Next.js, TypeScript, and AI-powered web applications.',
+  expertise: [
+    'Full Stack Development',
+    'AI & Machine Learning Integration',
+    'React & Next.js Development',
+    'TypeScript & JavaScript',
+    'Node.js & Python Backend',
+    'Database Design & Optimization',
+    'Cloud Architecture (AWS, GCP)',
+    'SaaS Platform Development',
+    'API Design & Development',
+    'Performance Optimization',
+  ],
 };
 
 export const NAV_LINKS = [

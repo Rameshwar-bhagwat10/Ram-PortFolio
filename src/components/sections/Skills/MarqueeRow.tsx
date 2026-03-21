@@ -46,8 +46,8 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
         const itemWidth = 64 + 24; // icon width (64px) + gap (24px on mobile, 32px on sm, 48px on md)
         const totalWidth = itemWidth * skills.length;
         
-        // Balanced speed: mobile (1.1), desktop (0.8)
-        const speed = isMobile ? 1.1 : 0.8;
+        // Increased speed: mobile (1.6), desktop (1.2)
+        const speed = isMobile ? 1.6 : 1.2;
         const newOffset = prev + (reverse ? speed : -speed);
         
         // Reset when one full set has scrolled

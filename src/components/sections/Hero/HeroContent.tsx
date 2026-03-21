@@ -3,29 +3,73 @@
 import { motion } from 'framer-motion';
 import { useCallback } from 'react';
 import Button from '@/components/ui/Button';
-import Container from '@/components/layout/Container';
 import { useIntroAnimation } from '@/context/IntroAnimationContext';
 
-// Staggered reveal variants
-const containerVariants = {
+// ─── Animation Variants ─────────────────────────────────────────────────────
+
+const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
 
-const childVariants = {
-  hidden: { opacity: 0, y: 25 },
+const fadeUpItem = {
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
+
+// ─── Letter-by-letter reveal ─────────────────────────────────────────────────
+
+function AnimatedLetters({
+  text,
+  baseDelay = 0,
+  isActive,
+  className,
+  style,
+  letterStyle,
+}: {
+  text: string;
+  baseDelay?: number;
+  isActive: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  letterStyle?: React.CSSProperties;
+}) {
+  return (
+    <span className={className} style={style}>
+      {text.split('').map((char, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
+          animate={
+            isActive
+              ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+              : { opacity: 0, y: 40, filter: 'blur(12px)' }
+          }
+          transition={{
+            duration: 0.6,
+            delay: baseDelay + i * 0.035,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          style={{ display: 'inline-block', ...letterStyle }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+// ─── Main Component ──────────────────────────────────────────────────────────
 
 export default function HeroContent() {
   const { isIntroComplete } = useIntroAnimation();
@@ -38,96 +82,190 @@ export default function HeroContent() {
   }, []);
 
   return (
-    <Container className="relative z-20 px-4 sm:px-6">
-      <div className="pt-28 sm:pt-40 md:pt-48 pb-16 sm:pb-28 md:pb-32 text-center">
-        {/* Invisible heading placeholder — reserves exact same space as the visual heading
-           rendered inside HeroStrips for the strip-reveal effect. */}
-        <div className="invisible px-2 sm:px-4" aria-hidden="true">
-          {/* Badge placeholder */}
-          <div className="flex justify-center mb-4 sm:mb-5">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5">
-              <span className="h-2.5 w-2.5" />
-              <span className="text-xs sm:text-sm font-medium">Available for Work</span>
-            </div>
-          </div>
-          <div className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.02em] leading-[1.05] sm:leading-[1.05] md:leading-[1.05] text-center" style={{ fontFamily: 'var(--font-space-grotesk), "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: 700 }}>
-            <div>Hi, I&apos;m</div>
-            <div>Rameshwar Bhagwat</div>
-          </div>
-          <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium tracking-[0.02em] leading-[1.3] mt-3 sm:mt-4" style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", -apple-system, sans-serif', fontWeight: 500 }}>
-            Full Stack &amp; AI Developer
-          </div>
-        </div>
-        <h1 className="sr-only">Rameshwar Bhagwat — Full Stack &amp; AI Developer</h1>
+    <div
+      className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
+      role="banner"
+    >
+      <div className="w-full max-w-[900px] mx-auto px-6 sm:px-8 text-center pointer-events-auto">
 
-        {/* Content below heading — animates in after strips complete */}
         <motion.div
-          className="mt-6 sm:mt-8 md:mt-10 space-y-4 sm:space-y-5 md:space-y-6"
-          variants={containerVariants}
+          variants={staggerContainer}
           initial="hidden"
           animate={isIntroComplete ? 'visible' : 'hidden'}
         >
+          {/* ── Main Heading with Name (H1 for SEO) ── */}
+          <header className="mb-2 sm:mb-3">
+            <h1
+              className="sr-only"
+              itemProp="name"
+            >
+              Rameshwar Bhagwat - Full Stack Developer & AI Engineer | React, Next.js, TypeScript Expert
+            </h1>
 
-        {/* Description - SEO optimized */}
-        <motion.div
-          variants={childVariants}
-          className="text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-6"
-          style={{
-            fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
-            fontWeight: 400,
-            letterSpacing: '0.01em',
-            color: 'rgba(255,255,255,0.85)',
-          }}
-        >
-          <p>
-            Crafting <em className="italic" style={{ backgroundImage: 'linear-gradient(to right, #f97316, #ef4444, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>AI-Powered</em> Platforms that
-            Elevate <em className="italic" style={{ backgroundImage: 'linear-gradient(to right, #f97316, #ef4444, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>SaaS &amp; Web Innovators</em>
-          </p>
-        </motion.div>
+            <div
+              style={{
+                fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
+                fontWeight: 800,
+              }}
+              aria-label="Rameshwar Bhagwat - Full Stack Developer"
+            >
+              {/* Greeting line */}
+              <div
+                className="text-[2.5rem] sm:text-5xl md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1.05] tracking-[-0.04em] text-white"
+                aria-hidden="true"
+              >
+                <AnimatedLetters
+                  text="Hey, I'm"
+                  baseDelay={0.05}
+                  isActive={isIntroComplete}
+                />
+              </div>
 
-        {/* CTA Buttons */}
-        <motion.div variants={childVariants} className="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-4 mt-5 sm:mt-8 px-4 sm:px-0 max-w-md sm:max-w-none mx-auto">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={() => scrollToSection('work')}
-            aria-label="View my portfolio work"
-            className="w-full sm:w-auto text-sm sm:text-base py-2.5 sm:py-3"
+              {/* Full name — single line */}
+              <div
+                className="text-[2.5rem] sm:text-5xl md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1.05] tracking-[-0.04em] whitespace-nowrap"
+                itemProp="name"
+              >
+                <AnimatedLetters
+                  text="Rameshwar"
+                  baseDelay={0.3}
+                  isActive={isIntroComplete}
+                  letterStyle={{
+                    background: 'linear-gradient(180deg, #FF8C00 0%, #FF1493 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                />
+                <span className="text-white">
+                  <AnimatedLetters
+                    text=" Bhagwat"
+                    baseDelay={0.6}
+                    isActive={isIntroComplete}
+                  />
+                </span>
+              </div>
+            </div>
+
+            {/* Role title with shimmer stripes effect */}
+            <motion.div
+              className="mt-4 sm:mt-5 flex justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isIntroComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <motion.span
+                className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold tracking-[0.2em] uppercase"
+                style={{
+                  background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.4) 100%)',
+                  backgroundSize: '200% 100%',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))',
+                }}
+                animate={{
+                  backgroundPosition: ['0% 0%', '200% 0%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+                itemProp="jobTitle"
+              >
+                Full Stack & AI Developer
+              </motion.span>
+            </motion.div>
+
+            {/* Animated divider line — below role */}
+            <motion.div
+              className="mt-3 sm:mt-4 lg:mt-5 flex justify-center"
+              initial={{ scaleX: 0 }}
+              animate={isIntroComplete ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformOrigin: 'center center' }}
+              aria-hidden="true"
+            >
+              <div
+                className="h-[2px] sm:h-[3px] w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[320px]"
+                style={{
+                  background: 'linear-gradient(90deg, transparent 0%, #FF4500 20%, #FF1493 50%, #FF8C00 80%, transparent 100%)',
+                }}
+              />
+            </motion.div>
+          </header>
+
+          <div className="mb-10 sm:mb-14" aria-hidden="true" />
+
+          {/* ── Description (H2 equivalent for SEO) ── */}
+          <motion.p
+            variants={fadeUpItem}
+            className="text-lg sm:text-xl md:text-2xl lg:text-[1.7rem] max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8"
+            style={{
+              fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
+              fontWeight: 400,
+              letterSpacing: '0.01em',
+              color: 'rgba(255,255,255,0.75)',
+              textShadow: '0 2px 12px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.25)',
+            }}
+            itemProp="description"
           >
-            View My Work
-          </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            shimmer={true}
-            onClick={() => scrollToSection('contact')}
-            aria-label="Get in touch with me"
-            className="w-full sm:w-auto text-sm sm:text-base py-2.5 sm:py-3"
+            Crafting{' '}
+            <em
+              className="not-italic font-medium"
+              style={{
+                background: 'linear-gradient(to right, #FF6347, #FF1493)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              AI-Powered
+            </em>{' '}
+            platforms that elevate{' '}
+            <em
+              className="not-italic font-medium"
+              style={{
+                background: 'linear-gradient(to right, #FF8C00, #FF1493)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              SaaS &amp; Web Innovators
+            </em>
+          </motion.p>
+
+          {/* ── CTA Buttons ── */}
+          <motion.nav
+            variants={fadeUpItem}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+            aria-label="Primary navigation - View portfolio or contact Rameshwar Bhagwat"
           >
-            Get In Touch
-          </Button>
-        </motion.div>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => scrollToSection('work')}
+              aria-label="View Rameshwar Bhagwat's portfolio projects and work samples"
+              className="w-full sm:w-auto sm:min-w-[180px] text-sm sm:text-base"
+            >
+              View My Work
+            </Button>
+            <Button
+              variant="secondary"
+              size="lg"
+              shimmer={true}
+              onClick={() => scrollToSection('contact')}
+              aria-label="Contact Rameshwar Bhagwat for Full Stack Development and AI Engineering projects"
+              className="w-full sm:w-auto sm:min-w-[180px] text-sm sm:text-base"
+            >
+              Get In Touch
+            </Button>
+          </motion.nav>
         </motion.div>
 
-        {/* Hidden SEO content */}
-        <div className="sr-only">
-          <h3>Rameshwar Bhagwat Portfolio</h3>
-          <p>
-            Rameshwar Bhagwat is a Full Stack & AI Developer based in Yeola, Maharashtra, India. 
-            Specializing in React, Next.js, TypeScript, and AI-powered web applications. 
-            Rameshwar Bhagwat builds scalable SaaS platforms and machine learning systems.
-            Available for full-time roles and freelance projects.
-          </p>
-          <ul>
-            <li>Full Stack Development (MERN Stack)</li>
-            <li>React & Next.js Expert</li>
-            <li>AI & Machine Learning Integration</li>
-            <li>TypeScript Development</li>
-            <li>Open Source Contributor</li>
-            <li>Technical Blog Writer</li>
-          </ul>
-        </div>
       </div>
-    </Container>
+    </div>
   );
 }

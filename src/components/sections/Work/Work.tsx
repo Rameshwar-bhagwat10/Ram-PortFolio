@@ -3,146 +3,184 @@
 import { motion } from 'framer-motion';
 import { projects } from './work.data';
 import ProjectCard from './ProjectCard';
-import ScrollHeading from './ScrollHeading';
 
 export default function Work() {
   return (
-    <section 
-      id="work" 
-      className="relative bg-[#0F0E0E] py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32"
+    <section
+      id="work"
+      className="relative bg-[#0F0E0E] py-16 sm:py-20 md:py-28 lg:py-32"
       aria-label="Featured Projects Portfolio"
       itemScope
       itemType="https://schema.org/CreativeWork"
     >
-      {/* SEO Microdataa */}
+      {/* SEO Microdata */}
       <meta itemProp="name" content="Featured Projects - Rameshwar Bhagwat Portfolio" />
-      <meta itemProp="description" content="Showcase of full-stack web development projects including AI SaaS platforms, e-commerce marketplaces, healthcare portals, and fintech dashboards built with React, Next.js, TypeScript, and modern technologies." />
+      <meta
+        itemProp="description"
+        content="Showcase of full-stack web development projects including AI SaaS platforms, e-commerce marketplaces, healthcare portals, and fintech dashboards built with React, Next.js, TypeScript, and modern technologies."
+      />
       <meta itemProp="author" content="Rameshwar Bhagwat" />
-      <meta itemProp="keywords" content="web development projects, full stack portfolio, React projects, Next.js applications, TypeScript projects, MERN stack projects, AI SaaS, e-commerce platform, healthcare portal, fintech dashboard" />
 
       {/* Hidden SEO Content */}
       <div className="sr-only">
         <h2>Featured Projects Portfolio - Full Stack Web Development</h2>
         <p>
-          Explore a curated collection of production-ready web applications built by Rameshwar Bhagwat, 
-          showcasing expertise in full-stack development, modern JavaScript frameworks, and scalable architecture.
+          Explore a curated collection of production-ready web applications built by Rameshwar
+          Bhagwat, showcasing expertise in full-stack development, modern JavaScript frameworks,
+          and scalable architecture.
         </p>
-        
         <h3>Project Highlights</h3>
         <ul>
           {projects.map((project) => (
             <li key={project.id}>
               <h4>{project.title}</h4>
-              <p>{project.tagline} - {project.description}</p>
+              <p>
+                {project.tagline} - {project.description}
+              </p>
               <p>Technologies: {project.techStack.join(', ')}</p>
-              <ul>
-                {project.features.map((feature, idx) => (
-                  <li key={idx}>{feature}</li>
-                ))}
-              </ul>
             </li>
           ))}
         </ul>
-
-        <h3>Technical Expertise Demonstrated</h3>
-        <ul>
-          <li>Frontend Development: React, Next.js, TypeScript, JavaScript, Responsive Design</li>
-          <li>Backend Development: Node.js, Python, FastAPI, GraphQL, RESTful APIs</li>
-          <li>Databases: PostgreSQL, MongoDB, TimescaleDB, Redis</li>
-          <li>AI/ML Integration: TensorFlow, Machine Learning APIs, Natural Language Processing</li>
-          <li>Cloud & DevOps: AWS, Docker, Kafka, WebRTC</li>
-          <li>Payment Integration: Stripe, Secure Payment Gateways</li>
-          <li>Real-time Features: WebSocket, Live Data Streaming, Real-time Analytics</li>
-          <li>Security: HIPAA Compliance, Blockchain Verification, End-to-end Encryption</li>
-        </ul>
-
-        <h3>Project Categories</h3>
-        <ul>
-          <li>AI & Machine Learning Applications</li>
-          <li>E-commerce & Marketplace Platforms</li>
-          <li>Healthcare & Telemedicine Solutions</li>
-          <li>Financial Technology & Analytics</li>
-          <li>Enterprise SaaS Applications</li>
-        </ul>
-
-        <h3>Key Achievements</h3>
-        <ul>
-          <li>Built scalable applications serving 10,000+ concurrent users</li>
-          <li>Achieved 99.9% uptime for production systems</li>
-          <li>Improved conversion rates by 40% through optimization</li>
-          <li>Processed millions of transactions daily with zero downtime</li>
-          <li>Implemented HIPAA-compliant healthcare solutions</li>
-          <li>Delivered real-time features with sub-100ms latency</li>
-        </ul>
       </div>
 
-      {/* Scroll-linked heading */}
-      <ScrollHeading />
-
       {/* Header Section */}
-      <div className="container mx-auto px-4 sm:px-6 mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-        <motion.div 
-          className="text-center max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ 
-            duration: 1.2,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-          {/* Small label */}
-          <motion.div
+      <div className="container mx-auto px-4 sm:px-6 mb-12 sm:mb-16 md:mb-20">
+        <div className="text-center max-w-4xl mx-auto">
+          {/* Label */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-4 sm:mb-5"
+            style={{
+              background: 'linear-gradient(90deg, #FF8C00, #FF1493)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Portfolio
+          </motion.p>
+
+          {/* Main Heading */}
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-5 md:mb-6"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-[-0.02em] mb-5 sm:mb-6"
+            style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif' }}
           >
-            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-[#FF8C00] to-[#FF5F00] animate-pulse" />
-            <span className="text-xs sm:text-sm text-white/70 font-medium">Portfolio Showcase</span>
+            <span className="text-white">Featured </span>
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #FF8C00 0%, #FF1493 50%, #FF8C00 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Projects
+            </span>
+          </motion.h2>
+
+          {/* Animated line */}
+          <motion.div
+            className="flex justify-center mb-6 sm:mb-8"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: 'center' }}
+          >
+            <div
+              className="h-[2px] w-20 sm:w-28 md:w-36"
+              style={{
+                background:
+                  'linear-gradient(90deg, transparent, #FF8C00, #FF1493, #FF8C00, transparent)',
+              }}
+            />
           </motion.div>
 
-          {/* Decorative line */}
-          <div className="flex items-center justify-center gap-3 mb-4 sm:mb-5 md:mb-6">
-            <div className="h-[1px] w-12 sm:w-16 md:w-20 bg-gradient-to-r from-transparent to-white/20" />
-            <div className="w-1.5 h-1.5 rotate-45 bg-primary-gradient" />
-            <div className="h-[1px] w-12 sm:w-16 md:w-20 bg-gradient-to-l from-transparent to-white/20" />
-          </div>
-
           {/* Description */}
-          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/60 leading-relaxed px-4 max-w-2xl mx-auto">
-            Explore a curated collection of full-stack applications showcasing expertise in modern web technologies, 
-            scalable architecture, and innovative solutions across <span className="text-white/80 font-medium">AI, e-commerce, healthcare, and fintech</span> domains.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-sm sm:text-base md:text-lg text-white/50 leading-relaxed max-w-2xl mx-auto"
+            style={{
+              fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
+            }}
+          >
+            A curated collection of full-stack applications showcasing modern web technologies and
+            innovative solutions.
+          </motion.p>
 
-          {/* Stats or badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 mt-6 sm:mt-7 md:mt-8">
-            <div className="flex items-center gap-2 text-xs sm:text-sm">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                <span className="text-base sm:text-lg font-bold text-gradient">{projects.length}</span>
-              </div>
-              <span className="text-white/50">Projects</span>
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex items-center justify-center gap-8 sm:gap-12 mt-8 sm:mt-10"
+          >
+            <div className="text-center">
+              <span
+                className="block text-2xl sm:text-3xl font-bold"
+                style={{
+                  background: 'linear-gradient(135deg, #FF8C00, #FF1493)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                {projects.length}
+              </span>
+              <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider">
+                Projects
+              </span>
             </div>
-            <div className="w-px h-6 bg-white/10" />
-            <div className="flex items-center gap-2 text-xs sm:text-sm">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                <span className="text-base sm:text-lg font-bold text-gradient">15+</span>
-              </div>
-              <span className="text-white/50">Technologies</span>
+            <div className="w-px h-8 bg-white/10" />
+            <div className="text-center">
+              <span
+                className="block text-2xl sm:text-3xl font-bold"
+                style={{
+                  background: 'linear-gradient(135deg, #FF8C00, #FF1493)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                15+
+              </span>
+              <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider">
+                Technologies
+              </span>
             </div>
-            <div className="w-px h-6 bg-white/10" />
-            <div className="flex items-center gap-2 text-xs sm:text-sm">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                <span className="text-base sm:text-lg font-bold text-gradient">4</span>
-              </div>
-              <span className="text-white/50">Industries</span>
+            <div className="w-px h-8 bg-white/10" />
+            <div className="text-center">
+              <span
+                className="block text-2xl sm:text-3xl font-bold"
+                style={{
+                  background: 'linear-gradient(135deg, #FF8C00, #FF1493)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                4
+              </span>
+              <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider">
+                Industries
+              </span>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Vertical Project Cards */}
+      {/* Project Cards */}
       <div className="container mx-auto px-4 sm:px-6 space-y-16 sm:space-y-20 md:space-y-28 lg:space-y-36">
         {projects.map((project, index) => (
           <ProjectCard key={project.id} project={project} index={index} />

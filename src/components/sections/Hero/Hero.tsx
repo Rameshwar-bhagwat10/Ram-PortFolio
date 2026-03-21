@@ -1,47 +1,185 @@
+'use client';
+
+import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 import HeroContent from './HeroContent';
 import HeroBackground from './HeroBackground';
 import HeroStrips from './HeroStrips';
 import StructuredData from '@/components/seo/StructuredData';
-import { PERSONAL_INFO, SITE_URL, SOCIAL_LINKS } from '@/lib/constants';
+import { PERSONAL_INFO, SITE_URL, SOCIAL_LINKS, SEO_KEYWORDS } from '@/lib/constants';
+import { useIntroAnimation } from '@/context/IntroAnimationContext';
+
+const NeuralSphere = dynamic(
+  () => import('./NeuralSphere'),
+  { ssr: false }
+);
 
 export default function Hero() {
+  const { isIntroComplete } = useIntroAnimation();
+
   return (
     <>
-      {/* JSON-LD Structured Data */}
       <StructuredData />
-      
-      <section 
-        id="hero" 
-        className="relative min-h-screen flex items-center justify-center text-center overflow-hidden px-4 sm:px-6 pb-0 rounded-b-[40px] sm:rounded-b-[60px] mb-0"
-        aria-label={`Hero section - ${PERSONAL_INFO.name} ${PERSONAL_INFO.jobTitle}`}
+
+      <section
+        id="hero"
+        className="relative overflow-hidden pb-0 rounded-b-[40px] sm:rounded-b-[60px] mb-0"
+        style={{ height: '100vh' }}
+        aria-label={`${PERSONAL_INFO.name} - Full Stack Developer, AI Engineer, Web Developer Portfolio`}
         itemScope
         itemType="https://schema.org/Person"
       >
-        {/* Microdata for search engines */}
+        {/* ─── Primary Schema.org Person Microdata ─── */}
         <meta itemProp="name" content={PERSONAL_INFO.name} />
-        <meta itemProp="jobTitle" content={PERSONAL_INFO.jobTitle} />
-        <meta itemProp="description" content={PERSONAL_INFO.bio} />
+        <meta itemProp="givenName" content="Rameshwar" />
+        <meta itemProp="familyName" content="Bhagwat" />
+        <meta itemProp="jobTitle" content="Full Stack Developer & AI Engineer" />
+        <meta itemProp="description" content={`${PERSONAL_INFO.name} is a Full Stack Developer and AI Engineer specializing in React, Next.js, TypeScript, Node.js, Python, and AI/ML technologies. Expert in building scalable web applications, SaaS platforms, and AI-powered solutions.`} />
         <meta itemProp="url" content={SITE_URL} />
         <meta itemProp="email" content={PERSONAL_INFO.email} />
         <meta itemProp="telephone" content={PERSONAL_INFO.phone} />
         <meta itemProp="image" content={`${SITE_URL}${PERSONAL_INFO.image}`} />
+        <meta itemProp="knowsAbout" content="Full Stack Development, AI Engineering, React, Next.js, TypeScript, Node.js, Python, Machine Learning, Web Development, SaaS Development" />
+        <meta itemProp="hasOccupation" content="Full Stack Developer" />
+
+        {/* Social Links for Schema */}
         {SOCIAL_LINKS.map((link) => (
           <link key={link.name} itemProp="sameAs" href={link.url} />
         ))}
-        
+
+        {/* Address Schema */}
         <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress" className="hidden">
           <meta itemProp="addressLocality" content={PERSONAL_INFO.location.city} />
           <meta itemProp="addressRegion" content={PERSONAL_INFO.location.state} />
           <meta itemProp="addressCountry" content={PERSONAL_INFO.location.countryCode} />
         </div>
 
-        {/* Permanent strip background with heading reveal */}
-        <HeroStrips />
+        {/* ─── Hidden SEO Content for Search Engines ─── */}
+        <div className="sr-only">
+          <h1>Rameshwar Bhagwat - Full Stack Developer & AI Engineer</h1>
 
-        {/* Background Effects */}
+          <h2>About Rameshwar Bhagwat</h2>
+          <p>
+            Rameshwar Bhagwat is a highly skilled Full Stack Developer and AI Engineer based in {PERSONAL_INFO.location.city}, {PERSONAL_INFO.location.state}, {PERSONAL_INFO.location.country}.
+            With expertise in modern web technologies, Rameshwar Bhagwat specializes in building scalable, high-performance web applications and AI-powered platforms.
+          </p>
+
+          <h2>Rameshwar Bhagwat - Professional Skills</h2>
+          <p>
+            As a Full Stack Developer, Rameshwar Bhagwat is proficient in:
+          </p>
+          <ul>
+            <li>Frontend Development: React.js, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS</li>
+            <li>Backend Development: Node.js, Express.js, Python, FastAPI, REST APIs, GraphQL</li>
+            <li>Database Technologies: MongoDB, PostgreSQL, MySQL, Redis, Prisma ORM</li>
+            <li>AI & Machine Learning: TensorFlow, OpenAI, LangChain, AI Integration, ML APIs</li>
+            <li>Cloud & DevOps: AWS, Google Cloud, Docker, Kubernetes, CI/CD, Vercel</li>
+            <li>SaaS Development: Stripe Integration, Payment Systems, Multi-tenant Architecture</li>
+          </ul>
+
+          <h2>Rameshwar Bhagwat - Services</h2>
+          <p>
+            Rameshwar Bhagwat offers professional services including:
+          </p>
+          <ul>
+            <li>Full Stack Web Development by Rameshwar Bhagwat</li>
+            <li>AI-Powered Application Development by Rameshwar Bhagwat</li>
+            <li>SaaS Platform Development by Rameshwar Bhagwat</li>
+            <li>React & Next.js Development by Rameshwar Bhagwat</li>
+            <li>Custom Web Application Development by Rameshwar Bhagwat</li>
+            <li>API Development & Integration by Rameshwar Bhagwat</li>
+            <li>E-commerce Solutions by Rameshwar Bhagwat</li>
+            <li>Performance Optimization by Rameshwar Bhagwat</li>
+          </ul>
+
+          <h2>Why Choose Rameshwar Bhagwat?</h2>
+          <p>
+            Rameshwar Bhagwat combines technical expertise with creative problem-solving to deliver exceptional digital solutions.
+            Whether you need a Full Stack Developer for your startup, an AI Engineer to integrate machine learning capabilities,
+            or a Web Developer to build your next big project, Rameshwar Bhagwat has the skills and experience to bring your vision to life.
+          </p>
+
+          <h2>Contact Rameshwar Bhagwat</h2>
+          <p>
+            Looking to hire a Full Stack Developer? Contact Rameshwar Bhagwat at {PERSONAL_INFO.email} or {PERSONAL_INFO.phone}.
+            Rameshwar Bhagwat is available for freelance projects, full-time opportunities, and consulting work.
+          </p>
+
+          <h3>Keywords</h3>
+          <p>{SEO_KEYWORDS.join(', ')}, Rameshwar Bhagwat Portfolio, Rameshwar Bhagwat Developer, Rameshwar Bhagwat Full Stack,
+          Rameshwar Bhagwat AI Engineer, Rameshwar Bhagwat React Developer, Rameshwar Bhagwat Next.js Expert,
+          Hire Rameshwar Bhagwat, Rameshwar Bhagwat Web Developer, Rameshwar Bhagwat Software Engineer,
+          Best Full Stack Developer India, Top React Developer Maharashtra, AI Developer Yeola,
+          Rameshwar Bhagwat TypeScript, Rameshwar Bhagwat Node.js, Rameshwar Bhagwat Python Developer</p>
+        </div>
+
+        {/* ─── WebSite Schema for Search Appearance ─── */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Rameshwar Bhagwat - Full Stack Developer Portfolio",
+              "alternateName": ["Rameshwar Bhagwat", "Rameshwar Bhagwat Developer", "Rameshwar Bhagwat Portfolio"],
+              "url": SITE_URL,
+              "description": "Official portfolio of Rameshwar Bhagwat, a Full Stack Developer and AI Engineer specializing in React, Next.js, TypeScript, and AI-powered web applications.",
+              "author": {
+                "@type": "Person",
+                "name": "Rameshwar Bhagwat",
+                "jobTitle": "Full Stack Developer & AI Engineer",
+                "url": SITE_URL
+              },
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": `${SITE_URL}/?search={search_term_string}`,
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+
+        {/* ─── Professional Service Schema ─── */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "Rameshwar Bhagwat - Full Stack Development Services",
+              "description": "Professional Full Stack Development, AI Engineering, and Web Development services by Rameshwar Bhagwat",
+              "provider": {
+                "@type": "Person",
+                "name": "Rameshwar Bhagwat",
+                "jobTitle": "Full Stack Developer & AI Engineer"
+              },
+              "serviceType": ["Full Stack Development", "AI Engineering", "Web Development", "SaaS Development", "React Development", "Next.js Development"],
+              "areaServed": "Worldwide",
+              "url": SITE_URL
+            })
+          }}
+        />
+
+        <HeroStrips />
         <HeroBackground />
 
-        {/* Main content */}
+        {/* ── Single centering wrapper for BOTH sphere + content ── */}
+        <div className="absolute inset-0 z-[15] flex items-center justify-center">
+          {/* Sphere — behind content, same center point */}
+          <motion.div
+            className="absolute pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={isIntroComplete ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 1.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            aria-hidden="true"
+          >
+            <div className="w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[400px] md:h-[400px] lg:w-[460px] lg:h-[460px] xl:w-[520px] xl:h-[520px]">
+              <NeuralSphere />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Main content — uses SAME absolute inset-0 + flex center */}
         <HeroContent />
       </section>
     </>

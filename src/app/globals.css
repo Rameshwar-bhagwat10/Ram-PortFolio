@@ -251,6 +251,65 @@
   }
 }
 
+/* Compact strip - reduced height */
+.marquee-strip-compact {
+  position: relative;
+  margin: 0 -8rem;
+  padding: 0.5rem 0;
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .marquee-strip-compact {
+    margin: 0 -12rem;
+    padding: 0.6rem 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .marquee-strip-compact {
+    margin: 0 -16rem;
+    padding: 0.7rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee-strip-compact {
+    margin: 0 -20rem;
+    padding: 0.8rem 0;
+  }
+}
+
+/* Compact marquee text */
+.marquee-text-compact {
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.875rem, 2.5vw, 1.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0 0.75rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 640px) {
+  .marquee-text-compact {
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .marquee-text-compact {
+    padding: 0 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee-text-compact {
+    padding: 0 1.5rem;
+  }
+}
+
 /* Fire strip — static gradient, no animation on background */
 .marquee-strip-fire-bg {
   background: linear-gradient(90deg, #f97316, #ef4444, #ec4899, #f97316);
