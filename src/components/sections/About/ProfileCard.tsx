@@ -4,11 +4,12 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, Twitter, MapPin, Sparkles } from 'lucide-react';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';
-import { 
-  SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, 
-  SiPython, SiAmazon, SiTensorflow, SiDocker 
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiNodedotjs,
+  SiPython, SiAmazon, SiTensorflow, SiDocker
 } from 'react-icons/si';
 import { Layers } from 'lucide-react';
+import GlowCard from '@/components/ui/GlowCard';
 
 const expertise = [
   { name: 'React', icon: SiReact, color: '#61DAFB' },
@@ -31,15 +32,20 @@ const socialLinks = [
 
 export default function ProfileCard() {
   return (
-    <motion.div
-      className="relative bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl p-6 sm:p-8 w-full h-full"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    <GlowCard
+      className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl w-full h-full"
+      glowColor="rgba(249, 115, 22, 0.6)"
+      glowSize={280}
     >
-      {/* Top accent line */}
-      <div className="absolute top-0 left-6 right-6 sm:left-8 sm:right-8 h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+      <motion.div
+        className="relative p-6 sm:p-8 h-full"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {/* Top accent line */}
+        <div className="absolute top-0 left-6 right-6 sm:left-8 sm:right-8 h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
 
       {/* Profile Section */}
       <div className="flex flex-col items-center">
@@ -128,6 +134,7 @@ export default function ProfileCard() {
           ))}
         </div>
       </div>
-    </motion.div>
+      </motion.div>
+    </GlowCard>
   );
 }

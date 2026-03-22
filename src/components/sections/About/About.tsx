@@ -9,6 +9,7 @@ import TimelineStrip from './TimelineStrip';
 import MarqueeBanner from './MarqueeBanner';
 import StackedCards from './StackedCards';
 import InfoCards from './InfoCards';
+import GlowCard, { GlowCardGroup } from '@/components/ui/GlowCard';
 import { PERSONAL_INFO } from '@/lib/constants';
 
 export default function About() {
@@ -139,7 +140,7 @@ export default function About() {
           </div>
 
           {/* Main Content Grid */}
-          <div className="max-w-7xl mx-auto">
+          <GlowCardGroup className="max-w-7xl mx-auto">
             {/* Two-column layout: Profile Card | Right Content */}
             <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] xl:grid-cols-[420px_1fr] gap-6 sm:gap-8 lg:gap-10">
               {/* Left Side - Contained Profile Card */}
@@ -153,36 +154,42 @@ export default function About() {
                 <StatsGrid />
 
                 {/* Description Block */}
-                <motion.div
-                  className="relative bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl p-6 sm:p-8"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                <GlowCard
+                  className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl"
+                  glowColor="rgba(255, 100, 200, 0.6)"
+                  glowSize={250}
                 >
-                  {/* Accent bar */}
-                  <div className="absolute top-6 sm:top-8 left-0 w-1 h-12 sm:h-16 bg-gradient-to-b from-orange-500 to-pink-500 rounded-r-full" />
-                  <div className="pl-4 sm:pl-5 space-y-3 sm:space-y-4">
-                    <p 
-                      className="text-base sm:text-lg md:text-xl lg:text-2xl leading-[1.6] sm:leading-[1.7] font-normal text-white/90"
-                      style={{ fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif' }}
-                    >
-                      Rameshwar Bhagwat crafts high-performance web applications with clean architecture and exceptional user experiences.
-                    </p>
-                    <p 
-                      className="text-sm sm:text-base md:text-lg leading-[1.6] sm:leading-[1.7] font-normal text-white/50"
-                      style={{ fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif' }}
-                    >
-                      Specializing in scalable AI-powered applications that blend cutting-edge technology with intuitive design.
-                    </p>
-                  </div>
-                </motion.div>
+                  <motion.div
+                    className="relative p-6 sm:p-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {/* Accent bar */}
+                    <div className="absolute top-6 sm:top-8 left-0 w-1 h-12 sm:h-16 bg-gradient-to-b from-orange-500 to-pink-500 rounded-r-full" />
+                    <div className="pl-4 sm:pl-5 space-y-3 sm:space-y-4">
+                      <p
+                        className="text-base sm:text-lg md:text-xl lg:text-2xl leading-[1.6] sm:leading-[1.7] font-normal text-white/90"
+                        style={{ fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif' }}
+                      >
+                        Rameshwar Bhagwat crafts high-performance web applications with clean architecture and exceptional user experiences.
+                      </p>
+                      <p
+                        className="text-sm sm:text-base md:text-lg leading-[1.6] sm:leading-[1.7] font-normal text-white/50"
+                        style={{ fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif' }}
+                      >
+                        Specializing in scalable AI-powered applications that blend cutting-edge technology with intuitive design.
+                      </p>
+                    </div>
+                  </motion.div>
+                </GlowCard>
 
                 {/* Info Cards - Visitor + Contact */}
                 <InfoCards />
               </div>
             </div>
-          </div>
+          </GlowCardGroup>
       </Container>
 
       {/* Stacked Cards — outside Container so sticky works full-width */}

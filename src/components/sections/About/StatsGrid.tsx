@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { Briefcase, CheckCircle2, Users, TrendingUp } from 'lucide-react';
+import GlowCard from '@/components/ui/GlowCard';
 
 const stats = [
   { value: 6, label: 'Projects Built', suffix: '+', max: 10, icon: CheckCircle2, color: '#FF6B35' },
@@ -141,20 +142,24 @@ export default function StatsGrid() {
   return (
     <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 w-full">
       {stats.map((stat, index) => (
-        <div 
+        <GlowCard
           key={stat.label}
-          className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-5"
+          className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl"
+          glowColor={stat.color}
+          glowSize={180}
         >
-          <CircularProgress
-            value={stat.value}
-            max={stat.max}
-            color={stat.color}
-            icon={stat.icon}
-            label={stat.label}
-            suffix={stat.suffix}
-            index={index}
-          />
-        </div>
+          <div className="p-3 sm:p-4 md:p-5">
+            <CircularProgress
+              value={stat.value}
+              max={stat.max}
+              color={stat.color}
+              icon={stat.icon}
+              label={stat.label}
+              suffix={stat.suffix}
+              index={index}
+            />
+          </div>
+        </GlowCard>
       ))}
     </div>
   );

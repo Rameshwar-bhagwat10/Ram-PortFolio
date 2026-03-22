@@ -157,7 +157,7 @@ export default function StackedCards() {
     if (isInView && !hasAnimated) {
       const timer = setTimeout(() => {
         setHasAnimated(true);
-      }, 1800);
+      }, 1200);
       return () => clearTimeout(timer);
     }
   }, [isInView, hasAnimated]);
@@ -238,17 +238,22 @@ function ServiceCardItem({
 }) {
   const cardWidth = screenSize === 'mobile' ? 260 : screenSize === 'tablet' ? 220 : 260;
   const cardHeight = screenSize === 'mobile' ? 280 : screenSize === 'tablet' ? 250 : 280;
-  const delay = index * 0.12;
+
+  // Staggered delay with smooth curve
+  const delay = 0.15 + index * 0.08;
+
+  // Initial stacked position (cards stacked in center with slight offset)
+  const stackOffset = index * 4;
 
   return (
     <motion.div
       className="absolute cursor-pointer group"
       initial={{
         opacity: 0,
-        y: 150,
+        y: 100 + stackOffset,
         x: 0,
-        rotate: 0,
-        scale: 0.85,
+        rotate: (index - 2) * 3,
+        scale: 0.7,
       }}
       animate={
         isInView
@@ -261,16 +266,18 @@ function ServiceCardItem({
             }
           : {
               opacity: 0,
-              y: 150,
+              y: 100 + stackOffset,
               x: 0,
-              rotate: 0,
-              scale: 0.85,
+              rotate: (index - 2) * 3,
+              scale: 0.7,
             }
       }
       transition={{
-        duration: 0.9,
+        type: 'spring',
+        stiffness: 70,
+        damping: 14,
+        mass: 0.8,
         delay: delay,
-        ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{
         scale: 1.06,
