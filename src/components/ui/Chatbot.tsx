@@ -47,7 +47,7 @@ function formatMessage(content: string): React.ReactNode[] {
             element.scrollIntoView({ behavior: 'smooth' });
           }
         } : undefined}
-        className="text-[#FF8C00] hover:text-[#FF1493] underline underline-offset-2 transition-colors cursor-pointer"
+        className="text-[#0A84FF] hover:text-[#409CFF] underline underline-offset-2 transition-colors cursor-pointer"
         target={isAnchor ? undefined : "_blank"}
         rel={isAnchor ? undefined : "noopener noreferrer"}
       >
@@ -203,144 +203,135 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Floating Chat Button - iOS Style */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md border border-white/[0.15]"
         style={{
-          background: 'linear-gradient(135deg, #FF8C00 0%, #FF1493 100%)',
-          boxShadow: '0 4px 20px rgba(255, 140, 0, 0.4)',
+          background: 'rgba(255, 255, 255, 0.08)',
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
         }}
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.08, borderColor: 'rgba(255, 255, 255, 0.25)' }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: isOpen ? 0 : 1, y: isOpen ? 20 : 0, pointerEvents: isOpen ? 'none' : 'auto' }}
         transition={{ duration: 0.2 }}
         aria-label="Open chat"
       >
-        <MessageCircle size={24} className="text-white" />
-        {/* Pulse animation */}
+        <MessageCircle size={22} className="text-white/80" />
+        {/* Subtle pulse ring */}
         <motion.span
-          className="absolute inset-0 rounded-full"
-          style={{ background: 'linear-gradient(135deg, #FF8C00 0%, #FF1493 100%)' }}
-          animate={{ scale: [1, 1.3], opacity: [0.5, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+          className="absolute inset-0 rounded-full border border-white/20"
+          animate={{ scale: [1, 1.4], opacity: [0.4, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
         />
       </motion.button>
 
-      {/* Chat Window */}
+      {/* Chat Window - iOS Style */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)] rounded-2xl overflow-hidden flex flex-col"
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)] rounded-[24px] overflow-hidden flex flex-col backdrop-blur-xl border border-white/[0.12]"
             style={{
-              background: '#141414',
-              border: '1px solid rgba(255,255,255,0.1)',
-              boxShadow: '0 25px 50px rgba(0,0,0,0.5), 0 0 40px rgba(255,140,0,0.1)',
+              background: 'rgba(22, 22, 24, 0.85)',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
             }}
           >
-            {/* Header */}
-            <div
-              className="flex items-center justify-between p-4 border-b border-white/10"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255,140,0,0.1) 0%, rgba(255,20,147,0.05) 100%)',
-              }}
-            >
+            {/* Header - iOS Style */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.08]">
               <div className="flex items-center gap-3">
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{
-                    background: 'linear-gradient(135deg, #FF8C00 0%, #FF1493 100%)',
-                  }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center bg-white/[0.1] border border-white/[0.1]"
                 >
-                  <Bot size={20} className="text-white" />
+                  <Bot size={20} className="text-white/80" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white text-sm">Rameshwar's Assistant</h3>
+                  <h3 className="font-semibold text-white text-[15px] tracking-[-0.01em]">AI Assistant</h3>
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs text-white/50">Online</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#30D158]" />
+                    <span className="text-[11px] text-white/40">Online</span>
                   </div>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+                className="w-8 h-8 rounded-full flex items-center justify-center bg-white/[0.06] hover:bg-white/[0.1] transition-colors border border-white/[0.06]"
                 aria-label="Close chat"
               >
-                <X size={18} className="text-white/60" />
+                <X size={16} className="text-white/50" />
               </button>
             </div>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {/* Messages - iOS Style */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3" style={{ scrollbarWidth: 'none' }}>
               {messages.map((message) => (
                 <motion.div
                   key={message.id}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex gap-2 ${message.role === 'user' ? 'flex-row-reverse' : ''}`}
+                  transition={{ duration: 0.2 }}
+                  className={`flex gap-2.5 ${message.role === 'user' ? 'flex-row-reverse' : ''}`}
                 >
-                  {/* Avatar */}
+                  {/* Avatar - iOS Style */}
                   <div
-                    className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center ${
+                    className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center ${
                       message.role === 'assistant'
-                        ? 'bg-gradient-to-br from-[#FF8C00] to-[#FF1493]'
-                        : 'bg-white/10'
+                        ? 'bg-white/[0.1] border border-white/[0.08]'
+                        : 'bg-[#0A84FF]'
                     }`}
                   >
                     {message.role === 'assistant' ? (
-                      <Sparkles size={14} className="text-white" />
+                      <Sparkles size={13} className="text-white/70" />
                     ) : (
-                      <User size={14} className="text-white/70" />
+                      <User size={13} className="text-white" />
                     )}
                   </div>
 
-                  {/* Message bubble */}
+                  {/* Message bubble - iOS iMessage Style */}
                   <div
-                    className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
+                    className={`max-w-[75%] rounded-[18px] px-4 py-2.5 ${
                       message.role === 'user'
-                        ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF1493] text-white rounded-br-md'
-                        : 'bg-white/5 text-white/90 rounded-bl-md border border-white/5'
+                        ? 'bg-[#0A84FF] text-white rounded-br-[6px]'
+                        : 'bg-white/[0.08] text-white/90 rounded-bl-[6px] border border-white/[0.06]'
                     }`}
                   >
-                    <div className="text-sm whitespace-pre-wrap leading-relaxed">
+                    <div className="text-[14px] whitespace-pre-wrap leading-[1.4] tracking-[-0.01em]">
                       {message.role === 'assistant' ? formatMessage(message.content) : message.content}
                     </div>
                   </div>
                 </motion.div>
               ))}
 
-              {/* Loading indicator */}
+              {/* Loading indicator - iOS Style */}
               {isLoading && (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex gap-2"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex gap-2.5"
                 >
-                  <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-[#FF8C00] to-[#FF1493]">
-                    <Sparkles size={14} className="text-white" />
+                  <div className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center bg-white/[0.1] border border-white/[0.08]">
+                    <Sparkles size={13} className="text-white/70" />
                   </div>
-                  <div className="bg-white/5 rounded-2xl rounded-bl-md px-4 py-3 border border-white/5">
-                    <div className="flex gap-1">
+                  <div className="bg-white/[0.08] rounded-[18px] rounded-bl-[6px] px-4 py-3 border border-white/[0.06]">
+                    <div className="flex gap-1.5">
                       <motion.span
-                        className="w-2 h-2 rounded-full bg-white/40"
-                        animate={{ opacity: [0.4, 1, 0.4] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+                        className="w-2 h-2 rounded-full bg-white/30"
+                        animate={{ opacity: [0.3, 0.8, 0.3] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
                       />
                       <motion.span
-                        className="w-2 h-2 rounded-full bg-white/40"
-                        animate={{ opacity: [0.4, 1, 0.4] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+                        className="w-2 h-2 rounded-full bg-white/30"
+                        animate={{ opacity: [0.3, 0.8, 0.3] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 }}
                       />
                       <motion.span
-                        className="w-2 h-2 rounded-full bg-white/40"
-                        animate={{ opacity: [0.4, 1, 0.4] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
+                        className="w-2 h-2 rounded-full bg-white/30"
+                        animate={{ opacity: [0.3, 0.8, 0.3] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
                       />
                     </div>
                   </div>
@@ -350,15 +341,15 @@ export default function Chatbot() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Quick Suggestions */}
+            {/* Quick Suggestions - iOS Style Pills */}
             {suggestions.length > 0 && !isLoading && (
-              <div className="px-4 pb-2">
+              <div className="px-4 pb-3">
                 <div className="flex flex-wrap gap-2">
                   {suggestions.map((suggestion, index) => (
                     <button
                       key={index}
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="px-3 py-1.5 text-xs rounded-full border border-white/10 text-white/60 hover:text-white hover:border-[#FF8C00]/50 hover:bg-[#FF8C00]/10 transition-all duration-200"
+                      className="px-3.5 py-2 text-[12px] rounded-full bg-white/[0.06] border border-white/[0.08] text-white/60 hover:text-white/90 hover:bg-white/[0.1] hover:border-white/[0.15] transition-all duration-150"
                     >
                       {suggestion}
                     </button>
@@ -367,27 +358,28 @@ export default function Chatbot() {
               </div>
             )}
 
-            {/* Input */}
-            <form onSubmit={handleSubmit} className="p-4 border-t border-white/10">
-              <div className="flex gap-2">
+            {/* Input - iOS Style */}
+            <form onSubmit={handleSubmit} className="p-4 pt-2 border-t border-white/[0.06]">
+              <div className="flex gap-2.5 items-center">
                 <input
                   ref={inputRef}
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask me anything about Rameshwar..."
-                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#FF8C00]/50 transition-colors"
+                  placeholder="Message..."
+                  className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-full px-5 py-3 text-[14px] text-white placeholder-white/30 focus:outline-none focus:bg-white/[0.08] focus:border-white/[0.15] transition-all"
                   disabled={isLoading}
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    background: input.trim() ? 'linear-gradient(135deg, #FF8C00 0%, #FF1493 100%)' : 'rgba(255,255,255,0.05)',
-                  }}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-150 ${
+                    input.trim()
+                      ? 'bg-[#0A84FF] hover:bg-[#0A84FF]/90'
+                      : 'bg-white/[0.06] border border-white/[0.06]'
+                  }`}
                 >
-                  <Send size={18} className={input.trim() ? 'text-white' : 'text-white/30'} />
+                  <Send size={16} className={input.trim() ? 'text-white' : 'text-white/25'} />
                 </button>
               </div>
             </form>

@@ -1,14 +1,22 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from './work.data';
 import ProjectCard from './ProjectCard';
 
+const INITIAL_PROJECTS_COUNT = 3;
+
 export default function Work() {
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
+  const remainingCount = projects.length - INITIAL_PROJECTS_COUNT;
+
   return (
     <section
       id="work"
-      className="relative bg-[#0F0E0E] py-16 sm:py-20 md:py-28 lg:py-32"
+      className="relative py-16 sm:py-20 md:py-28 lg:py-32"
       aria-label="Featured Projects Portfolio"
       itemScope
       itemType="https://schema.org/CreativeWork"
@@ -73,16 +81,7 @@ export default function Work() {
             style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif' }}
           >
             <span className="text-white">Featured </span>
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #FF8C00 0%, #FF1493 50%, #FF8C00 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Projects
-            </span>
+            <span className="text-rainbow-gradient">Projects</span>
           </motion.h2>
 
           {/* Animated line */}
@@ -182,10 +181,115 @@ export default function Work() {
 
       {/* Project Cards */}
       <div className="container mx-auto px-4 sm:px-6 space-y-16 sm:space-y-20 md:space-y-28 lg:space-y-36">
-        {projects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} index={index} />
-        ))}
+        <AnimatePresence mode="wait">
+          {visibleProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </AnimatePresence>
       </div>
+
+      {/* See More Button */}
+      {remainingCount > 0 && !showAll && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="container mx-auto px-4 sm:px-6 mt-16 sm:mt-20 md:mt-28"
+        >
+          <div className="flex flex-col items-center justify-center">
+            {/* Decorative line */}
+            <div
+              className="w-px h-16 sm:h-20 mb-8"
+              style={{
+                background: 'linear-gradient(to bottom, transparent, rgba(255,140,0,0.3), transparent)',
+              }}
+            />
+
+            <button
+              onClick={() => setShowAll(true)}
+              className="group relative flex flex-col items-center gap-4 cursor-pointer"
+            >
+              {/* Button text */}
+              <span
+                className="text-sm sm:text-base font-semibold tracking-[0.15em] uppercase transition-all duration-300 group-hover:tracking-[0.2em]"
+                style={{
+                  background: 'linear-gradient(90deg, #FF8C00, #FF1493)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Explore {remainingCount} More Project{remainingCount > 1 ? 's' : ''}
+              </span>
+
+              {/* Animated arrow */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="flex flex-col items-center"
+              >
+                <svg
+                  className="w-5 h-5 sm:w-6 sm:h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="url(#arrowGradient)"
+                  strokeWidth={2}
+                >
+                  <defs>
+                    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#FF8C00" />
+                      <stop offset="100%" stopColor="#FF1493" />
+                    </linearGradient>
+                  </defs>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </motion.div>
+
+              {/* Hover glow effect */}
+              <div
+                className="absolute -inset-6 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 70%)',
+                }}
+              />
+            </button>
+
+            {/* Subtitle */}
+            <p className="text-white/30 text-xs sm:text-sm mt-4 text-center">
+              Click to reveal more innovative projects
+            </p>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Show Less Button (when expanded) */}
+      {showAll && projects.length > INITIAL_PROJECTS_COUNT && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="container mx-auto px-4 sm:px-6 mt-16 sm:mt-20 flex justify-center"
+        >
+          <button
+            onClick={() => setShowAll(false)}
+            className="group flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+          >
+            <svg
+              className="w-4 h-4 rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+            <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
+              Show Less
+            </span>
+          </button>
+        </motion.div>
+      )}
     </section>
   );
 }

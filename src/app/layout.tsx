@@ -8,6 +8,7 @@ import Footer from "@/components/layout/Footer/Footer";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { IntroAnimationProvider } from "@/context/IntroAnimationContext";
 import Chatbot from "@/components/ui/Chatbot";
+import CommandPalette from "@/components/ui/CommandPalette";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -269,6 +270,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <Chatbot />
+          <CommandPalette />
         </IntroAnimationProvider>
       </body>
     </html>

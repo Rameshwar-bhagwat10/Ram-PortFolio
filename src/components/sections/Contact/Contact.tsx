@@ -272,28 +272,34 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      {/* Contact Form Modal */}
+      {/* Contact Form Modal - iOS Style */}
       <AnimatePresence>
         {isFormOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop - iOS Style */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setIsFormOpen(false)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+              className="fixed inset-0 z-50"
+              style={{
+                background: 'rgba(0, 0, 0, 0.5)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+              }}
               aria-label="Close contact form"
             />
 
-            {/* Form Container */}
+            {/* Form Container - iOS Style */}
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="contact-form-title">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full max-w-lg pointer-events-auto relative"
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+                className="w-full max-w-4xl pointer-events-auto relative"
               >
                 <ContactCard onClose={() => setIsFormOpen(false)} />
               </motion.div>

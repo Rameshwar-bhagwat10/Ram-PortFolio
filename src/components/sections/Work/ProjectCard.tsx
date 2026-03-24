@@ -119,11 +119,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
   };
 
   return (
-    <article 
+    <article
       ref={ref}
       className="w-full max-w-7xl mx-auto"
       itemScope
       itemType="https://schema.org/SoftwareApplication"
+      data-project-id={project.id}
     >
       {/* JSON-LD Schema for Project */}
       <script
