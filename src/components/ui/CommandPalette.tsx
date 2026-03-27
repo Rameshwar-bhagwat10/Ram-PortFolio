@@ -447,7 +447,7 @@ export default function CommandPalette() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.15, ease: 'easeOut' }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
               onClick={() => setIsOpen(false)}
               className="fixed inset-0 z-[100]"
               style={{
@@ -460,19 +460,22 @@ export default function CommandPalette() {
             {/* Command Palette - Glassmorphism Style */}
             <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none">
               <motion.div
-                initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                initial={{ opacity: 0, scale: 0.5, y: 40 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.96, y: 8 }}
+                exit={{ opacity: 0, scale: 0.5, y: 40 }}
                 transition={{
-                  duration: 0.18,
-                  ease: [0.23, 1, 0.32, 1]
+                  type: 'spring',
+                  damping: 20,
+                  stiffness: 300,
+                  mass: 1,
+                  duration: 0.4
                 }}
                 className="w-full max-w-[540px] pointer-events-auto"
               >
                 <div
-                  className="relative overflow-hidden rounded-[20px] backdrop-blur-xl border border-white/[0.15]"
+                  className="relative overflow-hidden rounded-[20px] backdrop-blur-md border border-white/[0.15]"
                   style={{
-                    background: 'rgba(20, 20, 22, 0.75)',
+                    background: 'rgba(20, 20, 22, 0.6)',
                     boxShadow: '0 20px 50px -10px rgba(0, 0, 0, 0.5), 0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
                   }}
                 >
@@ -502,6 +505,12 @@ export default function CommandPalette() {
                   className="max-h-[360px] overflow-y-auto py-2"
                   style={{
                     scrollbarWidth: 'none',
+                    WebkitOverflowScrolling: 'touch',
+                    scrollBehavior: 'smooth',
+                    willChange: 'scroll-position',
+                    overscrollBehavior: 'contain',
+                    scrollPaddingTop: '4px',
+                    scrollPaddingBottom: '4px',
                   }}
                 >
                   {flattenedCommands.length === 0 ? (
@@ -518,7 +527,13 @@ export default function CommandPalette() {
                         if (items.length === 0) return null;
 
                         return (
-                          <div key={type} className="mb-2">
+                          <motion.div
+                            key={type}
+                            className="mb-2"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, ease: 'easeOut' }}
+                          >
                             {/* Group Label */}
                             <div className="px-5 py-2">
                               <span className="text-[12px] font-semibold uppercase tracking-wide text-white/35">
@@ -532,16 +547,27 @@ export default function CommandPalette() {
                               const isSelected = flatIndex === selectedIndex;
 
                               return (
-                                <button
+                                <motion.button
                                   key={cmd.id}
                                   data-index={flatIndex}
                                   onClick={cmd.action}
                                   onMouseEnter={() => setSelectedIndex(flatIndex)}
-                                  className={`w-[calc(100%-16px)] mx-2 px-3.5 py-3 flex items-center gap-3.5 transition-all duration-100 rounded-[14px] ${
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{
+                                    duration: 0.3,
+                                    delay: flatIndex * 0.02,
+                                    ease: 'easeOut'
+                                  }}
+                                  className={`w-[calc(100%-16px)] mx-2 px-3.5 py-3 flex items-center gap-3.5 rounded-[14px] will-change-[background-color] transition-all duration-75 ${
                                     isSelected
                                       ? 'bg-white/[0.1]'
                                       : 'hover:bg-white/[0.05]'
                                   }`}
+                                  style={{
+                                    willChange: isSelected ? 'background-color, box-shadow' : 'auto',
+                                    contain: 'layout style paint',
+                                  }}
                                 >
                                   {/* Icon */}
                                   <div
@@ -580,10 +606,10 @@ export default function CommandPalette() {
                                       )}
                                     </div>
                                   )}
-                                </button>
+                                </motion.button>
                               );
                             })}
-                          </div>
+                          </motion.div>
                         );
                       })}
                     </>

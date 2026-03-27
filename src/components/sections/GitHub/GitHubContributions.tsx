@@ -160,52 +160,97 @@ export default function GitHubContributions() {
           </p>
         </motion.div>
 
-        {/* Stats Cards - iOS Style */}
+        {/* Stats Cards - Clean iOS Glassmorphism */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-3 gap-3 mb-6"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"
         >
           {/* Total Contributions */}
-          <div className="p-4 rounded-2xl backdrop-blur-xl border border-white/[0.08] bg-white/[0.02]">
-            <div className="flex items-center gap-2.5 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-[#30D158]/10 border border-[#30D158]/20 flex items-center justify-center">
-                <GitCommit size={14} className="text-[#30D158]" />
+          <motion.div
+            whileHover={{ y: -4 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            className="relative p-5 rounded-[16px] backdrop-blur-xl border border-white/[0.08] overflow-hidden"
+            style={{
+              background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%)',
+            }}
+          >
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-9 h-9 rounded-[10px] bg-[#30D158]/10 border border-[#30D158]/20 flex items-center justify-center">
+                  <GitCommit size={16} className="text-[#30D158]" />
+                </div>
+                <span className="text-[10px] uppercase tracking-widest font-medium text-white/40">This Year</span>
               </div>
-              <span className="text-[10px] uppercase tracking-wider text-white/40">This Year</span>
+              <p className="text-2xl sm:text-xl md:text-2xl font-bold text-white mb-0.5 tracking-tight">
+                {stats.totalContributions.toLocaleString()}
+              </p>
+              <p className="text-[11px] text-white/35 font-medium">contributions</p>
             </div>
-            <p className="text-2xl font-bold text-white">{stats.totalContributions.toLocaleString()}</p>
-            <p className="text-[11px] text-white/40 mt-0.5">contributions</p>
-          </div>
+
+            {/* Subtle top highlight */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          </motion.div>
 
           {/* Current Streak */}
-          <div className="p-4 rounded-2xl backdrop-blur-xl border border-white/[0.08] bg-white/[0.02]">
-            <div className="flex items-center gap-2.5 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-[#FF9F0A]/10 border border-[#FF9F0A]/20 flex items-center justify-center">
-                <Flame size={14} className="text-[#FF9F0A]" />
+          <motion.div
+            whileHover={{ y: -4 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            className="relative p-5 rounded-[16px] backdrop-blur-xl border border-white/[0.08] overflow-hidden"
+            style={{
+              background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%)',
+            }}
+          >
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-9 h-9 rounded-[10px] bg-[#FF9F0A]/10 border border-[#FF9F0A]/20 flex items-center justify-center">
+                  <Flame size={16} className="text-[#FF9F0A]" />
+                </div>
+                <span className="text-[10px] uppercase tracking-widest font-medium text-white/40">Current</span>
               </div>
-              <span className="text-[10px] uppercase tracking-wider text-white/40">Current</span>
+              <p className="text-2xl sm:text-xl md:text-2xl font-bold text-white mb-0.5 tracking-tight">
+                {stats.currentStreak}
+              </p>
+              <p className="text-[11px] text-white/35 font-medium">day streak</p>
             </div>
-            <p className="text-2xl font-bold text-white">{stats.currentStreak}</p>
-            <p className="text-[11px] text-white/40 mt-0.5">day streak</p>
-          </div>
+
+            {/* Subtle top highlight */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          </motion.div>
 
           {/* Longest Streak */}
-          <div className="p-4 rounded-2xl backdrop-blur-xl border border-white/[0.08] bg-white/[0.02]">
-            <div className="flex items-center gap-2.5 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-[#BF5AF2]/10 border border-[#BF5AF2]/20 flex items-center justify-center">
-                <Calendar size={14} className="text-[#BF5AF2]" />
+          <motion.div
+            whileHover={{ y: -4 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            className="relative p-5 rounded-[16px] backdrop-blur-xl border border-white/[0.08] overflow-hidden"
+            style={{
+              background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%)',
+            }}
+          >
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-9 h-9 rounded-[10px] bg-[#BF5AF2]/10 border border-[#BF5AF2]/20 flex items-center justify-center">
+                  <Calendar size={16} className="text-[#BF5AF2]" />
+                </div>
+                <span className="text-[10px] uppercase tracking-widest font-medium text-white/40">Longest</span>
               </div>
-              <span className="text-[10px] uppercase tracking-wider text-white/40">Longest</span>
+              <p className="text-2xl sm:text-xl md:text-2xl font-bold text-white mb-0.5 tracking-tight">
+                {stats.longestStreak}
+              </p>
+              <p className="text-[11px] text-white/35 font-medium">day streak</p>
             </div>
-            <p className="text-2xl font-bold text-white">{stats.longestStreak}</p>
-            <p className="text-[11px] text-white/40 mt-0.5">day streak</p>
-          </div>
+
+            {/* Subtle top highlight */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          </motion.div>
         </motion.div>
 
-        {/* Contribution Heatmap Card - iOS Glassmorphism */}
+        {/* Contribution Heatmap Card - Clean iOS Glassmorphism */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -213,37 +258,42 @@ export default function GitHubContributions() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="relative rounded-[20px] backdrop-blur-xl border border-white/[0.08] overflow-hidden"
           style={{
-            background: 'rgba(22, 22, 24, 0.85)',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
           }}
         >
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#30D158]/[0.02] via-transparent to-[#0A84FF]/[0.02] pointer-events-none" />
+          {/* Subtle top highlight */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
           <div className="relative z-10 p-6">
             {/* Heatmap Header */}
-            <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="flex items-center justify-between mb-6 flex-wrap gap-4 pb-5 border-b border-white/[0.06]"
+            >
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-white/[0.06] border border-white/[0.1] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-[12px] bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
                   <Github size={18} className="text-white/70" />
                 </div>
                 <div>
                   <h3 className="text-[15px] font-semibold text-white">{PERSONAL_INFO.name}</h3>
-                  <p className="text-[11px] text-white/40">@{GITHUB_USERNAME}</p>
+                  <p className="text-[11px] text-white/40 font-medium">@{GITHUB_USERNAME}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2.5">
-                <span className="text-[10px] text-white/40 font-medium">Less</span>
+              <div className="flex items-center gap-3 px-3.5 py-2 rounded-[10px] bg-white/[0.03] border border-white/[0.06]">
+                <span className="text-[10px] text-white/50 font-medium uppercase tracking-wider">Less</span>
                 <div className="flex gap-1">
-                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.08)' }} />
-                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(48, 209, 88, 0.2)' }} />
-                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(48, 209, 88, 0.4)' }} />
-                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(48, 209, 88, 0.6)' }} />
-                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(48, 209, 88, 0.85)' }} />
+                  <div className="w-3 h-3 rounded-[3px] border border-white/[0.08]" style={{ backgroundColor: 'rgba(255, 255, 255, 0.04)' }} />
+                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(48, 209, 88, 0.25)' }} />
+                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(48, 209, 88, 0.45)' }} />
+                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(48, 209, 88, 0.65)' }} />
+                  <div className="w-3 h-3 rounded-[3px]" style={{ backgroundColor: 'rgba(48, 209, 88, 0.9)' }} />
                 </div>
-                <span className="text-[10px] text-white/40 font-medium">More</span>
+                <span className="text-[10px] text-white/50 font-medium uppercase tracking-wider">More</span>
               </div>
-            </div>
+            </motion.div>
 
             {/* Heatmap Grid */}
             <div className="overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
@@ -284,32 +334,44 @@ export default function GitHubContributions() {
                         {week.contributionDays.map((day, dayIndex) => (
                           <motion.div
                             key={day.date}
-                            initial={{ opacity: 0, scale: 0 }}
+                            initial={{ opacity: 0, scale: 0.3 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{
-                              duration: 0.3,
-                              delay: weekIndex * 0.006 + dayIndex * 0.002,
-                              ease: [0.16, 1, 0.3, 1],
+                              duration: 0.4,
+                              delay: weekIndex * 0.006 + dayIndex * 0.003,
+                              ease: [0.22, 1, 0.36, 1],
                             }}
                             whileHover={{
                               scale: 1.6,
-                              zIndex: 10,
-                              transition: { duration: 0.15, ease: [0.16, 1, 0.3, 1] }
+                              zIndex: 50,
+                              transition: { type: 'spring', stiffness: 400, damping: 20 }
                             }}
-                            className="w-[11px] h-[11px] rounded-[3px] cursor-pointer relative group"
-                            style={{ backgroundColor: day.color }}
+                            className="w-[12px] h-[12px] rounded-[3px] cursor-pointer relative group border border-white/[0.04]"
+                            style={{
+                              backgroundColor: day.color,
+                            }}
                             title={`${day.contributionCount} contributions on ${day.date}`}
                           >
-                            {/* Tooltip - iOS Style */}
-                            <div
-                              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 rounded-xl text-[11px] text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 backdrop-blur-xl border border-white/[0.1]"
-                              style={{ background: 'rgba(30, 30, 32, 0.95)' }}
+                            {/* iOS-style Tooltip */}
+                            <motion.div
+                              initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                              whileHover={{ opacity: 1, y: 0, scale: 1 }}
+                              transition={{ duration: 0.15, ease: 'easeOut' }}
+                              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-3 py-2 rounded-[10px] text-[10px] text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 backdrop-blur-xl border border-white/[0.1]"
+                              style={{
+                                background: 'linear-gradient(180deg, rgba(40, 40, 44, 0.95) 0%, rgba(28, 28, 32, 0.95) 100%)',
+                              }}
                             >
-                              <div className="font-semibold">{day.contributionCount} contributions</div>
-                              <div className="text-white/50 text-[10px]">{new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
-                              <div className="text-[#30D158] text-[9px] mt-0.5">{getContributionLevel(day.contributionCount)}</div>
-                            </div>
+                              <div className="font-semibold text-white mb-0.5">{day.contributionCount} contributions</div>
+                              <div className="text-white/50 text-[9px]">{new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+
+                              {/* Tooltip arrow */}
+                              <div
+                                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 border-r border-b border-white/[0.1]"
+                                style={{ background: 'rgba(28, 28, 32, 0.95)' }}
+                              />
+                            </motion.div>
                           </motion.div>
                         ))}
                       </div>
@@ -319,21 +381,38 @@ export default function GitHubContributions() {
               </div>
             </div>
 
-            {/* Footer with GitHub Profile Button - iOS Style */}
-            <div className="mt-5 pt-5 border-t border-white/[0.06] flex justify-center">
-              <a
+            {/* Footer with GitHub Profile Button - Clean iOS Style */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-6 pt-6 border-t border-white/[0.06] flex justify-center"
+            >
+              <motion.a
                 href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/[0.12] transition-all duration-200"
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="group relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-[12px] backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.12] transition-all duration-200"
+                style={{
+                  background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%)',
+                }}
               >
-                <Github size={16} className="text-white/60 group-hover:text-white/80 transition-colors" />
-                <span className="text-[13px] font-medium text-white/60 group-hover:text-white/80 transition-colors">
-                  View Profile
+                {/* Subtle top highlight */}
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent rounded-t-[12px]" />
+
+                <Github size={16} className="text-white/60 group-hover:text-[#30D158] transition-colors duration-200" />
+
+                <span className="text-[13px] font-semibold text-white/70 group-hover:text-white/90 transition-colors duration-200">
+                  View GitHub Profile
                 </span>
-                <ArrowUpRight size={14} className="text-white/40 group-hover:text-white/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-              </a>
-            </div>
+
+                <ArrowUpRight size={14} className="text-white/40 group-hover:text-[#30D158] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+              </motion.a>
+            </motion.div>
           </div>
         </motion.div>
       </div>

@@ -31,8 +31,8 @@ export default function Skills() {
       <div className="sr-only">
         <h2>Technical Skills and Expertise</h2>
         <p>
-          Rameshwar Bhagwat is proficient in a wide range of modern web development technologies, 
-          frameworks, and tools. With expertise spanning frontend, backend, databases, cloud services, 
+          Rameshwar Bhagwat is proficient in a wide range of modern web development technologies,
+          frameworks, and tools. With expertise spanning frontend, backend, databases, cloud services,
           and DevOps, he delivers comprehensive full-stack solutions.
         </p>
 

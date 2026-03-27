@@ -1,84 +1,81 @@
 'use client';
 
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const socialLinks = [
-  { name: 'GitHub', url: 'https://github.com/Rameshwar-bhagwat10', icon: Github },
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/Rameshwarbhagwat', icon: Linkedin },
-  { name: 'Twitter', url: 'https://twitter.com/Rameshwarbhagwat', icon: Twitter },
+  { name: 'GitHub', url: 'https://github.com/Rameshwar-bhagwat10', icon: Github, color: '#FFFFFF' },
+  { name: 'LinkedIn', url: 'https://linkedin.com/in/Rameshwarbhagwat', icon: Linkedin, color: '#0A66C2' },
+  { name: 'Twitter', url: 'https://twitter.com/Rameshwarbhagwat', icon: Twitter, color: '#1DA1F2' },
+  { name: 'Email', url: 'mailto:rameshwarbhagwat@gmail.com', icon: Mail, color: '#30D158' },
 ];
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="relative bg-[#0a0a0a] border-t border-white/[0.04]">
-      <div className="container mx-auto px-6 py-8 sm:py-10">
-        <div className="flex flex-col items-center gap-6">
-          {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <h3
-              className="text-lg sm:text-xl font-bold text-white mb-1"
+    <footer className="relative bg-[#080808] border-t border-white/[0.06]">
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-t from-white/[0.01] to-transparent pointer-events-none" />
+
+      {/* Content - Centered with side padding for fixed icons */}
+      <div className="relative z-10 flex items-center justify-center py-3 px-24 sm:px-28 md:px-32">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="flex flex-col items-center gap-2.5"
+        >
+          {/* Brand + Social Links Row */}
+          <div className="flex items-center gap-3">
+            {/* Name */}
+            <span
+              className="text-xs sm:text-sm font-semibold text-white/90 tracking-tight"
               style={{ fontFamily: 'var(--font-jakarta)' }}
             >
               Rameshwar Bhagwat
-            </h3>
-            <p
-              className="text-xs sm:text-sm text-white/40"
-              style={{
-                background: 'linear-gradient(90deg, #FF8C00, #FF1493)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Full Stack & AI Developer
-            </p>
-          </motion.div>
+            </span>
 
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center gap-3"
-          >
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={social.name}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.name}
-                whileHover={{ y: -3, scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-9 h-9 rounded-full bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-white/40 hover:text-white hover:border-white/20 hover:bg-white/[0.06] transition-all duration-300"
-              >
-                <social.icon size={16} />
-              </motion.a>
-            ))}
-          </motion.div>
+            {/* Separator */}
+            <div className="w-px h-3 bg-white/10" />
 
-          {/* Divider */}
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            {/* Social Links */}
+            <div className="flex items-center gap-1.5">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <motion.a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    whileHover={{ y: -2, scale: 1.15 }}
+                    whileTap={{ scale: 0.92 }}
+                    transition={{ duration: 0.15 }}
+                    className="group w-6 h-6 rounded-[6px] flex items-center justify-center transition-all duration-200"
+                    style={{
+                      background: `${social.color}10`,
+                      border: `1px solid ${social.color}25`,
+                    }}
+                  >
+                    <Icon
+                      size={11}
+                      className="transition-colors duration-200"
+                      style={{ color: social.color, opacity: 0.8 }}
+                    />
+                  </motion.a>
+                );
+              })}
+            </div>
+          </div>
 
           {/* Copyright */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[11px] sm:text-xs text-white/25"
-          >
-            &copy; {new Date().getFullYear()} Rameshwar Bhagwat. All rights reserved.
-          </motion.p>
-        </div>
+          <p className="text-[8px] sm:text-[9px] text-white/30 font-medium tracking-wider uppercase">
+            &copy; {currentYear} • Built with passion
+          </p>
+        </motion.div>
       </div>
     </footer>
   );

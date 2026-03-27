@@ -1,8 +1,8 @@
 import { IconType } from 'react-icons';
-import { 
-  SiReact, 
-  SiNextdotjs, 
-  SiTypescript, 
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
   SiTailwindcss,
   SiNodedotjs,
   SiExpress,
