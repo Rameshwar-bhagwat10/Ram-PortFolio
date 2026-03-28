@@ -25,6 +25,8 @@ const bottomRowItems = [
   'Problem Solver',
 ];
 
+const PORTFOLIO_BACKGROUND = '#0F0E0E';
+
 /* Enhanced marquee row with smooth animations */
 function MarqueeRow({
   items,
@@ -87,7 +89,7 @@ export default function MarqueeBanner() {
       ref={containerRef}
       className="relative h-screen flex items-center justify-center overflow-hidden select-none"
       style={{
-        background: 'linear-gradient(180deg, #080808 0%, #0a0a0a 50%, #080808 100%)',
+        backgroundColor: PORTFOLIO_BACKGROUND,
         contain: 'layout style',
         isolation: 'isolate',
       }}
@@ -102,7 +104,7 @@ export default function MarqueeBanner() {
           transition={{ duration: 1.5, ease: 'easeOut' }}
           style={{
             background:
-              'radial-gradient(ellipse 100% 60% at 50% 50%, rgba(10, 132, 255, 0.08) 0%, rgba(255, 45, 85, 0.04) 35%, transparent 70%)',
+              'radial-gradient(ellipse 100% 60% at 50% 50%, rgba(255, 140, 0, 0.08) 0%, rgba(255, 95, 0, 0.04) 35%, transparent 70%)',
           }}
         />
         {/* Secondary glow - warm */}
@@ -113,7 +115,7 @@ export default function MarqueeBanner() {
           transition={{ duration: 2, delay: 0.3, ease: 'easeOut' }}
           style={{
             background:
-              'radial-gradient(ellipse 80% 50% at 30% 50%, rgba(255, 149, 0, 0.06) 0%, transparent 50%)',
+              'radial-gradient(ellipse 80% 50% at 30% 50%, rgba(255, 95, 0, 0.06) 0%, transparent 50%)',
           }}
         />
         {/* Accent glow - purple */}
@@ -124,7 +126,7 @@ export default function MarqueeBanner() {
           transition={{ duration: 2, delay: 0.5, ease: 'easeOut' }}
           style={{
             background:
-              'radial-gradient(ellipse 70% 50% at 70% 50%, rgba(175, 82, 222, 0.05) 0%, transparent 50%)',
+              'radial-gradient(ellipse 70% 50% at 70% 50%, rgba(255, 20, 147, 0.05) 0%, transparent 50%)',
           }}
         />
       </div>
@@ -141,14 +143,14 @@ export default function MarqueeBanner() {
       <div
         className="absolute top-0 left-0 right-0 h-48 sm:h-60 pointer-events-none z-10"
         style={{
-          background: 'linear-gradient(to bottom, #080808 0%, #080808 20%, rgba(8,8,8,0.8) 60%, transparent 100%)'
+          background: `linear-gradient(to bottom, ${PORTFOLIO_BACKGROUND} 0%, ${PORTFOLIO_BACKGROUND} 20%, rgba(15,14,14,0.85) 60%, transparent 100%)`
         }}
       />
       {/* Bottom fade - enhanced gradient */}
       <div
         className="absolute bottom-0 left-0 right-0 h-48 sm:h-60 pointer-events-none z-10"
         style={{
-          background: 'linear-gradient(to top, #080808 0%, #080808 20%, rgba(8,8,8,0.8) 60%, transparent 100%)'
+          background: `linear-gradient(to top, ${PORTFOLIO_BACKGROUND} 0%, ${PORTFOLIO_BACKGROUND} 20%, rgba(15,14,14,0.85) 60%, transparent 100%)`
         }}
       />
 
@@ -223,7 +225,7 @@ export default function MarqueeBanner() {
         <div
           className="w-full h-full rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(10, 132, 255, 0.4), transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255, 140, 0, 0.32), transparent 70%)',
             filter: 'blur(20px)',
           }}
         />
@@ -239,7 +241,7 @@ export default function MarqueeBanner() {
         <div
           className="w-full h-full rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(175, 82, 222, 0.35), transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255, 20, 147, 0.3), transparent 70%)',
             filter: 'blur(25px)',
           }}
         />
@@ -293,7 +295,7 @@ export default function MarqueeBanner() {
           <motion.div
             className="w-1 h-2.5 rounded-full"
             style={{
-              background: 'linear-gradient(to bottom, rgba(10, 132, 255, 0.8), rgba(175, 82, 222, 0.4), transparent)',
+              background: 'linear-gradient(to bottom, rgba(255, 140, 0, 0.8), rgba(255, 20, 147, 0.4), transparent)',
             }}
             animate={{ y: [0, 8, 0], opacity: [1, 0.4, 1] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}

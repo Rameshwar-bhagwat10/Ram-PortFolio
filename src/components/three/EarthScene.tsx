@@ -7,17 +7,16 @@ import * as THREE from 'three';
 // ─── Configuration ───────────────────────────────────────────────────────────
 
 const SPHERE_RADIUS = 2.4;
-const GEODESIC_DETAIL = 3; // Higher subdivision for smoother geometry
-const RING_COUNT = 10; // More latitude rings
-const RING_SEGMENTS = 64; // Smoother rings
+const GEODESIC_DETAIL = 3;
+const RING_COUNT = 10;
+const RING_SEGMENTS = 64;
 
-// ─── Generate Geodesic Vertices and Edges ────────────────────────────────────
+// ─── Generate Geodesic Structure ─────────────────────────────────────────────
 
 function generateGeodesicStructure(radius: number, detail: number) {
   const geometry = new THREE.IcosahedronGeometry(radius, detail);
   const positions = geometry.attributes.position;
 
-  // Extract unique vertices
   const vertices: THREE.Vector3[] = [];
   const vertexMap = new Map<string, number>();
 
@@ -33,7 +32,6 @@ function generateGeodesicStructure(radius: number, detail: number) {
     }
   }
 
-  // Extract edges from triangles
   const edges: [number, number][] = [];
   const edgeSet = new Set<string>();
 
@@ -48,7 +46,6 @@ function generateGeodesicStructure(radius: number, detail: number) {
       indices.push(vertexMap.get(key)!);
     }
 
-    // Add edges for this triangle
     const triEdges: [number, number][] = [
       [indices[0], indices[1]],
       [indices[1], indices[2]],
@@ -65,7 +62,6 @@ function generateGeodesicStructure(radius: number, detail: number) {
   }
 
   geometry.dispose();
-
   return { vertices, edges };
 }
 
@@ -75,7 +71,7 @@ function generateLatitudeRings(radius: number, ringCount: number, segments: numb
   const ringPositions: Float32Array[] = [];
 
   for (let ring = 1; ring < ringCount; ring++) {
-    const phi = (ring / ringCount) * Math.PI; // From top to bottom
+    const phi = (ring / ringCount) * Math.PI;
     const y = radius * Math.cos(phi);
     const ringRadius = radius * Math.sin(phi);
 
@@ -94,9 +90,8 @@ function generateLatitudeRings(radius: number, ringCount: number, segments: numb
   return ringPositions;
 }
 
-// ─── Custom Shaders ─────────────────────────────────────────────────────────
+// ─── Custom Shaders ──────────────────────────────────────────────────────────
 
-// Geodesic edges - clean structural lines with energy pulse
 const edgeVertexShader = `
   attribute float aEdgeProgress;
   varying float vProgress;
@@ -118,18 +113,15 @@ const edgeFragmentShader = `
   varying vec3 vWorldPosition;
 
   void main() {
-    // Energy pulse traveling along edges
     float pulse = sin(uTime * 2.0 - vProgress * 6.28) * 0.5 + 0.5;
     pulse = pow(pulse, 3.0);
 
-    // Height-based intensity (brighter at equator)
     float heightFactor = 1.0 - abs(vWorldPosition.y) / 2.5;
     heightFactor = 0.6 + heightFactor * 0.4;
 
-    // Base glow + pulse highlight
     vec3 baseColor = uColor;
-    vec3 pulseColor = vec3(1.0, 0.85, 0.6);
-    vec3 finalColor = mix(baseColor, pulseColor, pulse * 0.4);
+    vec3 pulseColor = vec3(0.4, 0.85, 1.0);
+    vec3 finalColor = mix(baseColor, pulseColor, pulse * 0.35);
 
     float alpha = uOpacity * heightFactor * (0.7 + pulse * 0.3);
 
@@ -137,7 +129,6 @@ const edgeFragmentShader = `
   }
 `;
 
-// Nodes - glowing vertices at intersections
 const nodeVertexShader = `
   attribute float aSize;
   attribute float aPhase;
@@ -148,10 +139,8 @@ const nodeVertexShader = `
   void main() {
     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
 
-    // Pulse animation
     float pulse = sin(uTime * 1.5 + aPhase) * 0.5 + 0.5;
 
-    // Size varies with pulse
     float size = aSize * (0.8 + pulse * 0.4);
     gl_PointSize = size * (80.0 / -mvPosition.z);
 
@@ -170,11 +159,9 @@ const nodeFragmentShader = `
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
 
-    // Soft glow falloff
     float glow = 1.0 - smoothstep(0.0, 0.5, dist);
     glow = pow(glow, 2.0);
 
-    // Core is brighter
     float core = 1.0 - smoothstep(0.0, 0.15, dist);
 
     vec3 coreColor = vec3(1.0, 1.0, 1.0);
@@ -187,7 +174,6 @@ const nodeFragmentShader = `
   }
 `;
 
-// Latitude rings - subtle accent lines
 const ringVertexShader = `
   varying vec3 vPosition;
 
@@ -204,13 +190,11 @@ const ringFragmentShader = `
   varying vec3 vPosition;
 
   void main() {
-    // Flowing energy effect
     float angle = atan(vPosition.z, vPosition.x);
     float flow = sin(angle * 3.0 + uTime * 1.5 + uRingIndex * 1.5) * 0.5 + 0.5;
 
-    // Orange to gold gradient
-    vec3 color1 = vec3(1.0, 0.5, 0.15);
-    vec3 color2 = vec3(1.0, 0.75, 0.3);
+    vec3 color1 = vec3(0.2, 0.6, 1.0);
+    vec3 color2 = vec3(0.1, 0.9, 0.7);
     vec3 color = mix(color1, color2, flow);
 
     float alpha = uOpacity * (0.4 + flow * 0.4);
@@ -223,13 +207,11 @@ const ringFragmentShader = `
 
 function GeodesicEdges({
   vertices,
-  edges
+  edges,
 }: {
   vertices: THREE.Vector3[];
-  edges: [number, number][]
+  edges: [number, number][];
 }) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
-
   const geometry = useMemo(() => {
     const positions: number[] = [];
     const progress: number[] = [];
@@ -241,7 +223,6 @@ function GeodesicEdges({
       positions.push(v1.x, v1.y, v1.z);
       positions.push(v2.x, v2.y, v2.z);
 
-      // Progress along edge (0 to 1)
       progress.push(0, 1);
     });
 
@@ -258,7 +239,7 @@ function GeodesicEdges({
       fragmentShader: edgeFragmentShader,
       uniforms: {
         uTime: { value: 0 },
-        uColor: { value: new THREE.Color(1.0, 0.55, 0.2) },
+        uColor: { value: new THREE.Color(0.2, 0.6, 1.0) },
         uOpacity: { value: 0.25 },
       },
       transparent: true,
@@ -277,8 +258,6 @@ function GeodesicEdges({
 // ─── Geodesic Nodes Component ────────────────────────────────────────────────
 
 function GeodesicNodes({ vertices }: { vertices: THREE.Vector3[] }) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
-
   const geometry = useMemo(() => {
     const positions = new Float32Array(vertices.length * 3);
     const sizes = new Float32Array(vertices.length);
@@ -289,7 +268,6 @@ function GeodesicNodes({ vertices }: { vertices: THREE.Vector3[] }) {
       positions[i * 3 + 1] = v.y;
       positions[i * 3 + 2] = v.z;
 
-      // Vary sizes - poles and key vertices are larger
       const heightFactor = 1.0 - Math.abs(v.y) / SPHERE_RADIUS;
       sizes[i] = 0.8 + heightFactor * 0.5 + Math.random() * 0.3;
       phases[i] = Math.random() * Math.PI * 2;
@@ -309,7 +287,7 @@ function GeodesicNodes({ vertices }: { vertices: THREE.Vector3[] }) {
       fragmentShader: nodeFragmentShader,
       uniforms: {
         uTime: { value: 0 },
-        uColor: { value: new THREE.Color(1.0, 0.6, 0.25) },
+        uColor: { value: new THREE.Color(0.3, 0.7, 1.0) },
       },
       transparent: true,
       depthWrite: false,
@@ -324,17 +302,15 @@ function GeodesicNodes({ vertices }: { vertices: THREE.Vector3[] }) {
   return <points geometry={geometry} material={material} />;
 }
 
-// ─── Latitude Rings Component ────────────────────────────────────────────────
+// ─── Latitude Ring Component ─────────────────────────────────────────────────
 
 function LatitudeRing({
   positions,
-  ringIndex
+  ringIndex,
 }: {
   positions: Float32Array;
-  ringIndex: number
+  ringIndex: number;
 }) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
-
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
@@ -364,9 +340,9 @@ function LatitudeRing({
 }
 
 function LatitudeRings() {
-  const rings = useMemo(() =>
-    generateLatitudeRings(SPHERE_RADIUS, RING_COUNT, RING_SEGMENTS),
-    []
+  const rings = useMemo(
+    () => generateLatitudeRings(SPHERE_RADIUS, RING_COUNT, RING_SEGMENTS),
+    [],
   );
 
   return (
@@ -393,7 +369,7 @@ function GlowShell() {
     <mesh ref={meshRef}>
       <sphereGeometry args={[SPHERE_RADIUS * 1.02, 64, 64]} />
       <meshBasicMaterial
-        color="#ff6b20"
+        color="#2080ff"
         transparent
         opacity={0.02}
         side={THREE.BackSide}
@@ -419,7 +395,7 @@ function CoreGlow() {
     <mesh ref={meshRef}>
       <sphereGeometry args={[SPHERE_RADIUS * 0.15, 32, 32]} />
       <meshBasicMaterial
-        color="#ff8844"
+        color="#3399ff"
         transparent
         opacity={0.04}
         depthWrite={false}
@@ -435,7 +411,6 @@ function GeodesicNetwork() {
   const groupRef = useRef<THREE.Group>(null);
   const { pointer } = useThree();
 
-  // Store smooth rotation values
   const rotationRef = useRef({
     baseY: 0,
     targetX: 0,
@@ -446,31 +421,24 @@ function GeodesicNetwork() {
 
   const { vertices, edges } = useMemo(
     () => generateGeodesicStructure(SPHERE_RADIUS, GEODESIC_DETAIL),
-    []
+    [],
   );
 
   useFrame((_, delta) => {
     if (groupRef.current) {
       const rot = rotationRef.current;
 
-      // Clamp delta to prevent jumps on tab-switch or lag spikes
-      const dt = Math.min(delta, 0.1);
+      rot.baseY += 0.002;
 
-      // Continuous base rotation — frame-rate independent
-      rot.baseY += dt * 0.25;
+      const smoothDelta = Math.min(delta, 0.1);
+      const lerpFactor = 1 - Math.pow(0.001, smoothDelta);
 
-      // Mouse target — gentle influence
       rot.targetX = pointer.y * 0.15;
       rot.targetY = pointer.x * 0.2;
 
-      // Smooth exponential decay lerp (lower = smoother, 3 is very smooth)
-      const smoothness = 3;
-      const t = 1 - Math.exp(-smoothness * dt);
+      rot.currentX += (rot.targetX - rot.currentX) * lerpFactor * 2;
+      rot.currentY += (rot.targetY - rot.currentY) * lerpFactor * 2;
 
-      rot.currentX += (rot.targetX - rot.currentX) * t;
-      rot.currentY += (rot.targetY - rot.currentY) * t;
-
-      // Apply rotations
       groupRef.current.rotation.y = rot.baseY + rot.currentY;
       groupRef.current.rotation.x = rot.currentX;
     }
@@ -487,9 +455,9 @@ function GeodesicNetwork() {
   );
 }
 
-// ─── Canvas Wrapper ─────────────────────────────────────────────────────────
+// ─── Canvas Wrapper ──────────────────────────────────────────────────────────
 
-export default function NeuralSphere() {
+export default function EarthScene() {
   return (
     <div className="w-full h-full" style={{ minHeight: '320px' }}>
       <Canvas

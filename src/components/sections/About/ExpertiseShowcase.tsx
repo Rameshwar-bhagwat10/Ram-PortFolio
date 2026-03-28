@@ -305,16 +305,11 @@ export default function ExpertiseShowcase() {
         >
           {/* Left Side - Tab Navigation */}
           <div
-            className="relative rounded-[20px] backdrop-blur-xl border border-white/[0.06] p-4 lg:p-5 lg:sticky lg:top-24 flex flex-col"
-            style={{
-              background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
-            }}
+            className="relative p-4 lg:p-5 lg:sticky lg:top-24 flex flex-col"
           >
-            {/* Top highlight */}
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-t-[20px]" />
 
             {/* Mobile: Horizontal scroll / Desktop: Vertical */}
-            <div className="flex lg:flex-col gap-2 lg:gap-2.5 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide">
+            <div className="flex lg:flex-col gap-2 lg:gap-4 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide">
               {expertiseData.map((item, index) => (
                 <TabItem
                   key={item.id}

@@ -1,10 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import ContactCard from './ContactCard';
 import CustomParticleBackground from '@/components/background/CustomParticleBackground';
 import { PERSONAL_INFO, SITE_URL } from '@/lib/constants';
+
+const EarthScene = dynamic(() => import('@/components/three/EarthScene'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Contact() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -121,41 +127,15 @@ export default function Contact() {
         </p>
       </div>
 
-      {/* Particle Background - Removed for performance */}
-      {/* <CustomParticleBackground color="100, 255, 150" particleCount={35} /> */}
-
-      {/* Subtle background atmosphere - Optimized for performance */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Background image with black removed via screen blend - GPU optimized */}
-        <div
-          className="absolute inset-0 flex items-center justify-center will-change-transform"
-          style={{ transform: 'translateZ(0)' }}
-        >
-          <div
-            className="w-[600px] h-[600px] md:w-[750px] md:h-[750px] lg:w-[900px] lg:h-[900px]"
-            style={{
-              backgroundImage: "url('/images/hero/ChatGPT%20Image%20Mar%204%2C%202026%2C%2006_22_50%20PM.png')",
-              backgroundSize: 'contain',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              mixBlendMode: 'screen',
-              opacity: 0.35,
-              transform: 'translateZ(0)',
-            }}
-          />
+      {/* 3D Earth Sphere — behind content, same pattern as Hero NeuralSphere */}
+      <div className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none" aria-hidden="true">
+        <div className="w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] lg:w-[500px] lg:h-[500px] xl:w-[560px] xl:h-[560px]">
+          <EarthScene />
         </div>
-
-        {/* Radial orange glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-5"
-          style={{
-            background: 'radial-gradient(circle, rgba(255, 140, 0, 0.4) 0%, transparent 70%)',
-          }}
-        />
-
-        {/* Bottom horizon fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0F0E0E] to-transparent" />
       </div>
+
+      {/* Bottom horizon fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0F0E0E] to-transparent pointer-events-none" style={{ zIndex: 2 }} aria-hidden="true" />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         {/* Cinematic Headline */}
