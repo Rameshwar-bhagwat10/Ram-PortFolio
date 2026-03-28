@@ -181,7 +181,7 @@ export default function Work() {
 
       {/* Project Cards */}
       <div className="container mx-auto px-4 sm:px-6 space-y-16 sm:space-y-20 md:space-y-28 lg:space-y-36">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {visibleProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}

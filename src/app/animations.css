@@ -1,0 +1,119 @@
+/* =====================================================
+   ANIMATIONS — Separated for maintainability
+   All @keyframes + animation-driven classes live here.
+   ===================================================== */
+
+/* ── Animated Gradient Border ── */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-rotate {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+.animate-border-rotate {
+  animation: border-rotate 4s linear infinite;
+}
+
+/* ── Marquee Scroll Animations (GPU-composited) ── */
+@keyframes marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.marquee-scroll-left {
+  display: inline-flex;
+  animation: marquee-left var(--marquee-duration, 60s) linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.marquee-scroll-right {
+  display: inline-flex;
+  animation: marquee-right var(--marquee-duration, 60s) linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(-50%, 0, 0);
+}
+
+/* ── Aurora Float Animations ── */
+@keyframes aurora-float-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, 40px) scale(1.1);
+  }
+  100% {
+    transform: translate(-20px, 30px) scale(0.95);
+  }
+}
+
+@keyframes aurora-float-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 30px) scale(1.15);
+  }
+  100% {
+    transform: translate(25px, -35px) scale(0.9);
+  }
+}
+
+@keyframes aurora-float-3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(35px, -25px) scale(1.08);
+  }
+  100% {
+    transform: translate(-30px, 20px) scale(1.05);
+  }
+}
+
+@keyframes aurora-float-4 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-25px, -40px) scale(0.92);
+  }
+  100% {
+    transform: translate(40px, 25px) scale(1.12);
+  }
+}
+
+@keyframes aurora-float-5 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, 35px) scale(1.05);
+  }
+  100% {
+    transform: translate(-35px, -30px) scale(0.98);
+  }
+}

@@ -82,7 +82,13 @@ function SkillCard({ skill, index, onHover, isHovered }: SkillCardProps) {
           {/* Pulsing ring on hover */}
           <AnimatePresence>
             {isHovered && (
-              <>
+              <motion.div
+                key="pulse-rings"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
                 <motion.div
                   className="absolute inset-0 rounded-full"
                   initial={{ scale: 0.8, opacity: 0 }}
@@ -97,7 +103,7 @@ function SkillCard({ skill, index, onHover, isHovered }: SkillCardProps) {
                   transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
                   style={{ border: `1px solid ${skill.color}` }}
                 />
-              </>
+              </motion.div>
             )}
           </AnimatePresence>
 
@@ -122,7 +128,13 @@ function SkillCard({ skill, index, onHover, isHovered }: SkillCardProps) {
         {/* Floating particles on hover */}
         <AnimatePresence>
           {isHovered && (
-            <>
+            <motion.div
+              key="particles"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
               {[...Array(4)].map((_, i) => (
                 <motion.div
                   key={i}
@@ -153,7 +165,7 @@ function SkillCard({ skill, index, onHover, isHovered }: SkillCardProps) {
                   }}
                 />
               ))}
-            </>
+            </motion.div>
           )}
         </AnimatePresence>
       </motion.div>

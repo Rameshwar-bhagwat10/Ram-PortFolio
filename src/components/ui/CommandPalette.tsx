@@ -441,13 +441,15 @@ export default function CommandPalette() {
       {/* Command Palette Modal */}
       <AnimatePresence>
         {isOpen && (
-          <>
+          <motion.div
+            key="command-palette"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+          >
             {/* Backdrop - Subtle dim with minimal blur */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
+            <div
               onClick={() => setIsOpen(false)}
               className="fixed inset-0 z-[100]"
               style={{
@@ -632,7 +634,7 @@ export default function CommandPalette() {
               </div>
             </motion.div>
           </div>
-          </>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
