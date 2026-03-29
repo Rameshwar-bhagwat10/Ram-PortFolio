@@ -24,79 +24,79 @@ interface GitHubStats {
   currentStreak: number;
 }
 
+const generateMockData = (): GitHubStats => {
+  const weeks: ContributionWeek[] = [];
+  const today = new Date();
+  let totalContributions = 0;
+
+  // Generate last 52 weeks of data
+  for (let week = 51; week >= 0; week--) {
+    const contributionDays: ContributionDay[] = [];
+    
+    for (let day = 0; day < 7; day++) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - (week * 7 + (6 - day)));
+      
+      const count = Math.floor(Math.random() * 15);
+      totalContributions += count;
+      
+      let color = '#161b22';
+      if (count > 0) color = '#0e4429';
+      if (count > 3) color = '#006d32';
+      if (count > 6) color = '#26a641';
+      if (count > 9) color = '#39d353';
+      
+      contributionDays.push({
+        date: date.toISOString().split('T')[0],
+        contributionCount: count,
+        color,
+      });
+    }
+    
+    weeks.push({ contributionDays });
+  }
+
+  return {
+    totalContributions,
+    weeks,
+    longestStreak: 47,
+    currentStreak: 12,
+  };
+};
+
 export default function GitHubContributions() {
   const [stats, setStats] = useState<GitHubStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [_error, _setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const fetchGitHubContributions = async () => {
+      try {
+        const response = await fetch('/api/github-contributions');
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch contributions');
+        }
+
+        const data = await response.json();
+        
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        setStats(data);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching GitHub contributions:', err);
+        // Fallback to mock data if API fails
+        const mockData: GitHubStats = generateMockData();
+        setStats(mockData);
+        setLoading(false);
+      }
+    };
+
     fetchGitHubContributions();
   }, []);
-
-  const fetchGitHubContributions = async () => {
-    try {
-      const response = await fetch('/api/github-contributions');
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch contributions');
-      }
-
-      const data = await response.json();
-      
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      setStats(data);
-      setLoading(false);
-    } catch (err) {
-      console.error('Error fetching GitHub contributions:', err);
-      // Fallback to mock data if API fails
-      const mockData: GitHubStats = generateMockData();
-      setStats(mockData);
-      setLoading(false);
-    }
-  };
-
-  const generateMockData = (): GitHubStats => {
-    const weeks: ContributionWeek[] = [];
-    const today = new Date();
-    let totalContributions = 0;
-
-    // Generate last 52 weeks of data
-    for (let week = 51; week >= 0; week--) {
-      const contributionDays: ContributionDay[] = [];
-      
-      for (let day = 0; day < 7; day++) {
-        const date = new Date(today);
-        date.setDate(date.getDate() - (week * 7 + (6 - day)));
-        
-        const count = Math.floor(Math.random() * 15);
-        totalContributions += count;
-        
-        let color = '#161b22';
-        if (count > 0) color = '#0e4429';
-        if (count > 3) color = '#006d32';
-        if (count > 6) color = '#26a641';
-        if (count > 9) color = '#39d353';
-        
-        contributionDays.push({
-          date: date.toISOString().split('T')[0],
-          contributionCount: count,
-          color,
-        });
-      }
-      
-      weeks.push({ contributionDays });
-    }
-
-    return {
-      totalContributions,
-      weeks,
-      longestStreak: 47,
-      currentStreak: 12,
-    };
-  };
 
   const getContributionLevel = (count: number): string => {
     if (count === 0) return 'No contributions';
@@ -124,7 +124,7 @@ export default function GitHubContributions() {
     );
   }
 
-  if (error || !stats) {
+  if (_error || !stats) {
     return null;
   }
 
@@ -201,6 +201,7 @@ export default function GitHubContributions() {
                 scrollbarWidth: 'thin',
                 scrollbarColor: 'rgba(57, 211, 83, 0.5) rgba(255, 255, 255, 0.05)',
               }}
+              data-lenis-prevent
             >
               <div className="inline-flex flex-col gap-1.5 xs:gap-2">
                 {/* Month labels at top */}

@@ -1,12 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import SectionHeading from '@/components/ui/SectionHeading';
 import Container from '@/components/layout/Container';
 import MarqueeRow from './MarqueeRow';
 import { skills } from './skills.data';
-import CustomParticleBackground from '@/components/background/CustomParticleBackground';
-import { PERSONAL_INFO } from '@/lib/constants';
 
 export default function Skills() {
   // Split skills into two groups for different rows

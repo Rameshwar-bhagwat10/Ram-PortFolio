@@ -433,7 +433,10 @@ export default function ExpertiseShowcase() {
           {/* Left Side - Tab Navigation */}
           <div className="relative lg:p-5 lg:sticky lg:top-24 flex flex-col">
             {/* Mobile: Horizontal scroll / Desktop: Vertical */}
-            <div className="flex lg:flex-col gap-1.5 xs:gap-2 lg:gap-4 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide -mx-4 xs:-mx-5 sm:-mx-6 px-4 xs:px-5 sm:px-6 lg:mx-0 lg:px-0">
+            <div 
+              className="flex lg:flex-col gap-1.5 xs:gap-2 lg:gap-4 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide -mx-4 xs:-mx-5 sm:-mx-6 px-4 xs:px-5 sm:px-6 lg:mx-0 lg:px-0"
+              data-lenis-prevent
+            >
               {expertiseData.map((item, index) => (
                 <TabItem
                   key={item.id}

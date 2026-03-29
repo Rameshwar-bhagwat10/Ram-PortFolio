@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ComponentType } from 'react';
 
 export default function ParticlesBackground() {
   const [isDesktop, setIsDesktop] = useState(false);
-  const [Particles, setParticles] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [Particles, setParticles] = useState<ComponentType<any> | null>(null);
 
   useEffect(() => {
     const checkDesktop = () => {

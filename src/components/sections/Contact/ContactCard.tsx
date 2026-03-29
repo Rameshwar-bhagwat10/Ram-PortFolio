@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, X, Clock, ArrowUpRight } from 'lucide-react';
 import ContactForm from './ContactForm';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/lib/constants';

@@ -16,7 +16,7 @@ interface ContactFormProps {
   onClose?: () => void;
 }
 
-export default function ContactForm({ onClose }: ContactFormProps) {
+export default function ContactForm({ onClose: _onClose }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);

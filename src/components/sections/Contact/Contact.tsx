@@ -4,7 +4,6 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import ContactCard from './ContactCard';
-import CustomParticleBackground from '@/components/background/CustomParticleBackground';
 import { PERSONAL_INFO, SITE_URL } from '@/lib/constants';
 
 const EarthScene = dynamic(() => import('@/components/three/EarthScene'), {

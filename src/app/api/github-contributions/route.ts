@@ -3,6 +3,15 @@ import { NextResponse } from 'next/server';
 const GITHUB_USERNAME = 'Rameshwar-bhagwat10';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+interface ContributionDay {
+  date: string;
+  contributionCount: number;
+}
+
+interface ContributionWeek {
+  contributionDays: ContributionDay[];
+}
+
 export async function GET() {
   try {
     if (!GITHUB_TOKEN) {
@@ -54,7 +63,7 @@ export async function GET() {
     const calendar = data.data.user.contributionsCollection.contributionCalendar;
 
     // Calculate streaks
-    const allDays = calendar.weeks.flatMap((week: any) => week.contributionDays);
+    const allDays = calendar.weeks.flatMap((week: ContributionWeek) => week.contributionDays);
     const { currentStreak, longestStreak } = calculateStreaks(allDays);
 
     return NextResponse.json({
@@ -72,7 +81,7 @@ export async function GET() {
   }
 }
 
-function calculateStreaks(days: any[]) {
+function calculateStreaks(days: ContributionDay[]) {
   let currentStreak = 0;
   let longestStreak = 0;
   let tempStreak = 0;

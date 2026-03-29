@@ -10,7 +10,7 @@ const Divider = React.forwardRef<HTMLHRElement, DividerProps>(
     if (gradient) {
       return (
         <div
-          ref={ref as any}
+          ref={ref as React.Ref<HTMLDivElement>}
           className={cn(
             'h-px w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-30',
             className

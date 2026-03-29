@@ -38,7 +38,7 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
     let lastTime = 0;
     function raf(time: number) {
       // Calculate delta for consistent timing
-      const delta = time - lastTime;
+      const _delta = time - lastTime;
       lastTime = time;
       
       // Update Lenis with timestamp

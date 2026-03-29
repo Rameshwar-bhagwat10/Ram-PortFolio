@@ -26,13 +26,16 @@ export function reportWebVitals(metric: WebVitalsMetric) {
 
   // Send to analytics service
   // Example: Google Analytics
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', metric.name, {
-      value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
-      event_category: 'Web Vitals',
-      event_label: metric.id,
-      non_interaction: true,
-    });
+  if (typeof window !== 'undefined') {
+    const win = window as Window & { gtag?: (command: string, eventName: string, params: Record<string, unknown>) => void };
+    if (win.gtag) {
+      win.gtag('event', metric.name, {
+        value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+        event_category: 'Web Vitals',
+        event_label: metric.id,
+        non_interaction: true,
+      });
+    }
   }
 
   // Example: Send to custom analytics endpoint

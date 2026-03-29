@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState, useEffect, memo } from 'react';
 import * as THREE from 'three';
 
 // ─── Configuration ───────────────────────────────────────────────────────────
@@ -483,24 +483,55 @@ function GeodesicNetwork() {
 
 // ─── Canvas Wrapper ─────────────────────────────────────────────────────────
 
-export default function NeuralSphere() {
+function NeuralSphereCanvas({ isVisible }: { isVisible: boolean }) {
   return (
-    <div className="w-full h-full" style={{ minHeight: '320px', contain: 'strict' }}>
-      <Canvas
-        camera={{ position: [0, 0, 7], fov: 40 }}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference: 'high-performance',
-          stencil: false,
-          depth: true,
-        }}
-        dpr={[1, 1.5]}
-        style={{ background: 'transparent' }}
-        performance={{ min: 0.5 }}
-      >
-        <GeodesicNetwork />
-      </Canvas>
+    <Canvas
+      camera={{ position: [0, 0, 7], fov: 40 }}
+      gl={{
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+        stencil: false,
+        depth: true,
+      }}
+      dpr={[1, 1.5]}
+      style={{ background: 'transparent' }}
+      performance={{ min: 0.5 }}
+      frameloop={isVisible ? 'always' : 'never'}
+    >
+      <GeodesicNetwork />
+    </Canvas>
+  );
+}
+
+const MemoizedCanvas = memo(NeuralSphereCanvas);
+
+export default function NeuralSphere() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div 
+      ref={containerRef}
+      className="w-full h-full" 
+      style={{ minHeight: '320px', contain: 'strict' }}
+    >
+      <MemoizedCanvas isVisible={isVisible} />
     </div>
   );
 }

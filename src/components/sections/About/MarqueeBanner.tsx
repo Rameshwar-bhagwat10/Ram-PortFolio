@@ -44,11 +44,6 @@ const stripVariants = {
   },
 };
 
-const fadeInVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
-
 // Simplified transition (no blur animation)
 const stripTransition = (delay: number) => ({
   duration: 0.8,

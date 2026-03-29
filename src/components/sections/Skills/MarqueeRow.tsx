@@ -141,9 +141,26 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
   const offsetRef = useRef(0);
   const lastTimeRef = useRef<number>(0);
   const isPausedRef = useRef(false);
+  const isVisibleRef = useRef(true);
 
   // Memoize doubled skills array
   const displaySkills = useMemo(() => [...skills, ...skills], [skills]);
+
+  // Visibility detection to pause animation when off-screen
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   // Initialize offset based on direction
   useEffect(() => {
@@ -177,8 +194,8 @@ export default function MarqueeRow({ skills, reverse = false }: MarqueeRowProps)
       const deltaTime = (currentTime - lastTimeRef.current) / 1000; // Convert to seconds
       lastTimeRef.current = currentTime;
 
-      // Only update if not paused
-      if (!isPausedRef.current) {
+      // Only update if not paused and visible
+      if (!isPausedRef.current && isVisibleRef.current) {
         const movement = speed * deltaTime;
         offsetRef.current += reverse ? movement : -movement;
 

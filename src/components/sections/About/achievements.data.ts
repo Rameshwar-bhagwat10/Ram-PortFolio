@@ -1,5 +1,4 @@
 import { Trophy, Award, Star, Target, Zap, Code, Users, BookOpen } from 'lucide-react';
-import { IconType } from 'react-icons';
 import { LucideIcon } from 'lucide-react';
 
 export interface Achievement {

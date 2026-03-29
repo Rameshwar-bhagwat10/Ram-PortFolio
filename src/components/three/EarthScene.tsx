@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState, useEffect, memo } from 'react';
 import * as THREE from 'three';
 
 // ─── Configuration ───────────────────────────────────────────────────────────
@@ -457,21 +457,54 @@ function GeodesicNetwork() {
 
 // ─── Canvas Wrapper ──────────────────────────────────────────────────────────
 
-export default function EarthScene() {
+function EarthSceneCanvas({ isVisible }: { isVisible: boolean }) {
   return (
-    <div className="w-full h-full" style={{ minHeight: '320px' }}>
-      <Canvas
-        camera={{ position: [0, 0, 7], fov: 40 }}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference: 'high-performance',
-        }}
-        dpr={[1, 1.5]}
-        style={{ background: 'transparent' }}
-      >
-        <GeodesicNetwork />
-      </Canvas>
+    <Canvas
+      camera={{ position: [0, 0, 7], fov: 40 }}
+      gl={{
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+        stencil: false,
+        depth: true,
+      }}
+      dpr={[1, 1.5]}
+      style={{ background: 'transparent' }}
+      frameloop={isVisible ? 'always' : 'never'}
+    >
+      <GeodesicNetwork />
+    </Canvas>
+  );
+}
+
+const MemoizedCanvas = memo(EarthSceneCanvas);
+
+export default function EarthScene() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div 
+      ref={containerRef}
+      className="w-full h-full" 
+      style={{ minHeight: '320px', contain: 'strict' }}
+    >
+      <MemoizedCanvas isVisible={isVisible} />
     </div>
   );
 }

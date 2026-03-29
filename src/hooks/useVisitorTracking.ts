@@ -25,7 +25,6 @@ export function useVisitorTracking() {
   // Track visitor on mount
   useEffect(() => {
     let isMounted = true;
-    let intervalId: NodeJS.Timeout;
 
     const trackVisitor = async () => {
       try {
@@ -84,7 +83,7 @@ export function useVisitorTracking() {
     trackVisitor();
 
     // Refresh stats periodically
-    intervalId = setInterval(fetchStats, REFRESH_INTERVAL);
+    const intervalId = setInterval(fetchStats, REFRESH_INTERVAL);
 
     return () => {
       isMounted = false;

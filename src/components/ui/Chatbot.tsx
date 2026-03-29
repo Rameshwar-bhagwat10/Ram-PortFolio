@@ -179,7 +179,7 @@ export default function Chatbot() {
       } else {
         throw new Error(data.error || 'Failed to get response');
       }
-    } catch (error) {
+    } catch {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: "Sorry, I'm having trouble responding right now. Please try again or contact Rameshwar directly at rameshwarbhagwat019@gmail.com",

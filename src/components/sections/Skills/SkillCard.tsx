@@ -1,8 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
-export default function SkillCard({ skill }: { skill: any }) {
+interface Skill {
+  icon: ReactNode;
+  name: string;
+}
+
+export default function SkillCard({ skill }: { skill: Skill }) {
   return (
     <div className="p-4 rounded-lg border text-center">
       <div className="text-2xl mb-2">{skill.icon}</div>

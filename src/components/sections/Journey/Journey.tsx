@@ -25,7 +25,6 @@ const typeConfig = {
 function TimelineCard({ milestone, index }: { milestone: JourneyMilestone; index: number }) {
   const config = typeConfig[milestone.type];
   const Icon = config.icon;
-  const isEven = index % 2 === 0;
 
   return (
     <motion.div

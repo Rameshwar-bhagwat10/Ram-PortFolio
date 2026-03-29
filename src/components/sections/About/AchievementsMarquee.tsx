@@ -1,32 +1,117 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { achievements, Achievement } from './achievements.data';
+import { achievements } from './achievements.data';
 
 interface AchievementsMarqueeProps {
   reverse?: boolean;
 }
 
-export default function AchievementsMarquee({ reverse = false }: AchievementsMarqueeProps) {
+// Memoized achievement card to prevent unnecessary re-renders
+const AchievementCard = memo(function AchievementCard({ 
+  achievement, 
+  index, 
+  onHover, 
+  onLeave 
+}: { 
+  achievement: typeof achievements[0];
+  index: number;
+  onHover: (index: number) => void;
+  onLeave: () => void;
+}) {
+  const Icon = achievement.icon;
+  
+  return (
+    <motion.div
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={onLeave}
+      className="flex-shrink-0 relative group"
+      style={{ width: '150px' }}
+      whileHover={{ scale: 1.05 }}
+    >
+      <div className="relative px-2 xs:px-3 sm:px-4 py-2 xs:py-2.5 sm:py-3 rounded-lg xs:rounded-xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.06] overflow-hidden transition-all duration-300 group-hover:border-white/[0.12] group-hover:bg-white/[0.04]">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-3 relative">
+          <div className="p-1 xs:p-1.5 sm:p-2 rounded-md xs:rounded-lg bg-white/[0.03]">
+            <Icon className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 text-white/70" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-[9px] xs:text-[10px] sm:text-xs font-medium text-white/90 truncate">
+              {achievement.title}
+            </p>
+            <p className="text-[7px] xs:text-[8px] sm:text-[10px] text-white/50 truncate">
+              {achievement.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+});
+
+function AchievementsMarquee({ reverse = false }: AchievementsMarqueeProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
+  const isVisibleRef = useRef(true);
+  const lastTimeRef = useRef(0);
   
   const [offset, setOffset] = useState(() => {
     if (reverse) {
-      const cardWidth = 150 + 12; // card width (150px) + gap (12px on mobile, 20px on desktop)
+      const cardWidth = 150 + 12;
       return -cardWidth * achievements.length;
     }
     return 0;
   });
 
+  const handleHover = useCallback((index: number) => {
+    setHoveredIndex(index);
+  }, []);
+
+  const handleLeave = useCallback(() => {
+    setHoveredIndex(null);
+  }, []);
+
+  useEffect(() => {
+    // Visibility detection
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     if (hoveredIndex !== null) return;
 
-    const animate = () => {
+    const targetFPS = 30; // Throttle to 30 FPS for smoother performance
+    const frameInterval = 1000 / targetFPS;
+
+    const animate = (currentTime: number) => {
+      // Skip if not visible
+      if (!isVisibleRef.current) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
+      // FPS throttling
+      const elapsed = currentTime - lastTimeRef.current;
+      if (elapsed < frameInterval) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastTimeRef.current = currentTime - (elapsed % frameInterval);
+
       setOffset((prev) => {
-        const cardWidth = 150 + 12; // card width (150px) + gap (12px)
+        const cardWidth = 150 + 12;
         const totalWidth = cardWidth * achievements.length;
         const newOffset = prev + (reverse ? 0.8 : -0.8);
         
@@ -62,49 +147,13 @@ export default function AchievementsMarquee({ reverse = false }: AchievementsMar
         }}
       >
         {displayAchievements.map((achievement, index) => (
-          <motion.div
+          <AchievementCard
             key={`${achievement.id}-${index}`}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-            className="flex-shrink-0 relative group"
-            style={{ width: '150px' }}
-            whileHover={{ scale: 1.05, y: -8 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Card */}
-            <div className="relative h-full min-h-[140px] sm:min-h-[160px] bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 hover:bg-white/10 transition-all duration-300">
-              {/* Glow effect on hover */}
-              <div 
-                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"
-                style={{ 
-                  background: `radial-gradient(circle at center, ${achievement.color}20, transparent 70%)` 
-                }}
-              />
-              
-              {/* Content */}
-              <div className="relative z-10 flex flex-col gap-1.5 sm:gap-2 h-full">
-                {/* Text */}
-                <div className="space-y-1.5 sm:space-y-2 flex-1">
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <h4 className="text-xs sm:text-sm font-bold text-white line-clamp-1">
-                      {achievement.title}
-                    </h4>
-                    {achievement.year && (
-                      <span className="text-[8px] sm:text-[9px] px-1 sm:px-1.5 py-0.5 rounded-full bg-primary-gradient text-white flex-shrink-0">
-                        {achievement.year}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-[10px] sm:text-[11px] text-white/70 leading-relaxed line-clamp-2 sm:line-clamp-none">
-                    {achievement.description}
-                  </p>
-                  <p className="text-[9px] sm:text-[10px] text-white/50 leading-relaxed line-clamp-2 sm:line-clamp-none">
-                    {achievement.details}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            achievement={achievement}
+            index={index}
+            onHover={handleHover}
+            onLeave={handleLeave}
+          />
         ))}
       </div>
 
@@ -114,3 +163,5 @@ export default function AchievementsMarquee({ reverse = false }: AchievementsMar
     </div>
   );
 }
+
+export default memo(AchievementsMarquee);

@@ -3,14 +3,14 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { NAV_LINKS } from '@/lib/constants';
-import { ChevronDown, Home, User, Code2, Briefcase, Mail } from 'lucide-react';
+import { ChevronDown, Home, User, Code2, Briefcase, Mail, LucideIcon } from 'lucide-react';
 
 interface NavLinksProps {
   activeSection: string;
 }
 
 // Icon mapping for nav links
-const navIcons: Record<string, any> = {
+const navIcons: Record<string, LucideIcon> = {
   hero: Home,
   about: User,
   skills: Code2,
