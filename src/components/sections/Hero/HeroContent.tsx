@@ -99,7 +99,7 @@ export default function HeroContent() {
       className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
       role="banner"
     >
-      <div className="w-full max-w-[900px] mx-auto px-6 sm:px-8 text-center pointer-events-auto">
+      <div className="w-full max-w-[900px] mx-auto px-4 sm:px-6 md:px-8 text-center pointer-events-auto">
 
         <motion.div
           variants={staggerContainer}
@@ -124,7 +124,7 @@ export default function HeroContent() {
             >
               {/* Greeting line */}
               <div
-                className="text-[2.5rem] sm:text-5xl md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1.05] tracking-[-0.04em] text-white"
+                className="text-[1.75rem] sm:text-5xl md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1.05] tracking-[-0.04em] text-white"
                 aria-hidden="true"
               >
                 <AnimatedLetters
@@ -134,9 +134,9 @@ export default function HeroContent() {
                 />
               </div>
 
-              {/* Full name — single line */}
+              {/* Full name — always single line */}
               <div
-                className="text-[2.5rem] sm:text-5xl md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1.05] tracking-[-0.04em] whitespace-nowrap"
+                className="text-[1.75rem] sm:text-5xl md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1.05] tracking-[-0.04em] whitespace-nowrap"
                 itemProp="name"
               >
                 <AnimatedLetters
@@ -162,13 +162,13 @@ export default function HeroContent() {
 
             {/* Role title with shimmer stripes effect */}
             <motion.div
-              className="mt-4 sm:mt-5 flex justify-center"
+              className="mt-3 sm:mt-5 flex justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={isIntroComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
             >
               <motion.span
-                className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold tracking-[0.2em] uppercase"
+                className="text-xs sm:text-base md:text-lg lg:text-xl font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase"
                 style={{
                   background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.4) 100%)',
                   backgroundSize: '200% 100%',
@@ -201,7 +201,7 @@ export default function HeroContent() {
               aria-hidden="true"
             >
               <div
-                className="h-[2px] sm:h-[3px] w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[320px]"
+                className="h-[2px] sm:h-[3px] w-full max-w-[180px] sm:max-w-[280px] lg:max-w-[320px]"
                 style={{
                   background: 'linear-gradient(90deg, transparent 0%, #FF4500 20%, #FF1493 50%, #FF8C00 80%, transparent 100%)',
                 }}
@@ -209,12 +209,12 @@ export default function HeroContent() {
             </motion.div>
           </header>
 
-          <div className="mb-10 sm:mb-14" aria-hidden="true" />
+          <div className="mb-8 sm:mb-14" aria-hidden="true" />
 
           {/* ── Description (H2 equivalent for SEO) ── */}
           <motion.p
             variants={fadeUpItem}
-            className="text-lg sm:text-xl md:text-2xl lg:text-[1.7rem] max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8"
+            className="text-base sm:text-xl md:text-2xl lg:text-[1.7rem] max-w-2xl mx-auto leading-relaxed mb-5 sm:mb-8 px-2 sm:px-0"
             style={{
               fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
               fontWeight: 400,
@@ -253,7 +253,7 @@ export default function HeroContent() {
           {/* ── CTA Buttons ── */}
           <motion.nav
             variants={fadeUpItem}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
             aria-label="Primary navigation - View portfolio or contact Rameshwar Bhagwat"
           >
             <Button

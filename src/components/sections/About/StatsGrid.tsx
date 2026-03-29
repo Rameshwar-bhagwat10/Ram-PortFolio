@@ -87,13 +87,19 @@ const CircularProgress = memo(function CircularProgress({
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [startAnimation, setStartAnimation] = useState(false);
   
+  // Use a responsive radius - will be set via viewBox scaling
+  const radius = 42;
+  const strokeWidth = 5;
+  const normalizedRadius = radius;
+  const center = 50; // viewBox center
+  
   // Memoize calculations
   const { circumference, offset } = useMemo(() => {
     const percentage = (value / max) * 100;
-    const circ = 2 * Math.PI * 45;
+    const circ = 2 * Math.PI * normalizedRadius;
     const off = circ - (percentage / 100) * circ;
     return { circumference: circ, offset: off };
-  }, [value, max]);
+  }, [value, max, normalizedRadius]);
 
   // Trigger ring animation after card animation
   useEffect(() => {
@@ -119,24 +125,28 @@ const CircularProgress = memo(function CircularProgress({
       }}
     >
       {/* Circular Progress */}
-      <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mb-2 sm:mb-3">
+      <div className="relative w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mb-2 sm:mb-3">
         {/* Background Circle */}
-        <svg className="w-full h-full transform -rotate-90" aria-hidden="true">
+        <svg 
+          className="w-full h-full transform -rotate-90" 
+          viewBox="0 0 100 100"
+          aria-hidden="true"
+        >
           <circle
-            cx="50%"
-            cy="50%"
-            r="45"
+            cx={center}
+            cy={center}
+            r={normalizedRadius}
             stroke="rgba(255, 255, 255, 0.1)"
-            strokeWidth="6"
+            strokeWidth={strokeWidth}
             fill="none"
           />
           {/* Progress Circle - Smoother CSS animation */}
           <circle
-            cx="50%"
-            cy="50%"
-            r="45"
+            cx={center}
+            cy={center}
+            r={normalizedRadius}
             stroke={color}
-            strokeWidth="6"
+            strokeWidth={strokeWidth}
             fill="none"
             strokeLinecap="round"
             strokeDasharray={circumference}
@@ -151,30 +161,30 @@ const CircularProgress = memo(function CircularProgress({
 
         {/* Center Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <Icon size={20} style={{ color }} className="mb-0.5 sm:mb-1" aria-hidden="true" />
-          <div className="text-xl sm:text-2xl font-bold text-white">
+          <Icon className="w-4 h-4 xs:w-5 xs:h-5 sm:w-5 sm:h-5 mb-0.5 sm:mb-1" style={{ color }} aria-hidden="true" />
+          <div className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold text-white">
             <AnimatedNumber value={value} suffix={suffix} isInView={startAnimation} />
           </div>
         </div>
       </div>
 
       {/* Label */}
-      <p className="text-xs sm:text-sm font-semibold text-center text-primary-gradient">{label}</p>
+      <p className="text-[10px] xs:text-xs sm:text-sm font-semibold text-center text-primary-gradient leading-tight">{label}</p>
     </motion.div>
   );
 });
 
 export default function StatsGrid() {
   return (
-    <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 w-full">
+    <div className="grid grid-cols-3 gap-2 xs:gap-3 sm:gap-4 md:gap-5 w-full">
       {stats.map((stat, index) => (
         <GlowCard
           key={stat.label}
-          className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl"
+          className="bg-[#141414] border border-white/[0.06] rounded-xl xs:rounded-2xl sm:rounded-3xl"
           glowColor={stat.color}
           glowSize={180}
         >
-          <div className="p-3 sm:p-4 md:p-5">
+          <div className="p-2 xs:p-3 sm:p-4 md:p-5">
             <CircularProgress
               value={stat.value}
               max={stat.max}

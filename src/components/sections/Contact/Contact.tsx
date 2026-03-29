@@ -18,7 +18,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center justify-center py-32 px-6 bg-[#0F0E0E] overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-[#0F0E0E] overflow-hidden"
       aria-label="Contact Information and Inquiry Form"
       itemScope
       itemType="https://schema.org/ContactPage"
@@ -137,14 +137,14 @@ export default function Contact() {
       {/* Bottom horizon fade */}
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0F0E0E] to-transparent pointer-events-none" style={{ zIndex: 2 }} aria-hidden="true" />
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-4xl mx-auto text-center px-2">
         {/* Cinematic Headline */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.02em] leading-tight text-white mb-6 uppercase"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-[-0.02em] leading-tight text-white mb-4 sm:mb-6 uppercase"
           style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}
         >
           Let's Build Something{' '}
@@ -156,7 +156,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
-          className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-12"
+          className="text-base sm:text-lg md:text-xl text-muted max-w-2xl mx-auto mb-8 sm:mb-12 px-2"
         >
           Whether you're launching a startup or scaling an enterprise, I'm here to turn your vision into reality
         </motion.p>
@@ -170,7 +170,7 @@ export default function Contact() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsFormOpen(true)}
-          className="group relative px-10 py-3.5 rounded-full font-semibold text-base text-white backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 inline-flex items-center gap-3 overflow-hidden opacity-80"
+          className="group relative px-8 sm:px-10 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base text-white backdrop-blur-xl bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 inline-flex items-center gap-2 sm:gap-3 overflow-hidden opacity-80"
           aria-label="Open contact form"
         >
           {/* White glow effect */}
@@ -245,12 +245,12 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mt-12 max-w-2xl mx-auto space-y-3"
+          className="mt-8 sm:mt-12 max-w-2xl mx-auto space-y-2 sm:space-y-3 px-2"
         >
-          <p className="text-lg md:text-xl font-medium text-white">
+          <p className="text-base sm:text-lg md:text-xl font-medium text-white">
             Available for full-time roles and selective freelance projects.
           </p>
-          <p className="text-sm md:text-base text-white/50 leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-white/50 leading-relaxed">
             I focus on shipping clean, scalable web solutions that support real users and growing products.
           </p>
         </motion.div>
@@ -277,13 +277,14 @@ export default function Contact() {
             />
 
             {/* Form Container - iOS Style */}
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="contact-form-title">
+            <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="contact-form-title">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 10 }}
                 transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-                className="w-full max-w-4xl pointer-events-auto relative"
+                className="w-full sm:max-w-4xl max-h-[90vh] sm:max-h-none overflow-y-auto pointer-events-auto relative rounded-t-[24px] sm:rounded-[24px]"
+                data-lenis-prevent
               >
                 <ContactCard onClose={() => setIsFormOpen(false)} />
               </motion.div>

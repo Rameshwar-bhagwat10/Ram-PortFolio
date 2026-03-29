@@ -142,41 +142,41 @@ export default function About() {
           {/* Main Content Grid */}
           <GlowCardGroup className="max-w-7xl mx-auto">
             {/* Two-column layout: Profile Card | Right Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] xl:grid-cols-[420px_1fr] gap-6 sm:gap-8 lg:gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] xl:grid-cols-[420px_1fr] gap-4 xs:gap-5 sm:gap-6 md:gap-8 lg:gap-10">
               {/* Left Side - Contained Profile Card */}
               <div className="flex justify-center lg:justify-start">
                 <ProfileCard />
               </div>
 
               {/* Right Side - Stats + Description + Info Cards */}
-              <div className="flex flex-col gap-6 sm:gap-8">
+              <div className="flex flex-col gap-4 xs:gap-5 sm:gap-6 md:gap-8">
                 {/* Stats Row */}
                 <StatsGrid />
 
                 {/* Description Block */}
                 <GlowCard
-                  className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl"
+                  className="bg-[#141414] border border-white/[0.06] rounded-xl xs:rounded-2xl sm:rounded-3xl"
                   glowColor="rgba(255, 100, 200, 0.6)"
                   glowSize={250}
                 >
                   <motion.div
-                    className="relative p-6 sm:p-8"
+                    className="relative p-4 xs:p-5 sm:p-6 md:p-8"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                   >
                     {/* Accent bar */}
-                    <div className="absolute top-6 sm:top-8 left-0 w-1 h-12 sm:h-16 bg-gradient-to-b from-orange-500 to-pink-500 rounded-r-full" />
-                    <div className="pl-4 sm:pl-5 space-y-3 sm:space-y-4">
+                    <div className="absolute top-4 xs:top-5 sm:top-6 md:top-8 left-0 w-1 h-10 xs:h-12 sm:h-14 md:h-16 bg-gradient-to-b from-orange-500 to-pink-500 rounded-r-full" />
+                    <div className="pl-3 xs:pl-4 sm:pl-5 space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4">
                       <p
-                        className="text-base sm:text-lg md:text-xl lg:text-2xl leading-[1.6] sm:leading-[1.7] font-normal text-white/90"
+                        className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl leading-[1.5] xs:leading-[1.6] sm:leading-[1.7] font-normal text-white/90"
                         style={{ fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif' }}
                       >
                         Rameshwar Bhagwat crafts high-performance web applications with clean architecture and exceptional user experiences.
                       </p>
                       <p
-                        className="text-sm sm:text-base md:text-lg leading-[1.6] sm:leading-[1.7] font-normal text-white/50"
+                        className="text-xs xs:text-sm sm:text-base md:text-lg leading-[1.5] xs:leading-[1.6] sm:leading-[1.7] font-normal text-white/50"
                         style={{ fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif' }}
                       >
                         Specializing in scalable AI-powered applications that blend cutting-edge technology with intuitive design.

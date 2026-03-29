@@ -111,12 +111,12 @@ export default function GitHubContributions() {
 
   if (loading) {
     return (
-      <section className="relative py-20 px-6 bg-[#0F0E0E]">
+      <section className="relative py-12 xs:py-16 sm:py-20 px-4 xs:px-5 sm:px-6 bg-[#0F0E0E]">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center h-96">
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
-              <p className="text-white/60 text-sm">Loading GitHub activity...</p>
+          <div className="flex items-center justify-center h-64 xs:h-80 sm:h-96">
+            <div className="flex flex-col items-center gap-3 xs:gap-4">
+              <div className="w-10 h-10 xs:w-12 xs:h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+              <p className="text-white/60 text-xs xs:text-sm">Loading GitHub activity...</p>
             </div>
           </div>
         </div>
@@ -129,11 +129,11 @@ export default function GitHubContributions() {
   }
 
   return (
-    <section className="relative py-20 px-6 bg-[#0F0E0E] overflow-hidden">
+    <section className="relative py-12 xs:py-16 sm:py-20 px-4 xs:px-5 sm:px-6 bg-[#0F0E0E] overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-green-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/4 w-48 xs:w-64 sm:w-96 h-48 xs:h-64 sm:h-96 bg-green-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 xs:w-64 sm:w-96 h-48 xs:h-64 sm:h-96 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -143,19 +143,19 @@ export default function GitHubContributions() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 xs:mb-10 sm:mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4">
-            <Github size={16} className="text-white/70" />
-            <span className="text-xs font-medium text-white/70 uppercase tracking-wider">Open Source</span>
+          <div className="inline-flex items-center gap-1.5 xs:gap-2 px-3 xs:px-4 py-1.5 xs:py-2 rounded-full bg-white/5 border border-white/10 mb-3 xs:mb-4">
+            <Github className="w-3.5 h-3.5 xs:w-4 xs:h-4 text-white/70" />
+            <span className="text-[10px] xs:text-xs font-medium text-white/70 uppercase tracking-wider">Open Source</span>
           </div>
           <h2
-            className="text-4xl md:text-5xl font-extrabold text-white mb-3 uppercase tracking-[-0.02em]"
+            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 xs:mb-3 uppercase tracking-[-0.02em]"
             style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 800 }}
           >
             GitHub <span className="text-rainbow-gradient">Activity</span>
           </h2>
-          <p className="text-muted text-lg max-w-2xl mx-auto">
+          <p className="text-muted text-sm xs:text-base sm:text-lg max-w-2xl mx-auto px-2">
             Consistent contributions and continuous learning
           </p>
         </motion.div>
@@ -166,7 +166,7 @@ export default function GitHubContributions() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative p-8 rounded-2xl backdrop-blur-md bg-white/[0.02] border border-white/[0.08] overflow-hidden shadow-2xl"
+          className="relative p-4 xs:p-5 sm:p-6 md:p-8 rounded-xl xs:rounded-2xl backdrop-blur-md bg-white/[0.02] border border-white/[0.08] overflow-hidden shadow-2xl"
           style={{
             boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
           }}
@@ -176,29 +176,35 @@ export default function GitHubContributions() {
           
           <div className="relative z-10">
             {/* Heatmap Header */}
-            <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+            <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between mb-4 xs:mb-5 sm:mb-6 gap-3 xs:gap-4">
               <div className="flex items-center gap-2">
-                <Github size={20} className="text-white/70" />
-                <h3 className="text-xl font-bold text-white">{PERSONAL_INFO.name}</h3>
+                <Github className="w-4 h-4 xs:w-5 xs:h-5 text-white/70" />
+                <h3 className="text-base xs:text-lg sm:text-xl font-bold text-white">{PERSONAL_INFO.name}</h3>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-white/50 font-medium">Less</span>
-                <div className="flex gap-1.5">
-                  <div className="w-4 h-4 rounded-sm bg-white/10 border border-white/20" />
-                  <div className="w-4 h-4 rounded-sm bg-[#0e4429] border border-white/10" />
-                  <div className="w-4 h-4 rounded-sm bg-[#006d32] border border-white/10" />
-                  <div className="w-4 h-4 rounded-sm bg-[#26a641] border border-white/10" />
-                  <div className="w-4 h-4 rounded-sm bg-[#39d353] border border-white/10" />
+              <div className="flex items-center gap-2 xs:gap-3">
+                <span className="text-[10px] xs:text-xs text-white/50 font-medium">Less</span>
+                <div className="flex gap-1 xs:gap-1.5">
+                  <div className="w-3 h-3 xs:w-4 xs:h-4 rounded-sm bg-white/10 border border-white/20" />
+                  <div className="w-3 h-3 xs:w-4 xs:h-4 rounded-sm bg-[#0e4429] border border-white/10" />
+                  <div className="w-3 h-3 xs:w-4 xs:h-4 rounded-sm bg-[#006d32] border border-white/10" />
+                  <div className="w-3 h-3 xs:w-4 xs:h-4 rounded-sm bg-[#26a641] border border-white/10" />
+                  <div className="w-3 h-3 xs:w-4 xs:h-4 rounded-sm bg-[#39d353] border border-white/10" />
                 </div>
-                <span className="text-xs text-white/50 font-medium">More</span>
+                <span className="text-[10px] xs:text-xs text-white/50 font-medium">More</span>
               </div>
             </div>
 
-            {/* Heatmap Grid */}
-            <div className="overflow-x-auto pb-4">
-              <div className="inline-flex flex-col gap-2">
+            {/* Heatmap Grid with stylish scrollbar */}
+            <div 
+              className="overflow-x-auto pb-3 xs:pb-4 github-scrollbar"
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: 'rgba(57, 211, 83, 0.5) rgba(255, 255, 255, 0.05)',
+              }}
+            >
+              <div className="inline-flex flex-col gap-1.5 xs:gap-2">
                 {/* Month labels at top */}
-                <div className="flex gap-1 pl-[52px]">
+                <div className="flex gap-[3px] xs:gap-1 pl-8 xs:pl-10 sm:pl-[52px]">
                   {stats.weeks.map((week, weekIndex) => {
                     // Get the first day of the week to determine month
                     const firstDay = new Date(week.contributionDays[0].date);
@@ -207,9 +213,9 @@ export default function GitHubContributions() {
                       new Date(stats.weeks[weekIndex - 1].contributionDays[0].date).getMonth() !== month;
                     
                     return (
-                      <div key={weekIndex} className="w-3 text-xs text-white/40">
+                      <div key={weekIndex} className="w-[10px] xs:w-3 text-[9px] xs:text-[10px] sm:text-xs text-white/40">
                         {isFirstWeekOfMonth && (
-                          <span className="inline-block -ml-2">
+                          <span className="inline-block -ml-1 xs:-ml-2">
                             {monthLabels[month]}
                           </span>
                         )}
@@ -219,18 +225,18 @@ export default function GitHubContributions() {
                 </div>
 
                 {/* Grid container */}
-                <div className="flex gap-1">
+                <div className="flex gap-[3px] xs:gap-1">
                 {/* Day labels */}
-                <div className="flex flex-col gap-1 pr-2 justify-around text-xs text-white/40">
+                <div className="flex flex-col gap-[3px] xs:gap-1 pr-1 xs:pr-1.5 sm:pr-2 justify-around text-[8px] xs:text-[10px] sm:text-xs text-white/40">
                   {dayLabels.map((day, i) => (
-                    i % 2 === 1 && <div key={day} className="h-3 flex items-center">{day}</div>
+                    i % 2 === 1 && <div key={day} className="h-[10px] xs:h-3 flex items-center">{day}</div>
                   ))}
                 </div>
 
                   {/* Contribution grid */}
-                  <div className="flex gap-1">
+                  <div className="flex gap-[3px] xs:gap-1">
                     {stats.weeks.map((week, weekIndex) => (
-                      <div key={weekIndex} className="flex flex-col gap-1">
+                      <div key={weekIndex} className="flex flex-col gap-[3px] xs:gap-1">
                         {week.contributionDays.map((day, dayIndex) => (
                           <motion.div
                             key={day.date}
@@ -247,15 +253,15 @@ export default function GitHubContributions() {
                               zIndex: 10,
                               transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] }
                             }}
-                            className="w-3 h-3 rounded-sm cursor-pointer relative group"
+                            className="w-[10px] h-[10px] xs:w-3 xs:h-3 rounded-[2px] xs:rounded-sm cursor-pointer relative group"
                             style={{ backgroundColor: day.color }}
                             title={`${day.contributionCount} contributions on ${day.date}`}
                           >
-                            {/* Tooltip */}
-                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 rounded-lg bg-black/90 border border-white/20 text-xs text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
+                            {/* Tooltip - hidden on small mobile, show on hover for larger */}
+                            <div className="hidden xs:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 xs:px-3 py-1.5 xs:py-2 rounded-md xs:rounded-lg bg-black/90 border border-white/20 text-[10px] xs:text-xs text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
                               <div className="font-semibold">{day.contributionCount} contributions</div>
                               <div className="text-white/60">{new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
-                              <div className="text-white/40 text-[10px] mt-1">{getContributionLevel(day.contributionCount)}</div>
+                              <div className="text-white/40 text-[9px] xs:text-[10px] mt-0.5 xs:mt-1">{getContributionLevel(day.contributionCount)}</div>
                             </div>
                           </motion.div>
                         ))}
@@ -266,20 +272,28 @@ export default function GitHubContributions() {
               </div>
             </div>
 
+            {/* Scroll hint for mobile */}
+            <div className="flex xs:hidden items-center justify-center gap-2 mt-2 text-[10px] text-white/30">
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Scroll to explore</span>
+            </div>
+
             {/* Footer with GitHub Profile Button */}
-            <div className="mt-6 pt-6 border-t border-white/10 flex justify-center">
+            <div className="mt-4 xs:mt-5 sm:mt-6 pt-4 xs:pt-5 sm:pt-6 border-t border-white/10 flex justify-center">
               <a
                 href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300"
+                className="group inline-flex items-center gap-1.5 xs:gap-2 px-4 xs:px-5 sm:px-6 py-2.5 xs:py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300"
               >
-                <Github size={18} className="text-white/70 group-hover:text-white transition-colors" />
-                <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                <Github className="w-4 h-4 xs:w-[18px] xs:h-[18px] text-white/70 group-hover:text-white transition-colors" />
+                <span className="text-xs xs:text-sm font-medium text-white/70 group-hover:text-white transition-colors">
                   Visit GitHub Profile
                 </span>
                 <svg 
-                  className="w-4 h-4 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all" 
+                  className="w-3.5 h-3.5 xs:w-4 xs:h-4 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"

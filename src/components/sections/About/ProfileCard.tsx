@@ -65,27 +65,27 @@ const ProfileCard = memo(function ProfileCard() {
 
   return (
     <GlowCard
-      className="bg-[#141414] border border-white/[0.06] rounded-2xl sm:rounded-3xl w-full h-full"
+      className="bg-[#141414] border border-white/[0.06] rounded-xl xs:rounded-2xl sm:rounded-3xl w-full h-full"
       glowColor="rgba(249, 115, 22, 0.6)"
       glowSize={280}
     >
       <motion.div
-        className="relative p-6 sm:p-8 h-full"
+        className="relative p-4 xs:p-5 sm:p-6 md:p-8 h-full"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         {/* Top accent line */}
-        <div className="absolute top-0 left-6 right-6 sm:left-8 sm:right-8 h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+        <div className="absolute top-0 left-4 right-4 xs:left-5 xs:right-5 sm:left-6 sm:right-6 md:left-8 md:right-8 h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
 
       {/* Profile Section */}
       <div className="flex flex-col items-center">
         {/* Profile Image */}
-        <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mb-5 sm:mb-6">
+        <div className="relative w-24 h-24 xs:w-28 xs:h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-48 lg:h-48 mb-3 xs:mb-4 sm:mb-5 md:mb-6">
           {/* Animated gradient ring */}
           <div 
-            className="absolute -inset-[3px] rounded-full animate-border-rotate"
+            className="absolute -inset-[2px] xs:-inset-[3px] rounded-full animate-border-rotate"
             style={{
               background: 'conic-gradient(from var(--border-angle, 0deg), #f97316 0%, #ef4444 25%, #ec4899 50%, #8b5cf6 75%, #f97316 100%)',
             }}
@@ -93,7 +93,7 @@ const ProfileCard = memo(function ProfileCard() {
           {/* Dark ring gap */}
           <div className="absolute inset-0 rounded-full bg-[#141414]" />
           {/* Profile picture */}
-          <div className="absolute inset-[3px] rounded-full overflow-hidden">
+          <div className="absolute inset-[2px] xs:inset-[3px] rounded-full overflow-hidden">
             <Image
               src="/images/profile/profile.jpeg"
               alt={profileAlt}
@@ -104,66 +104,66 @@ const ProfileCard = memo(function ProfileCard() {
             />
           </div>
           {/* Online status dot */}
-          <div className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-500 border-[3px] border-[#141414] z-10">
+          <div className="absolute bottom-0.5 right-0.5 xs:bottom-1 xs:right-1 sm:bottom-2 sm:right-2 w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 rounded-full bg-emerald-500 border-2 xs:border-[3px] border-[#141414] z-10">
             <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-40" />
           </div>
         </div>
 
         {/* Name */}
         <h3 
-          className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-1.5"
+          className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold text-white mb-1 xs:mb-1.5"
           style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif', fontWeight: 700 }}
         >
           {PERSONAL_INFO.name}
         </h3>
 
         {/* Job Title Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] mb-3">
-          <Sparkles size={11} className="text-orange-400" />
-          <span className="text-[11px] sm:text-xs text-white/50 font-medium">{PERSONAL_INFO.jobTitle}</span>
+        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-2 xs:px-2.5 sm:px-3 py-0.5 xs:py-1 rounded-full bg-white/[0.04] border border-white/[0.08] mb-2 xs:mb-3">
+          <Sparkles className="w-2.5 h-2.5 xs:w-3 xs:h-3 text-orange-400" />
+          <span className="text-[9px] xs:text-[10px] sm:text-xs text-white/50 font-medium">{PERSONAL_INFO.jobTitle}</span>
         </div>
 
         {/* Location */}
-        <div className="flex items-center gap-1.5 text-white/35 mb-5 sm:mb-6">
-          <MapPin size={11} />
-          <span className="text-[11px] sm:text-xs">{locationString}</span>
+        <div className="flex items-center gap-1 xs:gap-1.5 text-white/35 mb-3 xs:mb-4 sm:mb-5 md:mb-6">
+          <MapPin className="w-2.5 h-2.5 xs:w-3 xs:h-3" />
+          <span className="text-[9px] xs:text-[10px] sm:text-xs">{locationString}</span>
         </div>
 
         {/* Social Links */}
-        <div className="flex items-center gap-2 mb-6 sm:mb-8">
+        <div className="flex items-center gap-1.5 xs:gap-2 mb-4 xs:mb-5 sm:mb-6 md:mb-8">
           {socialLinks.map(({ name, icon: Icon, href, label, isExternal }) => (
             <a
               key={name}
               href={href}
               target={isExternal ? '_blank' : undefined}
               rel={isExternal ? 'noopener noreferrer' : undefined}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.06] hover:border-white/[0.15] transition-all duration-300 flex items-center justify-center group"
+              className="w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.06] hover:border-white/[0.15] transition-all duration-300 flex items-center justify-center group"
               aria-label={label}
             >
-              <Icon size={14} className="sm:w-4 sm:h-4 text-white/40 group-hover:text-white/80 transition-colors" />
+              <Icon className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 text-white/40 group-hover:text-white/80 transition-colors" />
             </a>
           ))}
         </div>
       </div>
 
       {/* Divider */}
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent mb-6 sm:mb-8" />
+      <div className="h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent mb-4 xs:mb-5 sm:mb-6 md:mb-8" />
 
       {/* Core Expertise */}
       <div>
-        <h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-white/30 mb-4 text-center">
+        <h4 className="text-[9px] xs:text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-white/30 mb-2.5 xs:mb-3 sm:mb-4 text-center">
           Core Expertise
         </h4>
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+        <div className="flex flex-wrap gap-1 xs:gap-1.5 sm:gap-2 justify-center">
           {expertise.map((skill) => {
             const IconComponent = skill.icon;
             return (
               <div
                 key={skill.name}
-                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300"
+                className="flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2 sm:px-2.5 md:px-3 py-1 xs:py-1.5 sm:py-2 rounded-full bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300"
               >
-                <IconComponent size={12} className="sm:w-3.5 sm:h-3.5 flex-shrink-0" style={{ color: skill.color }} />
-                <span className="text-[10px] sm:text-xs text-white/55 font-medium">{skill.name}</span>
+                <IconComponent className="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" style={{ color: skill.color }} />
+                <span className="text-[8px] xs:text-[9px] sm:text-[10px] md:text-xs text-white/55 font-medium">{skill.name}</span>
               </div>
             );
           })}

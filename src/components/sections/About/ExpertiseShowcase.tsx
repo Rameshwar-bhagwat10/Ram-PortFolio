@@ -395,28 +395,18 @@ export default function ExpertiseShowcase() {
   }, []);
 
   return (
-    <div className="relative bg-[#0F0E0E] py-16 sm:py-20 md:py-24 overflow-hidden">
-      {/* Background Effects - simplified */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div 
-          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl"
-          style={{ background: 'rgba(255, 140, 0, 0.02)' }}
-        />
-        <div 
-          className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full blur-3xl"
-          style={{ background: 'rgba(255, 20, 147, 0.02)' }}
-        />
-      </div>
+    <div className="relative py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
+      {/* Background is transparent to merge with portfolio default bg */}
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 xs:px-5 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-8 xs:mb-10 sm:mb-12 md:mb-16">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-primary-gradient text-xs sm:text-sm font-semibold tracking-wider uppercase mb-2 sm:mb-3"
+            className="text-primary-gradient text-[10px] xs:text-xs sm:text-sm font-semibold tracking-wider uppercase mb-1.5 xs:mb-2 sm:mb-3"
           >
             What I Do
           </motion.p>
@@ -425,7 +415,7 @@ export default function ExpertiseShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white uppercase tracking-[-0.02em]"
+            className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white uppercase tracking-[-0.02em]"
             style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif' }}
           >
             My <span className="text-rainbow-gradient">Expertise</span>
@@ -438,12 +428,12 @@ export default function ExpertiseShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="grid grid-cols-1 lg:grid-cols-[300px_1fr] xl:grid-cols-[320px_1fr] gap-6 lg:gap-8"
+          className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr] gap-4 xs:gap-5 sm:gap-6 lg:gap-8"
         >
           {/* Left Side - Tab Navigation */}
-          <div className="relative p-4 lg:p-5 lg:sticky lg:top-24 flex flex-col">
+          <div className="relative lg:p-5 lg:sticky lg:top-24 flex flex-col">
             {/* Mobile: Horizontal scroll / Desktop: Vertical */}
-            <div className="flex lg:flex-col gap-2 lg:gap-4 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide">
+            <div className="flex lg:flex-col gap-1.5 xs:gap-2 lg:gap-4 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide -mx-4 xs:-mx-5 sm:-mx-6 px-4 xs:px-5 sm:px-6 lg:mx-0 lg:px-0">
               {expertiseData.map((item, index) => (
                 <TabItem
                   key={item.id}
@@ -470,7 +460,7 @@ export default function ExpertiseShowcase() {
 
           {/* Right Side - Preview Area */}
           <div
-            className="relative rounded-[24px] backdrop-blur-xl border border-white/[0.06] overflow-hidden"
+            className="relative rounded-xl xs:rounded-2xl lg:rounded-[24px] backdrop-blur-xl border border-white/[0.06] overflow-hidden"
             style={{
               background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0.01) 100%)',
               contain: 'layout style',
@@ -481,7 +471,7 @@ export default function ExpertiseShowcase() {
 
             {/* Subtle gradient orb */}
             <div
-              className="absolute top-0 right-0 w-[400px] h-[400px] pointer-events-none"
+              className="absolute top-0 right-0 w-[200px] xs:w-[300px] sm:w-[400px] h-[200px] xs:h-[300px] sm:h-[400px] pointer-events-none"
               style={{
                 background: 'radial-gradient(circle at 80% 20%, rgba(255, 140, 0, 0.04) 0%, transparent 50%)',
               }}
@@ -489,7 +479,7 @@ export default function ExpertiseShowcase() {
             />
 
             {/* Content */}
-            <div className="relative z-10 p-5 sm:p-6 lg:p-8">
+            <div className="relative z-10 p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8">
               <AnimatePresence mode="wait">
                 <PreviewContent key={activeItem.id} item={activeItem} />
               </AnimatePresence>
@@ -526,12 +516,12 @@ const TabItem = memo(function TabItem({
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="relative flex items-center gap-3 lg:gap-4 p-3 lg:p-4 rounded-[14px] min-w-[180px] lg:min-w-0 w-full text-left overflow-hidden"
+      className="relative flex items-center gap-2 xs:gap-2.5 lg:gap-4 p-2 xs:p-2.5 sm:p-3 lg:p-4 rounded-lg xs:rounded-xl lg:rounded-[14px] min-w-[140px] xs:min-w-[160px] sm:min-w-[180px] lg:min-w-0 w-full text-left overflow-hidden flex-shrink-0 lg:flex-shrink"
       style={{ contain: 'layout style' }}
     >
       {/* Animated Background - simplified */}
       <motion.div
-        className="absolute inset-0 rounded-[14px]"
+        className="absolute inset-0 rounded-lg xs:rounded-xl lg:rounded-[14px]"
         initial={false}
         animate={{
           background: isActive
@@ -545,10 +535,10 @@ const TabItem = memo(function TabItem({
 
       {/* Active indicator line */}
       <motion.div
-        className="absolute left-0 top-1/2 w-[3px] rounded-r-full"
+        className="absolute left-0 top-1/2 w-[2px] xs:w-[3px] rounded-r-full"
         initial={false}
         animate={{
-          height: isActive ? 32 : 0,
+          height: isActive ? 24 : 0,
           y: '-50%',
           opacity: isActive ? 1 : 0,
         }}
@@ -561,7 +551,7 @@ const TabItem = memo(function TabItem({
 
       {/* Icon Box */}
       <motion.div
-        className="relative z-10 flex-shrink-0 w-10 h-10 lg:w-11 lg:h-11 rounded-[12px] flex items-center justify-center"
+        className="relative z-10 flex-shrink-0 w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-lg xs:rounded-[10px] lg:rounded-[12px] flex items-center justify-center"
         initial={false}
         animate={{
           background: isActive
@@ -574,7 +564,7 @@ const TabItem = memo(function TabItem({
         style={{ border: '1px solid' }}
       >
         <Icon 
-          className="w-5 h-5 lg:w-6 lg:h-6 transition-colors duration-200"
+          className="w-4 h-4 xs:w-[18px] xs:h-[18px] sm:w-5 sm:h-5 lg:w-6 lg:h-6 transition-colors duration-200"
           style={{ color: isActive ? '#FF8C00' : 'rgba(255, 255, 255, 0.6)' }}
         />
       </motion.div>
@@ -582,13 +572,13 @@ const TabItem = memo(function TabItem({
       {/* Text */}
       <div className="relative z-10 flex-1 min-w-0">
         <h3
-          className="text-[13px] lg:text-[14px] font-semibold truncate transition-colors duration-200"
+          className="text-[11px] xs:text-[12px] sm:text-[13px] lg:text-[14px] font-semibold truncate transition-colors duration-200"
           style={{ color: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.8)' }}
         >
           {item.title}
         </h3>
         <p
-          className="text-[10px] lg:text-[11px] truncate transition-colors duration-200"
+          className="text-[9px] xs:text-[10px] lg:text-[11px] truncate transition-colors duration-200"
           style={{ color: isActive ? 'rgba(255, 255, 255, 0.55)' : 'rgba(255, 255, 255, 0.35)' }}
         >
           {item.subtitle}
@@ -627,31 +617,31 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
       style={{ contain: 'layout style' }}
     >
       {/* Header */}
-      <div className="flex items-start gap-4 mb-5">
+      <div className="flex items-start gap-2.5 xs:gap-3 sm:gap-4 mb-3 xs:mb-4 sm:mb-5">
         {/* Large Icon - simplified animation */}
         <motion.div
           variants={scaleVariants}
-          className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-[14px] flex items-center justify-center text-[#FF8C00]"
+          className="flex-shrink-0 w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg xs:rounded-xl lg:rounded-[14px] flex items-center justify-center text-[#FF8C00]"
           style={{
             background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, rgba(255, 20, 147, 0.1) 100%)',
             border: '1px solid rgba(255, 140, 0, 0.25)',
             boxShadow: '0 4px 20px rgba(255, 140, 0, 0.15)',
           }}
         >
-          <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+          <Icon className="w-5 h-5 xs:w-[22px] xs:h-[22px] sm:w-6 sm:h-6 md:w-7 md:h-7" />
         </motion.div>
 
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <motion.h3
             variants={itemVariants}
-            className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-0.5"
+            className="text-base xs:text-lg sm:text-xl lg:text-2xl font-bold text-white mb-0.5 truncate"
             style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif' }}
           >
             {item.title}
           </motion.h3>
           <motion.p
             variants={itemVariants}
-            className="text-xs sm:text-sm font-semibold"
+            className="text-[10px] xs:text-xs sm:text-sm font-semibold"
             style={{
               background: 'linear-gradient(90deg, #FF8C00, #FF1493)',
               WebkitBackgroundClip: 'text',
@@ -663,32 +653,47 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
           </motion.p>
         </div>
 
-        {/* Stats Badges - simplified */}
+        {/* Stats Badges - hidden on mobile, shown on sm+ */}
         <motion.div
           variants={scaleVariants}
-          className="hidden sm:flex items-center gap-2"
+          className="hidden sm:flex items-center gap-1.5 sm:gap-2"
         >
           <div
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] bg-white/[0.04] border border-white/[0.08] cursor-default hover:scale-105 hover:-translate-y-0.5 transition-transform duration-200"
+            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-md sm:rounded-[8px] bg-white/[0.04] border border-white/[0.08] cursor-default hover:scale-105 hover:-translate-y-0.5 transition-transform duration-200"
             style={{ boxShadow: '0 2px 8px rgba(10, 132, 255, 0.1)' }}
           >
-            <Briefcase className="w-3.5 h-3.5 text-[#0A84FF]" />
-            <span className="text-[11px] font-semibold text-white">{item.stats.projects}</span>
+            <Briefcase className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#0A84FF]" />
+            <span className="text-[10px] sm:text-[11px] font-semibold text-white">{item.stats.projects}</span>
           </div>
           <div
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] bg-white/[0.04] border border-white/[0.08] cursor-default hover:scale-105 hover:-translate-y-0.5 transition-transform duration-200"
+            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-md sm:rounded-[8px] bg-white/[0.04] border border-white/[0.08] cursor-default hover:scale-105 hover:-translate-y-0.5 transition-transform duration-200"
             style={{ boxShadow: '0 2px 8px rgba(255, 214, 10, 0.1)' }}
           >
-            <Star className="w-3.5 h-3.5 text-[#FFD60A]" />
-            <span className="text-[11px] font-semibold text-white">{item.stats.experience}</span>
+            <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#FFD60A]" />
+            <span className="text-[10px] sm:text-[11px] font-semibold text-white">{item.stats.experience}</span>
           </div>
         </motion.div>
       </div>
 
+      {/* Mobile Stats - visible only on mobile */}
+      <motion.div
+        variants={itemVariants}
+        className="flex sm:hidden items-center gap-2 mb-3"
+      >
+        <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-white/[0.04] border border-white/[0.08]">
+          <Briefcase className="w-3 h-3 text-[#0A84FF]" />
+          <span className="text-[10px] font-semibold text-white">{item.stats.projects}</span>
+        </div>
+        <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-white/[0.04] border border-white/[0.08]">
+          <Star className="w-3 h-3 text-[#FFD60A]" />
+          <span className="text-[10px] font-semibold text-white">{item.stats.experience}</span>
+        </div>
+      </motion.div>
+
       {/* Description */}
       <motion.p
         variants={itemVariants}
-        className="text-[13px] sm:text-[14px] leading-[1.7] text-white/60 mb-6 max-w-2xl"
+        className="text-[11px] xs:text-[12px] sm:text-[13px] md:text-[14px] leading-[1.6] sm:leading-[1.7] text-white/60 mb-4 xs:mb-5 sm:mb-6 max-w-2xl"
       >
         {item.description}
       </motion.p>
@@ -696,55 +701,55 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
       {/* Animated Divider */}
       <motion.div
         variants={dividerVariants}
-        className="h-px bg-gradient-to-r from-white/[0.06] via-white/[0.1] to-white/[0.06] mb-6 origin-left"
+        className="h-px bg-gradient-to-r from-white/[0.06] via-white/[0.1] to-white/[0.06] mb-4 xs:mb-5 sm:mb-6 origin-left"
       />
 
       {/* Tech Stack */}
-      <motion.div variants={itemVariants} className="mb-6">
-        <p className="text-[10px] uppercase tracking-[0.1em] text-white/40 font-medium mb-3">
+      <motion.div variants={itemVariants} className="mb-4 xs:mb-5 sm:mb-6">
+        <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.1em] text-white/40 font-medium mb-2 xs:mb-2.5 sm:mb-3">
           Tech Stack
         </p>
-        <div className="flex flex-wrap gap-2.5">
+        <div className="flex flex-wrap gap-1.5 xs:gap-2 sm:gap-2.5">
           {item.techStack.map((tech, index) => (
             <motion.div
               key={tech.name}
               variants={techStackItemVariants}
               custom={index}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-[8px] border border-white/[0.08] hover:border-white/[0.15] hover:-translate-y-0.5 hover:scale-105 transition-all duration-200 cursor-default"
+              className="flex items-center gap-1 xs:gap-1.5 px-2 xs:px-2.5 sm:px-3 py-1 xs:py-1.5 sm:py-2 rounded-md xs:rounded-[8px] border border-white/[0.08] hover:border-white/[0.15] hover:-translate-y-0.5 hover:scale-105 transition-all duration-200 cursor-default"
               style={{ background: 'rgba(255, 255, 255, 0.04)' }}
             >
-              <span style={{ color: tech.color }}>
-                {TechIcons[tech.name] || <Code2 className="w-4 h-4" />}
+              <span style={{ color: tech.color }} className="[&>svg]:w-3 [&>svg]:h-3 xs:[&>svg]:w-[14px] xs:[&>svg]:h-[14px] sm:[&>svg]:w-[18px] sm:[&>svg]:h-[18px]">
+                {TechIcons[tech.name] || <Code2 className="w-3 h-3 xs:w-[14px] xs:h-[14px] sm:w-4 sm:h-4" />}
               </span>
-              <span className="text-[12px] font-medium text-white/80">{tech.name}</span>
+              <span className="text-[10px] xs:text-[11px] sm:text-[12px] font-medium text-white/80">{tech.name}</span>
             </motion.div>
           ))}
         </div>
       </motion.div>
 
       {/* Key Highlights */}
-      <motion.div variants={itemVariants} className="mb-6">
-        <p className="text-[10px] uppercase tracking-[0.1em] text-white/40 font-medium mb-3">
+      <motion.div variants={itemVariants} className="mb-4 xs:mb-5 sm:mb-6">
+        <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.1em] text-white/40 font-medium mb-2 xs:mb-2.5 sm:mb-3">
           Key Highlights
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 xs:gap-2 sm:gap-2.5">
           {item.highlights.map((highlight, index) => (
             <motion.div
               key={index}
               variants={highlightItemVariants}
               custom={index}
-              className="flex items-start gap-2.5 group cursor-default hover:translate-x-1 transition-transform duration-200"
+              className="flex items-start gap-1.5 xs:gap-2 sm:gap-2.5 group cursor-default hover:translate-x-1 transition-transform duration-200"
             >
               <div
-                className="flex-shrink-0 w-5 h-5 rounded-[5px] flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200"
+                className="flex-shrink-0 w-4 h-4 xs:w-[18px] xs:h-[18px] sm:w-5 sm:h-5 rounded-[4px] xs:rounded-[5px] flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200"
                 style={{
                   background: 'rgba(48, 209, 88, 0.1)',
                   border: '1px solid rgba(48, 209, 88, 0.2)',
                 }}
               >
-                <Check className="w-3 h-3 text-[#30D158]" />
+                <Check className="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 text-[#30D158]" />
               </div>
-              <span className="text-[12px] text-white/60 leading-relaxed group-hover:text-white/80 transition-colors duration-200">
+              <span className="text-[10px] xs:text-[11px] sm:text-[12px] text-white/60 leading-relaxed group-hover:text-white/80 transition-colors duration-200">
                 {highlight}
               </span>
             </motion.div>
@@ -755,36 +760,36 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
       {/* Footer CTA - simplified */}
       <motion.div
         variants={footerVariants}
-        className="pt-5 border-t border-white/[0.06]"
+        className="pt-3 xs:pt-4 sm:pt-5 border-t border-white/[0.06]"
       >
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3 hover:translate-x-0.5 transition-transform duration-200">
+        <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-3 xs:gap-4">
+          <div className="flex items-center gap-2 xs:gap-3 hover:translate-x-0.5 transition-transform duration-200">
             <div
-              className="w-10 h-10 rounded-[10px] flex items-center justify-center hover:scale-110 transition-transform duration-200"
+              className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-lg xs:rounded-[10px] flex items-center justify-center hover:scale-110 transition-transform duration-200"
               style={{
                 background: 'rgba(10, 132, 255, 0.1)',
                 border: '1px solid rgba(10, 132, 255, 0.2)',
               }}
             >
-              <MessageSquare className="w-5 h-5 text-[#0A84FF]" />
+              <MessageSquare className="w-4 h-4 xs:w-[18px] xs:h-[18px] sm:w-5 sm:h-5 text-[#0A84FF]" />
             </div>
             <div>
-              <p className="text-[13px] font-medium text-white">Interested in this service?</p>
-              <p className="text-[11px] text-white/40">Let&apos;s discuss your project requirements</p>
+              <p className="text-[11px] xs:text-[12px] sm:text-[13px] font-medium text-white">Interested in this service?</p>
+              <p className="text-[9px] xs:text-[10px] sm:text-[11px] text-white/40">Let&apos;s discuss your project</p>
             </div>
           </div>
           <a
             href="#contact"
-            className="group flex items-center gap-2 px-4 py-2.5 rounded-[10px] border border-white/[0.08] hover:border-[#FF8C00]/40 hover:scale-[1.03] hover:translate-x-1 active:scale-[0.97] transition-all duration-300"
+            className="group flex items-center gap-1.5 xs:gap-2 px-3 xs:px-3.5 sm:px-4 py-2 xs:py-2.5 rounded-lg xs:rounded-[10px] border border-white/[0.08] hover:border-[#FF8C00]/40 hover:scale-[1.03] hover:translate-x-1 active:scale-[0.97] transition-all duration-300 w-full xs:w-auto justify-center xs:justify-start"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 20, 147, 0.06) 100%)',
               boxShadow: '0 2px 12px rgba(255, 140, 0, 0.1)',
             }}
           >
-            <span className="text-[12px] font-semibold text-white/80 group-hover:text-white transition-colors duration-200">
+            <span className="text-[11px] xs:text-[12px] font-semibold text-white/80 group-hover:text-white transition-colors duration-200">
               Get in Touch
             </span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#FF8C00] group-hover:translate-x-0.5 transition-transform duration-200" />
+            <ArrowRight className="w-3 h-3 xs:w-3.5 xs:h-3.5 text-[#FF8C00] group-hover:translate-x-0.5 transition-transform duration-200" />
           </a>
         </div>
       </motion.div>
