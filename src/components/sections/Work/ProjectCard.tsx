@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { ExternalLink, Github } from 'lucide-react';
-import { Project } from './work.data';
+import { Project, projects } from './work.data';
 import { useState, useRef, memo, useCallback, useMemo } from 'react';
 import { 
   SiNextdotjs, 
@@ -31,7 +31,10 @@ import {
   SiPandas,
   SiNumpy,
   SiScikitlearn,
-  SiJavascript
+  SiJavascript,
+  SiExpress,
+  SiMysql,
+  SiAxios
 } from 'react-icons/si';
 import { TbApi } from 'react-icons/tb';
 
@@ -44,10 +47,12 @@ const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; st
   'Python': { icon: SiPython, color: '#3776AB' },
   'Kotlin': { icon: SiKotlin, color: '#7F52FF' },
   'Node.js': { icon: SiNodedotjs, color: '#339933' },
+  'Express.js': { icon: SiExpress, color: '#FFFFFF' },
   'FastAPI': { icon: SiFastapi, color: '#009688' },
   'GraphQL': { icon: SiGraphql, color: '#E10098' },
   'TensorFlow': { icon: SiTensorflow, color: '#FF6F00' },
   'PostgreSQL': { icon: SiPostgresql, color: '#4169E1' },
+  'MySQL': { icon: SiMysql, color: '#4479A1' },
   'MongoDB': { icon: SiMongodb, color: '#47A248' },
   'TimescaleDB': { icon: SiPostgresql, color: '#FDB515' },
   'Redis': { icon: SiRedis, color: '#DC382D' },
@@ -68,6 +73,7 @@ const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; st
   'NLTK': { icon: SiPython, color: '#3776AB' },
   'Matplotlib': { icon: SiPython, color: '#11557C' },
   'OpenWeather API': { icon: TbApi, color: '#EB6E4B' },
+  'Axios': { icon: SiAxios, color: '#5A29E4' },
   'Android SDK': { icon: SiKotlin, color: '#3DDC84' },
 };
 
@@ -220,7 +226,7 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 text-white/40 text-[10px] xs:text-xs sm:text-sm font-medium tabular-nums z-10">
-                  {String(index + 1).padStart(2, '0')} / {String(5).padStart(2, '0')}
+                  {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
                 </div>
               </div>
             </motion.div>

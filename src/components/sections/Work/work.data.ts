@@ -32,6 +32,26 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    title: "Library Management System",
+    tagline: "Full-Stack System for Managing Books, Members, and Transactions",
+    description: "A complete full-stack Library Management System built with a robust backend and modern frontend. The system manages books, members, issue/return workflows, and fine calculations using database triggers and optimized APIs, with a clean and responsive user interface.",
+    features: [
+      "Complete book, member, issue, and fine management system",
+      "Automated fine calculation using database triggers",
+      "Secure and structured backend with Node.js, Express, and MySQL",
+      "Advanced frontend with search, filters, pagination, and dashboard",
+      "Transaction-safe operations ensuring data consistency",
+      "Real-time UI updates with clean and responsive design"
+    ],
+    techStack: ["React", "Node.js", "Express.js", "MySQL", "Tailwind CSS", "Axios"],
+    image: "/images/projects/project6.png",
+    hoverImage: "/images/projects/project6-hover.png",
+    liveUrl: "https://library-management-demo.com",
+    githubUrl: "https://github.com/Rameshwar-bhagwat10/DBMS-Project",
+    color: "37, 99, 235"
+  },
+  {
+    id: 3,
     title: "Safecoast",
     tagline: "Coastal Hazard Intelligence Platform",
     description: "Safecoast is a coastal hazard intelligence system designed to monitor environmental risk factors and support faster preparedness with real-time alerting insights.",
@@ -48,7 +68,7 @@ export const projects: Project[] = [
     color: "0, 119, 182"
   },
   {
-    id: 3,
+    id: 4,
     title: "Spam Message Detection",
     tagline: "Machine Learning-Based Text Classification System",
     description: "Developed a machine learning-based spam message detection system using Python to classify SMS and text messages as spam or legitimate.",
@@ -65,7 +85,7 @@ export const projects: Project[] = [
     color: "220, 53, 69"
   },
   {
-    id: 4,
+    id: 5,
     title: "Moungiri Store E-Commerce",
     tagline: "Digital Storefront for Local Kirana Business",
     description: "Developed a complete e-commerce platform for a local kirana store with product management, cart functionality, and order processing.",
@@ -82,7 +102,7 @@ export const projects: Project[] = [
     color: "16, 185, 129"
   },
   {
-    id: 5,
+    id: 6,
     title: "Devory",
     tagline: "AI-Powered Student Project Platform",
     description: "Devory is an AI-driven platform designed to help students discover, build, and manage real-world technical projects with intelligent recommendations and structured workflows.",
