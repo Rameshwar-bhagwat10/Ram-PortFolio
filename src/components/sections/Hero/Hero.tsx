@@ -1,22 +1,12 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { motion } from 'framer-motion';
 import HeroContent from './HeroContent';
 import HeroBackground from './HeroBackground';
 import HeroStrips from './HeroStrips';
 import StructuredData from '@/components/seo/StructuredData';
 import { PERSONAL_INFO, SITE_URL, SOCIAL_LINKS, SEO_KEYWORDS } from '@/lib/constants';
-import { useIntroAnimation } from '@/context/IntroAnimationContext';
-
-const NeuralSphere = dynamic(
-  () => import('./NeuralSphere'),
-  { ssr: false }
-);
 
 export default function Hero() {
-  const { isIntroComplete } = useIntroAnimation();
-
   return (
     <>
       <StructuredData />
@@ -168,26 +158,6 @@ export default function Hero() {
 
         <HeroStrips />
         <HeroBackground />
-
-        {/* ── Single centering wrapper for sphere ── */}
-        <div 
-          className="absolute inset-0 z-[15] flex items-center justify-center"
-          style={{ contain: 'layout style' }}
-        >
-          {/* Sphere — behind content, same center point */}
-          <motion.div
-            className="absolute pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={isIntroComplete ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 1.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            aria-hidden="true"
-            style={{ willChange: isIntroComplete ? 'auto' : 'opacity' }}
-          >
-            <div className="w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[400px] md:h-[400px] lg:w-[460px] lg:h-[460px] xl:w-[520px] xl:h-[520px]">
-              <NeuralSphere />
-            </div>
-          </motion.div>
-        </div>
 
         {/* Main content — uses SAME absolute inset-0 + flex center */}
         <HeroContent />

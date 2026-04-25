@@ -29,6 +29,67 @@ html.lenis, html.lenis body {
 }
 
 /* =====================================================
+   CUSTOM CURSOR
+   ===================================================== */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-enabled,
+  html.custom-cursor-enabled body,
+  html.custom-cursor-enabled a,
+  html.custom-cursor-enabled button,
+  html.custom-cursor-enabled [role='button'],
+  html.custom-cursor-enabled .cursor-pointer,
+  html.custom-cursor-enabled input[type='button'],
+  html.custom-cursor-enabled input[type='submit'] {
+    cursor: none !important;
+  }
+
+  html.custom-cursor-enabled input,
+  html.custom-cursor-enabled textarea,
+  html.custom-cursor-enabled select,
+  html.custom-cursor-enabled [contenteditable='true'] {
+    cursor: text !important;
+  }
+}
+
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+  z-index: 2147483647;
+}
+
+.custom-cursor-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.75),
+    0 0 12px rgba(255, 255, 255, 0.35);
+  transition: opacity 0.18s ease;
+}
+
+.custom-cursor-ring {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1.25px solid rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+    0 0 18px rgba(255, 255, 255, 0.08);
+  transition: opacity 0.22s ease;
+}
+
+.custom-cursor-dot.is-visible,
+.custom-cursor-ring.is-visible {
+  opacity: 1;
+}
+
+/* =====================================================
    BASE LAYER — Resets, typography, scrollbar
    ===================================================== */
 @layer base {
@@ -116,6 +177,27 @@ html.lenis, html.lenis body {
     background-clip: text;
   }
 
+  .stroke-text,
+  .stroke-text * {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    -webkit-text-stroke: var(--stroke-width, 1px) var(--stroke-color, rgba(255, 255, 255, 0.45));
+    text-shadow: none;
+    transition:
+      -webkit-text-stroke-width 0.35s ease-out,
+      -webkit-text-stroke-color 0.35s ease-out;
+  }
+
+  .stroke-text:hover,
+  .stroke-text:hover *,
+  .hero-heading.group:hover .stroke-text,
+  .hero-heading.group:hover .stroke-text * {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    --stroke-width: 1.1px;
+    text-shadow: none;
+  }
+
   /* Hide scrollbar */
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -169,10 +251,10 @@ html.lenis, html.lenis body {
    BUTTON STYLES
    ===================================================== */
 .btn-primary {
-  background: linear-gradient(135deg, #FF0000 0%, #FF1493 50%, #FF8C00 100%);
+  background: linear-gradient(135deg, #FF5C29 0%, #FF1493 55%, #FF8C00 100%);
   background-size: 200% 200%;
   box-shadow:
-    0 2px 12px rgba(255, 20, 147, 0.2),
+    0 2px 12px rgba(255, 92, 41, 0.2),
     0 0 0 1px rgba(255, 255, 255, 0.06) inset;
   transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     background-position 0.5s cubic-bezier(0.16, 1, 0.3, 1),
@@ -181,8 +263,8 @@ html.lenis, html.lenis body {
 .btn-primary:hover {
   background-position: 100% 100%;
   box-shadow:
-    0 4px 24px rgba(255, 20, 147, 0.35),
-    0 0 60px rgba(255, 140, 0, 0.12),
+    0 4px 24px rgba(255, 20, 147, 0.32),
+    0 0 60px rgba(255, 140, 0, 0.14),
     0 0 0 1px rgba(255, 255, 255, 0.12) inset;
 }
 .btn-primary:active {

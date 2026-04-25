@@ -30,6 +30,18 @@ const fadeUpItem = {
 // ─── Custom easing for GPU-optimized transforms ─────────────────────────────
 const customEase = [0.22, 1, 0.36, 1] as const;
 
+const rameshwarStrokeColors = [
+  '#FF5C29',
+  '#FF4A38',
+  '#FF3948',
+  '#FF2858',
+  '#FF1493',
+  '#FF2A80',
+  '#FF416E',
+  '#FF6351',
+  '#FF8C00',
+];
+
 // ─── Letter-by-letter reveal (memoized for performance) ─────────────────────
 
 const AnimatedLetters = memo(function AnimatedLetters({
@@ -39,6 +51,7 @@ const AnimatedLetters = memo(function AnimatedLetters({
   className,
   style,
   letterStyle,
+  getLetterStyle,
 }: {
   text: string;
   baseDelay?: number;
@@ -46,6 +59,7 @@ const AnimatedLetters = memo(function AnimatedLetters({
   className?: string;
   style?: React.CSSProperties;
   letterStyle?: React.CSSProperties;
+  getLetterStyle?: (index: number, total: number, char: string) => React.CSSProperties;
 }) {
   // Memoize letter styles to prevent recalculation
   const letters = useMemo(() => text.split(''), [text]);
@@ -73,7 +87,11 @@ const AnimatedLetters = memo(function AnimatedLetters({
             delay: baseDelay + i * 0.03,
             ease: customEase,
           }}
-          style={baseLetterStyle}
+          style={
+            getLetterStyle
+              ? { ...baseLetterStyle, ...getLetterStyle(i, letters.length, char) }
+              : baseLetterStyle
+          }
         >
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
@@ -108,90 +126,50 @@ export default function HeroContent() {
         >
           {/* ── Main Heading with Name (H1 for SEO) ── */}
           <header className="mb-2 sm:mb-3">
-            <h1
-              className="sr-only"
-              itemProp="name"
-            >
+            <p className="sr-only">
               Rameshwar Bhagwat - Full Stack Developer & AI Engineer | React, Next.js, TypeScript Expert
-            </h1>
+            </p>
 
-            <div
-              style={{
-                fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif',
-                fontWeight: 800,
-              }}
+            <h1
+              className="group hero-heading flex flex-col items-center gap-y-0.5 sm:gap-y-1 text-[clamp(2.35rem,7.4vw,7.2rem)] leading-[0.9] tracking-tight font-[900]"
+              itemProp="name"
               aria-label="Rameshwar Bhagwat - Full Stack Developer"
+              style={{
+                fontFamily: '"Satoshi", "Inter", system-ui, sans-serif',
+              }}
             >
-              {/* Greeting line */}
-              <div
-                className="text-[1.75rem] sm:text-5xl md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1.05] tracking-[-0.04em] text-white"
-                aria-hidden="true"
-              >
+              <span className="block whitespace-nowrap text-white" aria-hidden="true">
                 <AnimatedLetters
-                  text="Hey, I'm"
+                  text="Hey,"
                   baseDelay={0.05}
                   isActive={isIntroComplete}
                 />
-              </div>
+              </span>
 
-              {/* Full name — always single line */}
-              <div
-                className="text-[1.75rem] sm:text-5xl md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] leading-[1.05] tracking-[-0.04em] whitespace-nowrap"
-                itemProp="name"
-              >
-                <AnimatedLetters
-                  text="Rameshwar"
-                  baseDelay={0.3}
-                  isActive={isIntroComplete}
-                  letterStyle={{
-                    background: 'linear-gradient(180deg, #FF8C00 0%, #FF1493 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                />
-                <span className="text-white">
+              <span className="block whitespace-nowrap" aria-hidden="true">
+                <span className="inline-block align-baseline text-white">
                   <AnimatedLetters
-                    text=" Bhagwat"
-                    baseDelay={0.6}
+                    text="I'm "
+                    baseDelay={0.3}
                     isActive={isIntroComplete}
                   />
                 </span>
-              </div>
-            </div>
+                <span className="stroke-text inline-block align-baseline">
+                  <AnimatedLetters
+                    text="Rameshwar"
+                    baseDelay={0.42}
+                    isActive={isIntroComplete}
+                    getLetterStyle={(index) =>
+                      ({
+                        '--stroke-color': rameshwarStrokeColors[Math.min(index, rameshwarStrokeColors.length - 1)],
+                      } as React.CSSProperties)
+                    }
+                  />
+                </span>
+              </span>
+            </h1>
 
-            {/* Role title with shimmer stripes effect */}
-            <motion.div
-              className="mt-3 sm:mt-5 flex justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isIntroComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <motion.span
-                className="text-xs sm:text-base md:text-lg lg:text-xl font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase"
-                style={{
-                  background: 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.4) 100%)',
-                  backgroundSize: '200% 100%',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))',
-                }}
-                animate={{
-                  backgroundPosition: ['0% 0%', '200% 0%'],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-                itemProp="jobTitle"
-              >
-                Full Stack & AI Developer
-              </motion.span>
-            </motion.div>
-
-            {/* Animated divider line — below role */}
+            {/* Animated divider line — below heading */}
             <motion.div
               className="mt-3 sm:mt-4 lg:mt-5 flex justify-center"
               initial={{ scaleX: 0 }}
@@ -203,7 +181,7 @@ export default function HeroContent() {
               <div
                 className="h-[2px] sm:h-[3px] w-full max-w-[180px] sm:max-w-[280px] lg:max-w-[320px]"
                 style={{
-                  background: 'linear-gradient(90deg, transparent 0%, #FF4500 20%, #FF1493 50%, #FF8C00 80%, transparent 100%)',
+                  background: 'linear-gradient(90deg, transparent 0%, #FF5C29 20%, #FF1493 50%, #FF8C00 80%, transparent 100%)',
                 }}
               />
             </motion.div>
@@ -214,7 +192,7 @@ export default function HeroContent() {
           {/* ── Description (H2 equivalent for SEO) ── */}
           <motion.p
             variants={fadeUpItem}
-            className="text-base sm:text-xl md:text-2xl lg:text-[1.7rem] max-w-2xl mx-auto leading-relaxed mb-5 sm:mb-8 px-2 sm:px-0"
+            className="text-[0.9rem] sm:text-[1.05rem] md:text-[1.25rem] lg:text-[1.45rem] max-w-2xl mx-auto leading-relaxed mb-5 sm:mb-8 px-2 sm:px-0"
             style={{
               fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
               fontWeight: 400,
@@ -228,7 +206,7 @@ export default function HeroContent() {
             <em
               className="not-italic font-medium"
               style={{
-                background: 'linear-gradient(to right, #FF6347, #FF1493)',
+                background: 'linear-gradient(90deg, #FF5C29 0%, #FF1493 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -240,7 +218,7 @@ export default function HeroContent() {
             <em
               className="not-italic font-medium"
               style={{
-                background: 'linear-gradient(to right, #FF8C00, #FF1493)',
+                background: 'linear-gradient(90deg, #FF1493 0%, #FF8C00 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

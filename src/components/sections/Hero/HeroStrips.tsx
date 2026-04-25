@@ -86,13 +86,13 @@ export default function HeroStrips() {
     <>
       {/* Base dark background — always visible behind strips */}
       <div
-        className="absolute inset-0 z-0 rounded-b-[40px] sm:rounded-b-[60px] bg-[#0F0E0E]"
+        className="absolute inset-0 z-0 bg-[#0F0E0E]"
         aria-hidden="true"
       />
 
       {/* Light overlay — clean white backdrop during intro, fades out after */}
       <motion.div
-        className="absolute inset-0 z-0 rounded-b-[40px] sm:rounded-b-[60px]"
+        className="absolute inset-0 z-0"
         initial={{ opacity: 1 }}
         animate={{ opacity: isIntroComplete ? 0 : 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -105,7 +105,7 @@ export default function HeroStrips() {
 
       {/* 11 seamless vertical strips — pure CSS animation on GPU compositor */}
       <div
-        className="absolute inset-0 z-[10] flex rounded-b-[40px] sm:rounded-b-[60px] overflow-hidden"
+        className="absolute inset-0 z-[10] flex overflow-hidden"
         style={{ gap: 0, contain: 'strict' }}
         aria-hidden="true"
       >
@@ -129,14 +129,6 @@ export default function HeroStrips() {
         ))}
       </div>
 
-      {/* Gradient transition to About — hidden during intro */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-b from-transparent to-[#0F0E0E] pointer-events-none z-[3] rounded-b-[40px] sm:rounded-b-[60px]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isIntroComplete ? 1 : 0 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-        aria-hidden="true"
-      />
     </>
   );
 }

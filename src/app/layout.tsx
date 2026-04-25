@@ -9,6 +9,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { IntroAnimationProvider } from "@/context/IntroAnimationContext";
 import Chatbot from "@/components/ui/Chatbot";
 import CommandPalette from "@/components/ui/CommandPalette";
+import CustomCursor from "@/components/ui/CustomCursor";
 import SmoothScrollWrapper from "@/components/layout/SmoothScrollWrapper";
 import SuppressThreeWarnings from "@/components/utils/SuppressThreeWarnings";
 
@@ -288,6 +289,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${playfairDisplay.variable} ${plusJakartaSans.variable} ${spaceGrotesk.variable} antialiased`}
         style={{ overflow: 'visible' }}
       >
+        <CustomCursor />
         <IntroAnimationProvider>
           <SuppressThreeWarnings />
           <SmoothScrollWrapper>
