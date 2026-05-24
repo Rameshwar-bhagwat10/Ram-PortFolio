@@ -129,7 +129,7 @@ export default function GitHubContributions() {
   }
 
   return (
-    <section className="relative py-12 xs:py-16 sm:py-20 px-4 xs:px-5 sm:px-6 bg-[#0F0E0E] overflow-hidden">
+    <section id="github" className="relative py-12 xs:py-16 sm:py-20 px-4 xs:px-5 sm:px-6 bg-[#0F0E0E] overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/4 w-48 xs:w-64 sm:w-96 h-48 xs:h-64 sm:h-96 bg-green-500/5 rounded-full blur-3xl" />

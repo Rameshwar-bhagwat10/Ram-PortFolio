@@ -43,6 +43,7 @@ export default function CustomCursor() {
       ring.classList.toggle('is-visible', visible);
     };
 
+    // Tracking mouse coordinates
     const handlePointerMove = (event: PointerEvent) => {
       if (event.pointerType && event.pointerType !== 'mouse') return;
 
@@ -63,6 +64,56 @@ export default function CustomCursor() {
       dot.style.transform = `translate3d(${x - DOT_SIZE / 2}px, ${y - DOT_SIZE / 2}px, 0)`;
     };
 
+    // Event delegation for clickable and text elements
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target) return;
+
+      const isClickable = target.closest('a, button, [role="button"], .cursor-pointer, input[type="submit"], input[type="button"], label') !== null;
+      const isText = target.closest('input[type="text"], input[type="email"], input[type="search"], textarea, [contenteditable="true"]') !== null;
+
+      const dotVisual = dot.querySelector('.custom-cursor-dot-visual');
+      const ringVisual = ring.querySelector('.custom-cursor-ring-visual');
+
+      if (dotVisual && ringVisual) {
+        // Toggle hovered state
+        if (isClickable) {
+          dotVisual.classList.add('is-hovered');
+          ringVisual.classList.add('is-hovered');
+        } else {
+          dotVisual.classList.remove('is-hovered');
+          ringVisual.classList.remove('is-hovered');
+        }
+
+        // Toggle text entry state (fade cursor to avoid blocking text caret)
+        if (isText) {
+          dot.classList.add('is-text');
+          ring.classList.add('is-text');
+        } else {
+          dot.classList.remove('is-text');
+          ring.classList.remove('is-text');
+        }
+      }
+    };
+
+    const handleMouseDown = () => {
+      const dotVisual = dot.querySelector('.custom-cursor-dot-visual');
+      const ringVisual = ring.querySelector('.custom-cursor-ring-visual');
+      if (dotVisual && ringVisual) {
+        dotVisual.classList.add('is-clicked');
+        ringVisual.classList.add('is-clicked');
+      }
+    };
+
+    const handleMouseUp = () => {
+      const dotVisual = dot.querySelector('.custom-cursor-dot-visual');
+      const ringVisual = ring.querySelector('.custom-cursor-ring-visual');
+      if (dotVisual && ringVisual) {
+        dotVisual.classList.remove('is-clicked');
+        ringVisual.classList.remove('is-clicked');
+      }
+    };
+
     const handleWindowBlur = () => {
       setVisible(false);
     };
@@ -78,7 +129,6 @@ export default function CustomCursor() {
         setVisible(false);
         return;
       }
-
       if (hasPointerRef.current) {
         setVisible(true);
       }
@@ -99,6 +149,9 @@ export default function CustomCursor() {
     };
 
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
+    window.addEventListener('mousedown', handleMouseDown, { passive: true });
+    window.addEventListener('mouseup', handleMouseUp, { passive: true });
     window.addEventListener('blur', handleWindowBlur);
     window.addEventListener('focus', handleWindowFocus);
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -106,6 +159,9 @@ export default function CustomCursor() {
 
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('blur', handleWindowBlur);
       window.removeEventListener('focus', handleWindowFocus);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
@@ -121,8 +177,12 @@ export default function CustomCursor() {
 
   return (
     <>
-      <div ref={ringRef} className="custom-cursor-ring" aria-hidden="true" />
-      <div ref={dotRef} className="custom-cursor-dot" aria-hidden="true" />
+      <div ref={ringRef} className="custom-cursor-ring-container" aria-hidden="true">
+        <div className="custom-cursor-ring-visual" />
+      </div>
+      <div ref={dotRef} className="custom-cursor-dot-container" aria-hidden="true">
+        <div className="custom-cursor-dot-visual" />
+      </div>
     </>
   );
 }

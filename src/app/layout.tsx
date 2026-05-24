@@ -8,10 +8,12 @@ import Footer from "@/components/layout/Footer/Footer";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { IntroAnimationProvider } from "@/context/IntroAnimationContext";
 import Chatbot from "@/components/ui/Chatbot";
-import CommandPalette from "@/components/ui/CommandPalette";
+import TerminalSandbox from "@/components/ui/TerminalSandbox";
 import CustomCursor from "@/components/ui/CustomCursor";
 import SmoothScrollWrapper from "@/components/layout/SmoothScrollWrapper";
 import SuppressThreeWarnings from "@/components/utils/SuppressThreeWarnings";
+import MatrixRain from "@/components/ui/MatrixRain";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -290,6 +292,7 @@ export default function RootLayout({
         style={{ overflow: 'visible' }}
       >
         <CustomCursor />
+        <MatrixRain />
         <IntroAnimationProvider>
           <SuppressThreeWarnings />
           <SmoothScrollWrapper>
@@ -299,7 +302,7 @@ export default function RootLayout({
             </main>
             <Footer />
             <Chatbot />
-            <CommandPalette />
+            <TerminalSandbox />
           </SmoothScrollWrapper>
         </IntroAnimationProvider>
       </body>

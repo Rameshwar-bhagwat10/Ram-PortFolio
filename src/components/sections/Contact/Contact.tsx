@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import ContactCard from './ContactCard';
@@ -13,6 +13,12 @@ const EarthScene = dynamic(() => import('@/components/three/EarthScene'), {
 
 export default function Contact() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpen = () => setIsFormOpen(true);
+    window.addEventListener('open-contact-form', handleOpen);
+    return () => window.removeEventListener('open-contact-form', handleOpen);
+  }, []);
 
   return (
     <section

@@ -39,7 +39,8 @@ html.lenis, html.lenis body {
   html.custom-cursor-enabled [role='button'],
   html.custom-cursor-enabled .cursor-pointer,
   html.custom-cursor-enabled input[type='button'],
-  html.custom-cursor-enabled input[type='submit'] {
+  html.custom-cursor-enabled input[type='submit'],
+  html.custom-cursor-enabled label {
     cursor: none !important;
   }
 
@@ -51,8 +52,8 @@ html.lenis, html.lenis body {
   }
 }
 
-.custom-cursor-dot,
-.custom-cursor-ring {
+.custom-cursor-dot-container,
+.custom-cursor-ring-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -60,9 +61,21 @@ html.lenis, html.lenis body {
   opacity: 0;
   will-change: transform, opacity;
   z-index: 2147483647;
+  transition: opacity 0.22s ease;
 }
 
-.custom-cursor-dot {
+.custom-cursor-dot-container.is-visible,
+.custom-cursor-ring-container.is-visible {
+  opacity: 1;
+}
+
+/* Fade cursor when over text inputs to let the native text insertion caret display clearly */
+.custom-cursor-dot-container.is-text,
+.custom-cursor-ring-container.is-text {
+  opacity: 0.15 !important;
+}
+
+.custom-cursor-dot-visual {
   width: 5px;
   height: 5px;
   border-radius: 999px;
@@ -70,10 +83,10 @@ html.lenis, html.lenis body {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.75),
     0 0 12px rgba(255, 255, 255, 0.35);
-  transition: opacity 0.18s ease;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.custom-cursor-ring {
+.custom-cursor-ring-visual {
   width: 24px;
   height: 24px;
   border-radius: 999px;
@@ -81,12 +94,37 @@ html.lenis, html.lenis body {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.12) inset,
     0 0 18px rgba(255, 255, 255, 0.08);
-  transition: opacity 0.22s ease;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.custom-cursor-dot.is-visible,
-.custom-cursor-ring.is-visible {
-  opacity: 1;
+/* Hover State - Clickable items trigger expansions and color transition */
+.custom-cursor-dot-visual.is-hovered {
+  transform: scale(0.4);
+  background: rgba(255, 140, 0, 0.8);
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.6);
+}
+
+.custom-cursor-ring-visual.is-hovered {
+  transform: scale(1.6);
+  border-color: #FF1493; /* Symmetrical theme pink */
+  background: rgba(255, 20, 147, 0.08);
+  box-shadow: 
+    0 0 0 1px rgba(255, 20, 147, 0.2) inset,
+    0 0 20px rgba(255, 20, 147, 0.4);
+}
+
+/* Click State - Visual feedback */
+.custom-cursor-dot-visual.is-clicked {
+  transform: scale(0.2);
+}
+
+.custom-cursor-ring-visual.is-clicked {
+  transform: scale(0.9);
+  border-color: #39d353; /* Click feedback green */
+  background: rgba(57, 211, 83, 0.12);
+  box-shadow: 
+    0 0 0 1px rgba(57, 211, 83, 0.2) inset,
+    0 0 14px rgba(57, 211, 83, 0.4);
 }
 
 /* =====================================================
