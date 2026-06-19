@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, X } from 'lucide-react';
 
@@ -88,7 +88,7 @@ export default function TerminalSandbox() {
   const activeTheme = THEME_CONFIGS[currentTheme];
 
   // Generate ASCII welcome banner
-  const getBanner = (): React.ReactNode => (
+  const getBanner = useCallback((): React.ReactNode => (
     <div className={`${activeTheme.primaryColor} font-mono text-[9px] leading-3 sm:text-[11px] sm:leading-4 mb-3 select-none opacity-90`}>
       <pre className="whitespace-pre overflow-x-auto scrollbar-none">
 {`██████╗  █████╗ ███╗   ███╗     ██████╗██╗     ██╗
@@ -104,14 +104,14 @@ export default function TerminalSandbox() {
         Type <span className={`${activeTheme.accentColor} font-bold`}>help</span> to view available system commands.
       </div>
     </div>
-  );
+  ), [activeTheme.primaryColor, activeTheme.accentColor]);
 
   // Initial welcome message
   useEffect(() => {
     setLogs([
       { type: 'system', text: getBanner() }
     ]);
-  }, [currentTheme]);
+  }, [getBanner]);
 
   // Keyboard shortcut to open/close (Cmd+K / Ctrl+K / Escape)
   useEffect(() => {
@@ -479,7 +479,7 @@ export default function TerminalSandbox() {
         }
         break;
 
-      case 'neofetch':
+      case 'neofetch': {
         const todayStr = new Date().toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
@@ -515,6 +515,7 @@ export default function TerminalSandbox() {
           }
         ]);
         break;
+      }
 
       case 'weather':
         setLogs(prev => [
@@ -546,7 +547,7 @@ export default function TerminalSandbox() {
         ]);
         break;
 
-      case 'hack':
+      case 'hack': {
         setIsLoading(false); // handle loading manually for animation
         const steps = [
           { text: 'Initializing decryption protocol on port 8080...', type: 'system' as const },
@@ -577,6 +578,7 @@ export default function TerminalSandbox() {
           setLogs(prev => [...prev, { type: steps[i].type, text: steps[i].text }]);
         }
         break;
+      }
 
       case 'matrix':
         setLogs(prev => [

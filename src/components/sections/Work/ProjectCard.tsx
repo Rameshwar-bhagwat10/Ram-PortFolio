@@ -1,11 +1,10 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import Button from '@/components/ui/Button';
-import { ExternalLink, Github } from 'lucide-react';
-import { Project, projects } from './work.data';
-import { useState, useRef, memo, useCallback, useMemo, useEffect } from 'react';
+import { Github, Info } from 'lucide-react';
+import { Project } from './work.data';
+import { useState, memo, useCallback, useMemo, useEffect } from 'react';
 import { 
   SiNextdotjs, 
   SiReact, 
@@ -38,10 +37,8 @@ import {
   SiSupabase
 } from 'react-icons/si';
 import { TbApi } from 'react-icons/tb';
-import { AnimatePresence } from 'framer-motion';
-import { Info } from 'lucide-react';
 
-// Tech stack icon mapping with original brand colors
+// Brand color configurations for icons
 const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; style?: React.CSSProperties; className?: string }>; color: string }> = {
   'Next.js': { icon: SiNextdotjs, color: '#FFFFFF' },
   'Next.js (App Router)': { icon: SiNextdotjs, color: '#FFFFFF' },
@@ -84,14 +81,6 @@ const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; st
   'Android SDK': { icon: SiKotlin, color: '#3DDC84' },
 };
 
-// Optimized spring config
-const imageSpring = {
-  type: 'spring' as const,
-  stiffness: 150,
-  damping: 20,
-  mass: 0.8,
-};
-
 interface ProjectCardProps {
   project: Project;
   index: number;
@@ -100,10 +89,8 @@ interface ProjectCardProps {
 const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'info' | 'error' } | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-  // Auto-hide toast
+  // Auto-hide toast notifications
   useEffect(() => {
     if (toast) {
       const timer = setTimeout(() => setToast(null), 3000);
@@ -111,17 +98,11 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
     }
   }, [toast]);
 
-  // Alternating layout: even index = image left, odd index = image right
-  const isReversed = index % 2 !== 0;
-
-  // Slide direction based on layout side
-  const imageSlideX = isReversed ? 60 : -60;
-  const contentSlideX = isReversed ? -60 : 60;
-
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
   const handleMouseLeave = useCallback(() => setIsHovered(false), []);
-  
-  const handleLiveClick = useCallback(() => {
+
+  const handleLiveClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
     if (project.liveUrl && project.liveUrl.trim() !== "" && !project.liveUrl.includes("demo-link")) {
       window.open(project.liveUrl, '_blank');
     } else {
@@ -129,7 +110,8 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
     }
   }, [project.liveUrl]);
 
-  const handleGithubClick = useCallback(() => {
+  const handleGithubClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
     if (project.githubUrl && project.githubUrl.trim() !== "" && !project.githubUrl.includes("yourusername")) {
       window.open(project.githubUrl, '_blank');
     } else {
@@ -137,343 +119,193 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
     }
   }, [project.githubUrl]);
 
-  // Memoize project schema
-  const projectSchema = useMemo(() => ({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": project.title,
-    "description": `${project.tagline}. ${project.description}`,
-    "author": {
-      "@type": "Person",
-      "name": "Rameshwar Bhagwat",
-      "url": "https://rameshwarbhagwat.me"
-    },
-    "image": `https://rameshwarbhagwat.me${project.image}`,
-    "applicationCategory": "WebApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "keywords": project.techStack.join(', '),
-    ...(project.liveUrl && { "url": project.liveUrl }),
-    ...(project.githubUrl && { "codeRepository": project.githubUrl }),
-    "programmingLanguage": project.techStack,
-    "featureList": project.features
-  }), [project]);
+  // Find the primary technology for the App Icon
+  const primaryTech = useMemo(() => {
+    return project.techStack.find(tech => techConfig[tech]) || project.techStack[0];
+  }, [project.techStack]);
 
-  // Pre-computed styles
-  const ambientGlowStyle = useMemo(() => ({
-    background: `radial-gradient(circle, rgba(${project.color}, 0.4) 0%, transparent 70%)`,
-  }), [project.color]);
+  const techInfo = useMemo(() => techConfig[primaryTech], [primaryTech]);
+  const TechIcon = techInfo?.icon || SiReact;
+  const brandColor = `rgb(${project.color})`;
 
-  const borderGradientStyle = useMemo(() => ({
-    background: `conic-gradient(from var(--border-angle, 0deg), rgba(${project.color}, 0.15) 0%, rgba(${project.color}, 1) 12%, rgba(255,255,255,0.9) 15%, rgba(${project.color}, 1) 18%, rgba(${project.color}, 0.15) 30%)`,
-  }), [project.color]);
-
-  const staticBorderStyle = useMemo(() => ({
-    background: `linear-gradient(135deg, rgba(${project.color}, 0.35) 0%, rgba(${project.color}, 0.12) 50%, rgba(${project.color}, 0.35) 100%)`,
-  }), [project.color]);
+  // Card hover shadow style using project brand colors (mimics iOS ambient glow)
+  const hoverShadow = useMemo(() => {
+    return isHovered 
+      ? `0 20px 40px -15px rgba(${project.color}, 0.25), 0 1px 1px rgba(255, 255, 255, 0.08) inset`
+      : '0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(255, 255, 255, 0.03) inset';
+  }, [isHovered, project.color]);
 
   return (
-    <article
-      ref={ref}
-      className="w-full max-w-7xl mx-auto"
+    <motion.article
+      className="group relative overflow-hidden bg-[#161619]/70 backdrop-blur-xl border border-white/10 hover:border-white/20 rounded-[28px] flex flex-col h-full transition-colors duration-300"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      whileHover={{ y: -8, scale: 1.015 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+      style={{
+        boxShadow: hoverShadow,
+      }}
       itemScope
       itemType="https://schema.org/SoftwareApplication"
-      data-project-id={project.id}
-      style={{ contain: 'layout style' }}
     >
-      {/* JSON-LD Schema for Project */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
-      />
-      
-      {/* SEO Microdata */}
-      <meta itemProp="name" content={project.title} />
-      <meta itemProp="description" content={`${project.tagline}. ${project.description}`} />
-      <meta itemProp="author" content="Rameshwar Bhagwat" />
-      <meta itemProp="image" content={project.image} />
-      <meta itemProp="keywords" content={project.techStack.join(', ')} />
-      {project.liveUrl && <meta itemProp="url" content={project.liveUrl} />}
-      
-      <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-14 xl:gap-16 items-center ${isReversed ? 'md:[direction:rtl]' : ''}`}>
-        
-        {/* Image Container - simplified animation */}
-        <figure
-          className={`relative ${isReversed ? 'md:[direction:ltr]' : ''}`}
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? 'translateX(0)' : `translateX(${imageSlideX}px)`,
-            transition: 'opacity 0.7s ease-out 0.1s, transform 0.7s ease-out 0.1s',
-          }}
-          itemProp="image"
-        >
-          {/* Ambient glow */}
-          <div
-            className="absolute inset-0 -m-4 sm:-m-6 md:-m-8 rounded-full blur-3xl pointer-events-none opacity-15 sm:opacity-20"
-            style={ambientGlowStyle}
+      {/* Padded iOS Preview Image */}
+      <div className="p-3 pb-0 select-none">
+        <div className="relative aspect-[1.6] rounded-2xl overflow-hidden bg-neutral-950 border border-white/5">
+          {/* Main preview screenshot */}
+          <Image
+            src={project.image}
+            alt={`${project.title} screenshot`}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-all duration-700 group-hover:scale-105"
+            priority={index < 3}
           />
-          
-          {/* Image Box */}
-          <div className="relative h-[32vh] xs:h-[36vh] sm:h-[40vh] md:h-[45vh] lg:h-[55vh] xl:h-[60vh] rounded-xl md:rounded-2xl overflow-visible">
-            {/* Center hover detection zone */}
-            <div
-              className="absolute inset-[25%] z-[5] cursor-pointer"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+          {/* Hover preview interface cross-fade */}
+          <div className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100">
+            <Image
+              src={project.hoverImage}
+              alt={`${project.title} hover preview`}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
             />
-            {/* First Image - Back layer */}
-            <motion.div
-              className="absolute inset-0 rounded-xl md:rounded-2xl overflow-hidden"
-              animate={{
-                rotate: isHovered ? -8 : 0,
-                scale: isHovered ? 0.7 : 1,
-                x: isHovered ? -40 : 0,
-                y: isHovered ? 20 : 0,
-              }}
-              transition={imageSpring}
-              style={{ transformOrigin: 'center center', willChange: 'transform' }}
-            >
-              {/* Solid dark ring base */}
-              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl z-0 bg-[#1a1a1a]" />
-              {/* Animated gradient border */}
-              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl animate-border-rotate z-0" style={borderGradientStyle} />
-              {/* Static border glow underneath */}
-              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl z-0" style={staticBorderStyle} />
-              {/* Inner image with gap */}
-              <div className="absolute inset-0 m-[3px] rounded-[9px] md:rounded-[13px] overflow-hidden bg-[#171616] z-[1]">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} - Rameshwar Bhagwat Project Screenshot`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain md:object-cover"
-                  priority={index === 0}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 text-white/40 text-[10px] xs:text-xs sm:text-sm font-medium tabular-nums z-10">
-                  {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Second Image - Front layer (on hover) */}
-            <motion.div
-              className="absolute inset-0 rounded-xl md:rounded-2xl overflow-hidden"
-              animate={{
-                rotate: isHovered ? 8 : 0,
-                scale: isHovered ? 0.7 : 1,
-                x: isHovered ? 40 : 0,
-                y: isHovered ? -20 : 0,
-                opacity: isHovered ? 1 : 0,
-              }}
-              transition={imageSpring}
-              style={{ transformOrigin: 'center center', willChange: 'transform' }}
-            >
-              {/* Solid dark ring base */}
-              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl z-0 bg-[#1a1a1a]" />
-              {/* Animated gradient border */}
-              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl animate-border-rotate z-0" style={borderGradientStyle} />
-              {/* Static border glow underneath */}
-              <div className="absolute -inset-[3px] rounded-xl md:rounded-2xl z-0" style={staticBorderStyle} />
-              {/* Inner image with gap */}
-              <div className="absolute inset-0 m-[3px] rounded-[9px] md:rounded-[13px] overflow-hidden bg-[#171616] z-[1]">
-                <Image
-                  src={project.hoverImage}
-                  alt={`${project.title} - Rameshwar Bhagwat Project Interface`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain md:object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-              </div>
-            </motion.div>
           </div>
-        </figure>
+          {/* Inner dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+        </div>
+      </div>
 
-        {/* Content Container - simplified with CSS transitions */}
-        <div
-          className={`flex flex-col justify-center space-y-3 sm:space-y-4 md:space-y-5 ${isReversed ? 'md:[direction:ltr]' : ''}`}
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? 'translateX(0)' : `translateX(${contentSlideX}px)`,
-            transition: 'opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s',
-          }}
-        >
-          {/* Title */}
-          <h3
-            className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight"
-            itemProp="name"
-          >
-            {project.title}
-          </h3>
-
-          {/* Tagline */}
-          <p
-            className="text-base sm:text-lg md:text-lg lg:text-xl text-white/90"
-            itemProp="headline"
-            style={{
-              fontFamily: 'var(--font-instrument), Georgia, serif',
-              fontStyle: 'italic',
-              fontWeight: 400,
-            }}
-          >
-            {project.tagline}
-          </p>
-
-          {/* Divider */}
-          <div
-            className="w-10 md:w-12 h-[2px] bg-primary-gradient"
-            aria-hidden="true"
-            style={{
-              transform: isInView ? 'scaleX(1)' : 'scaleX(0)',
-              transformOrigin: 'left',
-              transition: 'transform 0.5s ease-out 0.3s',
-            }}
-          />
+      {/* Card Info Section */}
+      <div className="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          {/* iOS App Store styled Title block */}
+          <div className="flex items-start gap-3">
+            {/* Squircle App Icon */}
+            <div 
+              className="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center transition-all duration-300"
+              style={{
+                background: `rgba(${project.color}, 0.1)`,
+                border: `1.5px solid rgba(${project.color}, 0.25)`,
+                boxShadow: isHovered ? `0 0 15px rgba(${project.color}, 0.2)` : 'none'
+              }}
+            >
+              <TechIcon 
+                size={22} 
+                style={{ color: techInfo?.color || '#FFFFFF' }} 
+              />
+            </div>
+            {/* Title / Tagline */}
+            <div className="min-w-0 flex-1">
+              <span className="block text-[10px] tracking-wider text-white/40 uppercase font-bold font-outfit">
+                {project.tagline.split('for')[0].trim()}
+              </span>
+              <h3 
+                className="text-lg sm:text-xl font-bold tracking-tight font-outfit truncate transition-colors duration-300 mt-0.5"
+                style={{
+                  color: isHovered ? brandColor : '#FFFFFF'
+                }}
+                itemProp="name"
+              >
+                {project.title}
+              </h3>
+            </div>
+          </div>
 
           {/* Description */}
-          <p
-            className="text-sm sm:text-base md:text-base lg:text-lg text-white/80 leading-relaxed"
+          <p 
+            className="text-white/60 text-xs sm:text-sm font-outfit mt-4 leading-relaxed line-clamp-3 mb-4"
             itemProp="description"
-            style={{
-              fontFamily: 'var(--font-instrument), Georgia, serif',
-              fontStyle: 'italic',
-              fontWeight: 400,
-            }}
           >
             {project.description}
           </p>
 
-          {/* Features */}
-          <ul className="space-y-1.5 sm:space-y-2 md:space-y-2.5" itemProp="about">
-            {project.features.map((feature, idx) => (
-              <li
-                key={idx}
-                className="flex items-start gap-2 md:gap-3"
-                style={{
-                  opacity: isInView ? 1 : 0,
-                  transform: isInView ? 'translateX(0)' : 'translateX(15px)',
-                  transition: `opacity(1) ease-out ${0.35 + idx * 0.06}s, transform 0.4s ease-out ${0.35 + idx * 0.06}s`,
-                }}
-              >
-                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rotate-45 bg-primary-gradient mt-1.5 md:mt-2 flex-shrink-0" aria-hidden="true" />
-                <p
-                  className="text-[12px] sm:text-sm md:text-base text-white/70 leading-relaxed"
-                  style={{
-                    fontFamily: 'var(--font-instrument), Georgia, serif',
-                    fontStyle: 'italic',
-                    fontWeight: 400,
-                  }}
-                >
-                  {feature}
-                </p>
+          {/* Core Features List */}
+          <ul className="space-y-1.5 mb-5 mt-2">
+            {project.features.slice(0, 3).map((feat, idx) => (
+              <li key={idx} className="flex items-center gap-2 text-[11px] sm:text-xs text-white/55 font-outfit">
+                <span 
+                  className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: brandColor }}
+                />
+                <span className="line-clamp-1">{feat}</span>
               </li>
             ))}
           </ul>
 
-          {/* Tech Stack */}
-          <div
-            className="flex flex-wrap gap-1.5 md:gap-2"
-            role="list"
-            aria-label="Technologies used"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? 'translateY(0)' : 'translateY(10px)',
-              transition: 'opacity 0.5s ease-out 0.5s, transform 0.5s ease-out 0.5s',
-            }}
-          >
-            {project.techStack.map((tech, idx) => {
-              const config = techConfig[tech];
-              const Icon = config?.icon || SiReact;
-              const iconColor = config?.color || '#FFFFFF';
-              
-              return (
-                <span
-                  key={idx}
-                  className="px-2 md:px-2.5 py-0.5 md:py-1 text-[11px] md:text-sm rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-1 md:gap-1.5 hover:bg-white/10 transition-colors duration-200"
-                  role="listitem"
-                  itemProp="keywords"
-                  style={{
-                    fontFamily: 'var(--font-instrument), Georgia, serif',
-                    fontStyle: 'italic',
-                    fontWeight: 400,
-                  }}
-                >
-                  <Icon size={12} className="flex-shrink-0 md:w-3.5 md:h-3.5" style={{ color: iconColor }} aria-hidden="true" />
-                  <span className="text-white/80">{tech}</span>
-                </span>
-              );
-            })}
-          </div>
-
-          {/* CTA Buttons */}
-          <nav
-            className="flex items-center gap-2.5 md:gap-3 pt-1 md:pt-2 lg:pt-3"
-            aria-label="Project links"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? 'translateY(0)' : 'translateY(10px)',
-              transition: 'opacity 0.5s ease-out 0.6s, transform 0.5s ease-out 0.6s',
-            }}
-          >
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={handleLiveClick}
-              rightIcon={<ExternalLink size={13} className="sm:w-3.5 sm:h-3.5" />}
-              aria-label={`View ${project.title} live demo`}
-              className="text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 whitespace-nowrap"
-            >
-              View Live
-            </Button>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handleGithubClick}
-              rightIcon={<Github size={13} className="sm:w-3.5 sm:h-3.5" />}
-              aria-label={`View ${project.title} source code on GitHub`}
-              className="text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 whitespace-nowrap"
-            >
-              Source Code
-            </Button>
-          </nav>
-
-          {/* Toast Notification */}
-          <AnimatePresence>
-            {toast && (
-              <motion.div
-                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#1a1a1a]/90 border border-white/10 backdrop-blur-xl shadow-2xl min-w-[320px] max-w-[90vw]"
+          {/* Tech Badges */}
+          <div className="flex flex-wrap gap-1 mb-5">
+            {project.techStack.slice(0, 4).map((tech, idx) => (
+              <span 
+                key={idx} 
+                className="px-2.5 py-0.5 text-[10px] rounded-md bg-white/5 border border-white/10 text-white/60 font-outfit font-semibold"
               >
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-gradient flex items-center justify-center">
-                  <Info size={16} className="text-white" />
-                </div>
-                <p className="text-sm font-medium text-white/90 leading-tight">
-                  {toast.message}
-                </p>
-                <button 
-                  onClick={() => setToast(null)}
-                  className="ml-auto text-white/40 hover:text-white/60 transition-colors"
-                >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1L11 11M1 11L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </button>
-              </motion.div>
+                {tech}
+              </span>
+            ))}
+            {project.techStack.length > 4 && (
+              <span className="px-2.5 py-0.5 text-[10px] rounded-md bg-white/5 border border-white/10 text-white/40 font-outfit font-semibold">
+                +{project.techStack.length - 4}
+              </span>
             )}
-          </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Action Footer */}
+        <div>
+          <div className="w-full h-px bg-white/5 mb-4" />
+          <nav className="flex items-center gap-3" aria-label="Project actions">
+            {/* iOS GET Button (View Live) */}
+            <button
+              onClick={handleLiveClick}
+              className="flex-1 bg-white text-black font-bold font-outfit text-xs py-2 rounded-full hover:bg-neutral-200 transition-colors uppercase tracking-wider select-none text-center cursor-pointer"
+            >
+              Get
+            </button>
+            {/* Code button (GitHub) */}
+            <button
+              onClick={handleGithubClick}
+              className="flex-1 border border-white/10 hover:bg-white/5 text-white font-semibold font-outfit text-xs py-2 rounded-full transition-colors flex items-center justify-center gap-1 select-none cursor-pointer"
+            >
+              <Github size={12} />
+              <span>Source</span>
+            </button>
+          </nav>
         </div>
       </div>
-    </article>
+
+      {/* Floating iOS-style Toast Banners */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 15, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#1d1d1f]/95 border border-white/10 backdrop-blur-xl shadow-2xl min-w-[320px] max-w-[90vw]"
+          >
+            <div 
+              className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+              style={{ background: `rgba(${project.color}, 0.2)` }}
+            >
+              <Info size={16} style={{ color: brandColor }} />
+            </div>
+            <p className="text-sm font-medium text-white/90 leading-tight flex-1">
+              {toast.message}
+            </p>
+            <button 
+              onClick={() => setToast(null)}
+              className="text-white/40 hover:text-white/60 transition-colors ml-2 cursor-pointer"
+            >
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L11 11M1 11L11 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.article>
   );
 });
+
+ProjectCard.displayName = 'ProjectCard';
 
 export default ProjectCard;

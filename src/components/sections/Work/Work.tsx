@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useCallback, memo } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useCallback, memo, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from './work.data';
 import ProjectCard from './ProjectCard';
 
 const INITIAL_PROJECTS_COUNT = 3;
+const categories = ['All', 'AI & ML', 'Full-Stack', 'Web Apps'] as const;
+type Category = typeof categories[number];
 
 // Memoized stats component
 const Stats = memo(function Stats() {
@@ -13,7 +15,7 @@ const Stats = memo(function Stats() {
     <div className="flex items-center justify-center gap-8 sm:gap-12 mt-8 sm:mt-10">
       <div className="text-center">
         <span
-          className="block text-2xl sm:text-3xl font-bold"
+          className="block text-2xl sm:text-3xl font-bold font-outfit"
           style={{
             background: 'linear-gradient(135deg, #FF8C00, #FF1493)',
             WebkitBackgroundClip: 'text',
@@ -23,14 +25,14 @@ const Stats = memo(function Stats() {
         >
           {projects.length}
         </span>
-        <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider">
+        <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider font-semibold">
           Projects
         </span>
       </div>
       <div className="w-px h-8 bg-white/10" />
       <div className="text-center">
         <span
-          className="block text-2xl sm:text-3xl font-bold"
+          className="block text-2xl sm:text-3xl font-bold font-outfit"
           style={{
             background: 'linear-gradient(135deg, #FF8C00, #FF1493)',
             WebkitBackgroundClip: 'text',
@@ -40,14 +42,14 @@ const Stats = memo(function Stats() {
         >
           15+
         </span>
-        <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider">
+        <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider font-semibold">
           Technologies
         </span>
       </div>
       <div className="w-px h-8 bg-white/10" />
       <div className="text-center">
         <span
-          className="block text-2xl sm:text-3xl font-bold"
+          className="block text-2xl sm:text-3xl font-bold font-outfit"
           style={{
             background: 'linear-gradient(135deg, #FF8C00, #FF1493)',
             WebkitBackgroundClip: 'text',
@@ -57,7 +59,7 @@ const Stats = memo(function Stats() {
         >
           4
         </span>
-        <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider">
+        <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider font-semibold">
           Industries
         </span>
       </div>
@@ -66,13 +68,42 @@ const Stats = memo(function Stats() {
 });
 
 export default function Work() {
+  const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [showAll, setShowAll] = useState(false);
 
-  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
-  const remainingCount = projects.length - INITIAL_PROJECTS_COUNT;
+  // Filter projects dynamically based on category selection
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) => {
+      if (activeCategory === 'All') return true;
+      if (activeCategory === 'AI & ML') {
+        return project.techStack.some((t) =>
+          ['Python', 'Scikit-learn', 'TensorFlow', 'OpenAI API'].includes(t)
+        );
+      }
+      if (activeCategory === 'Full-Stack') {
+        return project.techStack.some((t) =>
+          ['Node.js', 'Express.js', 'MySQL', 'MongoDB', 'PostgreSQL', 'Supabase (PostgreSQL + Auth)', 'Prisma'].includes(t)
+        );
+      }
+      if (activeCategory === 'Web Apps') {
+        return project.techStack.some((t) =>
+          ['Next.js', 'React', 'Tailwind CSS'].includes(t)
+        );
+      }
+      return true;
+    });
+  }, [activeCategory]);
+
+  const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, INITIAL_PROJECTS_COUNT);
+  const remainingCount = filteredProjects.length - INITIAL_PROJECTS_COUNT;
 
   const handleShowMore = useCallback(() => setShowAll(true), []);
   const handleShowLess = useCallback(() => setShowAll(false), []);
+
+  const handleCategoryChange = useCallback((cat: Category) => {
+    setActiveCategory(cat);
+    setShowAll(false); // Reset list expansion on tab change
+  }, []);
 
   return (
     <section
@@ -87,7 +118,7 @@ export default function Work() {
       <meta itemProp="name" content="Featured Projects - Rameshwar Bhagwat Portfolio" />
       <meta
         itemProp="description"
-         content="Showcase of full-stack and AI-focused web development projects including WebCraft, Safecoast, and AI ML Progress Tracker, built with React, Next.js, TypeScript, and modern scalable architecture."
+        content="Showcase of full-stack and AI-focused web development projects including WebCraft, Safecoast, and AI ML Progress Tracker, built with React, Next.js, TypeScript, and modern scalable architecture."
       />
       <meta itemProp="author" content="Rameshwar Bhagwat" />
 
@@ -113,7 +144,7 @@ export default function Work() {
       </div>
 
       {/* Header Section */}
-      <div className="container mx-auto px-4 sm:px-6 mb-12 sm:mb-16 md:mb-20">
+      <div className="container mx-auto px-4 sm:px-6 mb-10 sm:mb-12">
         <div className="text-center max-w-4xl mx-auto">
           {/* Label */}
           <motion.p
@@ -121,7 +152,7 @@ export default function Work() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-4 sm:mb-5"
+            className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-3 sm:mb-4 font-outfit"
             style={{
               background: 'linear-gradient(90deg, #FF8C00, #FF1493)',
               WebkitBackgroundClip: 'text',
@@ -138,8 +169,7 @@ export default function Work() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-[-0.02em] mb-5 sm:mb-6"
-            style={{ fontFamily: 'var(--font-jakarta), "Plus Jakarta Sans", sans-serif' }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-[-0.02em] mb-4 sm:mb-5 font-outfit"
           >
             <span className="text-white">Featured </span>
             <span className="text-rainbow-gradient">Projects</span>
@@ -147,7 +177,7 @@ export default function Work() {
 
           {/* Animated line */}
           <motion.div
-            className="flex justify-center mb-6 sm:mb-8"
+            className="flex justify-center mb-5 sm:mb-6"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -169,13 +199,9 @@ export default function Work() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-sm sm:text-base md:text-lg text-white/50 leading-relaxed max-w-2xl mx-auto"
-            style={{
-              fontFamily: 'var(--font-playfair), "Playfair Display", Georgia, serif',
-            }}
+            className="text-sm sm:text-base md:text-lg text-white/50 leading-relaxed max-w-2xl mx-auto font-outfit"
           >
-            A curated collection of full-stack applications showcasing modern web technologies and
-            innovative solutions.
+            A curated collection of full-stack applications showcasing modern web technologies, AI integrations, and native experiences.
           </motion.p>
 
           {/* Stats */}
@@ -190,11 +216,55 @@ export default function Work() {
         </div>
       </div>
 
-      {/* Project Cards */}
-      <div className="container mx-auto px-4 sm:px-6 space-y-16 sm:space-y-20 md:space-y-28 lg:space-y-36">
-        {visibleProjects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} index={index} />
-        ))}
+      {/* iOS Segmented Control Switcher */}
+      <div className="flex justify-center mb-10 sm:mb-14 px-4 sm:px-0">
+        <div className="relative flex p-1 bg-white/5 border border-white/10 rounded-2xl max-w-md w-full sm:w-auto overflow-hidden">
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => handleCategoryChange(cat)}
+                className="relative flex-1 sm:flex-initial px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-xl text-center cursor-pointer transition-colors duration-200 z-[1] select-none font-outfit"
+                style={{
+                  color: isActive ? '#000000' : 'rgba(255, 255, 255, 0.6)',
+                }}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="segmented-active"
+                    className="absolute inset-0 bg-white rounded-xl shadow-md z-[-1]"
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  />
+                )}
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Project Cards Grid */}
+      <div className="container mx-auto px-4 sm:px-6">
+        <motion.div 
+          layout 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {visibleProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.4 }}
+              >
+                <ProjectCard project={project} index={index} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* See More Button */}
@@ -204,7 +274,7 @@ export default function Work() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="container mx-auto px-4 sm:px-6 mt-16 sm:mt-20 md:mt-28"
+          className="container mx-auto px-4 sm:px-6 mt-16 sm:mt-20 md:mt-24"
         >
           <div className="flex flex-col items-center justify-center">
             {/* Decorative line */}
@@ -221,7 +291,7 @@ export default function Work() {
             >
               {/* Button text */}
               <span
-                className="text-sm sm:text-base font-semibold tracking-[0.15em] uppercase transition-all duration-300 group-hover:tracking-[0.2em]"
+                className="text-sm sm:text-base font-semibold tracking-[0.15em] uppercase transition-all duration-300 group-hover:tracking-[0.2em] font-outfit"
                 style={{
                   background: 'linear-gradient(90deg, #FF8C00, #FF1493)',
                   WebkitBackgroundClip: 'text',
@@ -264,7 +334,7 @@ export default function Work() {
             </button>
 
             {/* Subtitle */}
-            <p className="text-white/30 text-xs sm:text-sm mt-4 text-center">
+            <p className="text-white/30 text-xs sm:text-sm mt-4 text-center font-outfit">
               Click to reveal more innovative projects
             </p>
           </div>
@@ -273,10 +343,10 @@ export default function Work() {
 
       {/* Show Less Button (when expanded) */}
       {showAll && projects.length > INITIAL_PROJECTS_COUNT && (
-        <div className="container mx-auto px-4 sm:px-6 mt-16 sm:mt-20 flex justify-center">
+        <div className="container mx-auto px-4 sm:px-6 mt-12 sm:mt-16 flex justify-center">
           <button
             onClick={handleShowLess}
-            className="group flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+            className="group flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
           >
             <svg
               className="w-4 h-4 rotate-180"
@@ -287,7 +357,7 @@ export default function Work() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
-            <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
+            <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors font-outfit">
               Show Less
             </span>
           </button>

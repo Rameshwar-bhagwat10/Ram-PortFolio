@@ -25,6 +25,16 @@ const config: Config = {
         muted: '#B3B3B3',
         border: 'rgba(255, 255, 255, 0.06)',
       },
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'monospace'],
+        outfit: ['var(--font-outfit)', 'sans-serif'],
+        bebas: ['var(--font-bebas-neue)', 'sans-serif'],
+        jakarta: ['var(--font-jakarta)', 'sans-serif'],
+        playfair: ['var(--font-playfair)', 'serif'],
+        space: ['var(--font-space-grotesk)', 'sans-serif'],
+        instrument: ['var(--font-instrument)', 'serif'],
+      },
       container: {
         center: true,
         padding: {
