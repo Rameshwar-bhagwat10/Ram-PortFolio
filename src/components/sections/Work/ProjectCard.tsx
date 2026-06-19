@@ -34,7 +34,8 @@ import {
   SiExpress,
   SiMysql,
   SiAxios,
-  SiSupabase
+  SiSupabase,
+  SiOpenai
 } from 'react-icons/si';
 import { TbApi } from 'react-icons/tb';
 
@@ -76,6 +77,7 @@ const techConfig: Record<string, { icon: React.ComponentType<{ size?: number; st
   'NLTK': { icon: SiPython, color: '#3776AB' },
   'Matplotlib': { icon: SiPython, color: '#11557C' },
   'OpenWeather API': { icon: TbApi, color: '#EB6E4B' },
+  'OpenAI API': { icon: SiOpenai, color: '#10A37F' },
   'REST API': { icon: TbApi, color: '#009688' },
   'Axios': { icon: SiAxios, color: '#5A29E4' },
   'Android SDK': { icon: SiKotlin, color: '#3DDC84' },
@@ -213,14 +215,14 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
 
           {/* Description */}
           <p 
-            className="text-white/60 text-xs sm:text-sm font-outfit mt-4 leading-relaxed line-clamp-3 mb-4"
+            className="text-white/60 text-xs sm:text-sm font-outfit mt-3 leading-relaxed line-clamp-3 mb-3"
             itemProp="description"
           >
             {project.description}
           </p>
 
           {/* Core Features List */}
-          <ul className="space-y-1.5 mb-5 mt-2">
+          <ul className="space-y-1 mb-3.5 mt-2">
             {project.features.slice(0, 3).map((feat, idx) => (
               <li key={idx} className="flex items-center gap-2 text-[11px] sm:text-xs text-white/55 font-outfit">
                 <span 
@@ -233,42 +235,56 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
           </ul>
 
           {/* Tech Badges */}
-          <div className="flex flex-wrap gap-1 mb-5">
-            {project.techStack.slice(0, 4).map((tech, idx) => (
-              <span 
-                key={idx} 
-                className="px-2.5 py-0.5 text-[10px] rounded-md bg-white/5 border border-white/10 text-white/60 font-outfit font-semibold"
-              >
-                {tech}
-              </span>
-            ))}
-            {project.techStack.length > 4 && (
-              <span className="px-2.5 py-0.5 text-[10px] rounded-md bg-white/5 border border-white/10 text-white/40 font-outfit font-semibold">
-                +{project.techStack.length - 4}
-              </span>
-            )}
+          <div className="flex flex-wrap gap-1.5 mb-3.5">
+            {project.techStack.map((tech, idx) => {
+              const config = techConfig[tech];
+              const Icon = config?.icon;
+              const iconColor = config?.color || '#FFFFFF';
+
+              return (
+                <span 
+                  key={idx} 
+                  className="inline-flex items-center gap-1 px-2 py-0.5 text-[9.5px] rounded-full bg-white/[0.03] border border-white/[0.06] text-white/55 font-outfit font-semibold transition-all duration-300 hover:bg-white/[0.06] hover:border-white/[0.12] hover:text-white/80"
+                >
+                  {Icon && (
+                    <Icon 
+                      size={10.5} 
+                      style={{ color: iconColor }}
+                      className="flex-shrink-0"
+                    />
+                  )}
+                  <span>{tech}</span>
+                </span>
+              );
+            })}
           </div>
         </div>
 
         {/* Action Footer */}
         <div>
-          <div className="w-full h-px bg-white/5 mb-4" />
+          <div className="w-full h-px bg-white/5 mb-3" />
           <nav className="flex items-center gap-3" aria-label="Project actions">
-            {/* iOS GET Button (View Live) */}
-            <button
+            {/* iOS Live App Button */}
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               onClick={handleLiveClick}
-              className="flex-1 bg-white text-black font-bold font-outfit text-xs py-2 rounded-full hover:bg-neutral-200 transition-colors uppercase tracking-wider select-none text-center cursor-pointer"
+              className="flex-1 text-white font-bold font-outfit text-xs py-2 rounded-full transition-all duration-300 select-none text-center cursor-pointer hover:brightness-110"
+              style={{
+                backgroundColor: brandColor,
+                boxShadow: `0 4px 14px rgba(${project.color}, 0.3)`,
+              }}
             >
-              Get
-            </button>
+              Live App
+            </motion.button>
             {/* Code button (GitHub) */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               onClick={handleGithubClick}
-              className="flex-1 border border-white/10 hover:bg-white/5 text-white font-semibold font-outfit text-xs py-2 rounded-full transition-colors flex items-center justify-center gap-1 select-none cursor-pointer"
+              className="flex-1 border border-white/10 hover:bg-white/5 hover:border-white/20 text-white font-semibold font-outfit text-xs py-2 rounded-full transition-all flex items-center justify-center gap-1.5 select-none cursor-pointer"
             >
-              <Github size={12} />
+              <Github size={12} className="text-white/80" />
               <span>Source</span>
-            </button>
+            </motion.button>
           </nav>
         </div>
       </div>

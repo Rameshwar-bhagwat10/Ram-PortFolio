@@ -97,9 +97,6 @@ export default function Work() {
   const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, INITIAL_PROJECTS_COUNT);
   const remainingCount = filteredProjects.length - INITIAL_PROJECTS_COUNT;
 
-  const handleShowMore = useCallback(() => setShowAll(true), []);
-  const handleShowLess = useCallback(() => setShowAll(false), []);
-
   const handleCategoryChange = useCallback((cat: Category) => {
     setActiveCategory(cat);
     setShowAll(false); // Reset list expansion on tab change
@@ -218,27 +215,43 @@ export default function Work() {
 
       {/* iOS Segmented Control Switcher */}
       <div className="flex justify-center mb-10 sm:mb-14 px-4 sm:px-0">
-        <div className="relative flex p-1 bg-white/5 border border-white/10 rounded-2xl max-w-md w-full sm:w-auto overflow-hidden">
-          {categories.map((cat) => {
+        <div className="relative flex items-center bg-[#0d0d0f]/80 backdrop-blur-xl border border-white/[0.06] rounded-full p-[3px] max-w-md w-full sm:w-auto overflow-hidden">
+          {categories.map((cat, idx) => {
             const isActive = activeCategory === cat;
+            const isNextActive = categories[idx + 1] === activeCategory;
+            const showDivider = idx < categories.length - 1 && !isActive && !isNextActive;
+
             return (
-              <button
-                key={cat}
-                onClick={() => handleCategoryChange(cat)}
-                className="relative flex-1 sm:flex-initial px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold rounded-xl text-center cursor-pointer transition-colors duration-200 z-[1] select-none font-outfit"
-                style={{
-                  color: isActive ? '#000000' : 'rgba(255, 255, 255, 0.6)',
-                }}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="segmented-active"
-                    className="absolute inset-0 bg-white rounded-xl shadow-md z-[-1]"
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+              <div key={cat} className="flex-1 sm:flex-initial flex items-center">
+                <motion.button
+                  whileTap={{ scale: 0.96 }}
+                  onClick={() => handleCategoryChange(cat)}
+                  className={`relative flex-1 sm:flex-initial w-full sm:w-auto px-4 sm:px-6 py-2 text-xs sm:text-[13px] font-semibold rounded-full text-center cursor-pointer transition-all duration-200 z-[1] select-none font-outfit ${
+                    isActive ? 'text-neutral-950 font-bold' : 'text-white/60 hover:text-white/90'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="segmented-active"
+                      className="absolute inset-0 bg-white rounded-full z-[-1]"
+                      style={{
+                        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 0.5px 0 rgba(255, 255, 255, 0.4)',
+                      }}
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  {cat}
+                </motion.button>
+                {/* iOS-style vertical divider */}
+                {idx < categories.length - 1 && (
+                  <div
+                    className="w-[1px] h-3.5 bg-white/[0.08] self-center transition-all duration-200"
+                    style={{
+                      opacity: showDivider ? 1 : 0,
+                    }}
                   />
                 )}
-                {cat}
-              </button>
+              </div>
             );
           })}
         </div>
@@ -267,110 +280,46 @@ export default function Work() {
         </motion.div>
       </div>
 
-      {/* See More Button */}
-      {remainingCount > 0 && !showAll && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="container mx-auto px-4 sm:px-6 mt-16 sm:mt-20 md:mt-24"
-        >
-          <div className="flex flex-col items-center justify-center">
-            {/* Decorative line */}
-            <div
-              className="w-px h-16 sm:h-20 mb-8"
-              style={{
-                background: 'linear-gradient(to bottom, transparent, rgba(255,140,0,0.3), transparent)',
-              }}
-            />
+      {/* See More / Show Less Button */}
+      {filteredProjects.length > INITIAL_PROJECTS_COUNT && (
+        <div className="container mx-auto px-4 sm:px-6 mt-16 sm:mt-20 md:mt-24 flex flex-col items-center justify-center">
+          {/* Decorative divider */}
+          <div
+            className="w-px h-12 mb-8"
+            style={{
+              background: 'linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent)',
+            }}
+          />
 
-            <button
-              onClick={handleShowMore}
-              className="group relative flex flex-col items-center gap-4 cursor-pointer"
-            >
-              {/* Button text */}
-              <span
-                className="text-sm sm:text-base font-semibold tracking-[0.15em] uppercase transition-all duration-300 group-hover:tracking-[0.2em] font-outfit"
-                style={{
-                  background: 'linear-gradient(90deg, #FF8C00, #FF1493)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                Explore {remainingCount} More Project{remainingCount > 1 ? 's' : ''}
-              </span>
-
-              {/* Animated arrow */}
-              <div
-                className="flex flex-col items-center"
-                style={{ animation: 'bounce-arrow 1.5s ease-in-out infinite' }}
-              >
-                <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="url(#arrowGradient)"
-                  strokeWidth={2}
-                >
-                  <defs>
-                    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#FF8C00" />
-                      <stop offset="100%" stopColor="#FF1493" />
-                    </linearGradient>
-                  </defs>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-
-              {/* Hover glow effect */}
-              <div
-                className="absolute -inset-6 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 70%)',
-                }}
-              />
-            </button>
-
-            {/* Subtitle */}
-            <p className="text-white/30 text-xs sm:text-sm mt-4 text-center font-outfit">
-              Click to reveal more innovative projects
-            </p>
-          </div>
-        </motion.div>
-      )}
-
-      {/* Show Less Button (when expanded) */}
-      {showAll && projects.length > INITIAL_PROJECTS_COUNT && (
-        <div className="container mx-auto px-4 sm:px-6 mt-12 sm:mt-16 flex justify-center">
-          <button
-            onClick={handleShowLess}
-            className="group flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
+          <motion.button
+            onClick={() => setShowAll(!showAll)}
+            whileHover={{ scale: 1.04, y: -2, borderColor: 'rgba(255, 255, 255, 0.2)' }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+            className="group relative flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#161619]/60 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_0_rgba(255,255,255,0.05)] cursor-pointer select-none font-outfit transition-all duration-300"
           >
-            <svg
-              className="w-4 h-4 rotate-180"
+            {/* Ambient Background Glow */}
+            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10 bg-gradient-to-r from-orange-500/10 to-pink-500/10" />
+
+            <span className="text-sm font-semibold tracking-wider text-white/80 group-hover:text-white transition-colors">
+              {showAll ? 'Show Less' : `Explore ${remainingCount} More Project${remainingCount > 1 ? 's' : ''}`}
+            </span>
+
+            {/* Dynamic Rotating Chevron */}
+            <motion.svg
+              animate={{ rotate: showAll ? 180 : 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="w-4 h-4 text-white/60 group-hover:text-white transition-colors"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={2.5}
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-            <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors font-outfit">
-              Show Less
-            </span>
-          </button>
+            </motion.svg>
+          </motion.button>
         </div>
       )}
-
-      {/* CSS animation for arrow */}
-      <style jsx>{`
-        @keyframes bounce-arrow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(8px); }
-        }
-      `}</style>
     </section>
   );
 }

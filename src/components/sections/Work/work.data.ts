@@ -23,7 +23,7 @@ export const projects: Project[] = [
       "Custom UI/UX design implementation",
       "SEO-ready architecture and fast loading speed"
     ],
-    techStack: ["React", "Next.js", "Tailwind CSS", "Firebase"],
+    techStack: ["React", "Tailwind CSS", "Firebase", "Node.js"],
     image: "/images/projects/project4.png",
     hoverImage: "/images/projects/project4-hover.png",
     liveUrl: "https://webcraftx.vercel.app/",
