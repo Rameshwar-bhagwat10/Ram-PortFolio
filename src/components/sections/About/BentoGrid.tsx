@@ -8,7 +8,7 @@ import {
   Github, Linkedin, Instagram, Plus, Layers, LucideIcon
 } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/lib/constants';
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef } from 'react';
 import { useVisitorTracking } from '@/hooks/useVisitorTracking';
 import { formatNumber } from '@/lib/visitor-utils';
 import { skills } from '@/components/sections/Skills/skills.data';

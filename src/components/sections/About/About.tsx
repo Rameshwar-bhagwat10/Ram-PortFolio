@@ -10,7 +10,6 @@ import BentoGrid from './BentoGrid';
 import { PERSONAL_INFO } from '@/lib/constants';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useScrollDirection } from '@/hooks/useScrollDirection';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -19,8 +18,6 @@ if (typeof window !== 'undefined') {
 export default function About() {
   const cardRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
-  const scrollDirection = useScrollDirection();
-  const isScrollingDown = scrollDirection === 'down';
 
   useEffect(() => {
     if (!aboutRef.current) return;

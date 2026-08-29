@@ -140,9 +140,9 @@ export default function Navbar() {
         </motion.nav>
       </div>
 
-      {/* Mobile Navbar */}
-      <motion.nav
-        className="fixed top-4 left-0 right-0 z-50 px-4 md:hidden"
+      {/* Mobile Navbar Header */}
+      <motion.header
+        className="fixed top-3 left-3.5 right-3.5 sm:left-4 sm:right-4 z-50 flex items-center justify-between pointer-events-none md:hidden"
         initial={{ opacity: 0, y: -20 }}
         animate={{
           y: shouldBeVisibleMobile ? 0 : isIntroComplete ? -90 : -20,
@@ -150,7 +150,19 @@ export default function Navbar() {
         }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="relative backdrop-blur-sm rounded-full px-4 py-2 shadow-lg flex justify-between items-center bg-[#0F0E0E]/40 border border-white/[0.05]">
+        {/* Top-Left: RB Logo */}
+        <motion.div
+          whileTap={{ scale: 0.94 }}
+          className="relative backdrop-blur-xl rounded-full p-2 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex items-center justify-center bg-[#0F0E0E]/70 border border-white/[0.1] cursor-pointer pointer-events-auto w-10 h-10"
+          onClick={() => {
+            if (pathname === '/') {
+              window.dispatchEvent(new CustomEvent('trigger-nav-fade', { detail: { id: 'hero' } }));
+            } else {
+              router.push('/');
+            }
+          }}
+          aria-label="Home logo"
+        >
           {/* Rotating white thin border */}
           <div
             className="absolute inset-0 pointer-events-none overflow-hidden rounded-full"
@@ -165,68 +177,75 @@ export default function Navbar() {
             <div
               className="absolute left-1/2 top-1/2 w-[150%] aspect-square animate-navbar-border-spin"
               style={{
-                background: 'conic-gradient(from 0deg, #ffffff, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, #ffffff)',
+                background: 'conic-gradient(from 0deg, #ffffff, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.15) 75%, #ffffff)',
               }}
             />
           </div>
-          {/* Logo */}
+          <Image
+            src="/icons/logo.svg"
+            alt="Rameshwar Bhagwat Logo"
+            width={26}
+            height={26}
+            className="w-full h-full object-contain relative z-10"
+            priority
+          />
+        </motion.div>
+
+        {/* Top-Right: 3 Lines Hamburger Button */}
+        <motion.button
+          whileTap={{ scale: 0.92 }}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className={`relative backdrop-blur-xl rounded-full p-2 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex items-center justify-center bg-[#0F0E0E]/70 border transition-colors duration-300 cursor-pointer pointer-events-auto w-10 h-10 ${
+            isMobileMenuOpen ? 'border-white/25 bg-[#0F0E0E]/90 shadow-[0_0_15px_rgba(255,255,255,0.15)]' : 'border-white/[0.1]'
+          }`}
+          aria-label="Toggle navigation menu"
+        >
+          {/* Rotating white thin border */}
           <div
-            className="cursor-pointer flex-shrink-0"
-            onClick={() => {
-              if (pathname === '/') {
-                window.dispatchEvent(new CustomEvent('trigger-nav-fade', { detail: { id: 'hero' } }));
-              } else {
-                router.push('/');
-              }
+            className="absolute inset-0 pointer-events-none overflow-hidden rounded-full"
+            style={{
+              padding: '1px',
+              WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+              WebkitMaskComposite: 'xor',
+              mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+              maskComposite: 'exclude',
             }}
           >
-            <Image
-              src="/icons/logo.svg"
-              alt="Rameshwar Bhagwat Logo"
-              width={40}
-              height={40}
-              priority
+            <div
+              className="absolute left-1/2 top-1/2 w-[150%] aspect-square animate-navbar-border-spin"
+              style={{
+                background: 'conic-gradient(from 0deg, #ffffff, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.15) 75%, #ffffff)',
+              }}
             />
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-white p-1.5 hover:bg-white/[0.05] rounded-full transition-all"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
+          {/* 3 Animated Horizontal Lines that morph to an X */}
+          <div className="w-4 h-3.5 flex flex-col justify-between items-center relative z-10">
+            <motion.span
+              animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full h-[1.5px] bg-white rounded-full origin-center"
+            />
+            <motion.span
+              animate={isMobileMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.15 }}
+              className="w-full h-[1.5px] bg-white rounded-full"
+            />
+            <motion.span
+              animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full h-[1.5px] bg-white rounded-full origin-center"
+            />
+          </div>
+        </motion.button>
 
-        {/* Mobile Menu Dropdown */}
+        {/* Vertical Collapsible Icon Menu (Right-Side) */}
         <MobileMenu
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
           activeSection={activeSection}
         />
-      </motion.nav>
+      </motion.header>
     </>
   );
 }

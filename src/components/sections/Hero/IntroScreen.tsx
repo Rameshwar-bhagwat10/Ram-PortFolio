@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import gsap from 'gsap';
 import { useIntroAnimation } from '@/context/IntroAnimationContext';
 
@@ -225,6 +224,7 @@ export default function IntroScreen() {
             aspectRatio: '832.725 / 236.312',
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/rameshwar-signature.svg"
             alt="Rameshwar signature"

@@ -240,7 +240,6 @@ function HeadingLine({
 // Page
 // ─────────────────────────────────────────────────────────────
 export default function ProjectsPageContent({ projects }: ProjectsPageContentProps) {
-  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [query, setQuery] = useState('');
   const [sortMode, setSortMode] = useState<SortMode>('featured');

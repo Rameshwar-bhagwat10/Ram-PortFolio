@@ -64,7 +64,7 @@ export default function CometBackground() {
     if (!ctx) return;
 
     const isMobile = window.innerWidth < 768;
-    const maxComets = isMobile ? 8 : 16;
+    const maxComets = isMobile ? 3 : 16;
 
     const setupCanvas = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);

@@ -6,19 +6,16 @@ import Image from 'next/image';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { 
   ArrowLeft, 
-  ExternalLink, 
   ShieldCheck, 
-  Calendar, 
   Award, 
   X, 
   Download, 
   Search, 
-  Sparkles,
-  BookOpen,
-  CheckCircle2,
-  ChevronRight,
-  BadgeCheck,
-  Tag
+  BookOpen, 
+  CheckCircle2, 
+  ChevronRight, 
+  BadgeCheck, 
+  Tag 
 } from 'lucide-react';
 import Container from '@/components/layout/Container';
 

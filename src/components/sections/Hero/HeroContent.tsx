@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, memo, useEffect, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useIntroAnimation } from '@/context/IntroAnimationContext';
 import Link from 'next/link';
 import gsap from 'gsap';
@@ -120,13 +120,6 @@ export default function HeroContent() {
     spotlightY.set(0.5);
   };
 
-  // Derive spotlight background (subtle white highlight, zero orange)
-  const spotlightBg = useTransform(
-    [spotlightX, spotlightY],
-    ([x, y]: number[]) =>
-      `radial-gradient(circle 90px at ${x * 100}% ${y * 100}%, rgba(255, 255, 255, 0.08), transparent)`
-  );
-
   // Spotlight mouse track effect with cached rect and rAF throttling
   useEffect(() => {
     // Initialize blobs off-screen
@@ -242,9 +235,9 @@ export default function HeroContent() {
         animate={isIntroComplete ? 'visible' : 'hidden'}
         className="relative w-full h-full flex flex-col items-center justify-center py-20"
       >
-        {/* Floating Description Left (Top-Left area) */}
+        {/* Floating Description Top-Left (Mobile & Desktop diagonal placement) */}
         <div
-          className={`absolute left-[3%] lg:left-[5%] top-[14%] lg:top-[16%] hidden md:block max-w-[210px] lg:max-w-[240px] text-right select-none pointer-events-none transition-colors duration-300 font-mono text-[9px] lg:text-[10px] xl:text-[11px] leading-[1.6] tracking-[0.1em] ${isIntroComplete ? 'hero-diagonal-left' : 'opacity-0'}`}
+          className={`absolute left-[4%] xs:left-[5%] top-[13%] xs:top-[14%] md:top-[14%] lg:top-[16%] md:left-[3%] lg:left-[5%] md:right-auto max-w-[170px] xs:max-w-[190px] md:max-w-[210px] lg:max-w-[240px] text-left md:text-right select-none pointer-events-none transition-colors duration-300 font-mono text-[7.5px] xs:text-[8.5px] md:text-[9px] lg:text-[10px] xl:text-[11px] leading-[1.5] md:leading-[1.6] tracking-[0.07em] md:tracking-[0.1em] ${isIntroComplete ? 'hero-diagonal-left' : 'opacity-0'}`}
           style={{
             color: isReveal ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)',
           }}
@@ -252,9 +245,9 @@ export default function HeroContent() {
           RAMESHWAR BHAGWAT • ARCHITECTING MODERN,<br />SCALABLE WEB PLATFORMS WITH PREMIUM LOGIC.
         </div>
 
-        {/* Floating Description Right (Bottom-Right area) */}
+        {/* Floating Description Bottom-Right (Mobile & Desktop diagonal placement) */}
         <div
-          className={`absolute right-[3%] lg:right-[5%] bottom-[20%] lg:bottom-[22%] hidden md:block max-w-[215px] lg:max-w-[245px] text-left select-none pointer-events-none transition-colors duration-300 font-mono text-[9px] lg:text-[10px] xl:text-[11px] leading-[1.6] tracking-[0.1em] ${isIntroComplete ? 'hero-diagonal-right' : 'opacity-0'}`}
+          className={`absolute right-[4%] xs:right-[5%] bottom-[17%] xs:bottom-[18%] md:bottom-[20%] lg:bottom-[22%] md:right-[3%] lg:right-[5%] md:left-auto max-w-[175px] xs:max-w-[195px] md:max-w-[215px] lg:max-w-[245px] text-right md:text-left select-none pointer-events-none transition-colors duration-300 font-mono text-[7.5px] xs:text-[8.5px] md:text-[9px] lg:text-[10px] xl:text-[11px] leading-[1.5] md:leading-[1.6] tracking-[0.07em] md:tracking-[0.1em] ${isIntroComplete ? 'hero-diagonal-right' : 'opacity-0'}`}
           style={{
             color: isReveal ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)',
           }}
@@ -264,14 +257,14 @@ export default function HeroContent() {
 
         {/* Main Graphic Heading Block */}
         <h1
-          className="w-full flex flex-col items-center leading-[0.92] select-none text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[7.5vw] xl:text-[8vw] font-black subpixel-antialiased"
+          className="w-full flex flex-col items-center leading-[0.92] select-none text-[2.65rem] xs:text-[3.15rem] sm:text-6xl md:text-7xl lg:text-[7.5vw] xl:text-[8vw] font-black subpixel-antialiased"
           style={{
             fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
             fontWeight: 800,
-            letterSpacing: '-0.045em',
+            letterSpacing: '-0.04em',
             color: isReveal ? '#000000' : '#ffffff',
             textShadow: isReveal ? 'none' : '0 0 12px rgba(255, 255, 255, 0.25)',
-            WebkitTextStroke: isReveal ? 'none' : '2.2px rgba(255, 255, 255, 0.9)',
+            WebkitTextStroke: isReveal ? 'none' : 'var(--hero-stroke, 2.2px rgba(255, 255, 255, 0.9))',
             WebkitMaskImage: 'linear-gradient(to bottom, #fff calc(100% - 8px), transparent 100%)',
             maskImage: 'linear-gradient(to bottom, #fff calc(100% - 8px), transparent 100%)',
             transition: 'color 0.3s ease, text-shadow 0.3s ease, -webkit-text-stroke 0.3s ease',
@@ -279,7 +272,7 @@ export default function HeroContent() {
           aria-label="AI & Web Software Developer Rameshwar Bhagwat"
         >
           {/* Row 1: AI & WEB + GitHub */}
-          <div className="flex items-center gap-x-3 sm:gap-x-4 md:gap-x-6 relative">
+          <div className="flex items-center gap-x-2 xs:gap-x-3 sm:gap-x-4 md:gap-x-6 relative">
             <div className={isIntroComplete ? 'hero-row-mask' : ''}>
               <div className={isIntroComplete ? 'hero-row-animated' : 'opacity-0'} style={{ '--row-i': 0 } as React.CSSProperties}>
                 <AnimatedLetters
@@ -305,7 +298,7 @@ export default function HeroContent() {
               aria-label="Rameshwar Bhagwat on GitHub"
             >
               <svg
-                className="w-[0.52em] h-[0.52em] transition-colors duration-300"
+                className="w-[0.46em] h-[0.46em] sm:w-[0.52em] sm:h-[0.52em] transition-colors duration-300"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -319,7 +312,7 @@ export default function HeroContent() {
           </div>
 
           {/* Row 2: SOFT < > WARE + LinkedIn */}
-          <div className="flex items-center gap-x-2 sm:gap-x-4 md:gap-x-6 mt-2 relative">
+          <div className="flex items-center gap-x-1.5 xs:gap-x-2.5 sm:gap-x-4 md:gap-x-6 mt-1 xs:mt-1.5 sm:mt-2 relative">
             {/* Outline LinkedIn Icon */}
             <a
               href="https://www.linkedin.com/in/rameshwar-bhagwat-888540328"
@@ -336,7 +329,7 @@ export default function HeroContent() {
               aria-label="Rameshwar Bhagwat on LinkedIn"
             >
               <svg
-                className="w-[0.52em] h-[0.52em] transition-colors duration-300"
+                className="w-[0.46em] h-[0.46em] sm:w-[0.52em] sm:h-[0.52em] transition-colors duration-300"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -361,7 +354,7 @@ export default function HeroContent() {
           </div>
 
           {/* Row 3: DEVELOPER + Instagram */}
-          <div className="flex items-center gap-x-2 sm:gap-x-4 md:gap-x-6 mt-2 relative">
+          <div className="flex items-center gap-x-1.5 xs:gap-x-2.5 sm:gap-x-4 md:gap-x-6 mt-1 xs:mt-1.5 sm:mt-2 relative">
             <div className={isIntroComplete ? 'hero-row-mask' : ''}>
               <div className={isIntroComplete ? 'hero-row-animated' : 'opacity-0'} style={{ '--row-i': 2 } as React.CSSProperties}>
                 <AnimatedLetters
@@ -387,7 +380,7 @@ export default function HeroContent() {
               aria-label="Rameshwar Bhagwat on Instagram"
             >
               <svg
-                className="w-[0.52em] h-[0.52em] transition-colors duration-300"
+                className="w-[0.46em] h-[0.46em] sm:w-[0.52em] sm:h-[0.52em] transition-colors duration-300"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -405,12 +398,12 @@ export default function HeroContent() {
 
         {/* CTA Buttons */}
         <motion.nav
-          className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0 mt-8 sm:mt-10 md:mt-12 z-30 ${isIntroComplete ? 'hero-btn-animated' : 'opacity-0'}`}
+          className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0 mt-6 xs:mt-7 sm:mt-10 md:mt-12 z-30 ${isIntroComplete ? 'hero-btn-animated' : 'opacity-0'}`}
           aria-label="Primary navigation - View portfolio or contact Rameshwar Bhagwat"
         >
           <Link href={isReveal ? '#' : '/resume'}>
             <motion.div
-              className={`group px-8 sm:px-10 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 inline-flex items-center gap-2 sm:gap-3 opacity-90 hover:opacity-100 cursor-pointer ${isReveal
+              className={`group px-6 py-2.5 xs:px-7 xs:py-3 sm:px-10 sm:py-3.5 rounded-full font-medium sm:font-semibold text-xs sm:text-base transition-all duration-300 inline-flex items-center gap-2 sm:gap-3 opacity-90 hover:opacity-100 cursor-pointer ${isReveal
                   ? 'glowing-border-btn-black text-black'
                   : 'glowing-border-btn-white text-white'
                 }`}
@@ -436,7 +429,7 @@ export default function HeroContent() {
 
             {/* Arrow icon */}
             <svg
-              className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+              className="relative z-10 w-3.5 h-3.5 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

@@ -45,7 +45,7 @@ export default function ParticleBackground() {
     if (!ctx) return;
 
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 15 : 30;
+    const particleCount = isMobile ? 6 : 30;
 
     // Setup canvas with optimized DPR
     const setupCanvas = () => {

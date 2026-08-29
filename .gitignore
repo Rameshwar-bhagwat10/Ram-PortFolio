@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# promo files
+/portfolio-promo/
+/src/components/promo/
+/src/app/\(promo\)/
+/src/styles/promo.module.css
+/public/promo images/
+

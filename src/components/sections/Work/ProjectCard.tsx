@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { Github, Info, ArrowRight } from 'lucide-react';
 import { Project } from './work.data';
-import { useState, memo, useCallback, useMemo, useEffect } from 'react';
+import { useState, memo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
   SiNextdotjs, 
@@ -91,12 +91,9 @@ interface ProjectCardProps {
 
 const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardProps) {
   const router = useRouter();
-  const [isHovered, setIsHovered] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'info' | 'error' } | null>(null);
 
-  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
   const handleMouseLeave = useCallback(() => {
-    setIsHovered(false);
     setToast(null); // Dismiss info popup when cursor leaves card
   }, []);
 
@@ -118,15 +115,6 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
     }
   }, [project.githubUrl]);
 
-  // Find the primary technology for the App Icon
-  const primaryTech = useMemo(() => {
-    return project.techStack.find(tech => techConfig[tech]) || project.techStack[0];
-  }, [project.techStack]);
-
-  const techInfo = useMemo(() => techConfig[primaryTech], [primaryTech]);
-  const TechIcon = techInfo?.icon || SiReact;
-  const brandColor = `rgb(${project.color})`;
-
   const handleInfoClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     setToast({
@@ -138,7 +126,6 @@ const ProjectCard = memo(function ProjectCard({ project, index }: ProjectCardPro
   return (
     <motion.article
       className="group relative overflow-hidden bg-[#141416]/75 backdrop-blur-2xl border border-white/[0.08] hover:border-white/[0.18] rounded-[32px] flex flex-col h-full transition-all duration-300 cursor-pointer"
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={() => router.push(`/projects/${project.id}`)}
       whileHover={{ y: -6 }}

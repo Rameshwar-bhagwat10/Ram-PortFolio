@@ -11,7 +11,6 @@ import {
   SiGit,
   SiDocker,
   SiPython,
-  SiAmazon,
   SiJavascript,
   SiGithub,
   SiVercel,

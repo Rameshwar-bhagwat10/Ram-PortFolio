@@ -76,9 +76,11 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     };
   }, []);
 
-  if (isProjectPage) {
+  const isPromoPage = pathname?.startsWith('/promo');
+
+  if (isProjectPage || isPromoPage) {
     return (
-      <main className="w-full min-h-screen relative overflow-visible">
+      <main className="w-full min-h-screen relative overflow-hidden bg-[#131313]">
         {children}
       </main>
     );

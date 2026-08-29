@@ -206,7 +206,7 @@ export default function Chatbot() {
       {/* Floating Chat Button - iOS Style */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md border border-white/[0.15]"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full flex items-center justify-center backdrop-blur-md border border-white/[0.15]"
         style={{
           background: 'rgba(255, 255, 255, 0.08)',
           boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
@@ -218,7 +218,7 @@ export default function Chatbot() {
         transition={{ duration: 0.2 }}
         aria-label="Open chat"
       >
-        <MessageCircle size={22} className="text-white/80" />
+        <MessageCircle className="w-5 h-5 sm:w-[22px] sm:h-[22px] text-white/80" />
         {/* Subtle pulse ring */}
         <motion.span
           className="absolute inset-0 rounded-full border border-white/20"

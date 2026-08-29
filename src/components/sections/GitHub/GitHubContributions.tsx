@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, memo, useMemo, useCallback } from 'react';
+import { useEffect, useState, memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Github } from 'lucide-react';
 import { PERSONAL_INFO } from '@/lib/constants';
