@@ -18,9 +18,9 @@ export default function Footer() {
   };
 
   return (
-    <div className="bg-[#0F0E0E] w-full px-4 xs:px-5 sm:px-6 md:px-8 pb-8 pt-4">
+    <div className="bg-[#0F0E0E] w-full px-3 xs:px-4 sm:px-6 md:px-8 pb-8 pt-4">
       <footer 
-        className="relative max-w-4xl mx-auto rounded-full border border-white/[0.08] overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.85)]"
+        className="relative max-w-4xl mx-auto rounded-[28px] xs:rounded-[32px] md:rounded-full border border-white/[0.08] overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.85)]"
         style={{
           background: 'linear-gradient(180deg, rgba(20, 18, 18, 0.65) 0%, rgba(13, 12, 12, 0.95) 100%)',
           backdropFilter: 'blur(24px) saturate(180%)',
@@ -42,14 +42,14 @@ export default function Footer() {
         />
 
         {/* Inner Padding Container */}
-        <div className="relative z-10 px-8 py-6 sm:px-12 sm:py-7">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-4">
+        <div className="relative z-10 px-5 py-6 xs:px-6 xs:py-6 sm:px-12 sm:py-7">
+          <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-5 md:gap-4 text-center md:text-left">
             
             {/* Left Side: Brand Sign-off, Status, Copyright */}
-            <div className="flex flex-col gap-2.5">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col items-center md:items-start gap-2.5">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 xs:gap-3">
                 <span
-                  className="text-lg sm:text-xl font-medium tracking-tight select-none"
+                  className="text-base xs:text-lg sm:text-xl font-medium tracking-tight select-none"
                   style={{ fontFamily: 'var(--font-instrument), Georgia, serif', textTransform: 'none' }}
                 >
                   <span className="text-white">Rameshwar</span>{' '}
@@ -65,8 +65,8 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1">
-                <p className="text-[11px] text-white/35 font-medium tracking-wider uppercase font-outfit select-none flex items-center gap-1.5">
+              <div className="flex flex-col items-center md:items-start gap-0.5 xs:gap-1">
+                <p className="text-[10px] xs:text-[11px] text-white/35 font-medium tracking-wider uppercase font-outfit select-none flex items-center gap-1.5">
                   &copy; {currentYear} &bull; Handcrafted with
                   <motion.span 
                     animate={{ scale: [1, 1.25, 1] }}
@@ -77,19 +77,19 @@ export default function Footer() {
                   </motion.span>
                   in India
                 </p>
-                <p className="text-[10px] text-white/20 font-mono">
+                <p className="text-[9.5px] xs:text-[10px] text-white/20 font-mono">
                   Engineered for Performance & Scalability
                 </p>
               </div>
             </div>
 
             {/* Right Side: Social links, Location, and navigation */}
-            <div className="flex flex-col items-center md:items-center gap-3">
+            <div className="flex flex-col items-center md:items-end gap-3">
               
               {/* Row with Social Buttons & Scroll to Top button */}
-              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5">
+              <div className="flex flex-wrap items-center justify-center md:justify-end gap-2 xs:gap-2.5 sm:gap-3.5">
                 {/* Circular Social Buttons */}
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2 xs:gap-2.5">
                   {socialLinks.map((social) => {
                     const Icon = social.icon;
                     return (
@@ -101,7 +101,7 @@ export default function Footer() {
                         aria-label={social.name}
                         whileHover={{ y: -3, scale: 1.08 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative group w-9 h-9 rounded-full flex items-center justify-center border transition-all duration-300 overflow-hidden"
+                        className="relative group w-8 h-8 xs:w-9 xs:h-9 rounded-full flex items-center justify-center border transition-all duration-300 overflow-hidden"
                         style={{
                           backgroundColor: 'rgba(255, 255, 255, 0.02)',
                           borderColor: 'rgba(255, 255, 255, 0.06)',
@@ -117,7 +117,7 @@ export default function Footer() {
                         }}
                         />
                         <Icon
-                          size={15}
+                          size={14}
                           className="text-white/45 group-hover:text-[var(--hover-color)] transition-colors duration-300 relative z-10"
                         />
                       </motion.a>
@@ -128,16 +128,16 @@ export default function Footer() {
                 {/* Scroll to top trigger */}
                 <button
                   onClick={handleScrollToTop}
-                  className="group flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.05] bg-white/[0.01] hover:bg-white/[0.06] hover:border-white/10 text-white/55 hover:text-white text-xs font-semibold transition-all duration-300 active:scale-95 cursor-pointer font-outfit"
+                  className="group flex items-center gap-1.5 xs:gap-2 px-3 xs:px-4 py-1.5 xs:py-2 rounded-full border border-white/[0.05] bg-white/[0.01] hover:bg-white/[0.06] hover:border-white/10 text-white/55 hover:text-white text-[11px] xs:text-xs font-semibold transition-all duration-300 active:scale-95 cursor-pointer font-outfit"
                 >
                   <span>Back to Top</span>
-                  <ArrowUp size={12} className="transition-transform group-hover:-translate-y-0.5" />
+                  <ArrowUp size={11} className="transition-transform group-hover:-translate-y-0.5" />
                 </button>
               </div>
 
               {/* Location Badge */}
               <div 
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/[0.05] bg-white/[0.02] text-[10px] text-white/45 font-mono select-none"
+                className="inline-flex items-center gap-1.5 px-3 py-1 xs:py-1.5 rounded-full border border-white/[0.05] bg-white/[0.02] text-[9.5px] xs:text-[10px] text-white/45 font-mono select-none"
                 style={{
                   boxShadow: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.02)'
                 }}

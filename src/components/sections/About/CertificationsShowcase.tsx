@@ -119,6 +119,7 @@ function CertCard({ cert }: { cert: Certificate }) {
   const [tilt, setTilt] = useState({ rx: 0, ry: 0, lift: 0, scale: 1 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
@@ -134,9 +135,10 @@ function CertCard({ cert }: { cert: Certificate }) {
   };
 
   // Determine offsets based on viewport width (overridden on mobile via css)
-  const txVal = typeof window !== 'undefined' && window.innerWidth <= 980 ? 0 : cert.tx;
-  const baseRotVal = typeof window !== 'undefined' && window.innerWidth <= 980 ? 0 : cert.baseRot;
-  const baseYVal = typeof window !== 'undefined' && window.innerWidth <= 980 ? 0 : cert.baseY;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  const txVal = isMobile ? 0 : cert.tx;
+  const baseRotVal = isMobile ? 0 : cert.baseRot;
+  const baseYVal = isMobile ? 0 : cert.baseY;
 
   return (
     <div
@@ -146,18 +148,18 @@ function CertCard({ cert }: { cert: Certificate }) {
         transform: `perspective(1000px) translate3d(${txVal}px, calc(${baseYVal}px + ${tilt.lift}px), 0) rotate(${baseRotVal}deg) scale(${tilt.scale}) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
         transformStyle: 'preserve-3d',
       }}
-      className={`group relative overflow-hidden w-[296px] rounded-[28px] bg-gradient-to-br from-[#1c1f26] via-[#16181d] to-[#121419] border border-white/10 p-4 pb-0 cursor-pointer transition-transform duration-500 ease-out select-none will-change-transform z-10 ${cert.accentShadow}`}
+      className={`group relative overflow-hidden w-full lg:w-[296px] rounded-[18px] xs:rounded-[22px] lg:rounded-[28px] bg-gradient-to-br from-[#1c1f26] via-[#16181d] to-[#121419] border border-white/10 p-2.5 xs:p-3 lg:p-4 pb-0 cursor-pointer transition-transform duration-500 ease-out select-none will-change-transform z-10 ${cert.accentShadow}`}
       tabIndex={0}
     >
       {/* Gloss Sheen */}
       <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-white/[0.055] to-transparent pointer-events-none" />
 
       {/* Hairline rim */}
-      <div className="absolute inset-0 rounded-[28px] border border-white/5 pointer-events-none z-[3]" />
+      <div className="absolute inset-0 rounded-[18px] xs:rounded-[22px] lg:rounded-[28px] border border-white/5 pointer-events-none z-[3]" />
 
       {/* Film grain noise overlay */}
       <div
-        className="absolute inset-0 opacity-[0.035] mix-blend-overlay pointer-events-none z-[4] rounded-[28px]"
+        className="absolute inset-0 opacity-[0.035] mix-blend-overlay pointer-events-none z-[4] rounded-[18px] xs:rounded-[22px] lg:rounded-[28px]"
         style={{ backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")` }}
       />
 
@@ -171,42 +173,42 @@ function CertCard({ cert }: { cert: Certificate }) {
       />
 
       {/* Verified Hover Badge overlay */}
-      <span className="absolute left-1/2 top-3 -translate-x-1/2 flex items-center gap-1 text-[#ffb088] text-[9.5px] tracking-wider uppercase font-medium font-mono whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out z-20">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3"><path d="M20 6L9 17l-5-5" /></svg>
+      <span className="absolute left-1/2 top-2 xs:top-3 -translate-x-1/2 flex items-center gap-1 text-[#ffb088] text-[8px] xs:text-[9.5px] tracking-wider uppercase font-medium font-mono whitespace-nowrap opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out z-20">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2.5 h-2.5 xs:w-3 xs:h-3"><path d="M20 6L9 17l-5-5" /></svg>
         Verified
       </span>
 
-      <div className="h-[148px] rounded-[17px] relative overflow-hidden mb-1.5 border border-white/[0.07] bg-[#0c0c0d]">
+      <div className="h-[90px] xs:h-[105px] sm:h-[130px] lg:h-[148px] rounded-[11px] xs:rounded-[13px] lg:rounded-[17px] relative overflow-hidden mb-1.5 border border-white/[0.07] bg-[#0c0c0d]">
         <div className="absolute inset-0">
           <Image
             src={cert.image}
             alt={cert.title}
             fill
-            sizes="260px"
+            sizes="(max-width: 768px) 50vw, 296px"
             className="object-cover opacity-100 transition-transform duration-500 group-hover:scale-[1.03]"
           />
         </div>
-        <span className="absolute left-3.5 bottom-3 text-[9px] tracking-wider text-white/40 font-mono z-[2]">{cert.serial}</span>
-        <div className={`absolute right-3 bottom-[-16px] w-[46px] h-[46px] rounded-full flex items-center justify-center bg-gradient-to-br from-white/[0.12] to-white/[0.02] backdrop-blur-[6px] border border-white/[0.14] shadow-[0_8px_18px_-8px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.15)] z-[3] ${cert.badgeTextColor}`}>
+        <span className="absolute left-2 bottom-1.5 xs:left-2.5 xs:bottom-2 lg:left-3.5 lg:bottom-3 text-[7px] xs:text-[8px] lg:text-[9px] tracking-wider text-white/40 font-mono z-[2]">{cert.serial}</span>
+        <div className={`absolute right-1.5 bottom-[-8px] xs:right-2 xs:bottom-[-10px] lg:right-3 lg:bottom-[-16px] w-[28px] h-[28px] xs:w-[32px] xs:h-[32px] lg:w-[46px] lg:h-[46px] rounded-full flex items-center justify-center bg-gradient-to-br from-white/[0.12] to-white/[0.02] backdrop-blur-[6px] border border-white/[0.14] shadow-[0_8px_18px_-8px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.15)] z-[3] [&>svg]:w-3.5 [&>svg]:h-3.5 xs:[&>svg]:w-4 xs:[&>svg]:h-4 lg:[&>svg]:w-[19px] lg:[&>svg]:h-[19px] ${cert.badgeTextColor}`}>
           {cert.badgeSvg}
         </div>
       </div>
 
-      <div className="pt-0.5 pb-4">
-        <div className="flex items-center justify-between mb-2">
-          <span className={`inline-block text-[9.5px] font-semibold tracking-wider uppercase py-1 px-2.5 rounded-[6px] ${cert.tagClasses}`}>{cert.issuer}</span>
-          <span className="text-[11px] text-white/40 tracking-wider font-mono">{cert.year}</span>
+      <div className="pt-0.5 xs:pt-1 pb-2 xs:pb-3 lg:pb-4">
+        <div className="flex items-center justify-between mb-1 xs:mb-1.5 lg:mb-2 gap-1">
+          <span className={`inline-block text-[7px] xs:text-[8px] lg:text-[9.5px] font-semibold tracking-wider uppercase py-0.5 px-1.5 xs:px-2 rounded-[4px] xs:rounded-[6px] truncate max-w-[85px] xs:max-w-[105px] sm:max-w-none ${cert.tagClasses}`}>{cert.issuer}</span>
+          <span className="text-[8px] xs:text-[9px] lg:text-[11px] text-white/40 tracking-wider font-mono flex-shrink-0">{cert.year}</span>
         </div>
-        <p className="text-[15px] font-semibold leading-[1.35] text-[#f2f1ee] m-0">{cert.title}</p>
+        <p className="text-[10px] xs:text-[11.5px] sm:text-[13px] lg:text-[15px] font-semibold leading-[1.28] lg:leading-[1.35] text-[#f2f1ee] line-clamp-2 h-[26px] xs:h-[30px] sm:h-[34px] lg:h-auto m-0">{cert.title}</p>
       </div>
 
-      <div className="relative -mx-4 px-4 py-3 flex items-center justify-between border-t border-dashed border-white/10">
+      <div className="relative -mx-2.5 xs:-mx-3 lg:-mx-4 px-2.5 xs:px-3 lg:px-4 py-1.5 xs:py-2 lg:py-3 flex items-center justify-between border-t border-dashed border-white/10">
         {/* Stub circular cutout masks */}
-        <div className="absolute left-[-8px] top-[-8px] w-4 h-4 rounded-full bg-[#0F0E0E]" />
-        <div className="absolute right-[-8px] top-[-8px] w-4 h-4 rounded-full bg-[#0F0E0E]" />
-        <span className="flex items-center gap-1.5 text-[10.5px] tracking-wider uppercase text-white/60 font-mono group-hover:text-white transition-colors duration-300">
+        <div className="absolute left-[-6px] top-[-6px] lg:left-[-8px] lg:top-[-8px] w-3 h-3 lg:w-4 lg:h-4 rounded-full bg-[#0F0E0E]" />
+        <div className="absolute right-[-6px] top-[-6px] lg:right-[-8px] lg:top-[-8px] w-3 h-3 lg:w-4 lg:h-4 rounded-full bg-[#0F0E0E]" />
+        <span className="flex items-center gap-1 text-[7.5px] xs:text-[8.5px] sm:text-[9.5px] lg:text-[10.5px] tracking-wider uppercase text-white/60 font-mono group-hover:text-white transition-colors duration-300">
           Explore Credentials
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3 text-[#ff6b3d] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><path d="M7 17L17 7M17 7H9M17 7V15" /></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-2.5 h-2.5 xs:w-3 xs:h-3 text-[#ff6b3d] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><path d="M7 17L17 7M17 7H9M17 7V15" /></svg>
         </span>
       </div>
     </div>
@@ -247,7 +249,7 @@ export default function CertificationsShowcase() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen py-16 sm:py-20 lg:py-0 flex items-center justify-center bg-transparent z-10 overflow-hidden" id="certifications">
+    <section ref={sectionRef} className="relative min-h-screen py-12 xs:py-14 sm:py-20 lg:py-0 flex items-center justify-center bg-transparent z-10 overflow-hidden" id="certifications">
       {/* Clean Grid Overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-20"
@@ -261,11 +263,11 @@ export default function CertificationsShowcase() {
         }}
       />
 
-      <Container className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(320px,420px)_1fr] items-center gap-10 lg:gap-5 w-full">
+      <Container className="max-w-7xl mx-auto px-2.5 xs:px-3 sm:px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(320px,420px)_1fr] items-center gap-5 xs:gap-6 lg:gap-5 w-full">
 
-          {/* LEFT COLUMN */}
-          <div className="flex flex-col gap-7 lg:gap-7 items-center lg:items-end lg:pr-2.5 w-full order-2 lg:order-1">
+          {/* LEFT COLUMN (Row 1 of 2-column grid on mobile, Left column on desktop) */}
+          <div className="grid grid-cols-2 lg:flex lg:flex-col gap-2.5 xs:gap-3.5 sm:gap-4 lg:gap-7 items-center lg:items-end lg:pr-2.5 w-full order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0, x: isDesktop ? '115%' : 0, y: isDesktop ? 0 : 55, scale: 0.95 }}
               animate={isInView ? { opacity: 1, x: 0, y: 0, scale: 1 } : { opacity: 0, x: isDesktop ? '115%' : 0, y: isDesktop ? 0 : 55, scale: 0.95 }}
@@ -291,7 +293,7 @@ export default function CertificationsShowcase() {
                 }}
                 className="w-full flex justify-center lg:justify-end"
               >
-                <Link href="/certifications?cert=openai-buildthon" className="block focus:outline-none">
+                <Link href="/certifications?cert=openai-buildthon" className="block focus:outline-none w-full flex justify-center lg:justify-end">
                   <CertCard cert={CERTIFICATIONS[0]} />
                 </Link>
               </motion.div>
@@ -322,7 +324,7 @@ export default function CertificationsShowcase() {
                 }}
                 className="w-full flex justify-center lg:justify-end"
               >
-                <Link href="/certifications?cert=fundamentals-ml" className="block focus:outline-none">
+                <Link href="/certifications?cert=fundamentals-ml" className="block focus:outline-none w-full flex justify-center lg:justify-end">
                   <CertCard cert={CERTIFICATIONS[1]} />
                 </Link>
               </motion.div>
@@ -334,26 +336,26 @@ export default function CertificationsShowcase() {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={centerContainerVariants}
-            className="text-center flex flex-col items-center gap-5 px-1.5 order-1 lg:order-2 select-none"
+            className="text-center flex flex-col items-center gap-3 xs:gap-3.5 sm:gap-5 px-1.5 order-1 lg:order-2 select-none"
           >
-            <motion.span variants={centerItemVariants} className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] text-[11px] font-medium tracking-[0.14em] uppercase text-[#ffb088]">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5 mr-1.5"><circle cx="12" cy="8" r="5" /><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5" /></svg>
+            <motion.span variants={centerItemVariants} className="inline-flex items-center gap-1.5 xs:gap-2 py-1 xs:py-1.5 px-3.5 xs:px-4 rounded-full border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] text-[9.5px] xs:text-[11px] font-medium tracking-[0.14em] uppercase text-[#ffb088]">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5 mr-1"><circle cx="12" cy="8" r="5" /><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5" /></svg>
               Professional Milestones
             </motion.span>
             
             <motion.h2
               variants={centerItemVariants}
-              className="text-[44px] sm:text-[54px] md:text-[64px] lg:text-[72px] font-black tracking-[-0.025em] leading-[1.01] text-white"
+              className="text-[30px] xs:text-[36px] sm:text-[54px] md:text-[64px] lg:text-[72px] font-black tracking-[-0.025em] leading-[1.03] sm:leading-[1.01] text-white"
               style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
             >
               Certificates<br />&amp; <span className="bg-gradient-to-r from-[#ff6b3d] via-[#ffb088] to-[#ff6b3d] bg-clip-text text-transparent">Awards</span>
             </motion.h2>
             
-            <motion.p variants={centerItemVariants} className="max-w-[360px] text-[14.5px] leading-[1.65] text-white/60 font-light font-jakarta">
+            <motion.p variants={centerItemVariants} className="max-w-[320px] xs:max-w-[360px] text-[12px] xs:text-[13px] sm:text-[14.5px] leading-[1.55] text-white/60 font-light font-jakarta">
               A visual journey through verified certifications, hackathons, and credentials.
             </motion.p>
             
-            <motion.div variants={centerItemVariants} className="flex items-center justify-center gap-3.5 text-[11.5px] text-white/40 tracking-wider font-mono">
+            <motion.div variants={centerItemVariants} className="flex items-center justify-center gap-2 xs:gap-3 sm:gap-3.5 text-[9.5px] xs:text-[11px] sm:text-[11.5px] text-white/40 tracking-wider font-mono">
               <span><b>04</b> certifications</span>
               <span className="w-1.5 h-1.5 rounded-full bg-white/10"></span>
               <span><b>03</b> platforms</span>
@@ -361,9 +363,9 @@ export default function CertificationsShowcase() {
               <span><b>2025–26</b></span>
             </motion.div>
 
-            <motion.div variants={centerItemVariants} className="inline-block mt-4">
+            <motion.div variants={centerItemVariants} className="inline-block mt-1.5 xs:mt-2.5 sm:mt-4">
               <Link href="/certifications">
-                <button className="relative group inline-flex items-center gap-2.5 py-3.5 px-7 rounded-full border border-[#ff6b3d] bg-transparent text-[12px] font-bold tracking-widest uppercase text-white overflow-hidden transition-colors duration-500 hover:text-[#1a0d06] font-mono">
+                <button className="relative group inline-flex items-center gap-2 py-2 xs:py-2.5 sm:py-3.5 px-5 xs:px-6 sm:px-7 rounded-full border border-[#ff6b3d] bg-transparent text-[10.5px] xs:text-[11.5px] sm:text-[12px] font-bold tracking-widest uppercase text-white overflow-hidden transition-colors duration-500 hover:text-[#1a0d06] font-mono">
                   <span className="absolute inset-0 bg-[#ff6b3d] translate-y-[101%] transition-transform duration-500 ease-out group-hover:translate-y-0 z-0" />
                   <span className="relative z-10 flex items-center gap-2">
                     View Credentials
@@ -374,8 +376,8 @@ export default function CertificationsShowcase() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT COLUMN */}
-          <div className="flex flex-col gap-7 lg:gap-7 items-center lg:items-start lg:pl-2.5 w-full order-3">
+          {/* RIGHT COLUMN (Row 2 of 2-column grid on mobile, Right column on desktop) */}
+          <div className="grid grid-cols-2 lg:flex lg:flex-col gap-2.5 xs:gap-3.5 sm:gap-4 lg:gap-7 items-center lg:items-start lg:pl-2.5 w-full order-3">
             <motion.div
               initial={{ opacity: 0, x: isDesktop ? '-115%' : 0, y: isDesktop ? 0 : 55, scale: 0.95 }}
               animate={isInView ? { opacity: 1, x: 0, y: 0, scale: 1 } : { opacity: 0, x: isDesktop ? '-115%' : 0, y: isDesktop ? 0 : 55, scale: 0.95 }}
@@ -401,7 +403,7 @@ export default function CertificationsShowcase() {
                 }}
                 className="w-full flex justify-center lg:justify-start"
               >
-                <Link href="/certifications?cert=developing-ai-solutions" className="block focus:outline-none">
+                <Link href="/certifications?cert=developing-ai-solutions" className="block focus:outline-none w-full flex justify-center lg:justify-start">
                   <CertCard cert={CERTIFICATIONS[2]} />
                 </Link>
               </motion.div>
@@ -432,7 +434,7 @@ export default function CertificationsShowcase() {
                 }}
                 className="w-full flex justify-center lg:justify-start"
               >
-                <Link href="/certifications?cert=nptel-iit-madras" className="block focus:outline-none">
+                <Link href="/certifications?cert=nptel-iit-madras" className="block focus:outline-none w-full flex justify-center lg:justify-start">
                   <CertCard cert={CERTIFICATIONS[3]} />
                 </Link>
               </motion.div>
