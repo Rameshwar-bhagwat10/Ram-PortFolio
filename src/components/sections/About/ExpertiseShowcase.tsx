@@ -19,169 +19,68 @@ import {
   LucideIcon
 } from 'lucide-react';
 
-// Tech Stack Icons (using Lucide + custom SVGs) - moved outside component
+import {
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiTypescript,
+  SiJavascript,
+  SiMongodb,
+  SiPostgresql,
+  SiMysql,
+  SiOpenai,
+  SiTensorflow,
+  SiPython,
+  SiScikitlearn,
+  SiFramer,
+  SiTailwindcss,
+  SiCss3,
+  SiGreensock,
+  SiSupabase,
+  SiStripe,
+  SiExpress,
+  SiDocker,
+  SiRedis,
+  SiPrisma,
+  SiGraphql,
+  SiJsonwebtokens,
+  SiAuth0,
+  SiThreedotjs,
+  SiWebgl,
+} from 'react-icons/si';
+
+// Tech Stack Icons (using official high-fidelity branded icons from react-icons)
 const TechIcons: Record<string, React.ReactNode> = {
-  React: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 13.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/>
-      <path fill="none" stroke="currentColor" strokeWidth="1" d="M12 21c-4.97 0-9-2.686-9-6s4.03-6 9-6 9 2.686 9 6-4.03 6-9 6Z"/>
-      <path fill="none" stroke="currentColor" strokeWidth="1" d="M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3s-4.5 4.03-4.5 9 2.015 9 4.5 9Z" transform="rotate(60 12 12)"/>
-      <path fill="none" stroke="currentColor" strokeWidth="1" d="M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3s-4.5 4.03-4.5 9 2.015 9 4.5 9Z" transform="rotate(-60 12 12)"/>
-    </svg>
-  ),
-  'Next.js': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2Zm-1.5 14.5V10l6 8h-2l-4-5.333V16.5h-1.5v-6l1.5 2v4Z"/>
-    </svg>
-  ),
-  'Node.js': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2L3 7v10l9 5 9-5V7l-9-5Zm0 2.18L18.36 7.5 12 10.82 5.64 7.5 12 4.18ZM5 8.82l6 3.32v6.36l-6-3.32V8.82Zm8 9.68V12.14l6-3.32v6.36l-6 3.32Z"/>
-    </svg>
-  ),
-  TypeScript: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M3 3h18v18H3V3Zm10.71 13.44c.33.26.78.44 1.33.54v-1.44c-.26-.09-.42-.22-.5-.4-.08-.18-.08-.44.02-.78.1-.35.3-.65.58-.9.28-.25.6-.38.96-.38.39 0 .72.12.99.38.27.25.47.55.58.9.1.34.1.6.02.78-.08.18-.24.31-.5.4v1.44c.55-.1 1-.28 1.33-.54.33-.26.55-.58.67-.96.12-.38.12-.78 0-1.2-.12-.42-.36-.8-.72-1.14-.36-.34-.82-.6-1.38-.8-.56-.2-1.18-.3-1.86-.3-.68 0-1.3.1-1.86.3-.56.2-1.02.46-1.38.8-.36.34-.6.72-.72 1.14-.12.42-.12.82 0 1.2.12.38.34.7.67.96ZM8 11h2v6H8v-6Zm4-3H6v2h6V8Z"/>
-    </svg>
-  ),
-  JavaScript: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M3 3h18v18H3V3Zm4.5 15c.83 0 1.5-.34 2-.76V15.5c-.37.36-.88.5-1.5.5-.83 0-1.5-.67-1.5-1.5v-1c0-.83.67-1.5 1.5-1.5.62 0 1.13.14 1.5.5v-1.74c-.5-.42-1.17-.76-2-.76-1.66 0-3 1.34-3 3v1c0 1.66 1.34 3 3 3Zm7.5 0c.83 0 1.5-.34 2-.76V15.5c-.37.36-.88.5-1.5.5-.83 0-1.5-.67-1.5-1.5v-4h3V9h-3V7h-2v7.5c0 1.66 1.34 3 3 3Z"/>
-    </svg>
-  ),
-  MongoDB: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2C9.24 2 7 4.24 7 7c0 2.85 2.92 7.21 5 9.88 2.08-2.67 5-7.03 5-9.88 0-2.76-2.24-5-5-5Zm0 7.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
-      <path d="M12 22c-.55 0-1-.45-1-1v-3h2v3c0 .55-.45 1-1 1Z"/>
-    </svg>
-  ),
-  PostgreSQL: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Zm-1-13h2v6h-2V7Zm0 8h2v2h-2v-2Z"/>
-    </svg>
-  ),
-  OpenAI: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M22.2 11.2c.4-1.3.2-2.8-.6-4-1.2-1.9-3.5-2.7-5.6-2.1-.8-.9-1.9-1.6-3.2-1.8-2.2-.4-4.4.6-5.5 2.5-1.2-.1-2.4.3-3.4 1.2-1.5 1.4-1.9 3.6-1 5.4-.4 1.3-.2 2.8.6 4 1.2 1.9 3.5 2.7 5.6 2.1.8.9 1.9 1.6 3.2 1.8 2.2.4 4.4-.6 5.5-2.5 1.2.1 2.4-.3 3.4-1.2 1.5-1.4 1.9-3.6 1-5.4Z"/>
-    </svg>
-  ),
-  TensorFlow: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2 4 6v12l8 4 8-4V6l-8-4Zm6 14.5-6 3-6-3v-9l6-3 6 3v9Z"/>
-    </svg>
-  ),
-  LangChain: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm-1-13h2v6h-2V7Zm0 8h2v2h-2v-2Z"/>
-    </svg>
-  ),
-  Python: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2c-1.66 0-3 1.34-3 3v2H6c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h1v3c0 1.66 1.34 3 3 3h4c1.66 0 3-1.34 3-3v-2h3c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2h-1V5c0-1.66-1.34-3-3-3h-4Zm-1 3c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1Zm2 12c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1Z"/>
-    </svg>
-  ),
-  'Framer Motion': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M4 4h16v5.33H9.33L4 4Zm0 5.33h5.33L14.67 14.67H4V9.33Zm0 5.34h10.67l5.33 5.33H4v-5.33Z"/>
-    </svg>
-  ),
-  'Three.js': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2L2 19.5h20L12 2Zm0 4l6.5 11.5h-13L12 6Z"/>
-    </svg>
-  ),
-  GSAP: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 3c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.14-7-7 3.14-7 7-7Z"/>
-    </svg>
-  ),
-  WebGL: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/>
-    </svg>
-  ),
-  Stripe: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305Z"/>
-    </svg>
-  ),
-  Auth0: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2L3 7v10l9 5 9-5V7l-9-5Zm0 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z"/>
-    </svg>
-  ),
-  Redis: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 14.5L5.5 12 12 7.5l6.5 4.5-6.5 4.5Z"/>
-    </svg>
-  ),
-  REST: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M4 4h16v4H4V4Zm0 6h16v4H4v-4Zm0 6h16v4H4v-4Z"/>
-    </svg>
-  ),
-  GraphQL: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.18L18.36 7.5 12 10.82 5.64 7.5 12 4.18ZM5 8.82l6 3.32v6.36l-6-3.32V8.82Zm8 9.68V12.14l6-3.32v6.36l-6 3.32Z"/>
-    </svg>
-  ),
-  Prisma: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M12 2 2 22h20L12 2Zm0 4 7 14H5l7-14Z"/>
-    </svg>
-  ),
-  Docker: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M13 3h2v2h-2V3Zm-3 0h2v2h-2V3Zm-3 0h2v2H7V3ZM4 6h2v2H4V6Zm3 0h2v2H7V6Zm3 0h2v2h-2V6Zm3 0h2v2h-2V6Zm3 0h2v2h-2V6ZM4 9h2v2H4V9Zm3 0h2v2H7V9Zm3 0h2v2h-2V9Zm3 0h2v2h-2V9Zm5.5 0c2.49 0 4.5 2.01 4.5 4.5S20.49 18 18 18H3v-4h17v4h-2.5c1.38 0 2.5-1.12 2.5-2.5S18.88 13 17.5 13H3V9h16.5Z"/>
-    </svg>
-  ),
-  MySQL: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93Zm8.5-4.43c-.19-.46-.57-.8-.94-.97L15 13v-2c0-.55-.45-1-1-1h-4v-2h2c.55 0 1-.45 1-1V5.5c2.33.67 4.07 2.71 4.38 5.18l1.62.82c-.08.68-.26 1.34-.5 1.98v1.02Z"/>
-    </svg>
-  ),
-  'Scikit-learn': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12 2L2 7l10 5 10-5-10-5Zm0 10L2 17l10 5 10-5-10-5Z"/>
-    </svg>
-  ),
-  NLTK: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-    </svg>
-  ),
-  'Tailwind CSS': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.002 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C7.666 17.818 9.027 19 12.002 19c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/>
-    </svg>
-  ),
-  'CSS Grid/Flexbox': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2">
-      <rect x="3" y="3" width="18" height="18" rx="2"/>
-      <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
-    </svg>
-  ),
-  Supabase: (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor">
-      <path d="M21.362 9.356H12.83l5.656-7.856a.5.5 0 0 0-.6-.756L6.225 7.15c-.412.18-.58.656-.375 1.05.08.156.22.28.388.344h8.53l-5.656 7.856a.5.5 0 0 0 .6.756l11.662-7.4a.5.5 0 0 0-.062-.9z"/>
-    </svg>
-  ),
-  'Auth / RLS': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-    </svg>
-  ),
-  'Express.js': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-    </svg>
-  ),
-  'MySQL Triggers': (
-    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-    </svg>
-  ),
+  React: <SiReact className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'Next.js': <SiNextdotjs className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'Node.js': <SiNodedotjs className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  TypeScript: <SiTypescript className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  JavaScript: <SiJavascript className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  MongoDB: <SiMongodb className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  PostgreSQL: <SiPostgresql className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  MySQL: <SiMysql className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'MySQL Triggers': <SiMysql className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  OpenAI: <SiOpenai className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  TensorFlow: <SiTensorflow className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  Python: <SiPython className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'Scikit-learn': <SiScikitlearn className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  NLTK: <Cpu className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'Framer Motion': <SiFramer className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'Tailwind CSS': <SiTailwindcss className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'CSS Grid/Flexbox': <SiCss3 className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  GSAP: <SiGreensock className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'Three.js': <SiThreedotjs className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  WebGL: <SiWebgl className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  Supabase: <SiSupabase className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  Stripe: <SiStripe className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'Auth / RLS': <SiJsonwebtokens className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  Auth0: <SiAuth0 className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  Redis: <SiRedis className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  REST: <Code2 className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  'Express.js': <SiExpress className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  GraphQL: <SiGraphql className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  Prisma: <SiPrisma className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
+  Docker: <SiDocker className="w-4 h-4 xs:w-4.5 xs:h-4.5" />,
 };
 
 // Expertise Data
