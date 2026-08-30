@@ -150,10 +150,10 @@ export default function About() {
         {/* Card 1: Sticky About Bento Grid (centered vertically in viewport) */}
         <div
           ref={cardRef}
-          className="lg:sticky z-10 px-6 sm:px-12 md:px-16 lg:px-20 xl:px-24 w-full lg:h-screen lg:flex lg:flex-col lg:justify-center pt-8 pb-16 lg:pt-0 lg:pb-0"
+          className="lg:sticky z-10 px-2 xs:px-4 sm:px-12 md:px-16 lg:px-20 xl:px-24 w-full lg:h-screen lg:flex lg:flex-col lg:justify-center pt-2 pb-10 sm:pt-8 sm:pb-16 lg:pt-0 lg:pb-0"
           style={{ top: '0px' }}
         >
-          <Container>
+          <Container className="px-0 sm:px-4">
             {/* Hidden SEO Content */}
             <div className="sr-only">
               <h2>About Rameshwar Bhagwat - Full Stack & AI Developer</h2>

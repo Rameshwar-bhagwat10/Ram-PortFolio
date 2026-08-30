@@ -5,11 +5,12 @@ import { memo } from 'react';
 const AboutDome = memo(function AboutDome() {
   return (
     <div
-      className="relative mx-auto -mt-1 sm:-mt-1 md:-mt-1.5 -mb-8 sm:-mb-10 md:-mb-12 w-[480px] sm:w-[640px] md:w-[800px] h-[165px] sm:h-[220px] md:h-[265px] pointer-events-none overflow-visible z-10 about-dome opacity-0"
+      className="relative mx-auto -mt-1 sm:-mt-1 md:-mt-1.5 -mb-6 sm:-mb-10 md:-mb-12 w-full max-w-[340px] xs:max-w-[420px] sm:max-w-[640px] md:max-w-[800px] h-[95px] xs:h-[125px] sm:h-[220px] md:h-[265px] pointer-events-none overflow-visible z-10 about-dome opacity-0 flex justify-center items-center"
     >
       <svg
         className="w-full h-full overflow-visible"
         viewBox="0 0 600 200"
+        preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >

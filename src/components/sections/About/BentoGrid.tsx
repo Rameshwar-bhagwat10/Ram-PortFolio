@@ -199,7 +199,7 @@ const BentoGlowCard = memo(function BentoGlowCard({
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       onClick={onClick}
-      className={`group relative overflow-hidden rounded-[30px] border border-white/[0.04] transition-colors duration-300 about-bento-card ${className}`}
+      className={`group relative overflow-hidden rounded-[24px] sm:rounded-[30px] border border-white/[0.04] transition-colors duration-300 about-bento-card ${className}`}
       style={{
         background: 'linear-gradient(180deg, rgba(30, 28, 28, 0.45) 0%, rgba(21, 19, 19, 0.9) 100%)',
         boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.03)',
@@ -209,11 +209,11 @@ const BentoGlowCard = memo(function BentoGlowCard({
       {/* Glow border effect - only visible on hover / proximity */}
       <div
         ref={glowRef}
-        className="absolute inset-0 rounded-[30px] pointer-events-none overflow-hidden"
+        className="absolute inset-0 rounded-[24px] sm:rounded-[30px] pointer-events-none overflow-hidden"
         style={{
           opacity: 0,
           transition: 'opacity 300ms',
-          padding: '1px', // Thin border (1px instead of 2px)
+          padding: '1px',
           WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           WebkitMaskComposite: 'xor',
           mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -250,7 +250,7 @@ const BentoCard = memo(function BentoCard({
 }) {
   return (
     <BentoGlowCard
-      className={`p-4 xs:p-4.5 sm:p-5 flex flex-col justify-between cursor-pointer select-none ${className}`}
+      className={`p-3.5 xs:p-4 sm:p-5 flex flex-col justify-between cursor-pointer select-none ${className}`}
       onClick={onClick}
     >
       {/* Content wrapper */}
@@ -260,8 +260,8 @@ const BentoCard = memo(function BentoCard({
 
       {/* Floating premium bottom-right arrow (circle) */}
       {showArrow && (
-        <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/5 bg-neutral-900/60 flex items-center justify-center text-white/30 group-hover:text-white group-hover:bg-neutral-950 group-hover:border-white/15 transition-all duration-300">
-          <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <div className="absolute bottom-3 right-3 xs:bottom-3.5 xs:right-3.5 sm:bottom-5 sm:right-5 w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 rounded-full border border-white/5 bg-neutral-900/60 flex items-center justify-center text-white/30 group-hover:text-white group-hover:bg-neutral-950 group-hover:border-white/15 transition-all duration-300 pointer-events-none">
+          <ArrowUpRight className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       )}
     </BentoGlowCard>
@@ -281,18 +281,18 @@ export default function BentoGrid() {
   };
 
   return (
-    <BentoGlowGroup className="grid grid-cols-4 gap-4 xs:gap-5 md:gap-6 max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 w-full font-jakarta">
+    <BentoGlowGroup className="grid grid-cols-2 md:grid-cols-4 gap-3 xs:gap-4 md:gap-6 max-w-6xl mx-auto px-2 xs:px-3 sm:px-6 md:px-8 lg:px-10 w-full font-jakarta">
 
       {/* ================= ROW 1: PROFILE & RIGHT SIDE ================= */}
 
-      {/* 1. Profile Card (2 cols, span 2 rows on desktop) */}
+      {/* 1. Profile Card (2 cols on mobile, 2 cols + 2 rows on desktop) */}
       <BentoCard
-        className="col-span-4 md:col-span-2 row-span-2 md:h-full justify-between"
+        className="col-span-2 md:col-span-2 md:row-span-2 md:h-full justify-between p-4 xs:p-5 sm:p-6 order-1 md:order-1"
         onClick={() => handleNav('about')}
       >
-        <div className="flex flex-col sm:flex-row gap-6 items-center justify-center sm:justify-between h-full w-full">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center justify-between h-full w-full pr-8 sm:pr-0 pb-1 sm:pb-0">
           {/* Avatar frame with bright premium blue/indigo glow */}
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-tl-[30px] rounded-br-[30px] overflow-hidden flex-shrink-0 bg-gradient-to-br from-[#1E4ED8] via-[#3B82F6] to-[#6366F1] shadow-lg">
+          <div className="relative w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-tl-[22px] rounded-br-[22px] sm:rounded-tl-[30px] sm:rounded-br-[30px] overflow-hidden flex-shrink-0 bg-gradient-to-br from-[#1E4ED8] via-[#3B82F6] to-[#6366F1] shadow-lg">
             <div className="absolute inset-0 bg-[#0c0b0b]/15 pointer-events-none" />
             <Image
               src="/images/profile/profile.jpeg"
@@ -305,11 +305,11 @@ export default function BentoGrid() {
           </div>
 
           {/* Bio text */}
-          <div className="text-center sm:text-left flex flex-col justify-center flex-1">
-            <span className="text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block mb-1">
+          <div className="text-left flex flex-col justify-center flex-1">
+            <span className="text-[9px] xs:text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block mb-1">
               A Full Stack Developer
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight mb-2">
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight mb-1.5 sm:mb-2">
               Rameshwar Bhagwat.
             </h2>
             <p className="text-xs sm:text-sm text-white/50 leading-relaxed max-w-xs">
@@ -319,36 +319,36 @@ export default function BentoGrid() {
         </div>
       </BentoCard>
 
-      {/* 2. Marquee Ticker Card (2 cols, 1 row) */}
+      {/* 2. Marquee Ticker Card (2 cols on mobile, 2 cols on desktop) */}
       <BentoGlowCard
-        className="col-span-4 md:col-span-2 p-3 sm:p-4 flex items-center cursor-pointer select-none"
+        className="col-span-2 md:col-span-2 p-2.5 xs:p-3 sm:p-4 flex items-center cursor-pointer select-none order-2 md:order-2"
       >
         <div className="flex w-full items-center justify-between overflow-hidden relative">
-          <div className="flex whitespace-nowrap animate-marquee py-1.5 text-[10px] sm:text-xs font-mono font-bold tracking-[0.1em] text-white/40 uppercase">
+          <div className="flex whitespace-nowrap animate-marquee py-1 sm:py-1.5 text-[9.5px] xs:text-[10px] sm:text-xs font-mono font-bold tracking-[0.1em] text-white/40 uppercase">
             <span>Next.js Expert • Product Builder • AI & ML Integration • SaaS Architect • Next.js Expert • Product Builder • </span>
           </div>
           <div className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-full bg-gradient-to-l from-[#171515] to-transparent pointer-events-none" />
         </div>
       </BentoGlowCard>
 
-      {/* 3. Visitor Stats Card (1 col) */}
+      {/* 3. Visitor Stats Card (1 col on mobile, 1 col on desktop) */}
       <BentoCard
-        className="col-span-2 md:col-span-1 justify-between h-36 sm:h-38 md:h-40"
+        className="col-span-1 md:col-span-1 justify-between min-h-[145px] xs:min-h-[155px] md:h-40 order-3 md:order-3"
         onClick={() => handleNav('about')}
         showArrow={true}
       >
-        <div className="flex flex-col justify-center pt-1.5 flex-1">
-          <div className="flex items-center gap-2 mb-2">
+        <div className="flex flex-col justify-start pt-0.5 flex-1">
+          <div className="flex items-center gap-1.5 xs:gap-2 mb-1.5 xs:mb-2">
             <div className="relative flex h-2 w-2">
               <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${stats.usingFallback ? 'bg-[#38BDF8]/40' : 'bg-emerald-400'} opacity-75`}></span>
               <span className={`relative inline-flex rounded-full h-2 w-2 ${stats.usingFallback ? 'bg-[#38BDF8]' : 'bg-emerald-500'}`}></span>
             </div>
-            <span className={`text-[10px] font-mono font-semibold tracking-wider uppercase ${stats.usingFallback ? 'text-[#38BDF8]' : 'text-emerald-400'}`}>
+            <span className={`text-[8.5px] xs:text-[9.5px] sm:text-[10px] font-mono font-semibold tracking-wider uppercase ${stats.usingFallback ? 'text-[#38BDF8]' : 'text-emerald-400'}`}>
               {stats.usingFallback ? 'System Active' : 'Live Now'}
             </span>
           </div>
 
-          <div className="text-2xl sm:text-3xl font-black text-white tracking-tight font-outfit">
+          <div className="text-xl xs:text-2xl sm:text-3xl font-black text-white tracking-tight font-outfit">
             {isLoading ? (
               <span className="animate-pulse">...</span>
             ) : (
@@ -356,26 +356,26 @@ export default function BentoGrid() {
             )}
           </div>
         </div>
-        <div className="pr-10 pt-1">
-          <span className="text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block">
+        <div className="pr-6 xs:pr-7 sm:pr-10 pt-1">
+          <span className="text-[8.5px] xs:text-[9.5px] sm:text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block">
             Stats Counter
           </span>
-          <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mt-0.5">
+          <h3 className="text-sm xs:text-base sm:text-xl font-bold text-white tracking-tight mt-0.5 leading-tight">
             Profile Visitors
           </h3>
         </div>
       </BentoCard>
 
-      {/* 4. Projects Showcase Card (1 col) - Redesigned Multi-Card Stack */}
+      {/* 4. Projects Showcase Card (1 col on mobile, 1 col on desktop) */}
       <BentoCard
-        className="col-span-2 md:col-span-1 justify-between h-36 sm:h-38 md:h-40 group/project"
+        className="col-span-1 md:col-span-1 justify-between min-h-[145px] xs:min-h-[155px] md:h-40 group/project order-4 md:order-4"
         onClick={() => handleNav('work')}
         showArrow={true}
       >
         {/* Center Interactive 3D Card Stack */}
-        <div className="relative w-full h-16 sm:h-18 pt-1 flex items-center justify-center pointer-events-none">
+        <div className="relative w-full h-14 xs:h-16 sm:h-18 pt-0.5 flex items-center justify-center pointer-events-none">
           {/* Back Card Stack 2 */}
-          <div className="absolute w-20 h-12 sm:w-24 sm:h-14 rounded-lg overflow-hidden border border-white/10 shadow-lg bg-neutral-900 transition-all duration-500 ease-out -translate-x-3 -rotate-12 scale-85 opacity-40 group-hover/project:-translate-x-6 group-hover/project:-rotate-16 group-hover/project:opacity-70">
+          <div className="absolute w-16 h-10 xs:w-18 xs:h-11 sm:w-24 sm:h-14 rounded-md sm:rounded-lg overflow-hidden border border-white/10 shadow-lg bg-neutral-900 transition-all duration-500 ease-out -translate-x-2 -rotate-12 scale-85 opacity-40 group-hover/project:-translate-x-4 group-hover/project:-rotate-16 group-hover/project:opacity-70">
             <Image
               src={projects[1]?.image || "/images/projects/project2.png"}
               alt="Project Preview 2"
@@ -385,7 +385,7 @@ export default function BentoGrid() {
           </div>
 
           {/* Back Card Stack 1 */}
-          <div className="absolute w-22 h-13 sm:w-26 sm:h-15 rounded-lg overflow-hidden border border-white/15 shadow-xl bg-neutral-900 transition-all duration-500 ease-out translate-x-3 rotate-12 scale-90 opacity-60 group-hover/project:translate-x-6 group-hover/project:rotate-16 group-hover/project:opacity-85">
+          <div className="absolute w-17 h-10.5 xs:w-20 xs:h-12 sm:w-26 sm:h-15 rounded-md sm:rounded-lg overflow-hidden border border-white/15 shadow-xl bg-neutral-900 transition-all duration-500 ease-out translate-x-2 rotate-12 scale-90 opacity-60 group-hover/project:translate-x-4 group-hover/project:rotate-16 group-hover/project:opacity-85">
             <Image
               src={projects[2]?.image || "/images/projects/project3.png"}
               alt="Project Preview 3"
@@ -395,7 +395,7 @@ export default function BentoGrid() {
           </div>
 
           {/* Front Primary Card */}
-          <div className="relative w-24 h-14 sm:w-28 sm:h-16 rounded-xl overflow-hidden border border-white/20 shadow-[0_10px_24px_rgba(0,0,0,0.6)] bg-neutral-950 z-10 transition-all duration-500 ease-out group-hover/project:scale-105 group-hover/project:-translate-y-1">
+          <div className="relative w-20 h-12 xs:w-22 xs:h-13 sm:w-28 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden border border-white/20 shadow-[0_10px_24px_rgba(0,0,0,0.6)] bg-neutral-950 z-10 transition-all duration-500 ease-out group-hover/project:scale-105 group-hover/project:-translate-y-1">
             <Image
               src={projects[0]?.image || "/images/projects/project1.png"}
               alt="Featured Project Showcase"
@@ -404,37 +404,37 @@ export default function BentoGrid() {
             />
             {/* Glossy overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-white/10" />
-            <div className="absolute bottom-1 left-1.5 right-1.5 flex items-center justify-between">
-              <span className="text-[7.5px] font-mono font-bold text-white/90 truncate max-w-[70px]">
+            <div className="absolute bottom-0.5 xs:bottom-1 left-1 xs:left-1.5 right-1 xs:right-1.5 flex items-center justify-between">
+              <span className="text-[6.5px] xs:text-[7.5px] font-mono font-bold text-white/90 truncate max-w-[55px] xs:max-w-[70px]">
                 {projects[0]?.title || "WebCraft"}
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#30D158]" />
+              <span className="w-1 h-1 xs:w-1.5 xs:h-1.5 rounded-full bg-[#30D158]" />
             </div>
           </div>
         </div>
 
-        {/* Bottom Text Label (Matching Visitor Stats Card) */}
-        <div className="pr-10 pt-1">
-          <span className="text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block">
+        {/* Bottom Text Label */}
+        <div className="pr-6 xs:pr-7 sm:pr-10 pt-1">
+          <span className="text-[8.5px] xs:text-[9.5px] sm:text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block">
             Showcase
           </span>
-          <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mt-0.5">
+          <h3 className="text-sm xs:text-base sm:text-xl font-bold text-white tracking-tight mt-0.5 leading-tight">
             Projects
           </h3>
         </div>
       </BentoCard>
 
-      {/* ================= ROW 2: SERVICES, TECH & PROFILES ================= */}
+      {/* ================= ROW 2: CORE EXPERTISE & SOCIAL PROFILES (4-SQUARE GRID ON MOBILE) ================= */}
 
-      {/* 5. Tech Stack Card (1 col) */}
+      {/* 5. Tech Stack Card (1 col on mobile, 1 col on desktop) */}
       <BentoCard
-        className="col-span-2 md:col-span-1 justify-between h-36 sm:h-38 md:h-40 p-4 sm:p-5"
+        className="col-span-1 md:col-span-1 justify-between min-h-[145px] xs:min-h-[155px] md:h-40 order-5 md:order-5"
         onClick={() => handleNav('skills')}
         showArrow={false}
       >
         <div className="flex flex-col justify-between h-full w-full">
           <div>
-            <span className="text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block mb-1.5 text-center">
+            <span className="text-[8.5px] xs:text-[9.5px] sm:text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block mb-1 text-center">
               Core Expertise
             </span>
             {(() => {
@@ -443,27 +443,27 @@ export default function BentoGrid() {
                 return (
                   <div
                     key={skill.name}
-                    className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300"
+                    className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] transition-all duration-300 flex-shrink-0"
                   >
                     <IconComponent className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" style={{ color: skill.color }} />
-                    <span className="text-[8px] sm:text-[9px] text-white/60 font-medium font-jakarta">{skill.name}</span>
+                    <span className="text-[7px] xs:text-[8px] sm:text-[9px] text-white/60 font-medium font-jakarta whitespace-nowrap">{skill.name}</span>
                   </div>
                 );
               };
               return (
-                <div className="flex flex-col gap-2.5 sm:gap-3 items-center w-full mt-2">
-                  {/* Row 1: Next.js */}
-                  <div className="flex justify-center">
+                <div className="flex flex-col gap-1.5 xs:gap-2 items-center w-full mt-1 sm:mt-1.5">
+                  {/* Row 1: Next.js + React */}
+                  <div className="flex justify-center gap-1 xs:gap-1.5">
                     {renderBadge(expertise[1])}
-                  </div>
-                  {/* Row 2: React, TypeScript */}
-                  <div className="flex justify-center gap-2 sm:gap-2.5">
                     {renderBadge(expertise[0])}
-                    {renderBadge(expertise[2])}
                   </div>
-                  {/* Row 3: Node.js, Python, Docker */}
-                  <div className="flex justify-center gap-2 sm:gap-2.5">
+                  {/* Row 2: TypeScript + Node.js */}
+                  <div className="flex justify-center gap-1 xs:gap-1.5">
+                    {renderBadge(expertise[2])}
                     {renderBadge(expertise[3])}
+                  </div>
+                  {/* Row 3: Python + Docker */}
+                  <div className="flex justify-center gap-1 xs:gap-1.5">
                     {renderBadge(expertise[4])}
                     {renderBadge(expertise[6])}
                   </div>
@@ -474,54 +474,14 @@ export default function BentoGrid() {
         </div>
       </BentoCard>
 
-      {/* 6. Specialization / Services Card (2 cols) */}
+      {/* 7. Profiles / Socials Card (1 col on mobile, 1 col on desktop) */}
       <BentoCard
-        className="col-span-4 md:col-span-2 h-36 sm:h-38 md:h-40"
-        onClick={() => handleNav('skills')}
-        showArrow={true}
-      >
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 h-full w-full pr-8 sm:pr-10">
-          {/* Left Title */}
-          <div className="flex flex-col justify-center text-left w-full sm:w-auto">
-            <span className="text-[9px] sm:text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block">
-              Specialization
-            </span>
-            <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mt-1 leading-tight">
-              Services Offering
-            </h3>
-          </div>
-
-          {/* Right Services 2x2 grid of small capsules */}
-          <div className="grid grid-cols-2 gap-2 w-full sm:w-auto max-w-[280px]">
-            {[
-              { icon: Code, label: 'Web Apps', color: '#38BDF8' },
-              { icon: Brain, label: 'AI Integrations', color: '#FF9F0A' },
-              { icon: Database, label: 'Backends', color: '#34D399' },
-              { icon: Cpu, label: 'Systems', color: '#A78BFA' },
-            ].map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={idx}
-                  className="flex items-center gap-1.5 px-2 py-1 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.05] hover:border-white/[0.08] transition-colors duration-300"
-                >
-                  <Icon className="w-3 h-3 flex-shrink-0" style={{ color: item.color }} />
-                  <span className="text-[9px] sm:text-[10px] text-white/70 font-semibold font-jakarta leading-none">{item.label}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </BentoCard>
-
-      {/* 7. Profiles / Socials Card (1 col) - Redesigned Unique Social Hub */}
-      <BentoCard
-        className="col-span-2 md:col-span-1 justify-between h-36 sm:h-38 md:h-40 group/socials"
+        className="col-span-1 md:col-span-1 justify-between min-h-[145px] xs:min-h-[155px] md:h-40 group/socials order-6 md:order-7"
         onClick={() => handleNav('contact')}
         showArrow={true}
       >
         {/* Top Interactive Brand Buttons Row */}
-        <div className="flex items-center justify-center gap-2.5 sm:gap-3 pt-2 flex-1 z-10">
+        <div className="flex items-center justify-center gap-1.5 xs:gap-2 sm:gap-3 pt-1 flex-1 z-10">
           {[
             { 
               name: 'GitHub', 
@@ -551,37 +511,79 @@ export default function BentoGrid() {
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 title={social.name}
-                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center text-white/50 transition-all duration-300 active:scale-95 ${social.hoverStyles}`}
+                className={`w-8 h-8 xs:w-9 xs:h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center text-white/50 transition-all duration-300 active:scale-95 ${social.hoverStyles}`}
                 style={{
                   boxShadow: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.03)',
                 }}
               >
-                <Icon className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover/socials:scale-105" />
+                <Icon className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover/socials:scale-105" />
               </a>
             );
           })}
         </div>
 
         {/* Bottom Text Label */}
-        <div className="pr-10 pt-1 z-10">
-          <span className="text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block">
+        <div className="pr-6 xs:pr-7 sm:pr-10 pt-1 z-10">
+          <span className="text-[8.5px] xs:text-[9.5px] sm:text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block">
             Stay Connected
           </span>
-          <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mt-0.5">
+          <h3 className="text-sm xs:text-base sm:text-xl font-bold text-white tracking-tight mt-0.5 leading-tight">
             Profiles
           </h3>
         </div>
       </BentoCard>
 
-      {/* ================= ROW 3: STATS & CONTACT ================= */}
+      {/* ================= ROW 3: SERVICES OFFERING (FULL WIDTH ON MOBILE) ================= */}
 
-      {/* 8. Stats Card (2 cols) */}
+      {/* 6. Specialization / Services Card (2 cols on mobile, 2 cols on desktop) */}
+      <BentoCard
+        className="col-span-2 md:col-span-2 min-h-[145px] xs:min-h-[155px] md:h-40 order-7 md:order-6"
+        onClick={() => handleNav('skills')}
+        showArrow={true}
+      >
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 h-full w-full pr-8 sm:pr-10">
+          {/* Left Title */}
+          <div className="flex flex-col justify-center text-left w-full sm:w-auto">
+            <span className="text-[8.5px] xs:text-[9.5px] sm:text-[10px] font-mono font-medium tracking-[0.15em] text-white/30 uppercase block">
+              Specialization
+            </span>
+            <h3 className="text-base xs:text-lg sm:text-xl font-bold text-white tracking-tight mt-0.5 sm:mt-1 leading-tight">
+              Services Offering
+            </h3>
+          </div>
+
+          {/* Right Services 2x2 grid of small capsules */}
+          <div className="grid grid-cols-2 gap-1.5 xs:gap-2 w-full sm:w-auto max-w-[240px] xs:max-w-[280px]">
+            {[
+              { icon: Code, label: 'Web Apps', color: '#38BDF8' },
+              { icon: Brain, label: 'AI Integrations', color: '#FF9F0A' },
+              { icon: Database, label: 'Backends', color: '#34D399' },
+              { icon: Cpu, label: 'Systems', color: '#A78BFA' },
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="flex items-center gap-1.5 px-2 py-1 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.05] hover:border-white/[0.08] transition-colors duration-300"
+                >
+                  <Icon className="w-2.5 h-2.5 xs:w-3 xs:h-3 flex-shrink-0" style={{ color: item.color }} />
+                  <span className="text-[8.5px] xs:text-[9px] sm:text-[10px] text-white/70 font-semibold font-jakarta leading-none">{item.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </BentoCard>
+
+      {/* ================= ROW 4: STATS & CONTACT (FULL WIDTH ON MOBILE) ================= */}
+
+      {/* 8. Stats Card (2 cols on mobile, 2 cols on desktop) */}
       <BentoGlowCard
         onClick={() => handleNav('about')}
-        className="col-span-4 md:col-span-2 flex flex-col justify-between p-4 sm:p-5 cursor-pointer select-none"
+        className="col-span-2 md:col-span-2 flex flex-col justify-between p-3.5 xs:p-4 sm:p-5 cursor-pointer select-none order-8 md:order-8"
       >
         {/* Row of stats cards (raised) */}
-        <div className="flex gap-3 sm:gap-4 w-full h-full pt-1.5">
+        <div className="flex gap-2 xs:gap-3 sm:gap-4 w-full h-full pt-0.5 sm:pt-1.5">
           {[
             { value: `0${new Date().getFullYear() - 2025}+`, label: 'Years', sublabel: 'Experience' },
             { value: `${skills.length}+`, label: 'Tech Stack', sublabel: 'Skills' },
@@ -589,19 +591,19 @@ export default function BentoGrid() {
           ].map((stat, idx) => (
             <div
               key={idx}
-              className="flex-1 flex flex-col justify-center items-center py-2.5 sm:py-3 rounded-2xl border border-white/[0.02]"
+              className="flex-1 flex flex-col justify-center items-center py-2 xs:py-2.5 sm:py-3 px-1 rounded-xl sm:rounded-2xl border border-white/[0.02]"
               style={{
                 background: 'linear-gradient(180deg, rgba(20, 19, 19, 0.6) 0%, rgba(12, 11, 11, 0.9) 100%)',
                 boxShadow: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.01)',
               }}
             >
-              <span className="text-xl sm:text-2xl font-black text-white/90 tracking-tight font-outfit">
+              <span className="text-lg xs:text-xl sm:text-2xl font-black text-white/90 tracking-tight font-outfit">
                 {stat.value}
               </span>
-              <span className="text-[9px] font-semibold text-white/20 uppercase tracking-widest mt-1 block">
+              <span className="text-[8px] xs:text-[9px] font-semibold text-white/20 uppercase tracking-widest mt-1 block text-center">
                 {stat.label}
               </span>
-              <span className="text-[8px] font-medium text-white/20 uppercase tracking-wider block">
+              <span className="text-[7px] xs:text-[8px] font-medium text-white/20 uppercase tracking-wider block text-center">
                 {stat.sublabel}
               </span>
             </div>
@@ -609,30 +611,30 @@ export default function BentoGrid() {
         </div>
       </BentoGlowCard>
 
-      {/* 9. Let's Work Together Card (2 cols) */}
+      {/* 9. Let's Work Together Card (2 cols on mobile, 2 cols on desktop) */}
       <BentoGlowCard
         onClick={() => handleNav('contact')}
-        className="col-span-4 md:col-span-2 p-4 sm:p-5 flex flex-col justify-between cursor-pointer select-none min-h-[120px] md:h-full"
+        className="col-span-2 md:col-span-2 p-4 xs:p-5 sm:p-6 flex flex-col justify-between cursor-pointer select-none min-h-[140px] xs:min-h-[155px] md:h-full relative order-9 md:order-9"
       >
         {/* Star Sparkle Icon top left */}
         <div className="text-white/20 group-hover:text-orange-400 transition-colors duration-300">
-          <Plus className="w-5 h-5 animate-pulse" />
+          <Plus className="w-4 h-4 xs:w-5 xs:h-5 animate-pulse" />
         </div>
 
         {/* Headline */}
-        <div className="pr-12 pt-4">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.05] text-white mb-2 font-jakarta">
+        <div className="pr-10 xs:pr-12 pt-2 xs:pt-4">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-[1.05] text-white mb-1.5 sm:mb-2 font-jakarta">
             Let&apos;s <br />
             work <span className="font-instrument italic font-normal text-white/90 lowercase pr-1">together.</span>
           </h2>
-          <p className="text-xs sm:text-sm text-white/55 leading-relaxed max-w-xs font-jakarta mt-2">
+          <p className="text-xs sm:text-sm text-white/55 leading-relaxed max-w-xs font-jakarta mt-1 xs:mt-2">
             Have a project in mind? Reach out and let&apos;s craft something exceptional.
           </p>
         </div>
 
         {/* Floating premium bottom-right arrow (circle) */}
-        <div className="absolute bottom-6 right-6 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/5 bg-neutral-900/60 flex items-center justify-center text-white/30 group-hover:text-white group-hover:bg-neutral-950 group-hover:border-white/15 transition-all duration-300">
-          <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full border border-white/5 bg-neutral-900/60 flex items-center justify-center text-white/30 group-hover:text-white group-hover:bg-neutral-950 group-hover:border-white/15 transition-all duration-300 pointer-events-none">
+          <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </BentoGlowCard>
 
