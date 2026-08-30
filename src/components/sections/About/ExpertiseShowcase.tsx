@@ -537,8 +537,8 @@ export default function ExpertiseShowcase() {
   }, []);
 
   return (
-    <div className="relative py-16 xs:py-18 sm:py-20 md:py-24 overflow-hidden bg-[#0F0E0E]">
-      <div className="relative z-10 max-w-6xl mx-auto px-4 xs:px-5 sm:px-6 md:px-8">
+    <div className="relative py-12 xs:py-14 sm:py-20 md:py-24 overflow-hidden bg-[#0F0E0E]">
+      <div className="relative z-10 max-w-6xl mx-auto px-3 xs:px-4 sm:px-6 md:px-8">
         
         {/* Section Header */}
         <motion.div
@@ -546,11 +546,11 @@ export default function ExpertiseShowcase() {
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
           variants={headerContainerVariants}
-          className="text-center mb-10 xs:mb-12 sm:mb-14 md:mb-16"
+          className="text-center mb-8 xs:mb-10 sm:mb-14 md:mb-16"
         >
           <motion.div
             variants={badgeVariants}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06] mb-4 text-[#C2EF3A] text-xs font-semibold tracking-wider uppercase font-outfit"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06] mb-3 sm:mb-4 text-[#C2EF3A] text-[11px] sm:text-xs font-semibold tracking-wider uppercase font-outfit"
           >
             <div className="w-3.5 h-3.5 rounded-full bg-[#C2EF3A] flex items-center justify-center text-[#0F0E0E] flex-shrink-0">
               <svg className="w-[50%] h-[50%]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round">
@@ -562,7 +562,7 @@ export default function ExpertiseShowcase() {
           
           <motion.h2
             variants={titleContainerVariants}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-white max-w-2xl mx-auto font-jakarta flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.05em]"
+            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] sm:leading-[1.05] text-white max-w-2xl mx-auto font-jakarta flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.05em] px-2 sm:px-0"
           >
             {"Professional disciplines engineered for high performance.".split(" ").map((word, i) => (
               <span key={i} className="inline-block overflow-hidden py-0.5">
@@ -583,12 +583,12 @@ export default function ExpertiseShowcase() {
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
           variants={cardContainerVariants}
-          className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr] gap-4 xs:gap-5 sm:gap-6 lg:gap-8 items-stretch"
+          className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr] gap-3 xs:gap-4 sm:gap-6 lg:gap-8 items-stretch"
         >
           {/* Left Side - Tab Navigation Panel */}
           <motion.div 
             variants={leftCardVariants}
-            className="relative flex flex-col justify-between rounded-[30px] border border-white/[0.04] p-5 xs:p-6 lg:p-7 xl:p-8 overflow-hidden h-full"
+            className="relative flex flex-col justify-between rounded-[20px] xs:rounded-[24px] sm:rounded-[30px] border border-white/[0.04] p-3 xs:p-3.5 sm:p-5 lg:p-7 xl:p-8 overflow-hidden"
             style={{
               background: 'linear-gradient(180deg, rgba(30, 28, 28, 0.45) 0%, rgba(21, 19, 19, 0.95) 100%)',
               boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.03)',
@@ -598,7 +598,7 @@ export default function ExpertiseShowcase() {
             <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-white/[0.02] pointer-events-none" />
 
             {/* Content wrapper */}
-            <div className="relative z-10 flex flex-col gap-5 lg:gap-6 flex-1 justify-start">
+            <div className="relative z-10 flex flex-col gap-3 lg:gap-6 flex-1 justify-start">
               <div className="hidden lg:block">
                 <p className="text-[10px] font-mono font-bold tracking-[0.15em] text-white/35 uppercase mb-1">
                   Disciplines
@@ -610,7 +610,7 @@ export default function ExpertiseShowcase() {
 
               {/* Tab items list */}
               <div 
-                className="flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 scrollbar-hide -mx-4 xs:-mx-5 sm:-mx-6 px-4 xs:px-5 sm:px-6 lg:mx-0 lg:px-0"
+                className="flex lg:flex-col gap-2 xs:gap-2.5 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0 scrollbar-hide -mx-1 xs:-mx-1.5 sm:mx-0 px-1 xs:px-1.5 sm:px-0"
                 data-lenis-prevent
               >
                 {expertiseData.map((item, index) => (
@@ -625,8 +625,8 @@ export default function ExpertiseShowcase() {
               </div>
             </div>
 
-            {/* Footer - Compact Stats Row */}
-            <div className="relative z-10 flex lg:flex-row items-center gap-3 mt-6 pt-4 border-t border-white/[0.04]">
+            {/* Footer - Compact Stats Row (Desktop only, mobile has it in detail card) */}
+            <div className="relative z-10 hidden lg:flex items-center gap-3 mt-6 pt-4 border-t border-white/[0.04]">
               <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-[16px] bg-[#0E0D0D] border border-white/[0.03] flex-1 justify-center lg:justify-start">
                 <Clock className="w-3.5 h-3.5 text-[#C2EF3A]" />
                 <span className="text-[10px] font-bold font-mono text-white/55 uppercase tracking-wide whitespace-nowrap">
@@ -645,7 +645,7 @@ export default function ExpertiseShowcase() {
           {/* Right Side - Preview Area */}
           <motion.div
             variants={rightCardVariants}
-            className="relative rounded-[30px] border border-white/[0.04] overflow-hidden h-full flex flex-col"
+            className="relative rounded-[22px] xs:rounded-[26px] sm:rounded-[30px] border border-white/[0.04] overflow-hidden h-full flex flex-col"
             style={{
               background: 'linear-gradient(180deg, rgba(30, 28, 28, 0.45) 0%, rgba(21, 19, 19, 0.95) 100%)',
               boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.03)',
@@ -664,7 +664,7 @@ export default function ExpertiseShowcase() {
             />
 
             {/* Content */}
-            <div className="relative z-10 p-5 xs:p-6 sm:p-7 md:p-8 lg:p-10 flex-1 flex flex-col">
+            <div className="relative z-10 p-4 xs:p-5 sm:p-7 md:p-8 lg:p-10 flex-1 flex flex-col">
               <AnimatePresence mode="wait">
                 <PreviewContent key={activeItem.id} item={activeItem} />
               </AnimatePresence>
@@ -676,6 +676,7 @@ export default function ExpertiseShowcase() {
   );
 }
 
+// Tab Item Component - styled like Bento Grid cards
 // Tab Item Component - styled like Bento Grid cards
 const TabItem = memo(function TabItem({
   item,
@@ -698,7 +699,7 @@ const TabItem = memo(function TabItem({
     <motion.button
       onClick={handleClick}
       whileHover={{ y: -2, scale: 1.01 }}
-      className={`group relative flex items-center gap-3 lg:gap-4 p-3.5 sm:p-4 rounded-[20px] min-w-[150px] sm:min-w-[180px] lg:min-w-0 w-full text-left overflow-hidden flex-shrink-0 lg:flex-shrink transition-all duration-300 ${
+      className={`group relative flex items-center gap-2.5 xs:gap-3 lg:gap-4 p-2.5 xs:p-3 sm:p-3.5 lg:p-4 rounded-[16px] lg:rounded-[20px] min-w-[140px] xs:min-w-[160px] sm:min-w-[180px] lg:min-w-0 lg:w-full text-left overflow-hidden flex-shrink-0 lg:flex-shrink transition-all duration-300 ${
         isActive ? 'border-white/10' : 'border-white/[0.04]'
       }`}
       style={{
@@ -718,7 +719,7 @@ const TabItem = memo(function TabItem({
       {isActive && (
         <motion.div 
           layoutId="activeIndicator"
-          className="absolute left-3.5 right-3.5 lg:left-0 bottom-0 lg:bottom-3.5 lg:top-3.5 h-[2px] lg:h-auto w-auto lg:w-[3px] rounded-t-full lg:rounded-r-full bg-[#C2EF3A]"
+          className="absolute left-2.5 right-2.5 lg:left-0 bottom-0 lg:bottom-3.5 lg:top-3.5 h-[2px] lg:h-auto w-auto lg:w-[3px] rounded-t-full lg:rounded-r-full bg-[#C2EF3A]"
           style={{
             boxShadow: '0 0 8px rgba(194, 239, 58, 0.6)'
           }}
@@ -727,26 +728,26 @@ const TabItem = memo(function TabItem({
 
       {/* Icon Box */}
       <div
-        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-[12px] flex items-center justify-center border transition-all duration-300 ${
+        className={`w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-[10px] sm:rounded-[12px] flex items-center justify-center border flex-shrink-0 transition-all duration-300 ${
           isActive 
             ? 'bg-[#C2EF3A]/10 border-[#C2EF3A]/30 text-[#C2EF3A]' 
             : 'bg-white/5 border-white/5 text-white/50 group-hover:text-white/80 group-hover:bg-white/10'
         }`}
       >
-        <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
+        <Icon className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5" />
       </div>
 
       {/* Text block */}
       <div className="flex-1 min-w-0">
         <h3
-          className={`text-[12px] sm:text-[13px] font-bold font-jakarta truncate transition-colors duration-300 ${
+          className={`text-[11px] xs:text-[12px] sm:text-[13px] font-bold font-jakarta truncate transition-colors duration-300 ${
             isActive ? 'text-white' : 'text-white/70 group-hover:text-white'
           }`}
         >
           {item.title}
         </h3>
         <p
-          className={`text-[9px] sm:text-[10px] font-medium font-jakarta truncate transition-colors duration-300 ${
+          className={`text-[8.5px] xs:text-[9px] sm:text-[10px] font-medium font-jakarta truncate transition-colors duration-300 ${
             isActive ? 'text-white/45' : 'text-white/30 group-hover:text-white/40'
           }`}
         >
@@ -767,43 +768,43 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="flex flex-col flex-grow justify-between gap-6 h-full"
+      className="flex flex-col flex-grow justify-between gap-4 sm:gap-6 h-full"
       style={{ contain: 'layout style' }}
     >
       <div className="flex-1 flex flex-col justify-start">
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 mb-5 sm:mb-6">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="flex items-center gap-2.5 xs:gap-3">
             {/* Large Icon Box */}
             <div
-              className="flex-shrink-0 w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-[16px] flex items-center justify-center text-[#C2EF3A] border"
+              className="flex-shrink-0 w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-[14px] sm:rounded-[16px] flex items-center justify-center text-[#C2EF3A] border"
               style={{
                 background: 'linear-gradient(135deg, rgba(194, 239, 58, 0.1) 0%, rgba(194, 239, 58, 0.02) 100%)',
                 borderColor: 'rgba(194, 239, 58, 0.25)',
                 boxShadow: '0 4px 20px rgba(194, 239, 58, 0.12)',
               }}
             >
-              <Icon className="w-5.5 h-5.5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+              <Icon className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
             </div>
 
             <div className="min-w-0">
-              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-0.5 truncate font-jakarta">
+              <h3 className="text-base xs:text-lg sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-0.5 truncate font-jakarta">
                 {item.title}
               </h3>
-              <p className="text-[10px] xs:text-xs sm:text-sm font-bold text-[#C2EF3A] tracking-wider uppercase font-mono">
+              <p className="text-[9.5px] xs:text-[10px] sm:text-xs md:text-sm font-bold text-[#C2EF3A] tracking-wider uppercase font-mono">
                 {item.subtitle}
               </p>
             </div>
           </div>
 
-          {/* Stats Badges */}
-          <div className="hidden sm:flex items-center gap-2">
-            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#0E0D0D] border border-white/[0.04] text-[10px] sm:text-[11px] font-mono font-bold text-white/55 select-none uppercase tracking-wide">
-              <Briefcase className="w-3.5 h-3.5 text-[#C2EF3A]" />
+          {/* Stats Badges (Visible on mobile & desktop with responsive styling) */}
+          <div className="flex items-center gap-1.5 xs:gap-2">
+            <div className="flex items-center gap-1.5 px-2 xs:px-2.5 py-1 xs:py-1.5 rounded-lg bg-[#0E0D0D] border border-white/[0.04] text-[9px] xs:text-[10px] sm:text-[11px] font-mono font-bold text-white/55 select-none uppercase tracking-wide">
+              <Briefcase className="w-3 h-3 xs:w-3.5 xs:h-3.5 text-[#C2EF3A]" />
               <span>{item.stats.projects}</span>
             </div>
-            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#0E0D0D] border border-white/[0.04] text-[10px] sm:text-[11px] font-mono font-bold text-white/55 select-none uppercase tracking-wide">
-              <Star className="w-3.5 h-3.5 text-[#C2EF3A]" />
+            <div className="flex items-center gap-1.5 px-2 xs:px-2.5 py-1 xs:py-1.5 rounded-lg bg-[#0E0D0D] border border-white/[0.04] text-[9px] xs:text-[10px] sm:text-[11px] font-mono font-bold text-white/55 select-none uppercase tracking-wide">
+              <Star className="w-3 h-3 xs:w-3.5 xs:h-3.5 text-[#C2EF3A]" />
               <span>{item.stats.experience}</span>
             </div>
           </div>
@@ -812,7 +813,7 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-[11px] xs:text-[12px] sm:text-[13px] md:text-[14px] leading-relaxed text-white/50 mb-6 max-w-3xl font-jakarta"
+          className="text-[11.5px] xs:text-xs sm:text-[13px] md:text-[14px] leading-relaxed text-white/50 mb-4 sm:mb-6 max-w-3xl font-jakarta"
         >
           {item.description}
         </motion.p>
@@ -820,39 +821,39 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
         {/* Animated Divider */}
         <motion.div
           variants={dividerVariants}
-          className="h-px bg-gradient-to-r from-white/[0.04] via-white/[0.08] to-white/[0.04] mb-6 origin-left"
+          className="h-px bg-gradient-to-r from-white/[0.04] via-white/[0.08] to-white/[0.04] mb-4 sm:mb-6 origin-left"
         />
 
-        {/* Tech Stack Grid */}
-        <motion.div variants={itemVariants} className="mb-6">
-          <p className="text-[10px] uppercase tracking-[0.15em] text-white/35 font-mono font-bold mb-3">
+        {/* Tech Stack Grid (2-column on mobile, 3-column on desktop) */}
+        <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
+          <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.15em] text-white/35 font-mono font-bold mb-2.5 sm:mb-3">
             Tech Stack & Proficiency
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 w-full">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 xs:gap-2.5 sm:gap-3 w-full">
             {item.techStack.map((tech, index) => (
               <motion.div
                 key={tech.name}
                 variants={techStackItemVariants}
                 custom={index}
-                className="group relative flex items-center justify-between px-3.5 py-2.5 rounded-[16px] border border-white/[0.04] hover:border-white/[0.12] transition-all duration-300 bg-neutral-900/40 cursor-default select-none shadow-sm"
+                className="group relative flex items-center justify-between px-2.5 xs:px-3 py-2 xs:py-2.5 rounded-[12px] xs:rounded-[14px] sm:rounded-[16px] border border-white/[0.04] hover:border-white/[0.12] transition-all duration-300 bg-neutral-900/40 cursor-default select-none shadow-sm"
                 style={{
                   background: 'linear-gradient(180deg, rgba(24, 22, 22, 0.45) 0%, rgba(14, 13, 13, 0.95) 100%)',
                   boxShadow: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.01)'
                 }}
               >
                 {/* Glossy sheen */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.005] to-transparent rounded-[16px] pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.005] to-transparent rounded-[12px] xs:rounded-[14px] sm:rounded-[16px] pointer-events-none" />
 
-                <div className="flex items-center gap-2.5 min-w-0 flex-1 mr-2">
-                  <span style={{ color: tech.color }} className="flex-shrink-0 [&>svg]:w-4.5 [&>svg]:h-4.5">
-                    {TechIcons[tech.name] || <Code2 className="w-4.5 h-4.5" />}
+                <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 min-w-0 flex-1 mr-1.5 xs:mr-2">
+                  <span style={{ color: tech.color }} className="flex-shrink-0 [&>svg]:w-3.5 [&>svg]:h-3.5 xs:[&>svg]:w-4 xs:[&>svg]:h-4 sm:[&>svg]:w-4.5 sm:[&>svg]:h-4.5">
+                    {TechIcons[tech.name] || <Code2 className="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-4.5 sm:h-4.5" />}
                   </span>
-                  <span className="text-[11px] sm:text-xs font-bold font-jakarta text-white/80 truncate group-hover:text-white transition-colors duration-200">{tech.name}</span>
+                  <span className="text-[10px] xs:text-[11px] sm:text-xs font-bold font-jakarta text-white/80 truncate group-hover:text-white transition-colors duration-200">{tech.name}</span>
                 </div>
 
                 {/* Progress visual bar */}
-                <div className="flex flex-col items-end gap-1 flex-shrink-0 w-16">
-                  <span className="text-[9px] font-mono font-bold text-white/40 group-hover:text-[#C2EF3A] transition-colors duration-200">{tech.level}%</span>
+                <div className="flex flex-col items-end gap-0.5 xs:gap-1 flex-shrink-0 w-10 xs:w-12 sm:w-16">
+                  <span className="text-[8px] xs:text-[8.5px] sm:text-[9px] font-mono font-bold text-white/40 group-hover:text-[#C2EF3A] transition-colors duration-200">{tech.level}%</span>
                   <div className="w-full h-1 bg-[#1C1A1A] rounded-full overflow-hidden">
                     <motion.div
                       className="h-full bg-gradient-to-r from-[#C2EF3A]/60 to-[#C2EF3A] rounded-full"
@@ -869,24 +870,24 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
         </motion.div>
 
         {/* Key Highlights */}
-        <motion.div variants={itemVariants} className="mb-6">
-          <p className="text-[10px] uppercase tracking-[0.15em] text-white/35 font-mono font-bold mb-3">
+        <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
+          <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.15em] text-white/35 font-mono font-bold mb-2.5 sm:mb-3">
             Core Focus & Competencies
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 xs:gap-2.5 sm:gap-3">
             {item.highlights.map((highlight, index) => (
               <motion.div
                 key={index}
                 variants={highlightItemVariants}
                 custom={index}
-                className="flex items-start gap-2.5 group cursor-default hover:translate-x-0.5 transition-transform duration-200"
+                className="flex items-start gap-2 xs:gap-2.5 group cursor-default hover:translate-x-0.5 transition-transform duration-200"
               >
                 <div
-                  className="flex-shrink-0 w-[18px] h-[18px] rounded-[6px] flex items-center justify-center mt-0.5 bg-[#C2EF3A]/10 border border-[#C2EF3A]/20 group-hover:scale-105 transition-transform duration-200"
+                  className="flex-shrink-0 w-4 h-4 xs:w-[18px] xs:h-[18px] rounded-[5px] xs:rounded-[6px] flex items-center justify-center mt-0.5 bg-[#C2EF3A]/10 border border-[#C2EF3A]/20 group-hover:scale-105 transition-transform duration-200"
                 >
-                  <Check className="w-3 h-3 text-[#C2EF3A]" />
+                  <Check className="w-2.5 h-2.5 xs:w-3 xs:h-3 text-[#C2EF3A]" />
                 </div>
-                <span className="text-[11px] sm:text-xs text-white/55 leading-relaxed font-jakarta group-hover:text-white/80 transition-colors duration-200">
+                <span className="text-[10.5px] xs:text-[11px] sm:text-xs text-white/55 leading-relaxed font-jakarta group-hover:text-white/80 transition-colors duration-200">
                   {highlight}
                 </span>
               </motion.div>
@@ -898,29 +899,29 @@ const PreviewContent = memo(function PreviewContent({ item }: { item: ExpertiseI
       {/* Footer CTA */}
       <motion.div
         variants={footerVariants}
-        className="pt-4 border-t border-white/[0.04] mt-auto"
+        className="pt-3 sm:pt-4 border-t border-white/[0.04] mt-auto"
       >
-        <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-4">
-          <div className="flex items-center gap-3 hover:translate-x-0.5 transition-transform duration-200">
+        <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-between gap-3 xs:gap-4">
+          <div className="flex items-center gap-2.5 xs:gap-3 hover:translate-x-0.5 transition-transform duration-200">
             <div
-              className="w-10 h-10 rounded-[12px] flex items-center justify-center border hover:scale-110 transition-transform duration-200 bg-[#C2EF3A]/10 border-[#C2EF3A]/20 text-[#C2EF3A]"
+              className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-[10px] sm:rounded-[12px] flex items-center justify-center border hover:scale-110 transition-transform duration-200 bg-[#C2EF3A]/10 border-[#C2EF3A]/20 text-[#C2EF3A] flex-shrink-0"
             >
-              <MessageSquare className="w-5 h-5" />
+              <MessageSquare className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <p className="text-[12px] sm:text-[13px] font-bold text-white font-jakarta">Interested in this service?</p>
-              <p className="text-[10px] sm:text-[11px] text-white/30 font-jakarta">Let&apos;s discuss your project</p>
+              <p className="text-[11px] xs:text-[12px] sm:text-[13px] font-bold text-white font-jakarta">Interested in this service?</p>
+              <p className="text-[9.5px] xs:text-[10px] sm:text-[11px] text-white/30 font-jakarta">Let&apos;s discuss your project</p>
             </div>
           </div>
           <a
             href="#contact"
-            className="group flex items-center gap-2 px-4 py-2.5 rounded-[16px] border border-white/[0.05] hover:border-[#C2EF3A]/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 w-full xs:w-auto justify-center xs:justify-start"
+            className="group flex items-center gap-2 px-3.5 py-2 xs:px-4 xs:py-2.5 rounded-[12px] xs:rounded-[16px] border border-white/[0.05] hover:border-[#C2EF3A]/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 w-full xs:w-auto justify-center xs:justify-start"
             style={{
               background: 'linear-gradient(135deg, rgba(194, 239, 58, 0.1) 0%, rgba(194, 239, 58, 0.02) 100%)',
               boxShadow: '0 2px 12px rgba(194, 239, 58, 0.05)',
             }}
           >
-            <span className="text-[12px] font-bold text-white/85 group-hover:text-white transition-colors duration-200 font-jakarta">
+            <span className="text-[11px] xs:text-[12px] font-bold text-white/85 group-hover:text-white transition-colors duration-200 font-jakarta">
               Get in Touch
             </span>
             <NavbarArrowRight />
