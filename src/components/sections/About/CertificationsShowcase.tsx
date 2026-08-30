@@ -115,11 +115,11 @@ const CERTIFICATIONS: Certificate[] = [
   },
 ];
 
-function CertCard({ cert }: { cert: Certificate }) {
+function CertCard({ cert, isDesktop }: { cert: Certificate; isDesktop: boolean }) {
   const [tilt, setTilt] = useState({ rx: 0, ry: 0, lift: 0, scale: 1 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
+    if (!isDesktop) return;
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
@@ -134,19 +134,15 @@ function CertCard({ cert }: { cert: Certificate }) {
     setTilt({ rx: 0, ry: 0, lift: 0, scale: 1 });
   };
 
-  // Determine offsets based on viewport width (overridden on mobile via css)
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
-  const txVal = isMobile ? 0 : cert.tx;
-  const baseRotVal = isMobile ? 0 : cert.baseRot;
-  const baseYVal = isMobile ? 0 : cert.baseY;
-
   return (
     <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        transform: `perspective(1000px) translate3d(${txVal}px, calc(${baseYVal}px + ${tilt.lift}px), 0) rotate(${baseRotVal}deg) scale(${tilt.scale}) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
-        transformStyle: 'preserve-3d',
+        transform: isDesktop
+          ? `perspective(1000px) translate3d(${cert.tx}px, calc(${cert.baseY}px + ${tilt.lift}px), 0) rotate(${cert.baseRot}deg) scale(${tilt.scale}) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`
+          : 'none',
+        transformStyle: isDesktop ? 'preserve-3d' : 'flat',
       }}
       className={`group relative overflow-hidden w-full lg:w-[296px] rounded-[18px] xs:rounded-[22px] lg:rounded-[28px] bg-gradient-to-br from-[#1c1f26] via-[#16181d] to-[#121419] border border-white/10 p-2.5 xs:p-3 lg:p-4 pb-0 cursor-pointer transition-transform duration-500 ease-out select-none will-change-transform z-10 ${cert.accentShadow}`}
       tabIndex={0}
@@ -280,8 +276,8 @@ export default function CertificationsShowcase() {
               className="will-change-transform w-full flex justify-center lg:justify-end"
             >
               <motion.div
-                animate={isInView ? { y: [0, -6] } : { y: 0 }}
-                transition={{
+                animate={isDesktop && isInView ? { y: [0, -6] } : { y: 0 }}
+                transition={isDesktop ? {
                   y: {
                     type: 'tween',
                     ease: 'easeInOut',
@@ -290,11 +286,11 @@ export default function CertificationsShowcase() {
                     repeatType: 'reverse',
                     delay: CERTIFICATIONS[0].floatDelay + 0.65
                   }
-                }}
+                } : undefined}
                 className="w-full flex justify-center lg:justify-end"
               >
                 <Link href="/certifications?cert=openai-buildthon" className="block focus:outline-none w-full flex justify-center lg:justify-end">
-                  <CertCard cert={CERTIFICATIONS[0]} />
+                  <CertCard cert={CERTIFICATIONS[0]} isDesktop={isDesktop} />
                 </Link>
               </motion.div>
             </motion.div>
@@ -311,8 +307,8 @@ export default function CertificationsShowcase() {
               className="will-change-transform w-full flex justify-center lg:justify-end"
             >
               <motion.div
-                animate={isInView ? { y: [0, -6] } : { y: 0 }}
-                transition={{
+                animate={isDesktop && isInView ? { y: [0, -6] } : { y: 0 }}
+                transition={isDesktop ? {
                   y: {
                     type: 'tween',
                     ease: 'easeInOut',
@@ -321,11 +317,11 @@ export default function CertificationsShowcase() {
                     repeatType: 'reverse',
                     delay: CERTIFICATIONS[1].floatDelay + 0.8
                   }
-                }}
+                } : undefined}
                 className="w-full flex justify-center lg:justify-end"
               >
                 <Link href="/certifications?cert=fundamentals-ml" className="block focus:outline-none w-full flex justify-center lg:justify-end">
-                  <CertCard cert={CERTIFICATIONS[1]} />
+                  <CertCard cert={CERTIFICATIONS[1]} isDesktop={isDesktop} />
                 </Link>
               </motion.div>
             </motion.div>
@@ -390,8 +386,8 @@ export default function CertificationsShowcase() {
               className="will-change-transform w-full flex justify-center lg:justify-start"
             >
               <motion.div
-                animate={isInView ? { y: [0, -6] } : { y: 0 }}
-                transition={{
+                animate={isDesktop && isInView ? { y: [0, -6] } : { y: 0 }}
+                transition={isDesktop ? {
                   y: {
                     type: 'tween',
                     ease: 'easeInOut',
@@ -400,11 +396,11 @@ export default function CertificationsShowcase() {
                     repeatType: 'reverse',
                     delay: CERTIFICATIONS[2].floatDelay + 0.65
                   }
-                }}
+                } : undefined}
                 className="w-full flex justify-center lg:justify-start"
               >
                 <Link href="/certifications?cert=developing-ai-solutions" className="block focus:outline-none w-full flex justify-center lg:justify-start">
-                  <CertCard cert={CERTIFICATIONS[2]} />
+                  <CertCard cert={CERTIFICATIONS[2]} isDesktop={isDesktop} />
                 </Link>
               </motion.div>
             </motion.div>
@@ -421,8 +417,8 @@ export default function CertificationsShowcase() {
               className="will-change-transform w-full flex justify-center lg:justify-start"
             >
               <motion.div
-                animate={isInView ? { y: [0, -6] } : { y: 0 }}
-                transition={{
+                animate={isDesktop && isInView ? { y: [0, -6] } : { y: 0 }}
+                transition={isDesktop ? {
                   y: {
                     type: 'tween',
                     ease: 'easeInOut',
@@ -431,11 +427,11 @@ export default function CertificationsShowcase() {
                     repeatType: 'reverse',
                     delay: CERTIFICATIONS[3].floatDelay + 0.8
                   }
-                }}
+                } : undefined}
                 className="w-full flex justify-center lg:justify-start"
               >
                 <Link href="/certifications?cert=nptel-iit-madras" className="block focus:outline-none w-full flex justify-center lg:justify-start">
-                  <CertCard cert={CERTIFICATIONS[3]} />
+                  <CertCard cert={CERTIFICATIONS[3]} isDesktop={isDesktop} />
                 </Link>
               </motion.div>
             </motion.div>
